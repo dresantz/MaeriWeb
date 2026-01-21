@@ -77,7 +77,7 @@ function initDiceToggle() {
   if (!diceToggle || !dicePanel) return;
 
   diceToggle.addEventListener("click", () => {
-    dicePanel.classList.toggle("hidden");
+    dicePanel.classList.toggle("open");
   });
 }
 

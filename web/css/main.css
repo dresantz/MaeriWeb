@@ -181,7 +181,7 @@ section a:hover {
 }
 
 /* =========================
-   Floating Dice Roller
+   Floating Dice Roller (Animated)
 ========================= */
 
 #dice-toggle {
@@ -200,6 +200,7 @@ section a:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
+/* Dice Panel Base */
 #dice-panel {
   position: fixed;
   bottom: 0;
@@ -213,10 +214,22 @@ section a:hover {
   box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.6);
   z-index: 999;
   overflow-y: auto;
+
+  /* Animation setup */
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
+
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
-#dice-panel.hidden {
-  display: none;
+/* Open state */
+#dice-panel.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 #dice-panel header {
@@ -227,3 +240,4 @@ section a:hover {
 #dice-panel h2 {
   margin: 0;
 }
+
