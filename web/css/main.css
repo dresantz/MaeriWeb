@@ -1,117 +1,146 @@
 /* =========================
-   MaeriWeb - Base Styles
-   Mobile First
-   ========================= */
+   Maeri Web – Base Styles
+   Dark Theme | Mobile First
+========================= */
 
-/* ---- CSS Reset (minimal) ---- */
+:root {
+  --bg-color: #121212;
+  --card-color: #1e1e1e;
+  --text-color: #eaeaea;
+  --muted-text: #b5b5b5;
+  --accent-color: #8b7dff;
+  --border-radius: 8px;
+}
+
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* ---- Root Variables ---- */
-:root {
-  --color-bg: #0f0f12;
-  --color-surface: #1a1a1f;
-  --color-text: #f2f2f2;
-  --color-muted: #b3b3b3;
-  --color-accent: #c89b3c;
-
-  --font-base: system-ui, -apple-system, BlinkMacSystemFont,
-               "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-
-  --radius: 0.75rem;
-  --spacing: 1rem;
-  --max-width: 640px;
-}
-
-/* ---- Base Layout ---- */
-html {
-  font-size: 16px;
 }
 
 body {
-  font-family: var(--font-base);
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  line-height: 1.6;
-
-  display: flex;
-  justify-content: center;
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
-/* Wrapper to limit width on large screens */
-body > * {
-  width: 100%;
-  max-width: var(--max-width);
-  padding: var(--spacing);
-}
-
-/* ---- Typography ---- */
-h1, h2, h3 {
-  line-height: 1.2;
-  margin-bottom: 0.5rem;
-}
-
-h1 {
-  font-size: 2rem;
-}
-
-p {
-  margin-bottom: 1rem;
-  color: var(--color-text);
-}
-
-small {
-  color: var(--color-muted);
-}
-
-/* ---- Header ---- */
-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-header p {
-  color: var(--color-muted);
-}
-
-/* ---- Navigation ---- */
-nav ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-nav a {
-  display: block;
-  padding: 1rem;
-  text-align: center;
-
-  background-color: var(--color-surface);
-  color: var(--color-text);
-  text-decoration: none;
-
-  border-radius: var(--radius);
-  font-weight: 600;
-}
-
-nav a:hover {
-  background-color: var(--color-accent);
-  color: #000;
-}
-
-/* ---- Sections ---- */
-section {
-  margin-bottom: 2rem;
-}
-
-/* ---- Footer ---- */
+header,
 footer {
   text-align: center;
-  font-size: 0.875rem;
-  color: var(--color-muted);
-  margin-top: 2rem;
+  padding: 1rem;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+header p,
+footer p {
+  margin: 0.3rem 0 0;
+  color: var(--muted-text);
+}
+
+main {
+  padding: 1rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* =========================
+   Sections (Cards)
+========================= */
+
+section {
+  background-color: var(--card-color);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* =========================
+   Form Elements
+========================= */
+
+label {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--muted-text);
+}
+
+select,
+input[type="number"] {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid #333;
+  background-color: #2a2a2a;
+  color: var(--text-color);
+}
+
+select:focus,
+input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+/* =========================
+   Buttons (Unified Style)
+========================= */
+
+button {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--accent-color);
+  color: #121212;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* =========================
+   Results
+========================= */
+
+#result-output,
+#total-output {
+  font-size: 1.2rem;
+  margin: 0.2rem 0 0.8rem;
+}
+
+#total-output {
+  font-weight: bold;
+}
+
+/* =========================
+   History
+========================= */
+
+#history-output {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#history-output li {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #333;
+  font-size: 0.95rem;
+}
+
+/* =========================
+   Footer
+========================= */
+
+footer a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: bold;
 }
