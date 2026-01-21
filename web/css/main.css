@@ -241,3 +241,28 @@ section a:hover {
   margin: 0;
 }
 
+/* =========================
+   Scroll Lock
+========================= */
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+/* =========================
+   Dice Roller Overlay
+========================= */
+
+/*Detecta o toque fora*/
+
+#dice-overlay {
+  position: fixed;
+  inset: 0;
+  background: transparent;
+  z-index: 998;
+  display: none;
+}
+
+#dice-overlay.active {
+  display: block;
+}

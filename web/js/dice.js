@@ -73,13 +73,63 @@ function initDiceRoller() {
 function initDiceToggle() {
   const diceToggle = document.getElementById("dice-toggle");
   const dicePanel = document.getElementById("dice-panel");
+  const diceOverlay = document.getElementById("dice-overlay");
 
-  if (!diceToggle || !dicePanel) return;
+  if (!diceToggle || !dicePanel || !diceOverlay) return;
 
-  diceToggle.addEventListener("click", () => {
-    dicePanel.classList.toggle("open");
+  const STORAGE_KEY = "maeriDiceOpen";
+
+  function openDice() {
+    dicePanel.classList.add("open");
+    diceOverlay.classList.add("active");
+    document.body.classList.add("no-scroll");
+    localStorage.setItem(STORAGE_KEY, "true");
+  }
+
+  function closeDice() {
+    dicePanel.classList.remove("open");
+    diceOverlay.classList.remove("active");
+    document.body.classList.remove("no-scroll");
+    localStorage.setItem(STORAGE_KEY, "false");
+  }
+
+  function toggleDice() {
+    dicePanel.classList.contains("open") ? closeDice() : openDice();
+  }
+
+  // Toggle button
+  diceToggle.addEventListener("click", toggleDice);
+
+  // Click outside (overlay)
+  diceOverlay.addEventListener("click", closeDice);
+
+  /* ---------- Restore state ---------- */
+  if (localStorage.getItem(STORAGE_KEY) === "true") {
+    openDice();
+  }
+
+  /* ---------- Swipe Down to Close ---------- */
+  let startY = null;
+
+  dicePanel.addEventListener("touchstart", (e) => {
+    startY = e.touches[0].clientY;
+  });
+
+  dicePanel.addEventListener("touchend", (e) => {
+    if (startY === null) return;
+
+    const endY = e.changedTouches[0].clientY;
+    const diffY = endY - startY;
+
+    // Swipe down threshold
+    if (diffY > 80) {
+      closeDice();
+    }
+
+    startY = null;
   });
 }
+
 
 /* ---------- Init on DOM Ready ---------- */
 
