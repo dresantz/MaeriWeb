@@ -144,3 +144,37 @@ footer a {
   text-decoration: none;
   font-weight: bold;
 }
+/* =========================
+   Rulebook Typography
+========================= */
+
+section h2 {
+  font-size: 1.4rem;
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid #333;
+  padding-bottom: 0.3rem;
+}
+
+section h3 {
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+  color: var(--accent-color);
+}
+
+section p {
+  line-height: 1.6;
+  margin: 0.4rem 0 0.8rem;
+  color: var(--text-color);
+}
+
+section a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+section a:hover {
+  text-decoration: underline;
+}
