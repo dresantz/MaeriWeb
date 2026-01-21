@@ -1,40 +1,42 @@
-// Maeri RPG Dice Roller
-// All rolls are based on d6 and converted when necessary
-
-function rollD6() {
-  return Math.floor(Math.random() * 6) + 1;
+function rollDie(sides) {
+  return Math.floor(Math.random() * sides) + 1;
 }
 
-function convertRoll(d6Result, targetDie) {
-  if (targetDie === 6) {
-    return d6Result;
-  }
-
-  if (targetDie === 3) {
-    // 1-2 -> 1 | 3-4 -> 2 | 5-6 -> 3
-    return Math.ceil(d6Result / 2);
-  }
-
-  if (targetDie === 2) {
-    // 1-3 -> 1 | 4-6 -> 2
-    return d6Result <= 3 ? 1 : 2;
-  }
-
-  return d6Result;
-}
+const history = [];
 
 document.getElementById("roll-button").addEventListener("click", () => {
   const diceType = parseInt(document.getElementById("dice-type").value);
   const diceAmount = parseInt(document.getElementById("dice-amount").value);
 
-  let results = [];
+  const results = [];
+  let total = 0;
 
   for (let i = 0; i < diceAmount; i++) {
-    const d6Roll = rollD6();
-    const finalResult = convertRoll(d6Roll, diceType);
-    results.push(finalResult);
+    const roll = rollDie(diceType);
+    results.push(roll);
+    total += roll;
   }
 
   document.getElementById("result-output").textContent =
     results.join(", ");
+
+  document.getElementById("total-output").textContent = total;
+
+  // Update history (keep last 3)
+  history.unshift(`d${diceType} x${diceAmount} → ${results.join(", ")}`);
+  if (history.length > 3) history.pop();
+
+  const historyList = document.getElementById("history-output");
+  historyList.innerHTML = "";
+
+  history.forEach(entry => {
+    const li = document.createElement("li");
+    li.textContent = entry;
+    historyList.appendChild(li);
+  });
+});
+
+document.getElementById("clear-history").addEventListener("click", () => {
+  history.length = 0;
+  document.getElementById("history-output").innerHTML = "";
 });
