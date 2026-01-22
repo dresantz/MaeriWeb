@@ -204,6 +204,9 @@ function renderContentBlock(container, block) {
   }
 }
 
+const ICON_CLOSED = "☰";
+const ICON_OPEN = "✕";
+
 function initTOCToggle() {
   const tocToggle = document.getElementById("toc-toggle");
   const tocPanel = document.getElementById("toc-panel");
@@ -213,6 +216,8 @@ function initTOCToggle() {
   if (!tocToggle || !tocPanel || !tocOverlay || !tocList) return;
 
   function openTOC() {
+    tocToggle.textContent = ICON_OPEN;
+tocToggle.setAttribute("aria-label", "Close Rulebook Index");
     tocPanel.classList.add("open");
     tocOverlay.classList.add("active");
     document.body.classList.add("no-scroll");
@@ -220,6 +225,8 @@ function initTOCToggle() {
   }
 
   function closeTOC() {
+    tocToggle.textContent = ICON_CLOSED;
+tocToggle.setAttribute("aria-label", "Open Rulebook Index");
     tocPanel.classList.remove("open");
     tocOverlay.classList.remove("active");
     document.body.classList.remove("no-scroll");
