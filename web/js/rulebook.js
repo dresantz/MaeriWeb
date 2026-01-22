@@ -78,9 +78,33 @@ function renderTOC(chapterData) {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  loadChapter("02-personagem.json");
-});
+/* =========================
+   Chapter Catalog
+========================= */
+
+const RULEBOOK_CHAPTERS = [
+  { file: "01-o-basico.json", title: "O Básico" },
+  { file: "02-personagem.json", title: "Personagem" }
+  // Depois você adiciona os próximos aqui:
+  // { file: "03-....json", title: "..." },
+];
+
+let currentChapterFile = RULEBOOK_CHAPTERS[0].file;
+
+function renderChapterSelect() {
+  const select = document.getElementById("chapter-select");
+  if (!select) return;
+
+  select.innerHTML = "";
+
+  RULEBOOK_CHAPTERS.forEach((ch) => {
+    const option = document.createElement("option");
+    option.value = ch.file;
+    option.textContent = ch.title;
+    if (ch.file === currentChapterFile) option.selected = true;
+    select.appendChild(option);
+  });
+}
 
 /* =========================
    Maeri RPG – Rulebook Renderer (JSON)
@@ -322,14 +346,17 @@ function loadRulebookChapter(fileName) {
 
   const path = `../data/rulebook/${fileName}`;
 
+  currentChapterFile = fileName;
+
   fetch(path)
     .then((response) => {
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       return response.json();
     })
     .then((data) => {
-    renderRulebookChapter(data);
-    renderTOC(data);
+      renderRulebookChapter(data);
+      renderTOC(data);
+      renderChapterSelect();
     })
 
     .catch((error) => {
@@ -349,6 +376,26 @@ function loadRulebookChapter(fileName) {
 
 document.addEventListener("DOMContentLoaded", () => {
   initTOCToggle();
-  loadRulebookChapter("02-personagem.json");
+  const chapterSelect = document.getElementById("chapter-select");
+if (chapterSelect) {
+  chapterSelect.addEventListener("change", (e) => {
+    loadRulebookChapter(e.target.value);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // Fecha o TOC se estiver aberto
+    const tocPanel = document.getElementById("toc-panel");
+    const tocOverlay = document.getElementById("toc-overlay");
+    const tocToggle = document.getElementById("toc-toggle");
+
+    if (tocPanel && tocOverlay && tocToggle) {
+      tocPanel.classList.remove("open");
+      tocOverlay.classList.remove("active");
+      document.body.classList.remove("no-scroll");
+      tocToggle.textContent = "☰";
+      tocToggle.setAttribute("aria-label", "Open Rulebook Index");
+    }
+  });
+}
+  loadRulebookChapter(currentChapterFile);
 });
 
