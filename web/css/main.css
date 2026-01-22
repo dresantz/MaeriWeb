@@ -369,3 +369,117 @@ th {
   color: #ff8c8c;
   font-size: 0.95rem;
 }
+
+/* =========================
+   Rulebook TOC (Top Sheet)
+========================= */
+
+#toc-toggle {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  font-size: 1.4rem;
+  background-color: var(--accent-color);
+  color: #121212;
+  border: none;
+  cursor: pointer;
+  z-index: 1100;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Overlay */
+#toc-overlay {
+  position: fixed;
+  inset: 0;
+  background: transparent;
+  z-index: 1090;
+  display: none;
+}
+
+#toc-overlay.active {
+  display: block;
+}
+
+/* Panel */
+#toc-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-height: 70vh;
+  background-color: var(--card-color);
+  padding: 1rem;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6);
+  z-index: 1095;
+  overflow-y: auto;
+
+  /* Animation setup */
+  transform: translateY(-110%);
+  opacity: 0;
+  pointer-events: none;
+
+  transition:
+    transform 0.28s ease,
+    opacity 0.28s ease;
+}
+
+#toc-panel.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Header row inside the panel */
+.toc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.toc-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+#toc-close {
+  width: auto;
+  padding: 0.4rem 0.6rem;
+  font-size: 1rem;
+  border-radius: 10px;
+}
+
+/* Chapter title */
+.toc-chapter-title {
+  margin: 0.2rem 0 0.8rem;
+  color: var(--muted-text);
+  font-size: 0.95rem;
+}
+
+/* List */
+#toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#toc-list li {
+  border-bottom: 1px solid #333;
+}
+
+#toc-list a {
+  display: block;
+  padding: 0.7rem 0.2rem;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+#toc-list a:active {
+  opacity: 0.7;
+}

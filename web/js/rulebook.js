@@ -56,6 +56,28 @@ function loadChapter(chapterFile) {
     });
 }
 
+function renderTOC(chapterData) {
+  const tocList = document.getElementById("toc-list");
+  const tocChapterTitle = document.getElementById("toc-chapter-title");
+
+  if (!tocList || !tocChapterTitle) return;
+
+  tocChapterTitle.textContent = chapterData.title || "Rulebook";
+
+  tocList.innerHTML = "";
+
+  (chapterData.sections || []).forEach((section) => {
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+
+    a.href = `#${section.id}`;
+    a.textContent = section.title || "Untitled";
+
+    li.appendChild(a);
+    tocList.appendChild(li);
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   loadChapter("01-basico.json");
 });
@@ -182,6 +204,42 @@ function renderContentBlock(container, block) {
   }
 }
 
+function initTOCToggle() {
+  const tocToggle = document.getElementById("toc-toggle");
+  const tocPanel = document.getElementById("toc-panel");
+  const tocOverlay = document.getElementById("toc-overlay");
+  const tocClose = document.getElementById("toc-close");
+  const tocList = document.getElementById("toc-list");
+
+  if (!tocToggle || !tocPanel || !tocOverlay || !tocClose || !tocList) return;
+
+  function openTOC() {
+    tocPanel.classList.add("open");
+    tocOverlay.classList.add("active");
+    document.body.classList.add("no-scroll");
+    tocPanel.setAttribute("aria-hidden", "false");
+  }
+
+  function closeTOC() {
+    tocPanel.classList.remove("open");
+    tocOverlay.classList.remove("active");
+    document.body.classList.remove("no-scroll");
+    tocPanel.setAttribute("aria-hidden", "true");
+  }
+
+  tocToggle.addEventListener("click", openTOC);
+  tocClose.addEventListener("click", closeTOC);
+  tocOverlay.addEventListener("click", closeTOC);
+
+  // Close after clicking any item
+  tocList.addEventListener("click", (e) => {
+    const target = e.target;
+    if (target.tagName === "A") {
+      closeTOC();
+    }
+  });
+}
+
 function renderRulebookChapter(chapterData) {
   const container = document.getElementById("rulebook-content");
   if (!container) return;
@@ -229,8 +287,10 @@ function loadRulebookChapter(fileName) {
       return response.json();
     })
     .then((data) => {
-      renderRulebookChapter(data);
+    renderRulebookChapter(data);
+    renderTOC(data);
     })
+
     .catch((error) => {
       console.error("Failed to load rulebook chapter:", error);
 
@@ -247,6 +307,7 @@ function loadRulebookChapter(fileName) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Chapter 1: O Básico
+  initTOCToggle();
   loadRulebookChapter("01-o-basico.json");
 });
+

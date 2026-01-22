@@ -16,6 +16,24 @@
     <p>Core Rulebook</p>
   </header>
 
+  <!-- Rulebook Index Toggle -->
+<button id="toc-toggle" aria-label="Open Rulebook Index">☰</button>
+
+<!-- TOC Overlay -->
+<div id="toc-overlay"></div>
+
+<!-- TOC Panel -->
+<div id="toc-panel" aria-hidden="true">
+  <div class="toc-header">
+    <h2>Index</h2>
+    <button id="toc-close" aria-label="Close Index">✕</button>
+  </div>
+
+  <p id="toc-chapter-title" class="toc-chapter-title">—</p>
+  <ul id="toc-list"></ul>
+</div>
+
+
   <main class="rulebook">
     <div id="rulebook-content"></div>
   </main>
