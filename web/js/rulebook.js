@@ -208,10 +208,9 @@ function initTOCToggle() {
   const tocToggle = document.getElementById("toc-toggle");
   const tocPanel = document.getElementById("toc-panel");
   const tocOverlay = document.getElementById("toc-overlay");
-  const tocClose = document.getElementById("toc-close");
   const tocList = document.getElementById("toc-list");
 
-  if (!tocToggle || !tocPanel || !tocOverlay || !tocClose || !tocList) return;
+  if (!tocToggle || !tocPanel || !tocOverlay || !tocList) return;
 
   function openTOC() {
     tocPanel.classList.add("open");
@@ -227,8 +226,11 @@ function initTOCToggle() {
     tocPanel.setAttribute("aria-hidden", "true");
   }
 
-  tocToggle.addEventListener("click", openTOC);
-  tocClose.addEventListener("click", closeTOC);
+  tocToggle.addEventListener("click", () => {
+  const isOpen = tocPanel.classList.contains("open");
+  if (isOpen) closeTOC();
+  else openTOC();
+});
   tocOverlay.addEventListener("click", closeTOC);
 
   // Close after clicking any item

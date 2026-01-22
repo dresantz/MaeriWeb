@@ -411,7 +411,8 @@ th {
   width: 100%;
   max-height: 70vh;
   background-color: var(--card-color);
-  padding: 1rem;
+  padding-top: 1.25rem;
+  padding: 1.25rem 1rem 1rem;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6);
@@ -436,10 +437,8 @@ th {
 
 /* Header row inside the panel */
 .toc-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
+  text-align: center;
+  margin-bottom: 0.35rem;
 }
 
 .toc-header h2 {
@@ -447,18 +446,24 @@ th {
   font-size: 1.2rem;
 }
 
+
 #toc-close {
-  width: auto;
-  padding: 0.4rem 0.6rem;
+  justify-self: end;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   font-size: 1rem;
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
 /* Chapter title */
 .toc-chapter-title {
-  margin: 0.2rem 0 0.8rem;
-  color: var(--muted-text);
-  font-size: 0.95rem;
+  margin: 0.4rem 0 0.9rem;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  opacity: 0.95;
 }
 
 /* List */
