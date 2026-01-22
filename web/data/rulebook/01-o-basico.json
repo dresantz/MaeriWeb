@@ -1,0 +1,254 @@
+{
+  "id": "o-basico",
+  "title": "O Básico",
+  "order": 1,
+  "description": "Conceitos essenciais para começar a jogar Maeri RPG.",
+  "sections": [
+    {
+      "id": "roleplaying-game",
+      "title": "Roleplaying Game",
+      "tags": ["intro", "basics"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Escreva aqui o parágrafo introdutório do tópico Roleplaying Game."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "TODO: Item 1 da lista",
+            "TODO: Item 2 da lista",
+            "TODO: Item 3 da lista"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mentalidade",
+      "title": "Mentalidade",
+      "tags": ["intro", "basics"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Escreva aqui o parágrafo introdutório do tópico Mentalidade."
+        },
+        {
+          "type": "table",
+          "caption": "TODO: (opcional) Título/descrição da tabela",
+          "columns": [
+            "Coluna 1",
+            "Coluna 2",
+            "Coluna 3",
+            "Coluna 4",
+            "Coluna 5",
+            "Coluna 6"
+          ],
+          "rows": [
+            ["TODO", "TODO", "TODO", "TODO", "TODO", "TODO"],
+            ["TODO", "TODO", "TODO", "TODO", "TODO", "TODO"],
+            ["TODO", "TODO", "TODO", "TODO", "TODO", "TODO"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "caracteristicas-basicas",
+      "title": "Características Básicas",
+      "tags": ["basics", "characters"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo 1 (com lista curta abaixo)."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "TODO: Item A",
+            "TODO: Item B"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo 2 (com lista curta abaixo)."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "TODO: Item A",
+            "TODO: Item B"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo 3 (com lista curta abaixo)."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "TODO: Item A",
+            "TODO: Item B"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo 4 (com lista curta abaixo)."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "TODO: Item A",
+            "TODO: Item B"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo 5 (com lista curta abaixo)."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "TODO: Item A",
+            "TODO: Item B"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo 6 (com lista curta abaixo)."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "TODO: Item A",
+            "TODO: Item B"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "divisoes-de-tempo",
+      "title": "Divisões de Tempo",
+      "tags": ["basics", "time"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Escreva aqui o parágrafo introdutório do tópico Divisões de Tempo."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "TODO: Item 1",
+            "TODO: Item 2",
+            "TODO: Item 3"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "testes",
+      "title": "Testes",
+      "tags": ["basics", "rules"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Escreva aqui o parágrafo introdutório do tópico Testes."
+        }
+      ]
+    },
+    {
+      "id": "penalidades-e-bonus",
+      "title": "Penalidades e Bônus",
+      "tags": ["basics", "rules"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Escreva aqui o parágrafo introdutório do tópico Penalidades e Bônus."
+        }
+      ]
+    },
+    {
+      "id": "vantagem-e-desvantagem",
+      "title": "Vantagem e Desvantagem",
+      "tags": ["basics", "rules"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Escreva aqui o parágrafo introdutório do tópico Vantagem e Desvantagem."
+        }
+      ]
+    },
+    {
+      "id": "embate",
+      "title": "Embate",
+      "tags": ["combat", "rules"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Escreva aqui o parágrafo introdutório do tópico Embate."
+        }
+      ]
+    },
+    {
+      "id": "experiencia-e-nivel",
+      "title": "Experiência e Nível",
+      "tags": ["progression", "rules"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo introdutório do tópico Experiência e Nível."
+        },
+        {
+          "type": "subsections",
+          "items": [
+            {
+              "id": "ganhando-experiencia",
+              "title": "TODO: Subtópico 1",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "text": "TODO: Texto do subtópico 1."
+                },
+                {
+                  "type": "list",
+                  "style": "unordered",
+                  "items": [
+                    "TODO: Item 1",
+                    "TODO: Item 2",
+                    "TODO: Item 3"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "nivel-e-progresso",
+              "title": "TODO: Subtópico 2",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "text": "TODO: Texto do subtópico 2."
+                }
+              ]
+            },
+            {
+              "id": "limites-e-recompensas",
+              "title": "TODO: Subtópico 3",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "text": "TODO: Texto do subtópico 3."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

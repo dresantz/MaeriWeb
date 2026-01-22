@@ -266,3 +266,106 @@ body.no-scroll {
 #dice-overlay.active {
   display: block;
 }
+
+/* =========================
+   Long-form reading (Rulebook)
+========================= */
+
+.rulebook {
+  font-size: 1.05rem;        /* ~16.8px */
+  line-height: 1.7;
+}
+
+.rulebook h1 {
+  font-size: 1.8rem;
+  margin: 0 0 0.6rem;
+}
+
+.rulebook h2 {
+  font-size: 1.35rem;
+  margin: 1.4rem 0 0.6rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid #333;
+}
+
+.rulebook h3 {
+  font-size: 1.1rem;
+  margin: 1rem 0 0.4rem;
+  color: var(--accent-color);
+}
+
+.rulebook p {
+  margin: 0.5rem 0 0.9rem;
+  color: var(--text-color);
+}
+
+.rulebook ul {
+  margin: 0.4rem 0 1rem 1.2rem;
+}
+
+.rulebook li {
+  margin: 0.35rem 0;
+}
+
+.rulebook a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.rulebook a:hover {
+  text-decoration: underline;
+}
+
+/* Better readability on larger screens */
+@media (min-width: 768px) {
+  .rulebook {
+    font-size: 1.1rem;       /* ~17.6px */
+  }
+}
+
+/* =========================
+   Rulebook Blocks
+========================= */
+
+.table-caption {
+  color: var(--muted-text);
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  margin: 0.75rem 0 1rem;
+  border: 1px solid #333;
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 520px; /* helps readability for 6 columns */
+}
+
+th, td {
+  padding: 0.6rem;
+  border-bottom: 1px solid #333;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+th {
+  color: var(--text-color);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.subsection {
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed #333;
+}
+
+.warning {
+  color: #ff8c8c;
+  font-size: 0.95rem;
+}
