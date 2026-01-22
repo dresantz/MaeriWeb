@@ -79,7 +79,7 @@ function renderTOC(chapterData) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  loadChapter("01-basico.json");
+  loadChapter("02-personagem.json");
 });
 
 /* =========================
@@ -191,6 +191,38 @@ function renderContentBlock(container, block) {
     case "subsections":
       renderSubsections(container, block);
       break;
+
+    case "nestedList": {
+  const ul = document.createElement("ul");
+  ul.classList.add("nested-list");
+
+  block.items.forEach((item) => {
+    const li = document.createElement("li");
+
+    if (item.title) {
+      const title = document.createElement("strong");
+      title.textContent = item.title;
+      li.appendChild(title);
+    }
+
+    if (Array.isArray(item.items)) {
+      const subUl = document.createElement("ul");
+
+      item.items.forEach((subItem) => {
+        const subLi = document.createElement("li");
+        subLi.textContent = subItem;
+        subUl.appendChild(subLi);
+      });
+
+      li.appendChild(subUl);
+    }
+
+    ul.appendChild(li);
+  });
+
+  container.appendChild(ul);
+  break;
+}
 
     default: {
       // Unknown block type
@@ -317,6 +349,6 @@ function loadRulebookChapter(fileName) {
 
 document.addEventListener("DOMContentLoaded", () => {
   initTOCToggle();
-  loadRulebookChapter("01-o-basico.json");
+  loadRulebookChapter("02-personagem.json");
 });
 

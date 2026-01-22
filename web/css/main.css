@@ -488,3 +488,27 @@ th {
 #toc-list a:active {
   opacity: 0.7;
 }
+
+/* =========================
+   Nested Lists (Rulebook)
+========================= */
+
+.nested-list {
+  margin: 0.75rem 0 1rem;
+  padding-left: 1.2rem;
+}
+
+.nested-list > li {
+  margin-bottom: 0.6rem;
+}
+
+.nested-list strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.nested-list ul {
+  list-style: disc;
+  margin-top: 0.25rem;
+  padding-left: 1.2rem;
+}

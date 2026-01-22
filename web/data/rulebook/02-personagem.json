@@ -1,0 +1,290 @@
+{
+  "id": "personagem",
+  "title": "Personagem",
+  "order": 2,
+  "description": "Regras e conceitos relacionados ao personagem, seus recursos e aspectos de jogo.",
+  "sections": [
+    {
+      "id": "peso-e-limite-de-carga",
+      "title": "Peso e limite de carga",
+      "tags": ["character", "inventory", "movement"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo introdutório sobre Peso e limite de carga."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "TODO: Item 1",
+            "TODO: Item 2",
+            "TODO: Item 3"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "espaco-e-movimentacao",
+      "title": "Espaço e movimentação",
+      "tags": ["character", "movement", "positioning"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo introdutório sobre Espaço e movimentação."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "TODO: Item 1",
+            "TODO: Item 2",
+            "TODO: Item 3"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vitalidade-e-fora-de-acao",
+      "title": "Vitalidade e Fora de Ação",
+      "tags": ["character", "health", "combat"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo 1 sobre Vitalidade e Fora de Ação."
+        },
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo 2 (se necessário)."
+        }
+      ]
+    },
+    {
+      "id": "dano-e-ferimento",
+      "title": "Dano e Ferimento",
+      "tags": ["character", "damage", "combat"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo 1 sobre Dano e Ferimento."
+        },
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo 2 (se necessário)."
+        }
+      ]
+    },
+    {
+      "id": "controle-e-intriga",
+      "title": "Controle e Intriga",
+      "tags": ["character", "social", "conflict"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo 1 sobre Controle e Intriga."
+        },
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo 2 (se necessário)."
+        }
+      ]
+    },
+    {
+      "id": "repouso",
+      "title": "Repouso",
+      "tags": ["character", "recovery"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo introdutório sobre Repouso."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "TODO: Lista 1 - Item 1",
+            "TODO: Lista 1 - Item 2",
+            "TODO: Lista 1 - Item 3"
+          ]
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "TODO: Lista 2 - Item 1",
+            "TODO: Lista 2 - Item 2",
+            "TODO: Lista 2 - Item 3"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peculiaridades",
+      "title": "Peculiaridades",
+      "tags": ["character", "traits"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo 1 sobre Peculiaridades."
+        },
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo 2 (se necessário)."
+        }
+      ]
+    },
+    {
+      "id": "circulo",
+      "title": "Círculo",
+      "tags": ["character", "social", "relationships"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo 1 sobre Círculo."
+        },
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo 2 (se necessário)."
+        }
+      ]
+    },
+    {
+      "id": "moeda-inicial",
+      "title": "Moeda Inicial",
+      "tags": ["character", "economy", "equipment"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo introdutório sobre Moeda Inicial."
+        },
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo adicional (se necessário)."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "TODO: Lista 1 - Item 1",
+            "TODO: Lista 1 - Item 2",
+            "TODO: Lista 1 - Item 3"
+          ]
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "TODO: Lista 2 - Item 1",
+            "TODO: Lista 2 - Item 2",
+            "TODO: Lista 2 - Item 3"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "estudo-e-conhecimento",
+      "title": "Estudo e Conhecimento",
+      "tags": ["character", "skills", "knowledge"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo introdutório sobre Estudo e Conhecimento."
+        },
+        {
+          "type": "nestedList",
+          "items": [
+            {
+              "title": "TODO: Item principal 1",
+              "items": [
+                "TODO: Subitem 1",
+                "TODO: Subitem 2"
+              ]
+            },
+            {
+              "title": "TODO: Item principal 2",
+              "items": [
+                "TODO: Subitem 1",
+                "TODO: Subitem 2"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "segredos",
+      "title": "Segredos",
+      "tags": ["character", "narrative"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo introdutório sobre Segredos."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "TODO: Item 1",
+            "TODO: Item 2",
+            "TODO: Item 3"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "arquetipo",
+      "title": "Arquétipo",
+      "tags": ["character", "creation"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo introdutório sobre Arquétipo."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "TODO: Item 1",
+            "TODO: Item 2",
+            "TODO: Item 3"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "motivacao",
+      "title": "Motivação",
+      "tags": ["character", "narrative"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo introdutório sobre Motivação."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "TODO: Item 1",
+            "TODO: Item 2",
+            "TODO: Item 3"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "disposicao",
+      "title": "Disposição",
+      "tags": ["character", "state"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo 1 sobre Disposição."
+        },
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo 2 (se necessário)."
+        }
+      ]
+    }
+  ]
+}
