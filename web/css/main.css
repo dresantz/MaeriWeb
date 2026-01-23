@@ -524,3 +524,22 @@ th {
   color: var(--text-color);
   font-size: 1rem;
 }
+
+/* Chapter navigation inside TOC */
+.chapter-nav {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.chapter-nav button {
+  width: 100%;
+  padding: 0.7rem;
+  font-size: 1rem;
+  border-radius: 12px;
+}
+
+.chapter-nav button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}

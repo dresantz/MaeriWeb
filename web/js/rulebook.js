@@ -78,6 +78,50 @@ function renderTOC(chapterData) {
   });
 }
 
+function getCurrentChapterIndex() {
+  return RULEBOOK_CHAPTERS.findIndex(ch => ch.file === currentChapterFile);
+}
+
+function updateChapterNavButtons() {
+  const prevBtn = document.getElementById("chapter-prev");
+  const nextBtn = document.getElementById("chapter-next");
+
+  if (!prevBtn || !nextBtn) return;
+
+  const index = getCurrentChapterIndex();
+
+  prevBtn.disabled = index <= 0;
+  nextBtn.disabled = index === -1 || index >= RULEBOOK_CHAPTERS.length - 1;
+}
+
+function switchToChapterByIndex(newIndex) {
+  if (newIndex < 0 || newIndex >= RULEBOOK_CHAPTERS.length) return;
+
+  const chapter = RULEBOOK_CHAPTERS[newIndex];
+  loadRulebookChapter(chapter.file);
+
+  // Smooth scroll to top for reading flow
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  // Keep select in sync
+  const select = document.getElementById("chapter-select");
+  if (select) select.value = chapter.file;
+
+  // Close TOC after switching
+  const tocPanel = document.getElementById("toc-panel");
+  const tocOverlay = document.getElementById("toc-overlay");
+  const tocToggle = document.getElementById("toc-toggle");
+
+  if (tocPanel && tocOverlay && tocToggle) {
+    tocPanel.classList.remove("open");
+    tocOverlay.classList.remove("active");
+    document.body.classList.remove("no-scroll");
+    tocToggle.textContent = "☰";
+    tocToggle.setAttribute("aria-label", "Open Rulebook Index");
+  }
+}
+
+
 /* =========================
    Chapter Catalog
 ========================= */
@@ -357,6 +401,7 @@ function loadRulebookChapter(fileName) {
       renderRulebookChapter(data);
       renderTOC(data);
       renderChapterSelect();
+      updateChapterNavButtons();
     })
 
     .catch((error) => {
@@ -396,6 +441,23 @@ if (chapterSelect) {
     }
   });
 }
-  loadRulebookChapter(currentChapterFile);
-});
+  const prevBtn = document.getElementById("chapter-prev");
+  const nextBtn = document.getElementById("chapter-next");
 
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      const index = getCurrentChapterIndex();
+      switchToChapterByIndex(index - 1);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      const index = getCurrentChapterIndex();
+      switchToChapterByIndex(index + 1);
+    });
+  }
+
+  loadRulebookChapter(currentChapterFile);
+  updateChapterNavButtons();
+});
