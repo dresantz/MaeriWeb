@@ -94,7 +94,7 @@ function updateChapterNavButtons() {
   nextBtn.disabled = index === -1 || index >= RULEBOOK_CHAPTERS.length - 1;
 }
 
-function switchToChapterByIndex(newIndex) {
+function switchToChapterByIndex(newIndex, closeTOC = true) {
   if (newIndex < 0 || newIndex >= RULEBOOK_CHAPTERS.length) return;
 
   const chapter = RULEBOOK_CHAPTERS[newIndex];
@@ -105,21 +105,25 @@ function switchToChapterByIndex(newIndex) {
 
   // Keep select in sync
   const select = document.getElementById("chapter-select");
+
   if (select) select.value = chapter.file;
 
   // Close TOC after switching
-  const tocPanel = document.getElementById("toc-panel");
-  const tocOverlay = document.getElementById("toc-overlay");
-  const tocToggle = document.getElementById("toc-toggle");
+  if (closeTOC) {
+    const tocPanel = document.getElementById("toc-panel");
+    const tocOverlay = document.getElementById("toc-overlay");
+    const tocToggle = document.getElementById("toc-toggle");
 
-  if (tocPanel && tocOverlay && tocToggle) {
-    tocPanel.classList.remove("open");
-    tocOverlay.classList.remove("active");
-    document.body.classList.remove("no-scroll");
-    tocToggle.textContent = "☰";
-    tocToggle.setAttribute("aria-label", "Open Rulebook Index");
+    if (tocPanel && tocOverlay && tocToggle) {
+      tocPanel.classList.remove("open");
+      tocOverlay.classList.remove("active");
+      document.body.classList.remove("no-scroll");
+      tocToggle.textContent = "☰";
+      tocToggle.setAttribute("aria-label", "Open Rulebook Index");
+    }
   }
 }
+
 
 
 /* =========================
@@ -128,7 +132,8 @@ function switchToChapterByIndex(newIndex) {
 
 const RULEBOOK_CHAPTERS = [
   { file: "01-o-basico.json", title: "O Básico" },
-  { file: "02-personagem.json", title: "Personagem" }
+  { file: "02-personagem.json", title: "Personagem" },
+  { file: "03-combate.json", title: "Combate" }
   // Depois você adiciona os próximos aqui:
   // { file: "03-....json", title: "..." },
 ];
@@ -456,14 +461,14 @@ if (chapterSelect) {
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
       const index = getCurrentChapterIndex();
-      switchToChapterByIndex(index - 1);
+      switchToChapterByIndex(index - 1, false);
     });
   }
 
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
       const index = getCurrentChapterIndex();
-      switchToChapterByIndex(index + 1);
+      switchToChapterByIndex(index + 1, false);
     });
   }
 

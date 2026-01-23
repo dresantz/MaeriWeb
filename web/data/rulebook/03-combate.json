@@ -1,0 +1,29 @@
+{
+  "id": "combate",
+  "title": "Combate",
+  "order": 3,
+  "description": "Regras e conceitos relacionados ao combate.",
+  "sections": [
+    {
+      "id": "turono-de-combate",
+      "title": "Turno de combate",
+      "tags": ["character", "inventory", "movement"],
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "TODO: Parágrafo introdutório sobre Peso e limite de carga."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "TODO: Item 1",
+            "TODO: Item 2",
+            "TODO: Item 3"
+          ]
+        }
+      ]
+    }
+  ]
+}
+
