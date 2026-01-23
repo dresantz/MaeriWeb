@@ -1,3 +1,4 @@
+const LAST_TOPIC_KEY = "maeriLastTopic";
 
 function getChapterFromURL() {
   const params = new URLSearchParams(window.location.search);
@@ -371,8 +372,11 @@ tocToggle.setAttribute("aria-label", "Open Rulebook Index");
 
   // Close after clicking any item
   tocList.addEventListener("click", (e) => {
-    const target = e.target;
-    if (target.tagName === "A") {
+    if (e.target.tagName === "A") {
+      const targetId = e.target.getAttribute("href")?.replace("#", "");
+      if (targetId) {
+        localStorage.setItem(LAST_TOPIC_KEY, targetId);
+      }
       closeTOC();
     }
   });
@@ -438,6 +442,14 @@ function loadRulebookChapter(fileName) {
       renderTOC(data);
       renderChapterSelect();
       updateChapterNavButtons();
+
+      const lastTopicId = localStorage.getItem(LAST_TOPIC_KEY);
+      if (lastTopicId) {
+        const el = document.getElementById(lastTopicId);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
     })
 
     .catch((error) => {
@@ -460,6 +472,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const chapterSelect = document.getElementById("chapter-select");
 if (chapterSelect) {
   chapterSelect.addEventListener("change", (e) => {
+    localStorage.removeItem(LAST_TOPIC_KEY);
     loadRulebookChapter(e.target.value);
     window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -483,6 +496,7 @@ if (chapterSelect) {
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
       const index = getCurrentChapterIndex();
+      localStorage.removeItem(LAST_TOPIC_KEY);
       switchToChapterByIndex(index - 1, false);
     });
   }
@@ -490,6 +504,7 @@ if (chapterSelect) {
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
       const index = getCurrentChapterIndex();
+      localStorage.removeItem(LAST_TOPIC_KEY);
       switchToChapterByIndex(index + 1, false);
     });
   }
