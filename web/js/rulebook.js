@@ -1,3 +1,14 @@
+
+function getChapterFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const chapter = params.get("chapter");
+  return chapter;
+}
+
+function chapterExists(fileName) {
+  return RULEBOOK_CHAPTERS.some(ch => ch.file === fileName);
+}
+
 function renderRulebook(chapterData) {
   const container = document.getElementById("rulebook-content");
   if (!container) return;
@@ -140,12 +151,18 @@ const RULEBOOK_CHAPTERS = [
 
 const LAST_CHAPTER_KEY = "maeriLastChapter";
 
-const saved = localStorage.getItem(LAST_CHAPTER_KEY);
-const exists = RULEBOOK_CHAPTERS.some(ch => ch.file === saved);
+const urlChapter = getChapterFromURL();
+const savedChapter = localStorage.getItem(LAST_CHAPTER_KEY);
 
-let currentChapterFile = exists
-  ? saved
-  : RULEBOOK_CHAPTERS[0].file;
+let currentChapterFile;
+
+if (urlChapter && chapterExists(urlChapter)) {
+  currentChapterFile = urlChapter;
+} else if (savedChapter && chapterExists(savedChapter)) {
+  currentChapterFile = savedChapter;
+} else {
+  currentChapterFile = RULEBOOK_CHAPTERS[0].file;
+}
 
 function renderChapterSelect() {
   const select = document.getElementById("chapter-select");
@@ -405,6 +422,11 @@ function loadRulebookChapter(fileName) {
   currentChapterFile = fileName;
 
   localStorage.setItem(LAST_CHAPTER_KEY, fileName);
+
+  const url = new URL(window.location);
+  url.searchParams.set("chapter", fileName);
+  window.history.replaceState({}, "", url);
+
 
   fetch(path)
     .then((response) => {
