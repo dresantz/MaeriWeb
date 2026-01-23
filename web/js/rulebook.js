@@ -133,7 +133,14 @@ const RULEBOOK_CHAPTERS = [
   // { file: "03-....json", title: "..." },
 ];
 
-let currentChapterFile = RULEBOOK_CHAPTERS[0].file;
+const LAST_CHAPTER_KEY = "maeriLastChapter";
+
+const saved = localStorage.getItem(LAST_CHAPTER_KEY);
+const exists = RULEBOOK_CHAPTERS.some(ch => ch.file === saved);
+
+let currentChapterFile = exists
+  ? saved
+  : RULEBOOK_CHAPTERS[0].file;
 
 function renderChapterSelect() {
   const select = document.getElementById("chapter-select");
@@ -391,6 +398,8 @@ function loadRulebookChapter(fileName) {
   const path = `../data/rulebook/${fileName}`;
 
   currentChapterFile = fileName;
+
+  localStorage.setItem(LAST_CHAPTER_KEY, fileName);
 
   fetch(path)
     .then((response) => {
