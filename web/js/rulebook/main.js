@@ -55,6 +55,7 @@ function initChapterNavigation() {
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
       clearSavedTopic();
+      updateURLTopic(null);
       const index = getCurrentChapterIndex();
       switchToChapterByIndex(index - 1, false);
     });
@@ -63,6 +64,7 @@ function initChapterNavigation() {
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
       clearSavedTopic();
+      updateURLTopic(null);
       const index = getCurrentChapterIndex();
       switchToChapterByIndex(index + 1, false);
     });
@@ -84,6 +86,7 @@ function observeTopics() {
           const topicId = entry.target.id;
           if (topicId) {
             localStorage.setItem(LAST_TOPIC_KEY, topicId);
+            updateURLTopic(topicId);
           }
         }
       });
@@ -98,6 +101,7 @@ function observeTopics() {
   topics.forEach((topic) => observer.observe(topic));
 }
 
+
 /* =====================================================
    Helpers
 ===================================================== */
@@ -108,4 +112,45 @@ function clearSavedTopic() {
 
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+
+function getTopicFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("topic");
+}
+
+/* =====================================================
+   URL de tópicos
+===================================================== */
+
+function updateURLTopic(topicId) {
+  const params = new URLSearchParams(window.location.search);
+
+  if (topicId) {
+    params.set("topic", topicId);
+  } else {
+    params.delete("topic");
+  }
+
+  const newURL = `${window.location.pathname}?${params.toString()}`;
+  window.history.replaceState({}, "", newURL);
+}
+/**
+ * Restaura o último tópico visitado
+ * Prioridade:
+ * 1) URL (?topic=)
+ * 2) localStorage
+ */
+function restoreLastTopic() {
+  const topicFromURL = getTopicFromURL();
+  const topicFromStorage = localStorage.getItem(LAST_TOPIC_KEY);
+
+  const topicId = topicFromURL || topicFromStorage;
+  if (!topicId) return;
+
+  const el = document.getElementById(topicId);
+  if (el) {
+    el.scrollIntoView({ behavior: "auto", block: "start" });
+  }
 }
