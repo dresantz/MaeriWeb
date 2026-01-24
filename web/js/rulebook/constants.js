@@ -5,7 +5,6 @@
 export const LAST_CHAPTER_KEY = "maeriLastChapter";
 export const LAST_TOPIC_KEY = "maeriLastTopic";
 
-
 /*
  * Lista oficial de capítulos do Rulebook
  */

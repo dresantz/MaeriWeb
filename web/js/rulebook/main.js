@@ -12,23 +12,47 @@ import { RULEBOOK_CHAPTERS } from "./constants.js";
 import { currentChapterFile } from "./state.js";
 import { LAST_TOPIC_KEY } from "./constants.js";
 import { initChapterNavigation } from "./navigation.js";
+import { buildIndex } from "../search/searchIndex.js";
+import { initSearchUI } from "../search/searchUI.js";
+
+/* =====================================================
+   Pre-indexation
+===================================================== */
+
+async function preloadSearchIndex() {
+  const chaptersData = [];
+
+  for (const chapter of RULEBOOK_CHAPTERS) {
+    const path = `../data/rulebook/${chapter.file}`;
+
+    const res = await fetch(path);
+    if (!res.ok) continue;
+
+    const data = await res.json();
+
+    // Marca o capítulo de origem (sem afetar render)
+    data.__file = chapter.file;
+
+    chaptersData.push(data);
+  }
+
+  buildIndex(chaptersData);
+}
 
 /* =====================================================
    Entry point
 ===================================================== */
 
-document.addEventListener("DOMContentLoaded", initRulebook);
+document.addEventListener("DOMContentLoaded", async () => {
+  await preloadSearchIndex();
 
-/* =====================================================
-   Inicialização principal
-===================================================== */
-
-function initRulebook() {
   initTOCToggle();
   initChapterSelect();
   initChapterNavigation();
+  initSearchUI();
+
   loadInitialChapter();
-}
+});
 
 /* =====================================================
    Capítulo inicial (URL / localStorage / fallback)
