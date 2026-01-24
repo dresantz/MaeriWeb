@@ -14,6 +14,16 @@
   <header>
     <h1>Maeri RPG</h1>
     <p>Core Rulebook</p>
+        <div id="rulebook-search" class="search-container">
+      <input
+        type="search"
+        id="search-input"
+        placeholder="Buscar regra, termo ou ação..."
+        autocomplete="off"
+      />
+
+      <div id="search-results" class="search-results hidden"></div>
+    </div>
   </header>
 
   <!-- Rulebook Index Toggle -->
@@ -98,11 +108,7 @@
 </div>
 
   <script src="../js/dice.js"></script>
-  <script src="../js/rulebook/data.js"></script>
-  <script src="../js/rulebook/toc.js"></script>
-  <script src="../js/rulebook/renderer.js"></script>
-  <script src="../js/rulebook/main.js"></script>
-  <script src="../js/rulebook/loader.js"></script>
+  <script type="module" src="../js/rulebook/main.js"></script>
 
 </body>
 </html>

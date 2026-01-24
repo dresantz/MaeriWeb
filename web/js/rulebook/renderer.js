@@ -1,6 +1,6 @@
 
   // Renderiza um capítulo inteiro do rulebook
-function renderRulebookChapter(chapterData) {
+export function renderRulebookChapter(chapterData) {
   const container = document.getElementById("rulebook-content");
   if (!container) return;
 

@@ -1,4 +1,4 @@
-/**
+/*
  * Carrega um capítulo do Rulebook
  * Responsável por:
  * - Buscar o JSON do capítulo
@@ -8,7 +8,16 @@
  * - Restaurar tópico (URL ou localStorage)
  * - Ativar observador de scroll
  */
-function loadRulebookChapter(fileName) {
+import { renderRulebookChapter } from "./renderer.js";
+import { renderTOC } from "./toc.js";
+import { setCurrentChapter } from "./state.js";
+import { LAST_CHAPTER_KEY, LAST_TOPIC_KEY } from "./constants.js";
+import { renderChapterSelect } from "./toc.js";
+import { updateChapterNavButtons } from "./navigation.js";
+import { restoreLastTopic } from "./navigation.js";
+import { observeTopics } from "./navigation.js";
+
+export function loadRulebookChapter(fileName) {
   // Caminho do JSON
   // rulebook.html está em /web/pages/
   // JSON está em /web/data/rulebook/
@@ -17,7 +26,7 @@ function loadRulebookChapter(fileName) {
   /* =========================
      Estado global
   ========================= */
-  currentChapterFile = fileName;
+  setCurrentChapter(fileName);
   localStorage.setItem(LAST_CHAPTER_KEY, fileName);
 
   /* =========================

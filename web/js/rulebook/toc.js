@@ -1,16 +1,23 @@
+import { RULEBOOK_CHAPTERS, LAST_TOPIC_KEY } from "./constants.js";
+import { currentChapterFile } from "./state.js";
+import { loadRulebookChapter } from "./loader.js";
 
+/* =====================================================
+   Renderização do TOC
+===================================================== */
 
-function renderTOC(chapterData) {
+export function renderTOC(chapterData) {
   const tocList = document.getElementById("toc-list");
   const tocChapterTitle = document.getElementById("toc-chapter-title");
 
   if (!tocList || !tocChapterTitle) return;
 
   tocChapterTitle.textContent = chapterData.title || "Rulebook";
-
   tocList.innerHTML = "";
 
   (chapterData.sections || []).forEach((section) => {
+    if (!section.id) return;
+
     const li = document.createElement("li");
     const a = document.createElement("a");
 
@@ -22,10 +29,14 @@ function renderTOC(chapterData) {
   });
 }
 
+/* =====================================================
+   Abertura / fechamento do TOC
+===================================================== */
+
 const ICON_CLOSED = "☰";
 const ICON_OPEN = "✕";
 
-function initTOCToggle() {
+export function initTOCToggle() {
   const tocToggle = document.getElementById("toc-toggle");
   const tocPanel = document.getElementById("toc-panel");
   const tocOverlay = document.getElementById("toc-overlay");
@@ -35,7 +46,7 @@ function initTOCToggle() {
 
   function openTOC() {
     tocToggle.textContent = ICON_OPEN;
-tocToggle.setAttribute("aria-label", "Close Rulebook Index");
+    tocToggle.setAttribute("aria-label", "Close Rulebook Index");
     tocPanel.classList.add("open");
     tocOverlay.classList.add("active");
     document.body.classList.add("no-scroll");
@@ -44,7 +55,7 @@ tocToggle.setAttribute("aria-label", "Close Rulebook Index");
 
   function closeTOC() {
     tocToggle.textContent = ICON_CLOSED;
-tocToggle.setAttribute("aria-label", "Open Rulebook Index");
+    tocToggle.setAttribute("aria-label", "Open Rulebook Index");
     tocPanel.classList.remove("open");
     tocOverlay.classList.remove("active");
     document.body.classList.remove("no-scroll");
@@ -52,25 +63,34 @@ tocToggle.setAttribute("aria-label", "Open Rulebook Index");
   }
 
   tocToggle.addEventListener("click", () => {
-  const isOpen = tocPanel.classList.contains("open");
-  if (isOpen) closeTOC();
-  else openTOC();
-});
+    tocPanel.classList.contains("open") ? closeTOC() : openTOC();
+  });
+
   tocOverlay.addEventListener("click", closeTOC);
 
-  // Close after clicking any item
-  tocList.addEventListener("click", (e) => {
-    if (e.target.tagName === "A") {
-      const targetId = e.target.getAttribute("href")?.replace("#", "");
-      if (targetId) {
-        localStorage.setItem(LAST_TOPIC_KEY, targetId);
-      }
-      closeTOC();
-    }
-  });
+tocList.addEventListener("click", (e) => {
+  if (e.target.tagName !== "A") return;
+
+  e.preventDefault(); // 👈 importante
+
+  const targetId = e.target.getAttribute("href")?.slice(1);
+  if (!targetId) return;
+
+  localStorage.setItem(LAST_TOPIC_KEY, targetId);
+
+  const el = document.getElementById(targetId);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  closeTOC();
+});
+
 }
 
-function renderChapterSelect() {
+/* =====================================================
+   Select de capítulos
+===================================================== */
+
+export function renderChapterSelect() {
   const select = document.getElementById("chapter-select");
   if (!select) return;
 
@@ -80,53 +100,42 @@ function renderChapterSelect() {
     const option = document.createElement("option");
     option.value = ch.file;
     option.textContent = ch.title;
-    if (ch.file === currentChapterFile) option.selected = true;
+    option.selected = ch.file === currentChapterFile;
     select.appendChild(option);
   });
+
+  // 👇 garante que só adiciona UMA vez
+  select.onchange = () => {
+    loadRulebookChapter(select.value);
+  };
 }
 
-function getCurrentChapterIndex() {
-  return RULEBOOK_CHAPTERS.findIndex(ch => ch.file === currentChapterFile);
-}
+/* =====================================================
+   Troca de capítulo por índice
+===================================================== */
 
-function updateChapterNavButtons() {
-  const prevBtn = document.getElementById("chapter-prev");
-  const nextBtn = document.getElementById("chapter-next");
-
-  if (!prevBtn || !nextBtn) return;
-
-  const index = getCurrentChapterIndex();
-
-  prevBtn.disabled = index <= 0;
-  nextBtn.disabled = index === -1 || index >= RULEBOOK_CHAPTERS.length - 1;
-}
-
-function switchToChapterByIndex(newIndex, closeTOC = true) {
+export function switchToChapterByIndex(newIndex, closeTOC = true) {
   if (newIndex < 0 || newIndex >= RULEBOOK_CHAPTERS.length) return;
 
   const chapter = RULEBOOK_CHAPTERS[newIndex];
   loadRulebookChapter(chapter.file);
 
-  // Smooth scroll to top for reading flow
   window.scrollTo({ top: 0, behavior: "smooth" });
 
-  // Keep select in sync
   const select = document.getElementById("chapter-select");
-
   if (select) select.value = chapter.file;
 
-  // Close TOC after switching
-  if (closeTOC) {
-    const tocPanel = document.getElementById("toc-panel");
-    const tocOverlay = document.getElementById("toc-overlay");
-    const tocToggle = document.getElementById("toc-toggle");
+  if (!closeTOC) return;
 
-    if (tocPanel && tocOverlay && tocToggle) {
-      tocPanel.classList.remove("open");
-      tocOverlay.classList.remove("active");
-      document.body.classList.remove("no-scroll");
-      tocToggle.textContent = "☰";
-      tocToggle.setAttribute("aria-label", "Open Rulebook Index");
-    }
-  }
+  const tocPanel = document.getElementById("toc-panel");
+  const tocOverlay = document.getElementById("toc-overlay");
+  const tocToggle = document.getElementById("toc-toggle");
+
+  if (!tocPanel || !tocOverlay || !tocToggle) return;
+
+  tocPanel.classList.remove("open");
+  tocOverlay.classList.remove("active");
+  document.body.classList.remove("no-scroll");
+  tocToggle.textContent = ICON_CLOSED;
+  tocToggle.setAttribute("aria-label", "Open Rulebook Index");
 }

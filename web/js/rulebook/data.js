@@ -1,11 +1,3 @@
-// Chapters list
-const RULEBOOK_CHAPTERS = [
-  { file: "01-o-basico.json", title: "O Básico" },
-  { file: "02-personagem.json", title: "Personagem" },
-  { file: "03-combate.json", title: "Combate" }
-  // Depois você adiciona os próximos aqui:
-];
-
 // Storage keys
 const LAST_CHAPTER_KEY = "maeriLastChapter";
 const LAST_TOPIC_KEY = "maeriLastTopic";

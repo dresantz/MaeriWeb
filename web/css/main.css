@@ -543,3 +543,48 @@ th {
   opacity: 0.35;
   cursor: not-allowed;
 }
+
+/* Caixa de Busca*/
+.search-container {
+  position: sticky;
+  top: 0;
+  background: #111;
+  padding: 0.75rem;
+  z-index: 10;
+}
+
+#search-input {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+}
+
+.search-results {
+  background: #1b1b1b;
+  border: 1px solid #333;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.search-results.hidden {
+  display: none;
+}
+
+.search-result {
+  padding: 0.5rem;
+  cursor: pointer;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.search-result:hover {
+  background: #2a2a2a;
+}
+
+.search-result-title {
+  font-weight: bold;
+}
+
+.search-result-meta {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}

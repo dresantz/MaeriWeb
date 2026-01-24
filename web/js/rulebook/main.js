@@ -6,9 +6,18 @@
  * - Ativar persistência de tópico por scroll
  */
 
-document.addEventListener("DOMContentLoaded", () => {
-  initRulebook();
-});
+import { initTOCToggle } from "./toc.js";
+import { loadRulebookChapter } from "./loader.js";
+import { RULEBOOK_CHAPTERS } from "./constants.js";
+import { currentChapterFile } from "./state.js";
+import { LAST_TOPIC_KEY } from "./constants.js";
+import { initChapterNavigation } from "./navigation.js";
+
+/* =====================================================
+   Entry point
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", initRulebook);
 
 /* =====================================================
    Inicialização principal
@@ -26,7 +35,7 @@ function initRulebook() {
 ===================================================== */
 
 function loadInitialChapter() {
-  loadRulebookChapter(currentChapterFile);
+  loadRulebookChapter(currentChapterFile || RULEBOOK_CHAPTERS[0].file);
 }
 
 /* =====================================================
@@ -45,50 +54,23 @@ function initChapterSelect() {
 }
 
 /* =====================================================
-   Navegação: capítulo anterior / próximo
-===================================================== */
-
-function initChapterNavigation() {
-  const prevBtn = document.getElementById("chapter-prev");
-  const nextBtn = document.getElementById("chapter-next");
-
-  if (prevBtn) {
-    prevBtn.addEventListener("click", () => {
-      clearSavedTopic();
-      updateURLTopic(null);
-      const index = getCurrentChapterIndex();
-      switchToChapterByIndex(index - 1, false);
-    });
-  }
-
-  if (nextBtn) {
-    nextBtn.addEventListener("click", () => {
-      clearSavedTopic();
-      updateURLTopic(null);
-      const index = getCurrentChapterIndex();
-      switchToChapterByIndex(index + 1, false);
-    });
-  }
-}
-
-/* =====================================================
    Scroll Spy – persistência do último tópico lido
 ===================================================== */
 
-function observeTopics() {
+export function observeTopics() {
   const topics = document.querySelectorAll("section[data-topic]");
   if (!topics.length) return;
 
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const topicId = entry.target.id;
-          if (topicId) {
-            localStorage.setItem(LAST_TOPIC_KEY, topicId);
-            updateURLTopic(topicId);
-          }
-        }
+        if (!entry.isIntersecting) return;
+
+        const topicId = entry.target.id;
+        if (!topicId) return;
+
+        localStorage.setItem(LAST_TOPIC_KEY, topicId);
+        updateURLTopic(topicId);
       });
     },
     {
@@ -101,12 +83,11 @@ function observeTopics() {
   topics.forEach((topic) => observer.observe(topic));
 }
 
-
 /* =====================================================
    Helpers
 ===================================================== */
 
-function clearSavedTopic() {
+export function clearSavedTopic() {
   localStorage.removeItem(LAST_TOPIC_KEY);
 }
 
@@ -114,8 +95,7 @@ function scrollToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-
-function getTopicFromURL() {
+export function getTopicFromURL() {
   const params = new URLSearchParams(window.location.search);
   return params.get("topic");
 }
@@ -124,7 +104,7 @@ function getTopicFromURL() {
    URL de tópicos
 ===================================================== */
 
-function updateURLTopic(topicId) {
+export function updateURLTopic(topicId) {
   const params = new URLSearchParams(window.location.search);
 
   if (topicId) {
@@ -135,22 +115,4 @@ function updateURLTopic(topicId) {
 
   const newURL = `${window.location.pathname}?${params.toString()}`;
   window.history.replaceState({}, "", newURL);
-}
-/**
- * Restaura o último tópico visitado
- * Prioridade:
- * 1) URL (?topic=)
- * 2) localStorage
- */
-function restoreLastTopic() {
-  const topicFromURL = getTopicFromURL();
-  const topicFromStorage = localStorage.getItem(LAST_TOPIC_KEY);
-
-  const topicId = topicFromURL || topicFromStorage;
-  if (!topicId) return;
-
-  const el = document.getElementById(topicId);
-  if (el) {
-    el.scrollIntoView({ behavior: "auto", block: "start" });
-  }
 }
