@@ -68,8 +68,17 @@ export function bindSearchResultClicks() {
     const item = e.target.closest(".search-result");
     if (!item) return;
 
+    e.preventDefault();
+
     const chapter = item.dataset.chapter;
     const topic = item.dataset.topic;
+
+    // ✅ MOVE O FOCO PARA FORA DO OVERLAY
+    const safeFocusTarget =
+      document.getElementById("rulebook-content") ||
+      document.getElementById("toc-toggle");
+
+    safeFocusTarget?.focus?.();
 
     loadRulebookChapter(chapter);
     updateURLTopic(topic);

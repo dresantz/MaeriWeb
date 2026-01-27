@@ -53,14 +53,18 @@ export function initTOCToggle() {
     tocPanel.setAttribute("aria-hidden", "false");
   }
 
-  function closeTOC() {
-    tocToggle.textContent = ICON_CLOSED;
-    tocToggle.setAttribute("aria-label", "Open Rulebook Index");
-    tocPanel.classList.remove("open");
-    tocOverlay.classList.remove("active");
-    document.body.classList.remove("no-scroll");
-    tocPanel.setAttribute("aria-hidden", "true");
-  }
+function closeTOC() {
+  // ✅ 1. MOVE O FOCO PARA FORA DO TOC
+  tocToggle.focus();
+
+  // ✅ 2. AGORA é seguro esconder
+  tocToggle.textContent = ICON_CLOSED;
+  tocToggle.setAttribute("aria-label", "Open Rulebook Index");
+  tocPanel.classList.remove("open");
+  tocOverlay.classList.remove("active");
+  document.body.classList.remove("no-scroll");
+  tocPanel.setAttribute("aria-hidden", "true");
+}
 
   tocToggle.addEventListener("click", () => {
     tocPanel.classList.contains("open") ? closeTOC() : openTOC();
@@ -71,7 +75,7 @@ export function initTOCToggle() {
 tocList.addEventListener("click", (e) => {
   if (e.target.tagName !== "A") return;
 
-  e.preventDefault(); // 👈 importante
+  e.preventDefault();
 
   const targetId = e.target.getAttribute("href")?.slice(1);
   if (!targetId) return;
@@ -80,6 +84,13 @@ tocList.addEventListener("click", (e) => {
 
   const el = document.getElementById(targetId);
   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  // ✅ Move o foco para fora do TOC antes de escondê-lo
+  const safeFocusTarget =
+    document.getElementById("rulebook-content") ||
+    document.getElementById("toc-toggle");
+
+  safeFocusTarget?.focus?.();
 
   closeTOC();
 });
