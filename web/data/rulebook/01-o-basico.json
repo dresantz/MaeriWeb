@@ -1,254 +1,393 @@
 {
-  "id": "o-basico",
-  "title": "O Básico",
+  "id": "capitulo-um-o-basico",
+  "title": "CAPÍTULO UM: O BÁSICO",
   "order": 1,
-  "description": "Conceitos essenciais para começar a jogar Maeri RPG.",
   "sections": [
     {
       "id": "roleplaying-game",
-      "title": "Roleplaying Game",
-      "tags": ["intro", "basics"],
+      "title": "ROLEPLAYING GAME",
       "content": [
         {
           "type": "paragraph",
-          "text": "TODO: Escreva aqui o parágrafo introdutório do tópico Roleplaying Game."
+          "text": "Se você é um jogador experiente e quiser ter uma visão geral desse sistema, você pode se focar nas frases marcadas. Se você é iniciante, a melhor forma de aprender é jogando com jogadores experientes. Agora, se você não tem acesso a um grupo, a leitura do livro irá ensinar tudo o que você precisa."
+        },
+        {
+          "type": "paragraph",
+          "text": "RPG é a abreviação de Roleplaying Game, que significa jogo de interpretação (no sentido de atuar, representar). Nesse jogo, você cria um personagem em sua imaginação, anota as suas características de acordo com as regras e, em seguida, outro jogador chamado mestre irá impor desafios imaginários ao seu personagem inventado, que tentará sobrepujá-los com criatividade e sorte nos dados."
+        },
+        {
+          "type": "paragraph",
+          "text": "Os elementos fundamentais de um RPG de Mesa são o Mestre, o Cenário, o Sistema, o Jogador/Personagem e a Imaginação."
         },
         {
           "type": "list",
           "style": "unordered",
           "items": [
-            "TODO: Item 1 da lista",
-            "TODO: Item 2 da lista",
-            "TODO: Item 3 da lista"
+            "O Jogador/Personagem. O jogador é a pessoa responsável por criar um personagem que irá interagir com o mundo criado pelo mestre. A forma mais confortável de se jogar é com algo entre um e seis jogadores mais o mestre.",
+            "O Mestre. Jogador responsável pelos desafios imaginários, sua função é situar os personagens em um ambiente e descrever o que os personagens dos jogadores estão experimentando com seus sentidos.",
+            "O Cenário. Trata-se do lugar onde se passa a história que o mestre tem preparada para contar aos personagens dos jogadores.",
+            "O Sistema. São as orientações (ou regras) a respeito de como os jogadores devem montar seus personagens, lidar com desafios, e como o mestre deve conduzir o jogo, visando manter a partida justa e organizada. O RPG, porém, tem foco narrativo, e por isso as orientações devem servir à história e se adaptar ao contexto, caso algo não esteja definido no papel.",
+            "A Imaginação. Todo jogo se passa na imaginação dos jogadores e do mestre."
           ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Esse é um livro básico, ou seja, um livro que ensina um sistema de RPG. Ele contém o sistema e cenário chamado Maeri."
+        },
+        {
+          "type": "paragraph",
+          "text": "Maeri é jogado com 1d2, 1d3 e 1d6, abreviação para dados de 2, 3 e 6 lados. 1d6 significa 1 dado de 6 lados, 2d6 significa 2 dados de 6 lados e assim por diante. Observe que é possível usar apenas o dado de seis lados comum: 1d2 pode ser substituído por 1d6 se for considerado que resultado de 1 a 3 vale 1 e de 4 a 6 vale 2, enquanto para 1d3, 1 e 2 valem 1, 3 e 4 valem 3 e 5 e 6 valem 3."
         }
       ]
     },
     {
-      "id": "mentalidade",
-      "title": "Mentalidade",
-      "tags": ["intro", "basics"],
-      "content": [
-        {
-          "type": "paragraph",
-          "text": "TODO: Escreva aqui o parágrafo introdutório do tópico Mentalidade."
-        },
-        {
-          "type": "table",
-          "caption": "TODO: (opcional) Título/descrição da tabela",
-          "columns": [
-            "Coluna 1",
-            "Coluna 2",
-            "Coluna 3",
-            "Coluna 4",
-            "Coluna 5",
-            "Coluna 6"
-          ],
-          "rows": [
-            ["TODO", "TODO", "TODO", "TODO", "TODO", "TODO"],
-            ["TODO", "TODO", "TODO", "TODO", "TODO", "TODO"],
-            ["TODO", "TODO", "TODO", "TODO", "TODO", "TODO"]
-          ]
-        }
-      ]
-    },
-    {
-      "id": "caracteristicas-basicas",
-      "title": "Características Básicas",
-      "tags": ["basics", "characters"],
-      "content": [
-        {
-          "type": "paragraph",
-          "text": "TODO: Parágrafo 1 (com lista curta abaixo)."
-        },
-        {
-          "type": "list",
-          "style": "unordered",
-          "items": [
-            "TODO: Item A",
-            "TODO: Item B"
-          ]
-        },
-        {
-          "type": "paragraph",
-          "text": "TODO: Parágrafo 2 (com lista curta abaixo)."
-        },
-        {
-          "type": "list",
-          "style": "unordered",
-          "items": [
-            "TODO: Item A",
-            "TODO: Item B"
-          ]
-        },
-        {
-          "type": "paragraph",
-          "text": "TODO: Parágrafo 3 (com lista curta abaixo)."
-        },
-        {
-          "type": "list",
-          "style": "unordered",
-          "items": [
-            "TODO: Item A",
-            "TODO: Item B"
-          ]
-        },
-        {
-          "type": "paragraph",
-          "text": "TODO: Parágrafo 4 (com lista curta abaixo)."
-        },
-        {
-          "type": "list",
-          "style": "unordered",
-          "items": [
-            "TODO: Item A",
-            "TODO: Item B"
-          ]
-        },
-        {
-          "type": "paragraph",
-          "text": "TODO: Parágrafo 5 (com lista curta abaixo)."
-        },
-        {
-          "type": "list",
-          "style": "unordered",
-          "items": [
-            "TODO: Item A",
-            "TODO: Item B"
-          ]
-        },
-        {
-          "type": "paragraph",
-          "text": "TODO: Parágrafo 6 (com lista curta abaixo)."
-        },
-        {
-          "type": "list",
-          "style": "unordered",
-          "items": [
-            "TODO: Item A",
-            "TODO: Item B"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "divisoes-de-tempo",
-      "title": "Divisões de Tempo",
-      "tags": ["basics", "time"],
-      "content": [
-        {
-          "type": "paragraph",
-          "text": "TODO: Escreva aqui o parágrafo introdutório do tópico Divisões de Tempo."
-        },
-        {
-          "type": "list",
-          "style": "unordered",
-          "items": [
-            "TODO: Item 1",
-            "TODO: Item 2",
-            "TODO: Item 3"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "testes",
-      "title": "Testes",
-      "tags": ["basics", "rules"],
-      "content": [
-        {
-          "type": "paragraph",
-          "text": "TODO: Escreva aqui o parágrafo introdutório do tópico Testes."
-        }
-      ]
-    },
-    {
-      "id": "penalidades-e-bonus",
-      "title": "Penalidades e Bônus",
-      "tags": ["basics", "rules"],
-      "content": [
-        {
-          "type": "paragraph",
-          "text": "TODO: Escreva aqui o parágrafo introdutório do tópico Penalidades e Bônus."
-        }
-      ]
-    },
-    {
-      "id": "vantagem-e-desvantagem",
-      "title": "Vantagem e Desvantagem",
-      "tags": ["basics", "rules"],
-      "content": [
-        {
-          "type": "paragraph",
-          "text": "TODO: Escreva aqui o parágrafo introdutório do tópico Vantagem e Desvantagem."
-        }
-      ]
-    },
-    {
-      "id": "embate",
-      "title": "Embate",
-      "tags": ["combat", "rules"],
-      "content": [
-        {
-          "type": "paragraph",
-          "text": "TODO: Escreva aqui o parágrafo introdutório do tópico Embate."
-        }
-      ]
-    },
-    {
-      "id": "experiencia-e-nivel",
-      "title": "Experiência e Nível",
-      "tags": ["progression", "rules"],
-      "content": [
-        {
-          "type": "paragraph",
-          "text": "TODO: Parágrafo introdutório do tópico Experiência e Nível."
-        },
-        {
-          "type": "subsections",
-          "items": [
+          "id": "mentalidade",
+          "title": "MENTALIDADE",
+          "content": [
             {
-              "id": "ganhando-experiencia",
-              "title": "TODO: Subtópico 1",
-              "content": [
-                {
-                  "type": "paragraph",
-                  "text": "TODO: Texto do subtópico 1."
-                },
-                {
-                  "type": "list",
-                  "style": "unordered",
-                  "items": [
-                    "TODO: Item 1",
-                    "TODO: Item 2",
-                    "TODO: Item 3"
-                  ]
-                }
+              "type": "paragraph",
+              "text": "Toda campanha de RPG começa com a criação de personagem. O local onde serão escritas as informações do personagem do jogador é chamado de ficha. Uma dica para o iniciante é construir uma ficha conforme lê o livro, porém, mantenha-se sempre pronto para apagar ou mudar algo conforme for construindo."
+            },
+            {
+              "type": "paragraph",
+              "text": "Seis características básicas definem o personagem do jogador: Físico (F), Vigor (V), Destreza (D), Assimilação (A), Influência (I) e Sabedoria (S). As três primeiras são Características Físicas (CF = F, V e D) e as três últimas são as Características Mentais (CM = A, I e S)."
+            },
+            {
+              "type": "paragraph",
+              "text": "Cada uma das seis características já possui automaticamente 2 pontos, sendo 9 o limite máximo de pontos em uma característica. Quanto maior a quantidade de pontos em uma característica, maiores serão as chances do personagem sobrepujar desafios que exijam testes da referida característica."
+            },
+            {
+              "type": "paragraph",
+              "text": "Além desses 2 pontos iniciais em cada característica básica, os jogadores podem distribuir uma quantidade extra de pontos de acordo com a escolha de uma das três Mentalidades diferentes:"
+            },
+            {
+              "type": "table",
+              "columns": [
+                "Mentalidade",
+                "CF",
+                "CM",
+                "Aspectos",
+                "Vit",
+                "Con"
+              ],
+              "rows": [
+                ["Belicoso.", "+3, +2.", "+1.", "1 Aspecto.", "+4", "+2"],
+                ["Mediador.", "+2, +1.", "+2, +1.", "1 Aspecto.", "+3", "+2"],
+                ["Erudito.", "+1.", "+3, +1.", "2 Aspectos.", "+1", "+3"]
               ]
             },
             {
-              "id": "nivel-e-progresso",
-              "title": "TODO: Subtópico 2",
-              "content": [
-                {
-                  "type": "paragraph",
-                  "text": "TODO: Texto do subtópico 2."
-                }
+              "type": "paragraph",
+              "text": "Um personagem belicoso terá em sua CF uma característica 5 e outra 4, levando em conta os dois pontos já presentes, por exemplo. Aspectos permitem adquirir Estudos. Vit significa vitalidade e Con significa controle."
+            }
+          ]
+        },
+        {
+          "id": "caracteristicas-basicas",
+          "title": "CARACTERÍSTICAS BÁSICAS",
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Físico (F). É a condição física, muscular e bruta do personagem. Ter F1 significa ter pouco mais que o suficiente para se manter em pé, enquanto F9 é o suficiente para lidar com múltiplas vezes o próprio peso."
+            },
+            {
+              "type": "list",
+              "style": "unordered",
+              "items": [
+                "Forçar. Arrombar, esmagar, dobrar.",
+                "Segurar. puxar, erguer, empurrar, agarrar, escalar, pendurar-se. ",
+                "Golpear. Usar o corpo para causar impacto."
               ]
             },
             {
-              "id": "limites-e-recompensas",
-              "title": "TODO: Subtópico 3",
-              "content": [
-                {
-                  "type": "paragraph",
-                  "text": "TODO: Texto do subtópico 3."
-                }
+              "type": "paragraph",
+              "text": "Vigor (V). A resistência física e mental, a saúde, a energia vital. V1 seria como ter a saúde de um recém-nascido, enquanto com V9 o personagem pode perder um braço em combate e continuar lutando."
+            },
+            {
+              "type": "list",
+              "style": "unordered",
+              "items": [
+                "Resistir. Efeitos externos, como calor, frio, pressão.",
+                "Saúde. Efeitos internos, como veneno, doença, sede, fome, exaustão.",
+                "Foco. Efeitos mentais, como medo, tristeza, paixão."
               ]
+            },
+            {
+              "type": "paragraph",
+              "text": "Destreza (D). A movimentação física, velocidade, controle e noção corporal. Com D1 é possível pouco mais que caminhar, D3 o personagem já sabe nadar, e com D9 estará em nível olímpico de atletismo."
+            },
+            {
+              "type": "list",
+              "style": "unordered",
+              "items": [
+                "Acrobacia. Saltar, aterrizar, equilibrar.",
+                ", Movimento. Correr, esgueirar, rastejar.",
+                "Ocultar. Esconder-se.",
+                "Nadar. Movimentar na água.",
+                "Reflexo. Velocidade de resposta do corpo."
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "Assimilação (A). É a união dos cinco sentidos, a noção espacial e a resposta motora sutil do corpo. A2 é a habilidade motora e perceptiva de um bêbado e A9 é a capacidade de observação de um detetive experiente."
+            },
+            {
+              "type": "list",
+              "style": "unordered",
+              "items": [
+                "Mira. Acertar um alvo.",
+                "Manobrar. Cavalgar montarias, pilotar embarcações, guiar carroças.",
+                "Navegar. Localizar-se, encontrar direções.",
+                "Percepção. Detectar, procurar, observar.",
+                "Manusear. Lidar com objetos delicados, armadilhas, instrumentos, pintura, caligrafia."
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "Influência (I). É a inteligência interpessoal, a habilidade de se relacionar com outros seres. I1 é a simpatia de alguém que passou a vida em um buraco, I5 é a capacidade de um bom vendedor e I9 é o carisma de um líder político."
+            },
+            {
+              "type": "list",
+              "style": "unordered",
+              "items": [
+                "Intriga. Lábia, diplomacia, oratória, intimidação, sedução, provocação.",
+                "Liderar. Dar comandos e ser obedecido.",
+                "Domar. Lidar com animais, acalmar.",
+                "Performar. Apresentar, entreter, distrair."
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "Sabedoria (S). Conhecimento de mundo, memória, lógica, conectar informações. Com S1 o personagem é basicamente movido a instintos básicos como fome, S4 já permite ler e escrever de maneira coloquial e rudimentar em sua língua original, e S9 é a mente de um cientista de vanguarda."
+            },
+            {
+              "type": "list",
+              "style": "unordered",
+              "items": [
+                "Lembrar. Recordar, reconhecer, memorizar.",
+                "Estratégia. Planejar, organizar.",
+                "Avaliar. Determinar valor, verificar procedência, identificar.",
+                "Investigar. Entender, associar, deduzir, conjecturar."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "divisoes-de-tempo",
+          "title": "DIVISÕES DE TEMPO",
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "O mestre diz para um jogador que que ele está caminhando em uma estrada e uma carroça desgovernada vem em sua direção, e então, pergunta o que ele faz. O jogador diz que seu personagem tentará desviar saltando para o lado. O jogador está, nesse momento, realizando uma ação."
+            },
+            {
+              "type": "list",
+              "style": "unordered",
+              "items": [
+                "Uma ação é, portanto, a decisão do jogador ou do mestre que gera um ato de um personagem.",
+                "Um turno é o conjunto de ações que o personagem faz até que seja a vez do próximo. Em combate, um turno tem duração média de três a doze segundos.",
+                "Uma rodada é composta pelos turnos de todos os jogadores, e dos personagens não-jogadores, que estão envolvidos na cena. Uma rodada de combate, por exemplo, termina depois que todos os envolvidos finalizarem seus turnos uma vez, durando de quinze a trinta segundos, quando então começa a próxima rodada.",
+                "Uma cena está entre um conjunto de turnos e um conjunto de rodadas, geralmente com algo próximo de um a três minutos de duração. Muitas magias duram por uma cena, e equivalem ao tempo de um combate inteiro.",
+                "Uma temporada é um conjunto de rodadas e cenas, geralmente associada a períodos equivalentes a algo entre um dia e uma semana. Ela será utilizada em viagens, por exemplo.",
+                "Uma aventura é um conjunto de temporadas, geralmente associada ao período que compõem o início, o meio e o fim de uma história criada pelo mestre.",
+                "Uma campanha é o conjunto de aventuras vividas pelos jogadores, e que fecham o ciclo de aventuras dos personagens que interpretaram."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "testes",
+          "title": "TESTES",
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Se um jogador precisar superar um desafio durante a partida, o mestre pode determinar um teste para decidir se tal desafio será sobrepujado."
+            },
+            {
+              "type": "paragraph",
+              "text": "Digamos que o jogador queira deslocar uma rocha que está em seu caminho, para isso, ele precisa fazer um teste de forçar, que usa a característica F (Físico), já que é ela quem ajuda a definir a força do personagem."
+            },
+            {
+              "type": "paragraph",
+              "text": "O jogador sempre deve explicar como será feita a ação, assim fica mais fácil do mestre determinar o tipo de teste: “Eu me agarro à pedra e tento usar todo o peso do meu corpo contra ela para empurrá-la”."
+            },
+            {
+              "type": "paragraph",
+              "text": "Para fazer um teste, o mestre estabelece um Valor de Dificuldade cuja média é 11, depois, o jogador rola 2d6 e soma o resultado à característica testada, valor maior ou igual à Dificuldade estabelecida pelo mestre significa sucesso, caso contrário, será uma falha."
+            },
+            {
+              "type": "paragraph",
+              "text": "As dificuldades dos testes são:"
+            },
+            {
+              "type": "list",
+              "style": "unordered",
+              "items": [
+                "Fácil (5)",
+                "Elementar (7)",
+                "Simples (9)",
+                "Médio (11)",
+                "Árduo (13)",
+                "Complexo (15)",
+                "Difícil (17)"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "O mestre deve fazer uma rápida avaliação do problema em si e de como o jogador está tentando resolvê-lo para estabelecer o Valor de Dificuldade. Usar uma alavanca para mover a pedra pode ser mais fácil que usar as mãos."
+            },
+            {
+              "type": "paragraph",
+              "text": "Digamos que o jogador de D5 (Destreza Cinco) precise saltar de um telhado para cair em uma sacada no prédio ao lado, o mestre considera que será uma tarefa média (11), sendo assim, o jogador terá que conseguir no mínimo um 6 nos 2d6, para somar a sua D5 e conseguir um 11."
+            },
+            {
+              "type": "paragraph",
+              "text": "Considerando que o limite de uma característica é 9, se um personagem possui esse valor em uma característica, testes de dificuldade média (11) já não fazem mais sentido, já que o resultado mínimo em 2d6 é 2 e, portanto, o jogador já possui um 11 (2+9) automaticamente."
+            },
+            {
+              "type": "paragraph",
+              "text": "Sabendo disso, se o mestre ainda assim decidir que o jogador deve rolar os dados, resultado 1 e 1 nos dois dados, e 6 e 6, representam falha crítica e sucesso crítico respectivamente, portanto sempre representarão um sucesso ou falha. É importante ressaltar que se trata de resultado 1 e 1, e não 2, o importante é o valor de cada dado, e não a soma, pois em alguns casos um sucesso crítico pode ser alcançado com 5 e 6, por exemplo."
+            },
+            {
+              "type": "paragraph",
+              "text": "Uma falha não significa que o personagem não irá alcançar seu objetivo nunca mais. O mestre pode permitir uma nova rolagem após um período no qual o personagem descansa ou reavalia a situação — tempo esse que pode ser perigoso para os personagens, dependendo de onde estão esperando."
+            },
+            {
+              "type": "paragraph",
+              "text": "Em uma situação em que o personagem falhe em um teste de F (Físico) para empurrar uma porta pesada, por exemplo, o mestre pode permitir um teste de A (Assimilação), que abrange a capacidade de observação, para que ele encontre uma falha na estrutura da porta."
+            },
+            {
+              "type": "paragraph",
+              "text": "Se um personagem for puxado para participar de uma dança tradicional, o jogador pode pedir para tentar lembrar dos passos (teste de S, Sabedoria, lembrar), ou, tentar acompanhar observando e imitando (teste de A, Assimilação, percepção), ou ele pode tentar improvisar a dança (teste de I, Influência, performar)."
+            },
+            {
+              "type": "paragraph",
+              "text": "É possível também realizar testes em grupo, como em uma situação em que todos os jogadores pretendem se ocultar de algo. Nesses casos, um sucesso compensa uma falha, sucesso crítico compensa duas falhas, e falha crítica anula um sucesso."
+            }
+          ]
+        },
+        {
+          "id": "penalidades-e-bonus",
+          "title": "PENALIDADES E BÔNUS",
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Certas situações podem conceder bônus (+) ou penalidades (-) nas características testadas. Algumas habilidades e magias também fazem com que o personagem possa vir a receber bônus ou penalidades nos seus testes."
+            },
+            {
+              "type": "paragraph",
+              "text": "O mestre pode apontar bônus ou penalidades em testes quando a situação exigir um valor padrão. Um veneno que cause -1F irá causar a mesma penalidade em todos que o beberem."
+            },
+            {
+              "type": "paragraph",
+              "text": "Testes de V que envolvem resistir a algo por certa quantidade de tempo causam penalidades quanto mais tempo o personagem permanece resistindo. Tentativas consecutivas de certos tipos de teste, como os de manusear (A), podem aumentar a prática e o entendimento do objeto manuseado e conceder bônus."
+            }
+          ]
+        },
+        {
+          "id": "vantagem-e-desvantagem",
+          "title": "VANTAGEM E DESVANTAGEM",
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Em casos mais específicos é possível determinar testes com vantagem, rolando 3d6, ou desvantagem, rolando apenas 1d6. Trata-se de casos mais específicos pois geralmente acontece em condições como Cegueira, essas condições serão mais bem detalhadas em um tópico específico no capítulo sobre combate."
+            },
+            {
+              "type": "paragraph",
+              "text": "Vantagens e desvantagens são anuláveis entre si, então um personagem que tenha ganhado os dois acaba não recebendo nenhum. Vantagens e desvantagens não se acumulam, duas vantagens continuam dando apenas 3d6."
+            },
+            {
+              "type": "paragraph",
+              "text": "Em rolagens com vantagem, bastam dois resultados seis para ser considerado crítico, mas em desvantagem não existem críticos, o que significa que rolagens cujo nível de dificuldade seja maior que a característica testada mais sete são fracassos automáticos, visto que será impossível alcançar o resultado."
+            },
+            {
+              "type": "paragraph",
+              "text": "Diferente dos bônus e penalidades, o mestre deve fazer uso de vantagens e desvantagens quando o desafio não for padrão, e tendo a possibilidade de funcionar de forma diferente para cada personagem. Manobrar um navio em um mar revolto terá efeitos diferentes em cada personagem que tentar, pois haverá ondas e ventos diferentes a cada tentativa."
+            }
+          ]
+        },
+        {
+          "id": "embate",
+          "title": "EMBATE",
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "O que acontece quando uma característica de um personagem precisa ser testada em oposição à característica de outro personagem se chama Embate. Quando um personagem pretende passar despercebido por outro, por exemplo."
+            },
+            {
+              "type": "paragraph",
+              "text": "O que pretende passar precisa testar sua D (Destreza) para mover-se sorrateiramente, e a sentinela precisará testar sua A (Assimilação) para perceber o gatuno. Para realizar uma Embate, ambos devem rolar 2d6 e somar ao valor da característica que está pondo à prova, o maior resultado será o vencedor."
+            },
+            {
+              "type": "paragraph",
+              "text": "Por exemplo, se o gatuno tiver D6 e o vigilante tiver A4, o primeiro rolar um 3 e o segundo rolar um 4, eles somarão, respectivamente, 9 (6+3) e 8 (4+4), logo, o gatuno será bem-sucedido. Em casos de empate, o que tiver a característica maior vence, e caso as características sejam iguais, os dois falham, ou o teste é feito novamente."
+            },
+            {
+              "type": "paragraph",
+              "text": "Com esse conhecimento, o mestre pode conceber os mais variados tipos de embates: uma queda de braço (F x F), driblar (D x D), debater (S x S), convencer (I x I), intimidar (I x V), afanar (A x A)."
+            },
+            {
+              "type": "paragraph",
+              "text": "Esse tipo de teste é opcional fora de combate, o mestre é quem decide que tipo acha mais adequado aplicar, visto que ele não precisa fazer uma ficha para cada personagem que criar. Caso o mestre não queira que os jogadores saibam que um dos seus personagens está tentando algo contra eles, o mestre também pode fazer rolagens passivas, somando um valor 6 a característica do jogador e fazendo uma rolagem oculta para seu personagem tendo o resultado da soma como dificuldade."
+            },
+            {
+              "type": "paragraph",
+              "text": "Embates contra grupos de alvos apenas concedem bônus ou penalidades, não é preciso um embate para cada alvo. Cabe ao mestre julgar a situação e decidir se o embate será contra a maior ou a média das características dos membros do grupo alvo."
+            }
+          ]
+        },
+        {
+          "id": "nivel-e-experiencia",
+          "title": "NÍVEL E EXPERIÊNCIA",
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Quanto mais um personagem se aventura, mais ele aprende e adquire conhecimento. Para expressar em regras esse tipo de situação, há três tipos de pontos de experiência que podem ser dados aos jogadores; a experiência prática (xpp), a experiência material(xpm) e a experiência logística (xpl)."
+            },
+            {
+              "type": "paragraph",
+              "text": "A Experiência Prática (xpp) é a experiência impalpável, imaterial, que ninguém pode tirar de outro, pois é criada através da prática constante, do estudo ou da observação. Quando os personagens viajam eles praticam no caminho, essa pontuação expressa esses momentos. O mestre deve dar xpp apenas no final de aventuras, e de acordo com o tamanho de sua campanha."
+            },
+            {
+              "type": "list",
+              "style": "unordered",
+              "items": [
+                "A cada 200 xpp o personagem sobe de nível.",
+                "Nível 5 é o nível máximo de um personagem.",
+                "A cada Nível o personagem recebe 1 Característica de Classe (tópico Classes).",
+                "A cada Nível o jogador soma a sua Vit e Con valores de acordo com a Característica de Classe escolhida.",
+                "Níveis 2 e 4 o personagem recebe 1 Aspecto (adquirir Estudo)."
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "Os níveis também podem ser usados como uma ferramenta narrativa. Nas histórias, os personagens não apenas desenvolvem suas habilidades, mas também fazem descobertas pessoais e evoluem como pessoas. Assim, o jogador pode planejar o futuro do seu personagem em cada nível."
+            },
+            {
+              "type": "paragraph",
+              "text": "Por exemplo, um guerreiro solitário pode passar para o segundo nível pois aprendeu a confiar nos companheiros, no terceiro nível, ele pode chamar de amigo um companheiro com quem ele não se dava bem, no quarto ele é desafiado a provar sua amizade com algum tipo de sacrifício pessoal, e no quinto ele pode finalmente passar a aplicar a filosofia de que estar acompanhando é melhor do que estar sozinho."
+            },
+            {
+              "type": "paragraph",
+              "text": "A Experiência Material (xpm) trata-se de pequenos objetos tangíveis, palpáveis, que são usados para manutenção do personagem."
+            },
+            {
+              "type": "paragraph",
+              "text": "A cera que o arqueiro passa nas penas das flechas, pedra de amolar e o óleo contra ferrugem que o guerreiro usa em sua espada, tiras de couro que o batedor usa para reforçar as botas, lâminas de metal que o ladino usa para fazer suas ferramentas, erva medicinal que o curandeiro mantém para emergências, substâncias do alquimista ou do mago."
+            },
+            {
+              "type": "paragraph",
+              "text": "A Experiência Logística (xpl) representa tudo aquilo necessário para a manutenção da vida e da sua qualidade, de mantimentos como comida e água, até vestuário, incluindo acessórios."
+            },
+            {
+              "type": "paragraph",
+              "text": "Por dia ou temporada é consumido 1 xpl mesmo que o personagem deixe de comer (roupas ficam gastas, pelos crescem, gordura é perdida, suor se acumula). Enquanto estiverem em cidades, os jogadores podem fazer testes para conseguir pequenos trabalhos e fazer com que seu xpl não seja consumido."
+            },
+            {
+              "type": "paragraph",
+              "text": "O xpl diz sobre a aparência dos jogadores. Valores menores que 5 significa personagens maltrapilhos, malcheirosos, mal alimentados. Valores entre 5 e 15 é o de um aldeão comum, e valores maiores vão representando cada vez mais uma aparência bem cuidada, saudável e limpa. Nobres raramente são vistos em público com valores menores que 50."
             }
           ]
         }
       ]
     }
-  ]
-}

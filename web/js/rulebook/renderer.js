@@ -1,5 +1,4 @@
-
-  // Renderiza um capítulo inteiro do rulebook
+// Renderiza um capítulo inteiro do rulebook
 export function renderRulebookChapter(chapterData) {
   const container = document.getElementById("rulebook-content");
   if (!container) return;
@@ -27,25 +26,18 @@ export function renderRulebookChapter(chapterData) {
 
   /* =========================
      Sections (Topics)
-     Cada section é um TÓPICO
   ========================= */
   (chapterData.sections || []).forEach((section) => {
     const sectionEl = document.createElement("section");
 
-    // 🔑 ID do tópico (necessário para scroll, TOC e persistência)
     if (section.id) {
       sectionEl.id = section.id;
-
-      // 🔍 Marca este elemento como "observável"
-      // usado pelo IntersectionObserver
       sectionEl.dataset.topic = "true";
     }
 
-    // Título do tópico
     const h2 = createElement("h2", null, section.title || "Untitled Section");
     sectionEl.appendChild(h2);
 
-    // Conteúdo do tópico
     (section.content || []).forEach((block) => {
       renderContentBlock(sectionEl, block);
     });
@@ -55,8 +47,9 @@ export function renderRulebookChapter(chapterData) {
 }
 
 /* =====================================================
-   Helper: cria elementos HTML simples
+   Helper
 ===================================================== */
+
 function createElement(tag, className, text) {
   const el = document.createElement(tag);
   if (className) el.className = className;
@@ -73,22 +66,51 @@ function renderParagraph(container, block) {
   container.appendChild(p);
 }
 
+/* ✅ LISTA ATUALIZADA */
 function renderList(container, block) {
   const style = block.style || "unordered";
   const listEl = document.createElement(
     style === "ordered" ? "ol" : "ul"
   );
 
-  (block.items || []).forEach((itemText) => {
-    const li = createElement("li", null, itemText);
-    listEl.appendChild(li);
+  (block.items || []).forEach((item) => {
+    const li = document.createElement("li");
+
+    // 🟢 Lista simples (string)
+    if (typeof item === "string") {
+      li.textContent = item;
+      listEl.appendChild(li);
+      return;
+    }
+
+    // 🟢 Lista estruturada (objeto)
+    if (typeof item === "object" && item !== null) {
+      if (item.text) {
+        const textNode = document.createTextNode(item.text);
+        li.appendChild(textNode);
+      }
+
+      // Subitens
+      if (Array.isArray(item.subitems) && item.subitems.length > 0) {
+        const subUl = document.createElement("ul");
+
+        item.subitems.forEach((sub) => {
+          const subLi = document.createElement("li");
+          subLi.textContent = sub;
+          subUl.appendChild(subLi);
+        });
+
+        li.appendChild(subUl);
+      }
+
+      listEl.appendChild(li);
+    }
   });
 
   container.appendChild(listEl);
 }
 
 function renderTable(container, block) {
-  // Legenda opcional
   if (block.caption) {
     const caption = createElement(
       "p",
@@ -101,7 +123,6 @@ function renderTable(container, block) {
   const wrapper = createElement("div", "table-wrapper");
   const table = document.createElement("table");
 
-  // Cabeçalho
   if (block.columns && block.columns.length > 0) {
     const thead = document.createElement("thead");
     const tr = document.createElement("tr");
@@ -115,7 +136,6 @@ function renderTable(container, block) {
     table.appendChild(thead);
   }
 
-  // Corpo
   const tbody = document.createElement("tbody");
 
   (block.rows || []).forEach((row) => {
@@ -140,8 +160,6 @@ function renderSubsections(container, block) {
   subsections.forEach((sub) => {
     const subWrap = createElement("div", "subsection");
 
-    // Subsections NÃO são tópicos principais,
-    // então NÃO marcamos com data-topic
     if (sub.id) subWrap.id = sub.id;
 
     const title = createElement("h3", null, sub.title || "Untitled");
@@ -156,7 +174,7 @@ function renderSubsections(container, block) {
 }
 
 /* =====================================================
-   Dispatcher de blocos
+   Dispatcher
 ===================================================== */
 
 function renderContentBlock(container, block) {
@@ -211,13 +229,13 @@ function renderContentBlock(container, block) {
       break;
     }
 
-    default: {
-      const warning = createElement(
-        "p",
-        "warning",
-        `[Unsupported block type: ${block.type}]`
+    default:
+      container.appendChild(
+        createElement(
+          "p",
+          "warning",
+          `[Unsupported block type: ${block.type}]`
+        )
       );
-      container.appendChild(warning);
-    }
   }
 }

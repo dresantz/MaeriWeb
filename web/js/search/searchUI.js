@@ -33,6 +33,9 @@ function onSearchInput(e) {
   }
 
   handleSearch(query);
+
+  searchResults.classList.remove("hidden");
+  searchResults.setAttribute("aria-hidden", "false");
 }
 
 /* =====================================================
@@ -40,10 +43,10 @@ function onSearchInput(e) {
 ===================================================== */
 
 function clearResults() {
-  // 🔑 Move foco antes de esconder (evita warning aria-hidden)
+  // 🔑 Move o foco antes de esconder (evita warning aria-hidden)
   const safeFocusTarget =
     document.getElementById("rulebook-content") ||
-    document.getElementById("search-input");
+    searchInput;
 
   safeFocusTarget?.focus?.();
 

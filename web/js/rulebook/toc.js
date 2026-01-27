@@ -1,6 +1,7 @@
 import { RULEBOOK_CHAPTERS, LAST_TOPIC_KEY } from "./constants.js";
 import { currentChapterFile } from "./state.js";
 import { loadRulebookChapter } from "./loader.js";
+import { initTOCKeyboardNavigation } from "./tocKeyboard.js";
 
 /* =====================================================
    Renderização do TOC
@@ -23,6 +24,7 @@ export function renderTOC(chapterData) {
 
     a.href = `#${section.id}`;
     a.textContent = section.title || "Untitled";
+    a.tabIndex = -1; // foco controlado via teclado
 
     li.appendChild(a);
     tocList.appendChild(li);
@@ -44,27 +46,49 @@ export function initTOCToggle() {
 
   if (!tocToggle || !tocPanel || !tocOverlay || !tocList) return;
 
+  let keyboardAPI = null;
+
   function openTOC() {
     tocToggle.textContent = ICON_OPEN;
     tocToggle.setAttribute("aria-label", "Close Rulebook Index");
+
     tocPanel.classList.add("open");
     tocOverlay.classList.add("active");
     document.body.classList.add("no-scroll");
     tocPanel.setAttribute("aria-hidden", "false");
+
+    // ✅ 1. Garante que o TOC abre sempre no topo
+    tocPanel.scrollTop = 0;
+    tocList.scrollTop = 0;
+
+    // ✅ 2. Inicializa teclado uma única vez
+    keyboardAPI ??= initTOCKeyboardNavigation({
+      tocList,
+      onClose: closeTOC
+    });
+
+    // ✅ 3. Foco seguro: container primeiro (não rola)
+    tocPanel.focus({ preventScroll: true });
+
+    // ✅ 4. Depois de estabilizar, move foco lógico
+    requestAnimationFrame(() => {
+      keyboardAPI.focusFirst();
+    });
   }
 
-function closeTOC() {
-  // ✅ 1. MOVE O FOCO PARA FORA DO TOC
-  tocToggle.focus();
+  function closeTOC() {
+    tocToggle.focus({ preventScroll: true });
 
-  // ✅ 2. AGORA é seguro esconder
-  tocToggle.textContent = ICON_CLOSED;
-  tocToggle.setAttribute("aria-label", "Open Rulebook Index");
-  tocPanel.classList.remove("open");
-  tocOverlay.classList.remove("active");
-  document.body.classList.remove("no-scroll");
-  tocPanel.setAttribute("aria-hidden", "true");
-}
+    tocToggle.textContent = ICON_CLOSED;
+    tocToggle.setAttribute("aria-label", "Open Rulebook Index");
+
+    tocPanel.classList.remove("open");
+    tocOverlay.classList.remove("active");
+    document.body.classList.remove("no-scroll");
+    tocPanel.setAttribute("aria-hidden", "true");
+
+    keyboardAPI?.reset();
+  }
 
   tocToggle.addEventListener("click", () => {
     tocPanel.classList.contains("open") ? closeTOC() : openTOC();
@@ -72,29 +96,26 @@ function closeTOC() {
 
   tocOverlay.addEventListener("click", closeTOC);
 
-tocList.addEventListener("click", (e) => {
-  if (e.target.tagName !== "A") return;
+  tocList.addEventListener("click", (e) => {
+    const link = e.target.closest("a");
+    if (!link) return;
 
-  e.preventDefault();
+    e.preventDefault();
 
-  const targetId = e.target.getAttribute("href")?.slice(1);
-  if (!targetId) return;
+    const targetId = link.getAttribute("href")?.slice(1);
+    if (!targetId) return;
 
-  localStorage.setItem(LAST_TOPIC_KEY, targetId);
+    localStorage.setItem(LAST_TOPIC_KEY, targetId);
 
-  const el = document.getElementById(targetId);
-  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    const el = document.getElementById(targetId);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
 
-  // ✅ Move o foco para fora do TOC antes de escondê-lo
-  const safeFocusTarget =
-    document.getElementById("rulebook-content") ||
-    document.getElementById("toc-toggle");
+    const safeFocusTarget =
+      document.getElementById("rulebook-content") || tocToggle;
 
-  safeFocusTarget?.focus?.();
-
-  closeTOC();
-});
-
+    safeFocusTarget?.focus?.({ preventScroll: true });
+    closeTOC();
+  });
 }
 
 /* =====================================================
@@ -115,7 +136,6 @@ export function renderChapterSelect() {
     select.appendChild(option);
   });
 
-  // 👇 garante que só adiciona UMA vez
   select.onchange = () => {
     loadRulebookChapter(select.value);
   };
