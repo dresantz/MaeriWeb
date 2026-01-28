@@ -1,0 +1,18 @@
+{
+  "id": "magia",
+  "title": "CAPÍTULO QUATRO: MAGIA",
+  "order": 4,
+  "description": "Como funciona magia no sistema e lista de magias que podem ser aprendidas.",
+  "sections": [
+    {
+      "id": "magia",
+      "title": "magia",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Texto sobre magia."
+        }
+        ]
+    }
+    ]
+}

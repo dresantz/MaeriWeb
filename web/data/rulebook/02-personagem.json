@@ -1,45 +1,69 @@
 {
   "id": "personagem",
-  "title": "Personagem",
+  "title": "CAPÍTULO DOIS: PERSONAGEM",
   "order": 2,
-  "description": "Regras e conceitos relacionados ao personagem, seus recursos e aspectos de jogo.",
+  "description": "Como criar um personagem e interpretá-lo.",
   "sections": [
     {
       "id": "peso-e-limite-de-carga",
-      "title": "Peso e limite de carga",
-      "tags": ["character", "inventory", "movement"],
+      "title": "Peso e Limite de Carga",
       "content": [
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo introdutório sobre Peso e limite de carga."
+          "text": "O quanto um personagem pode carregar é medido pela variável Peso (Pes). 1 Pes é o equivalente a carregar algo pequeno e não muito desconfortável; como uma adaga. O que o mestre precisa levar em conta, porém, é o tamanho do item e a distribuição do peso dele no corpo, pois Pes é uma relação peso-portabilidade."
+        },
+        {
+          "type": "paragraph",
+          "text": "Carregar duas adagas, se estiverem juntas e bem ajustadas, não necessariamente ocupam 2 Pes, mas uma espada sim, e a mesma espada pode ocupar 3 Pes se não tiver uma bainha ou ao menos um barbante parra amarrá-la nas costas."
+        },
+        {
+          "type": "paragraph",
+          "text": "Objetos menores que uma adaga nem se quer precisam ser medidos, pois podem ser levados nos bolsos, como moedas. Mas carregar trinta moedas já pode ser um problema, passando a pesar 1 Pes."
+        },
+        {
+          "type": "paragraph",
+          "text": "Multiplique a F do personagem por 2 e 4, o primeiro resultado é o quanto o ele pode carregar (em Pes) sem sofrer desvantagem em teste de CF (Características Físicas), o segundo é o seu limite máximo, onde ele é incapaz de carregar mais nada a não ser objetos sem Pes. Um personagem com F3 pode carregar 6 Pes sem penalidade e tem 12 Pes como limite máximo, por exemplo."
+        },
+        {
+          "type": "paragraph",
+          "text": "Algumas Medidas:"
         },
         {
           "type": "list",
           "style": "unordered",
           "items": [
-            "TODO: Item 1",
-            "TODO: Item 2",
-            "TODO: Item 3"
+            "30 xpm = 1Pes.",
+            "30 xpl = 1Pes.",
+            "30 moedas = 1Pes.",
+            "O peso de um personagem em Pes é equivalente ao F."
           ]
         }
       ]
     },
     {
       "id": "espaco-e-movimentacao",
-      "title": "Espaço e movimentação",
-      "tags": ["character", "movement", "positioning"],
+      "title": "Espaço e Movimentação",
       "content": [
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo introdutório sobre Espaço e movimentação."
+          "text": "Cada ponto em D (Destreza) equivale a capacidade de se movimentar a 2 Espaços (Esp) por uma determinada medida de tempo, um personagem com D3 pode se deslocar a 6 Esp, e com D4 a 8 Esp, por exemplo. 1 Esp é um valor relativo médio entre personagens ou objetivos, estando ao redor de 1,5 metros em caso de combate. Isso significa que, em uma luta entre um guerreiro e um arqueiro, o arqueiro pode estar a 3 Esp do guerreiro, e o guerreiro, por sua vez, estar a 6 Esp do arqueiro. Nesse caso, talvez o arqueiro esteja espreitando de cima de uma árvore, de onde descer é muito mais fácil que subir, por exemplo. Observe que isso significa que o mestre tem a opção de usar a distância que achar apropriada entre dois alvos."
+        },
+        {
+          "type": "paragraph",
+          "text": "Outro uso da medida Esp está na cartografia, pois é algo comum para aventureiros ter que enfrentar longas viagens. Por exemplo: a quantidade de tempo que um grupo de três jogadores de D4 e D5 demora a percorrer 20 Esp de distância que existem entre a cidade A e a masmorra B. Nesse caso, os metros de uma distância de combate foram transformados em quilômetros em um mapa sem necessidade de mudar o sistema de medida em Esp."
+        },
+        {
+          "type": "paragraph",
+          "text": "E não é preciso saber quantos quilômetros exatamente. Com D4 e D5 o mestre pode definir que eles podem viajar 4 e 5 Esp por dia respectivamente, assim como ele também pode definir que a volta tenha 40 Esp, em vez dos 20 Esp da ida. Talvez pelo fato de a volta ser uma subida, talvez devido a uma tempestade ou por serem obrigados a enfrentar um desvio, assim o RPG se torna uma questão subjetiva ou matemática; o que for mais interessante para o grupo."
         },
         {
           "type": "list",
           "style": "unordered",
           "items": [
-            "TODO: Item 1",
-            "TODO: Item 2",
-            "TODO: Item 3"
+            "O mestre pode dar penalidades para essa movimentação se o personagem estiver se arrastando, abaixado, cruzando um terreno complicado, entre outros.",
+            "Um personagem é capaz de saltar sua D em Esp, distância e altura. Testes de saltar (acrobacia) só precisam ser feitos quando há alguma adversidade como ventania, plataformas em movimento, pular para se agarrar em algo, saltar pendurado, para evitar dano de queda, chão se desmanchando, e outros do tipo.",
+            "A velocidade que um personagem escala depende do mestre e da dificuldade que ele considera para o obstáculo a ser sobrepujado. O mestre pode exigir testes (agarrar, F) para obstáculos complexos ou instáveis.",
+            "Velocidade em combate não é o mesmo que velocidade máxima. Em combate, se presume que o personagem está rolando, deslizando, saltitando de lado para não perder o alvo de vista enquanto se desloca, ou até se pendurando ou pulando."
           ]
         }
       ]
@@ -47,242 +71,531 @@
     {
       "id": "vitalidade-e-fora-de-acao",
       "title": "Vitalidade e Fora de Ação",
-      "tags": ["character", "health", "combat"],
       "content": [
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo 1 sobre Vitalidade e Fora de Ação."
+          "text": "A Vit é também uma variável subjetiva que representa tudo aquilo que mantém o personagem fictício consciente, como saúde, energia, mecanismo, integridade, bioelétrica, alma, funções vitais, vontade, talvez até uma soma de tudo isso. Basicamente qualquer coisa que mantenha o personagem atuante."
         },
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo 2 (se necessário)."
+          "text": "A pontuação em Vitalidade (Vit) é determinada pela Mentalidade, somado à pontuação em Vigor (V) e à pontuação em Físico (F) (Vit = F + V + 3 [belicoso], ou 4 [mediador], ou 1 [erudito])."
+        },
+        {
+          "type": "paragraph",
+          "text": "Quando sofre dano o personagem perde Vit, e ao chegar a zero, ele estará Fora de Ação."
+        },
+        {
+          "type": "paragraph",
+          "text": "Um personagem Fora de Ação foi desacordado, desativado, caído no chão gritando de dor ou algo semelhante que o deixe inutilizado. Se o personagem sofrer um dano em um valor negativo maior que a sua Vit total, ele passa a estar morto."
+        },
+        {
+          "type": "paragraph",
+          "text": "A partir do turno seguinte ao de ter sua Vit zerada, o personagem deve passar por um teste de V por turno (resistir), se falhar, o personagem estará morto ou permanentemente incapaz de continuar se aventurando. Antes disso, outro personagem pode estabilizar o personagem, e ele não precisará mais fazer esse teste, mas continuará Fora de Ação."
+        },
+        {
+          "type": "paragraph",
+          "text": "Curar um personagem Fora de Ação por ter a Vit zerada precisa curar a Vit negativa também, mas a cura automaticamente estabiliza o alvo mesmo que ainda esteja com a Vit negativa."
         }
       ]
     },
     {
       "id": "dano-e-ferimento",
       "title": "Dano e Ferimento",
-      "tags": ["character", "damage", "combat"],
       "content": [
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo 1 sobre Dano e Ferimento."
+          "text": "Dano é qualquer coisa que faça um personagem perder Vit. Isso significa que existem machucados que não causam danos, geralmente pequenos ou muito superficiais, assim como alguns danos que não necessariamente machucam o corpo, visto que Vit representa mais do que apenas integridade física."
         },
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo 2 (se necessário)."
+          "text": "Ao jogar dados para decidir um dano, é possível conseguir valores negativos, porém, somados quaisquer bônus e/ou penalidades, mesmo com resultados negativos, o dano sempre será de no mínimo 1 na Vitalidade."
+        },
+        {
+          "type": "paragraph",
+          "text": "Se um personagem sofrer dano maior que sua pontuação em V, ele terá um ferimento. Um personagem não pode recuperar a Vit de um ferimento, mesmo com repouso, até que ele seja tratado por um especialista com Estudo Medicina."
+        },
+        {
+          "type": "paragraph",
+          "text": "Por exemplo, um personagem com V5 cai em uma armadilha. O mestre determina que a armadilha tem dano 1d6+2. Jogado o d6, o resultado é 4, totalizando 6. Nesse caso, como o dano foi maior que a V do alvo, ele está ferido, não podendo recuperar esses 6 Vit. Caso sofra outro ferimento, os resultados são cumulativos e ele não poderá recuperar a Vit perdida pelo segundo ferimento também."
         }
       ]
     },
     {
       "id": "controle-e-intriga",
       "title": "Controle e Intriga",
-      "tags": ["character", "social", "conflict"],
       "content": [
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo 1 sobre Controle e Intriga."
+          "text": "A pontuação em Controle (Con) é determinada pela Mentalidade, somado à pontuação em Sabedoria (S) e à pontuação em Influência (I) (Con = S + I + 2 [belicoso] ou 3 [mediador] ou 4 [erudito]). É semelhante a Vit, porém mais complexa. Isso porque Controle simboliza o domínio que o personagem tem sobre si mesmo. Quando o Controle chega à zero, o personagem literalmente perde o controle."
         },
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo 2 (se necessário)."
+          "text": "Controle pode representar medo, dor, loucura, exaustão, fome, sede, pode representar também coisas bastante abstratas, como desejos, amor, ódio, carência, pena e até capacidade mágica. As vezes até mais de uma dessas coisas ao mesmo tempo. Isso significa que o jogador deve anotar a perda de Con por motivos diferentes de maneira separada, o que será chamado de linha de controle."
+        },
+        {
+          "type": "paragraph",
+          "text": "Se uma jogadora é seduzida por um rapaz, que retira 10 dos seus 12 Con, e é acometida por uma doença que retira 6 de seus 12 Con, ela terá duas linhas de controle, uma que poderá ser anotada como 2 Con Paixão, e outra 6 Con Doença, por exemplo."
+        },
+        {
+          "type": "paragraph",
+          "text": "Lembrando, não ter a Con reduzida a zero não significa que o personagem resistiu a sedução, mas apenas que a situação ainda não é tão permanente e incontrolável."
+        },
+        {
+          "type": "paragraph",
+          "text": "O mestre tem como opção usar a Con em embates de intriga, cada argumento retirando Con em uma linha exclusiva. É possível também abrir linhas de Con de cansaço após longas viagens, que após ser zerada o personagem passa a sofrer condições específicas."
+        },
+        {
+          "type": "paragraph",
+          "text": "Outra linha de Con muito importante é a linha mágica. Alguns tipos de magia consomem Con Mágica do personagem, mas veremos mais a respeito em um capítulo específico."
+        },
+        {
+          "type": "paragraph",
+          "text": "Con é uma ferramenta livre para o mestre para ser usada de acordo com o tipo de história que está sendo contada. Se os jogadores dormirem de armadura, se estiverem se sentindo sujos ou feios, se sofreram uma desilusão ou uma perda, é possível retirar Con deles. Se eles conseguirem satisfazer anseios sociais, se conseguiram se alimentar com abundância, se beberam e se divertiram, eles podem recuperar Con."
+        },
+        {
+          "type": "paragraph",
+          "text": "E em Maeri, uma Con zerada pode significar muito mais do que apenas condições, podendo atrair criaturas que se alimentam do desespero e até invocar maldições. Lembrando também que o mestre precisa sempre dar oportunidades para o jogador recuperar o Controle do seu personagem."
         }
       ]
     },
     {
       "id": "repouso",
       "title": "Repouso",
-      "tags": ["character", "recovery"],
       "content": [
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo introdutório sobre Repouso."
+          "text": "Os critérios que precisam ser atendidos para qualquer tipo de repouso são:"
         },
         {
           "type": "list",
           "style": "unordered",
           "items": [
-            "TODO: Lista 1 - Item 1",
-            "TODO: Lista 1 - Item 2",
-            "TODO: Lista 1 - Item 3"
+            "Livre. Sem itens com mais de 1Pes no corpo como armadura, sem estar com alguma condição que o restrinja, ou sofrendo nenhum tipo de tensão física ou mental.",
+            "Conforto. Em local não exposto, usando algo macio como cama.",
+            "Alimentação. Tendo consumido seu xpl diário ou algo que substitua."
           ]
         },
         {
-          "type": "list",
-          "style": "unordered",
-          "items": [
-            "TODO: Lista 2 - Item 1",
-            "TODO: Lista 2 - Item 2",
-            "TODO: Lista 2 - Item 3"
-          ]
+          "type": "paragraph",
+          "text": "Repouso Total. Um descanso de pelo menos 4 temporadas. Com repouso total é possível recuperar totalmente a Vit e a Con, em linhas que o mestre aprovar, durante uma aventura."
+        },
+        {
+          "type": "paragraph",
+          "text": "Repouso Parcial. Um descanso de pelo menos 1 temporada. Irá recuperar 1d6 Vit e Con em linhas que o mestre aprovar, para cada ponto em V dos personagens. Podem ser feitos no máximo dois entre cada Repouso Total."
+        },
+        {
+          "type": "paragraph",
+          "text": "Repouso Rápido. Um descanso de pelo menos 4 horas. Recupera 1d6 Vit e Con, em linhas que o mestre aprovar. Podem ser feitos no máximo dois entre cada Repouso Total."
+        },
+        {
+          "type": "paragraph",
+          "text": "A Vit não representa apenas machucados, ela simboliza também a vontade do personagem de se manter atuante, e por isso é possível recuperar Vit com descanso; o machucado ainda está lá, mas ele não tem mais o mesmo efeito na Vit."
         }
       ]
     },
     {
       "id": "peculiaridades",
       "title": "Peculiaridades",
-      "tags": ["character", "traits"],
       "content": [
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo 1 sobre Peculiaridades."
+          "text": "Peculiaridades são características do personagem que não precisam necessariamente influenciar as regras. A ideia é justamente não desmotivar os jogadores a interpretar um personagem diferente por medo de que isso represente uma desvantagem ao longo da aventura."
         },
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo 2 (se necessário)."
+          "text": "Condições atípicas que no mundo real podem ser consideradas deficiências físicas ou mentais não necessariamente precisam ser representadas em números. Nesse sistema o jogador tem todo o direito de interpretar um personagem que possui um ou dois olhos de vidro sem necessidade de sofrer penalidades em testes de percepção, ou ter medo de cachorros sem que o mestre abra uma linha de Con Medo sempre que o jogador ver um."
+        },
+        {
+          "type": "paragraph",
+          "text": "Peculiaridades não precisam ser apenas condições física e mentais, o jogador pode apimentar seu personagem de várias formas, ele pode estar devendo para alguém, gostar de fumar cachimbo, ter uma serpente espiritual no lugar de um dos braços. Claro, tudo isso deve ser explicado na história do personagem."
         }
       ]
     },
     {
       "id": "circulo",
       "title": "Círculo",
-      "tags": ["character", "social", "relationships"],
       "content": [
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo 1 sobre Círculo."
+          "text": "Na construção do personagem, ou durante a partida, o jogador pode adquirir Contatos para o seu personagem, e o total desses contatos será chamado de Círculo. Contatos são pessoas de confiança que fornecem apoio logístico para o personagem, ou seja, veremos mais para frente que será difícil, por exemplo, adquirir armas de boa qualidade sem um contato que as venda."
         },
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo 2 (se necessário)."
+          "text": "O número máximo de Contatos será equivalente ao valor da Influência (I) do personagem, ou seja, um personagem com I6 poderá ter 6 contatos, e todos eles podem ser determinados já na sua construção. É uma sábia ideia, porém, reservar espaço para contatos serem adquiridos durante a aventura, o que poderá significar alianças poderosas com personagens do mestre, ou mesmo a revelação de elos do passado, assim como é importante observar que certas habilidades, como magias, exigem um espaço livre de contato. Adquirir ou alterar um Contato durante a aventura custará 1 Segredo."
+        },
+        {
+          "type": "paragraph",
+          "text": "Contatos são pessoas de confiança, que só trairão o jogador se enganadas por terceiros. Elas também confiam no personagem, e o personagem deverá zelar por elas. Elas possuem suas próprias vidas e sabem se virar, por isso não vão lutar com o personagem ou participar tão diretamente da vida deles, a não ser que isso seja permitido pelo mestre."
         }
       ]
     },
     {
       "id": "moeda-inicial",
       "title": "Moeda Inicial",
-      "tags": ["character", "economy", "equipment"],
       "content": [
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo introdutório sobre Moeda Inicial."
+          "text": "A principal moeda de Maeri é chamada Moeda Imperial:"
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Florim (Florins) de Ouro (Fo). 4g de ouro. 100 Tc ou 10 Dp.",
+            "Denar (Denares) de Prata (Dp). 2g de prata. 10 Tc.",
+            "Tostão (Tostões) de Cobre (Tc). 1g de cobre."
+          ]
         },
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo adicional (se necessário)."
+          "text": "A respeito do escambo, sim, é comum, mas apenas entre produtores, como fazendeiros, caçadores e pescadores (fumos, temperos, tecidos, animais). Soldados, mercenários, membros da nobreza, mercadores, estes preferem trabalhar com moedas."
+        },
+        {
+          "type": "paragraph",
+          "text": "Em Maeri, os bancos já existem há algum tempo, uma das mais poderosas forças financeiras do mundo. Eles fazem pesagem, câmbio, avaliação de autenticidade e qualidade e fazem empréstimos. Eles também trocam moedas, pois os comerciantes pequenos não trabalham com troco, por isso, se alguém tem só moedas de ouro e quiser comprar uma cerveja, precisará ir até um banqueiro para conseguir umas moedas de cobre. Tudo por uma pequena taxa, claro. Em Maeri, a presença de banqueiros é bem forte, mesmo entre os cidadãos comuns."
+        },
+        {
+          "type": "paragraph",
+          "text": "No momento da construção do personagem é preciso estabelecer a quantidade inicial de dinheiro que ele possui, para isso, considerasse que o valor de dinheiro que uma pessoa tem depende de um equilíbrio entre sorte, dedicação, inteligência e prestígio: um personagem iniciante começa com I (Influência) + 1d6 em Fo, V (Vigor) + 1d6 em Dp e S (Sabedoria) + 1d6 em Tc."
         },
         {
           "type": "list",
           "style": "unordered",
           "items": [
-            "TODO: Lista 1 - Item 1",
-            "TODO: Lista 1 - Item 2",
-            "TODO: Lista 1 - Item 3"
+            "I + 1d6 = florins de ouro.",
+            "V + 1d6 = denares de prata.",
+            "S + 1d6 = tostões de cobre."
           ]
         },
         {
-          "type": "list",
-          "style": "unordered",
-          "items": [
-            "TODO: Lista 2 - Item 1",
-            "TODO: Lista 2 - Item 2",
-            "TODO: Lista 2 - Item 3"
-          ]
+          "type": "paragraph",
+          "text": "Levando em conta que xpm são objetos materiais e negociáveis, é importante lembrar que, mesmo durante a criação do personagem, 1 xpm pode ser negociado, cada um, por 1 Dp e 30 moedas equivalem a 1 Pes."
         }
       ]
     },
     {
       "id": "estudo-e-conhecimento",
       "title": "Estudo e Conhecimento",
-      "tags": ["character", "skills", "knowledge"],
       "content": [
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo introdutório sobre Estudo e Conhecimento."
+          "text": "Estudos são aprendizados que o personagem praticou ao longo de sua vida inteira, adquirir um Estudo custa 1 Aspecto. Cada Estudo traz uma série de benefícios que o jogador pode fazer uso, além disso, todos eles permitem adquirir Conhecimentos. Conhecimentos são informações específicas dentro da área de Estudo do personagem."
         },
         {
-          "type": "nestedList",
-          "items": [
-            {
-              "title": "TODO: Item principal 1",
-              "items": [
-                "TODO: Subitem 1",
-                "TODO: Subitem 2"
-              ]
-            },
-            {
-              "title": "TODO: Item principal 2",
-              "items": [
-                "TODO: Subitem 1",
-                "TODO: Subitem 2"
-              ]
-            }
-          ]
+          "type": "paragraph",
+          "text": "A capacidade de memorização de conhecimentos de um personagem é chamada Campo de Conhecimento, a quantidade de campos de conhecimento que um personagem possui é equivalente a S do personagem."
+        },
+        {
+          "type": "paragraph",
+          "text": "Um personagem sem um Estudo sofrerá penalidades ao fazer testes dentro da área, caso o mestre permita esse teste. Algumas informações em Maeri são de conhecimento comum, ou seja, são informações que raríssimas pessoas não conhecem. Algo superficial a respeito das religiões, dos maiores reinos, das famílias poderosas da região onde o personagem mora, são um exemplo."
+        },
+        {
+          "type": "paragraph",
+          "text": "A quantidade de Conhecimentos em um Estudo é infinita, o que obrigará o jogador estudioso a buscar Fontes: bibliotecas, registros, professores, anotações, laboratórios."
+        },
+        {
+          "type": "paragraph",
+          "text": "Na construção do personagem, o jogador pode preencher todos os seus Campos livres ou não. Ao custo de 10 xpm (anotações e experimentos) e acesso a uma Fonte, o jogador tem direito a um teste de S durante seu repouso total para adquirir ou substituir um Conhecimento. Em caso de falha, o xpm ainda é consumido."
+        },
+        {
+          "type": "paragraph",
+          "text": "Há uma diferença entre ter o Conhecimento e aplicar o Conhecimento. Ou seja, dependendo da situação, o mestre pode ou não exigir testes para aplicar um Conhecimento."
+        },
+        {
+          "type": "paragraph",
+          "text": "Artesanato. Levando em conta que em Maeri quase tudo é artesanal, essa habilidade é uma mistura de engenheiro, marceneiro, ferreiro e até armeiro. Permite que o possuidor seja capaz de reconhecer e construir estruturas e armas. Conhecimentos: planta de castelos ou palácios específicos, construção de aparato específico, construir e reparar navios, construir e recuperar armas de um tipo (veja os tipos no tópico Contatos de Mercado), criar e desativar armadilhas, armas de cerco, fechaduras."
+        },
+        {
+          "type": "paragraph",
+          "text": "Reparador. O personagem começa com 10 xpm que representam seus utensílios de trabalho. A partir dessa pontuação, ele pode gastar 1 xpm para recuperar 1 Res em uma armadura, se ele tiver menos de 10 xpm, não terá os equipamentos para concertar nada. Ele pode gastar xpm equivalente ao preço da arma (1 xpm para cada 1 Dp) para restaurá-la se estiver destruída, e pode concertar armas mágicas por 3 xpm por Res, mas não é possível restaurar armas mágicas destruídas."
+        },
+        {
+          "type": "paragraph",
+          "text": "Reforçador. A partir de 10 xpm, o personagem pode gastar 1 xpm para reforçar uma arma ou armadura até o limite de +2 Res, o jogador não pode usar essa habilidade caso tenha menos de 10 xpm, ele só pode aplicar essa habilidade em armas mágicas se possuir um estudo mágico."
+        },
+        {
+          "type": "paragraph",
+          "text": "Destruidor. O personagem causa diminuição na Res da arma dos oponentes com valor 5 e 5, 6 e 5 no dado também, e 4 e 5 também no caso de armas de Contusão Pesada."
+        },
+        {
+          "type": "paragraph",
+          "text": "Runas. O artesão pode, ao custo de 3 xpm por Con, inserir em um objeto a capacidade usar uma magia que o artesão conheça cujo custo seja apenas em Con, a magia é consumida permanentemente após o uso, o artesão pode escolher como a magia será ativada e quantas cargas da magia irá colocar no objeto."
+        },
+        {
+          "type": "paragraph",
+          "text": "Comércio. Um personagem com esse estudo conhece pessoas envolvidas com o comércio mesmo que elas não estejam em seu círculo, o que significa que ele pode negociar itens que só pessoas com o Contato específico seria capaz, além de receber bônus em qualquer negociação com contatos que possua. Conhecimentos: locais de venda, locais de entrepostos comerciais, os tipos de matemática, o mercado negro das regiões, a psicologia de compra dos povos específicos, técnicas de negociação, negociações com bancos, documentos e moedas."
+        },
+        {
+          "type": "paragraph",
+          "text": "Fornecedor. O personagem recebe 2d6 xpl a cada 10 temporadas."
+        },
+        {
+          "type": "paragraph",
+          "text": "Herança. O personagem começa com +2d6 moedas de ouro (Fo)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Carta de Comércio. O jogador escolhe um tipo de produto e terá uma carta de comércio, enquanto possuir mais de 20 xpl e sua carta de comércio (só pode ser adquirida em uma guilda), será bem recebido em qualquer guilda do mesmo produto."
+        },
+        {
+          "type": "paragraph",
+          "text": "Crime. O personagem pode ser um criminoso, ou pode ser um estudioso do crime que usa seu conhecimento para combatê-lo. Mesmo com as cidades de Maeri não sendo tão grandes, sempre haverá algo como uma guilda secreta de pessoas de interesse que se reúnem para combinar formas de satisfazer seus anseios escusos, e que então se veem cercados de um grupo especializado em atender esses desejos. Conhecimentos: análise de veneno, colarinho branco, sabotagem, análise de ferimentos, rastreamento, armadilhas, fechaduras, afanar, avaliar arte específica, avaliar gemas."
+        },
+        {
+          "type": "paragraph",
+          "text": "Submundo. O personagem pode adquirir 1 Contato extra além do seu limite de I."
+        },
+        {
+          "type": "paragraph",
+          "text": "Sugerir. O personagem é capaz de conversar usando sugestões, de forma indireta, quase uma linguagem do crime, fazendo isso ele é capaz de entrar em contato com pessoas do meio e disfarçar suas conversas com eles."
+        },
+        {
+          "type": "paragraph",
+          "text": "Esconderijo. Com 25 xpm o personagem pode criar um esconderijo, um espaço pequeno, mas perfeitamente oculto atrás de paredes falsas ou árvores ocas, ou em casas abandonadas, um lugar onde ele pode desaparecer durante fugas e se manter abastecido por até 10 temporadas mesmo com companheiros, sem precisar sair, ele pode até interligar um esconderijo ao outro através de rotas de fuga planejadas."
+        },
+        {
+          "type": "paragraph",
+          "text": "Falsificação. A partir de 8 xpm, o personagem pode gastar 1 xpm para criar uma falsificação de algo que tenha o Conhecimento específico sobre como fazer, como mapas, cartas náuticas, obras de arte, cartas, raspagem de moedas, sinetes, recibos, cartas de crédito."
+        },
+        {
+          "type": "paragraph",
+          "text": "Copiar. O personagem pode copiar um pergaminho pagando 1 xpm para cada 1 Con da magia escrita nele."
+        },
+        {
+          "type": "paragraph",
+          "text": "Kit. O personagem começa com 8 xpm que representam seus itens de arrombamento, enquanto se mantiver acima disso, pode pagar 1 xpm para permitir um teste de A para destrancar fechaduras, desarmar armadilhas ou lidar com outros mecanismos complexos para os quais tenha Conhecimento."
+        },
+        {
+          "type": "paragraph",
+          "text": "Arte. O personagem é um mestre do entretenimento, saber contar histórias abre portas em um mundo sem formas rápidas de comunicação, e saber cantar essas histórias abrem ainda mais. Atores, músicos, malabaristas, muitas coisas podem ser pagas com uma simples canção ou apresentação. O personagem pode obter lucro com apresentações, o retorno dependerá do tempo de preparo, se houve ensaio ou foi de improviso, se o local é adequado, se houve cartazes, se havia público. Conhecimentos: dominar uma arte específica (acrobacia, equilíbrio, malabarismo, pintura, atuação, prestidigitação, humor, dança, narrativa, culinária, música)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Apresentação. O artista começa com 30 xpl que representam seus trajes característicos. Ele será bem recebido em castelos e salões enquanto se mantiver acima de 30 xpl."
+        },
+        {
+          "type": "paragraph",
+          "text": "Encenar. Ao custo de 8 xpm, o artista pode aprender qualquer Estudo como se fosse um conhecimento, mas os conhecimentos desse estudo também ocuparão campos."
+        },
+        {
+          "type": "paragraph",
+          "text": "Figurino. Para trocar de conhecimento, o artista pode substituir 10 xpm por 5 xpl."
+        },
+        {
+          "type": "paragraph",
+          "text": "Interpretar. O personagem pode usar pergaminhos com magias inscritas."
+        },
+        {
+          "type": "paragraph",
+          "text": "Linguagem. Personagens com S4 ou mais sabem ler e escrever muito mal, o Estudo Linguística permite que mesmo personagem com qualquer valor em S saiba escrever e ler de forma culta e formal, além de lhe dar conhecimento de línguas e suas origens. Conhecimentos: língua específica, língua perdida específica, língua inventada ou código secreto."
+        },
+        {
+          "type": "paragraph",
+          "text": "Escrita. O personagem pode escrever em volumes, códices e grimórios (vistos no tópico Contatos de Mercado) Conhecimentos que ele possua, ele precisa de 10 temporadas para cada Conhecimento."
+        },
+        {
+          "type": "paragraph",
+          "text": "Estudioso. Permite substituir um Conhecimento gastando 5 xpm em vez de 10 xpm."
+        },
+        {
+          "type": "paragraph",
+          "text": "Interpretar. O linguista pode usar pergaminhos com magias inscritas."
+        },
+        {
+          "type": "paragraph",
+          "text": "Transposição. Podem criar pergaminhos com magias que conheçam, ou copiando de volumes, códices ou grimórios."
+        },
+        {
+          "type": "paragraph",
+          "text": "Leitura. Não precisam de Fontes para troca de Conhecimento."
+        },
+        {
+          "type": "paragraph",
+          "text": "Medicina. Todas as magias de cura em Maeri são superficiais. Tratar feridas graves, doenças e outras condições exige um conhecimento profundo do corpo humano e do seu funcionamento. Ainda que lidar com cadáveres seja algo bastante censurado por parte dos membros das diversas fés, boa parte dos seus membros sabem a eficiência daqueles que se dedicam a esse estudo. Conhecimentos: tratar doença ou condição específica, preservar corpos ou outros materiais orgânicos."
+        },
+        {
+          "type": "paragraph",
+          "text": "Fármaco. A partir de 10 xpm para itens de laboratório, permite criar, ao custo de 1 xpm por Dp, qualquer poção ou veneno do contato Apotecário (tópico Contatos de Mercado)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Ressurreição. Ao custo de 100 xpm, que representam larvas para devorar carne podre, sanguessugas para drenar o sangue, ataduras com cataplasmas, mosquitos gigantes que funcionam como bolsas de transfusão, essência de enguia para desfibrilação e cabeças de formigas para sutura, o médico tem direito a um teste para reviver alguém que acabou de ser morto cujo corpo ainda esteja em condições."
+        },
+        {
+          "type": "paragraph",
+          "text": "Tratamento. Fora de combate, o médico pode curar 1 Vit para cada 1 xpm gasto, menos de ferimentos."
+        },
+        {
+          "type": "paragraph",
+          "text": "Realinhamento. Ao custo de 5 xpm, o médico tem direito a um teste para transformar o dano de um ferimento em dano normal."
+        },
+        {
+          "type": "paragraph",
+          "text": "Relaxamento. Além dos dados normais por repouso, permite curar 1d6 a mais de si próprio e de aliados por 1 xpm para cada dado."
+        },
+        {
+          "type": "paragraph",
+          "text": "Exploração. O personagem é especialista em sobrevivência em alguns tipos de território específicos como mar, floresta, prado, deserto, tundra ou montanhas, saberá rastrear animais, reconhecer plantas comestíveis, evitar territórios perigosos, analisar geografia. Esse tipo de conhecimento permite que o personagem sobreviva sozinho sem muitos problemas em qualquer tipo de região selvagem que conheça. Conhecimentos: animais, plantas, climas, geografia, locais de uma região específica."
+        },
+        {
+          "type": "paragraph",
+          "text": "Naturalista. Após um dia caminhando por um território novo, o personagem pode fazer um teste de S para mudar qualquer Conhecimento que envolva geografia para outro que envolva o território novo sem necessidade de uma Fonte."
+        },
+        {
+          "type": "paragraph",
+          "text": "Coletor. Consegue 1d6 xpl sempre que bem-sucedido em um teste de A autorizado pelo mestre dentro do território que tenha conhecimento."
+        },
+        {
+          "type": "paragraph",
+          "text": "Piloto. Com um Conhecimento de exploração em algum território de ar, terra ou água, o personagem saberá automaticamente como pilotar veículos comuns feitos para esses tipos de terreno."
+        },
+        {
+          "type": "paragraph",
+          "text": "Aparato. Ao custo de 1 xpm, o personagem com exploração não precisa de testes para improvisar cordas, fogueiras, cantis, bússolas e outros itens práticos."
+        },
+        {
+          "type": "paragraph",
+          "text": "Política. Nesse caso, abrange conhecimento político, histórico e legislativo. Com isso, o personagem pode reconhecer brasões, selos, pessoas, nomes, bandeiras, obras de arte e pode até advogar em nome de alguém em julgamentos, já que possui conhecimento sobre leis das regiões. Conhecimentos: história de cidades, povos, famílias nobres, regiões, leis específicas, costumes, mitos."
+        },
+        {
+          "type": "paragraph",
+          "text": "Título. O personagem é um pequeno nobre ou possui algum título menor, ele começa com 40 xpl que representam seus trajes garbosos, sinete e documentos que comprovam seu título. Será bem recebido em castelos e salões enquanto se mantiver acima de 40 xpl."
+        },
+        {
+          "type": "paragraph",
+          "text": "Nome. O personagem possui um nome ou sobrenome importante e reconhecido, o que o permite a palavra em conselhos, julgamentos e outros locais de tomada de decisão."
+        },
+        {
+          "type": "paragraph",
+          "text": "Estudo Formal. O personagem teve estudo formal em um castelo, universidade ou mosteiro. Os estudos formais em Maeri são compostos por gramática, astronomia, religião, estratégia, retórica, matemática, filosofia e música."
+        },
+        {
+          "type": "paragraph",
+          "text": "Religião. Em Maeri, as religiões, representadas principalmente pelas Fés de Midra, Yaria e Oromandes, são parte muito importante do cotidiano das pessoas através de preces, livros sagrados e rituais. Um personagem com esse estudo terá muita facilidade com testes entre aldeões e camponeses, sendo capaz de reuni-los com facilidade ao redor de cultos e rituais, desde que o personagem conheça ou seja capaz de subverter os ritos locais já estabelecidos. Conhecimentos: entendimento de povos e cidades perdidas, rituais, orações, escrituras sagradas específicas, culturas antigas, seres mitológicos, lendas, arquitetura, símbolos e costumes religiosos ou populares."
+        },
+        {
+          "type": "paragraph",
+          "text": "Paramentos. O personagem começa com 30 xpl que representam seus materiais litúrgicos, como batina, amuletos, pulseiras, anéis. Enquanto mantiver esses 30 xpl, sempre terá comida e abrigo em templos da sua fé."
+        },
+        {
+          "type": "paragraph",
+          "text": "Fé. O personagem pode gastar 1 xpm para consumir algo que lhe seja sagrado e lhe dê forças, impedindo que perca Con por questões associadas a medo."
         }
       ]
     },
     {
       "id": "segredos",
       "title": "Segredos",
-      "tags": ["character", "narrative"],
       "content": [
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo introdutório sobre Segredos."
+          "text": "Segredos são pontos que podem ser gastos para adquirir efeitos especiais ao longo da partida. Eles permitem que o jogador faça uma revelação surpresa que se torna real com a aprovação do mestre, uma mudança na história, um flashback, um plano secreto posto em prática, ou até um momento de mais absoluta sorte."
+        },
+        {
+          "type": "paragraph",
+          "text": "Se um jogador optar por não dar detalhes da história de um personagem antes da campanha, ele pode utilizar pontos de Segredo para ir criando-a ao longo da aventura, fazendo revelações a respeito do passado do personagem."
+        },
+        {
+          "type": "paragraph",
+          "text": "Em termos de regras, em acordo com o mestre e os demais jogadores, e sempre com revelações a respeito da história do personagem, gastar 1 ponto de Segredo permite:"
         },
         {
           "type": "list",
-          "style": "unordered",
           "items": [
-            "TODO: Item 1",
-            "TODO: Item 2",
-            "TODO: Item 3"
+            "Fazer uma alteração na história do mestre ou na própria história.",
+            "Adquirir um item mágico na construção do personagem.",
+            "Ganhar um turno para ação com F ou D, mais gesto e movimento, como uma interrupção (será visto no capítulo Regras de Combate).",
+            "Substituir um contato por outro ou adquirir um contato novo.",
+            "Cancelar um dano que levaria um personagem à zero ou menos de Vit, deixando-o com 1 Vit (a flechada acertou minha moeda da sorte)."
           ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Claro, a alteração será aceita apenas se houver um consenso entre mestre e jogadores, visando à diversão e à densidade da história. Depois de revelado, o Segredo deve ser respeitado ao longo de todo o resto do jogo."
+        },
+        {
+          "type": "paragraph",
+          "text": "O objetivo dos Segredos é justamente aumentar o efeito surpresa de uma história, assim como aumentar a interação dos jogadores com a construção do universo em que seus personagens existem. Ele não foi feito para que os jogadores possuam vantagens narrativas (“esse buraco que o mestre colocou para nos desafiar é na verdade uma ilusão, nós não precisamos pular por cima, é só caminhar”)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Enquanto o xpp é uma recompensa do final de uma aventura, os Segredos devem ser recompensas distribuídas para todos os jogadores ao mesmo tempo, no máximo três vezes por aventura, após os jogadores atingirem marcos que o mestre julgar importantes."
         }
       ]
     },
     {
       "id": "arquetipo",
       "title": "Arquétipo",
-      "tags": ["character", "creation"],
       "content": [
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo introdutório sobre Arquétipo."
+          "text": "Quando jogamos um RPG, estamos interpretando personagens ficcionais, e para ajudar futuros jogadores que não são acostumados com técnicas de criação e desenvolvimento de personagens ficcionais, Maeri possui os sistemas de Arquétipo, Motivação e Disposição."
+        },
+        {
+          "type": "paragraph",
+          "text": "O Arquétipo é a natureza do personagem, representa tendências que o jogador deve considerar na hora de ponderar a respeito das decisões do seu personagem. O princípio do Arquétipo é de que todo personagem-jogador de Maeri tenta, de alguma forma, se enxergar como uma pessoa correta (não necessariamente boa), e acredita sempre estar fazendo o que é certo ou o mais adequado no contexto da sua realidade. A partir desse princípio, são três os tipos de Arquétipo:"
         },
         {
           "type": "list",
-          "style": "unordered",
           "items": [
-            "TODO: Item 1",
-            "TODO: Item 2",
-            "TODO: Item 3"
+            "Heróis: São normalmente caracterizados por um conjunto de preceitos que guiam suas vidas. Não mentir, não roubar, não matar, honrar sua palavra, ser justo, proteger os inocentes e os oprimidos, ajudar quem precisa. Tudo isso sempre que possível, é claro, pois heróis não são necessariamente ingênuos. Eles sabem a diferença entre roubar uma fruta quando se está com fome e roubar de pessoas miseráveis. Eles sabem das mazelas do mundo, e sabem que seus próprios preceitos e atitudes podem conflitar. Ainda assim, eles decidem por conta própria melhorar o mundo através do exemplo, preferindo agir como um bastião do que é certo mesmo que custe caro e exija sacrifícios pessoais. Eles são o tipo de pessoa sem grandes ambições, mas que estão sempre tentando ser úteis de alguma forma. Trata-se do Hausto mais resistente de todos, pois é mais difícil manipular uma pessoa com uma moral bem estabelecida, ainda que isso restrinja sua forma de agir.",
+            "Anti-Herói: Eles não possuem preceitos, mas sim limites. Roubar, por exemplo, não é problema, mas roubar de amigos, ou de quem tem pouco, pode estar além dos seus limites. Geralmente se colocam em posição de lutar por ambições pessoais como diversão, dinheiro, sexo, fama, ser o melhor em sua arte ou especialidade, ganhar destaque entre os seus. Porém, como geralmente são interesses superficiais, é normal que se peguem sendo influenciados a certas atitudes que não condizem com o que estão acostumados, podendo espantar até a si próprios, seja para o bem, seja para o mal. Esse tipo é mais fácil de ser manipulado, suas pequenas ambições os fazem mais livres, porém, eles têm a tendência de “se vender” com mais facilidade.",
+            "Anti-Vilão: Trata-se do personagem superficialmente livre de amarras morais, mas sem as mesmas ambições do anti-herói, o que não significa que não tenha sentimentos. Ele se enxerga como um realista, não se importa em fazer o que pensa ser preciso, inclusive indo até onde ninguém jamais iria, como tortura e assassinato. Uma pessoa, porém, pode ser livre dos preceitos de um herói, mas ainda ser benevolente. O assassinato pode ser para poupar um reino de uma guerra, a tortura para extrair informações que salvem centenas de pessoas de um atentado. Para uns, a sua parte benevolente pode ser apenas para manter a máscara social, doando aos pobres e alimentando os famintos, mas por trás disso aliciando-os para uma rede de crimes e espionagem, e por mais que pareça horrível, eles dirão que ao menos esses pobres e famintos têm comida. Esse tipo de personagem tem a resistência do tipo herói e a liberdade do anti-herói, porém são os mais expostos mentalmente, devido aos danos na sua consciência."
           ]
+        },
+        {
+          "type": "paragraph",
+          "text": "O personagem pode realizar feitos que não condizem com o seu Arquétipo, desde que esse feito esteja associado a algo delicado da sua história. Um herói pode se ver matando alguém que matou uma pessoa que ele ama, um anti-herói pode dar seu dinheiro para uma criança que faça com que ele se lembre de si próprio no passado, e um anti-vilão pode se sentir compelido a não matar quando seus amigos lhe derem a confiança de que as coisas podem ser diferentes."
+        },
+        {
+          "type": "paragraph",
+          "text": "Os Arquétipos podem reagir de formas diferentes dadas as situações. Quando um monstro exige um teste para suportar o medo, um anti-herói pode ter desvantagem, o herói vantagem e o anti-vilão pode sofrer um dano maior na Con caso não passe no teste."
+        },
+        {
+          "type": "paragraph",
+          "text": "Quem julga os significados mais profundos de cada Arquétipo e do seu princípio é o mestre e os jogadores em suas respectivas campanhas, podendo esse tópico ser usado pelo mestre como uma forma de orientar a campanha, e pelos jogadores como uma ferramenta de desenvolvimento de personagem."
         }
       ]
     },
     {
       "id": "motivacao",
       "title": "Motivação",
-      "tags": ["character", "narrative"],
       "content": [
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo introdutório sobre Motivação."
+          "text": "A lista de Motivações a seguir é mais do que uma simples vontade, ela é algo profundo, intrínseco ao ser. Um personagem pode ter vontade de ganhar dinheiro, mas não é isso que permeia o âmago do seu personagem. Para que ele quer esse dinheiro? Como ele irá usá-lo? As Motivações são instruções mais profundas a respeito do que move o personagem."
         },
         {
           "type": "list",
-          "style": "unordered",
           "items": [
-            "TODO: Item 1",
-            "TODO: Item 2",
-            "TODO: Item 3"
+            "Amor: A pessoa movida por amor quer proteger aqueles que lhe são queridos. Mesmo que pareça algo típico de personagens heroicos, um vilão pode fazer coisas terríveis em nome desse tipo de verdade. O amor não é necessariamente para com algo ou alguém em específico, mas sim apenas uma verdade do seu ser.",
+            "Ódio: A pessoa movida por ódio quer destruir aqueles que lhe antagonizam. Mesmo que pareça algo típico de vilões, um herói pode ser motivado pela frustração que lhe foi imposta por criaturas, pessoas ou entidades que tenham porventura algum tipo de intenção negativa. O ódio, assim como o amor, não é necessariamente por uma coisa ou pessoa em específico.",
+            "Harmonia: A pessoa movida pela harmonia possui um conflito interno muito grande e quer apaziguá-lo. Uma pessoa pacífica pode se ver em constante estado de guerra e violência, uma pessoa solitária pode se ver experimentando as coisas boas e ruins das suas primeiras conexões, uma pessoa esperançosa pode se ver constantemente enfrentando os aspectos da morte e da perda, basta escolher dois sentimentos conflitantes quaisquer.",
+            "Medo: A pessoa movida pelo medo luta para superá-lo e nunca mais passar por esse medo novamente. Pessoas que foram vítimas de um trauma muito grande, que nasceram em sociedades isoladas, que foram maltratadas ou foram vítimas de fome ou doença podem se ver em um constante campo de batalha contra a sensação que enfrentaram, esse medo não afeta o personagem apenas quando ele se vê diante do alvo, mas molda toda a sua personalidade, uma pessoa que passou fome pode estar sempre querendo cozinhar para seus aliados, por exemplo.",
+            "Paz: A pessoa movida pela paz quer apenas poder descansar. Muitos são os casos de pessoas que querem voltar ao status quo, ou que querem apenas viver um tipo específico de vida, mas que acabam sendo tragadas para situações totalmente diferentes da que planejaram pelas mais diversas razões, do fazendeiro convocado para a guerra ao mago estudioso arrastado para o trabalho de campo, muitas vezes são personagens que rejeitam o próprio dom, querem voltar para sua família ou para a sua terra natal."
           ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Os jogadores precisam ter em mente que nenhuma Motivação deve ser tratada de forma literal, todos são quase como metáforas, eles existem no ponto mais profundo do eu do personagem. A Motivação ser amor não significa que o personagem deve sair por aí amando tudo, mas sim que na parte mais profunda do seu ser, ele age tendo esse amor em mente. Uma pessoa pode ser alegre e divertida, mas guardar no seu âmago uma tempestade de ódio pela vida."
         }
       ]
     },
     {
       "id": "disposicao",
       "title": "Disposição",
-      "tags": ["character", "state"],
       "content": [
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo 1 sobre Disposição."
+          "text": "Como o personagem está no dia. O mestre pode, em momentos específicos, perguntar aos jogadores como está a Disposição dos seus personagens. A Disposição não tem nenhum efeito mecânico, ela apenas ajuda os jogadores a pensar a respeito de como a aventura afetou ou tem afetado o personagem de acordo com a Motivação e o Arquétipo, por isso, existem apenas duas respostas para a pergunta: positiva ou negativa. O jogador não precisa nem sequer especificar a razão de estar positiva ou negativa."
         },
         {
           "type": "paragraph",
-          "text": "TODO: Parágrafo 2 (se necessário)."
+          "text": "Um anti-vilão movido pelo ódio cujo inimigo escapou estará com a Disposição positiva ou negativa no dia seguinte? Um herói movido por amor que fez um novo amigo? Um anti-herói movido pelo medo que encontrou aliados para derrotar seu antigo chefe? Um anti-vilão movido pela paz que está tendo que cuidar do agitado filhote de alguma besta selvagem?"
+        },
+        {
+          "type": "paragraph",
+          "text": "Os jogadores podem fazer mudanças de Disposição quando acharem apropriado e o mestre pode perguntar a respeito dela sempre que os personagens estiverem em momentos de descanso, entre aventuras ou temporadas. Um jogador mais dedicado pode, se quiser, ir anotando todas as mudanças, apenas para saber se seu personagem tem se estressado muito ou pouco ao longo da campanha."
         }
       ]
     }

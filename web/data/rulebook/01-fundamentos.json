@@ -1,11 +1,12 @@
 {
-  "id": "capitulo-um-o-basico",
-  "title": "CAPÍTULO UM: O BÁSICO",
+  "id": "fundamentos",
+  "title": "CAPÍTULO UM: FUNDAMENTOS",
   "order": 1,
+  "description": "O básico sobre o que é RPG e o que é Maeri.",
   "sections": [
     {
       "id": "roleplaying-game",
-      "title": "ROLEPLAYING GAME",
+      "title": "Roleplaying Game",
       "content": [
         {
           "type": "paragraph",
@@ -42,7 +43,7 @@
     },
     {
           "id": "mentalidade",
-          "title": "MENTALIDADE",
+          "title": "Mentalidade",
           "content": [
             {
               "type": "paragraph",
@@ -84,7 +85,7 @@
         },
         {
           "id": "caracteristicas-basicas",
-          "title": "CARACTERÍSTICAS BÁSICAS",
+          "title": "Características Básicas",
           "content": [
             {
               "type": "paragraph",
@@ -174,7 +175,7 @@
         },
         {
           "id": "divisoes-de-tempo",
-          "title": "DIVISÕES DE TEMPO",
+          "title": "Divisões de Tempo",
           "content": [
             {
               "type": "paragraph",
@@ -197,7 +198,7 @@
         },
         {
           "id": "testes",
-          "title": "TESTES",
+          "title": "Testes",
           "content": [
             {
               "type": "paragraph",
@@ -268,7 +269,7 @@
         },
         {
           "id": "penalidades-e-bonus",
-          "title": "PENALIDADES E BÔNUS",
+          "title": "Penalidades e Bônus",
           "content": [
             {
               "type": "paragraph",
@@ -286,7 +287,7 @@
         },
         {
           "id": "vantagem-e-desvantagem",
-          "title": "VANTAGEM E DESVANTAGEM",
+          "title": "Vantagem e Desvantagem",
           "content": [
             {
               "type": "paragraph",
@@ -308,7 +309,7 @@
         },
         {
           "id": "embate",
-          "title": "EMBATE",
+          "title": "Embate",
           "content": [
             {
               "type": "paragraph",
@@ -338,7 +339,7 @@
         },
         {
           "id": "nivel-e-experiencia",
-          "title": "NÍVEL E EXPERIÊNCIA",
+          "title": "Nível e Experiência",
           "content": [
             {
               "type": "paragraph",
