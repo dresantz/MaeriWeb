@@ -588,3 +588,12 @@ th {
   font-size: 0.8rem;
   opacity: 0.7;
 }
+
+/*Marca Do Highlight*/
+mark {
+  background: var(--accent-color, #7c6cff);
+  color: #000;
+  padding: 0 2px;
+  border-radius: 3px;
+}
+

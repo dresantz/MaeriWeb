@@ -27,7 +27,7 @@ export function initSearchRouter(container) {
 export function handleSearch(query) {
   if (!resultsContainer) return;
 
-  const results = search(query);
+  const results = search(query, { limit: 20 });
 
   if (!results.length) {
     resultsContainer.innerHTML = `
@@ -46,6 +46,8 @@ export function handleSearch(query) {
         class="search-result"
         data-chapter="${r.chapterFile}"
         data-topic="${r.topicId}"
+        role="button"
+        tabindex="0"
       >
         <strong>${r.topicTitle}</strong>
         <span>${r.chapterTitle}</span>
@@ -64,16 +66,19 @@ export function handleSearch(query) {
 export function bindSearchResultClicks() {
   if (!resultsContainer) return;
 
-  resultsContainer.addEventListener("click", (e) => {
+  resultsContainer.addEventListener("click", activateResult);
+  resultsContainer.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") activateResult(e);
+  });
+
+  function activateResult(e) {
     const item = e.target.closest(".search-result");
     if (!item) return;
 
     e.preventDefault();
 
-    const chapter = item.dataset.chapter;
-    const topic = item.dataset.topic;
+    const { chapter, topic } = item.dataset;
 
-    // ✅ MOVE O FOCO PARA FORA DO OVERLAY
     const safeFocusTarget =
       document.getElementById("rulebook-content") ||
       document.getElementById("toc-toggle");
@@ -84,5 +89,5 @@ export function bindSearchResultClicks() {
     updateURLTopic(topic);
 
     resultsContainer.classList.add("hidden");
-  });
+  }
 }

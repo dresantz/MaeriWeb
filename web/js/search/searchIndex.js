@@ -40,8 +40,10 @@ export function buildIndex(chaptersData) {
       index.push({
         chapterFile,
         chapterTitle: chapter.title || "",
+        _chapterTitleNorm: normalizeText(chapter.title || ""),
         topicId: section.id,
         topicTitle: section.title || "",
+        _topicTitleNorm: normalizeText(section.title || ""),
         text: extractText(section)
       });
     });
@@ -91,8 +93,8 @@ export function search(query, { limit = 20 } = {}) {
   for (const entry of index) {
     let score = 0;
 
-    const topicTitle = normalizeText(entry.topicTitle);
-    const chapterTitle = normalizeText(entry.chapterTitle);
+    const topicTitle = entry._topicTitleNorm;
+    const chapterTitle = entry._chapterTitleNorm;
     const text = entry.text; // já normalizado
     const words = text.split(" ");
 
