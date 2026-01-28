@@ -2,6 +2,7 @@ import { RULEBOOK_CHAPTERS, LAST_TOPIC_KEY } from "./constants.js";
 import { currentChapterFile } from "./state.js";
 import { loadRulebookChapter } from "./loader.js";
 import { initTOCKeyboardNavigation } from "./tocKeyboard.js";
+import { unlockBodyScroll } from "./uiReset.js";
 
 /* =====================================================
    Renderização do TOC
@@ -24,7 +25,7 @@ export function renderTOC(chapterData) {
 
     a.href = `#${section.id}`;
     a.textContent = section.title || "Untitled";
-    a.tabIndex = -1; // foco controlado via teclado
+    a.tabIndex = -1;
 
     li.appendChild(a);
     tocList.appendChild(li);
@@ -38,7 +39,12 @@ export function renderTOC(chapterData) {
 const ICON_CLOSED = "☰";
 const ICON_OPEN = "✕";
 
+let tocInitialized = false;
+
 export function initTOCToggle() {
+  if (tocInitialized) return;
+  tocInitialized = true;
+
   const tocToggle = document.getElementById("toc-toggle");
   const tocPanel = document.getElementById("toc-panel");
   const tocOverlay = document.getElementById("toc-overlay");
@@ -47,6 +53,10 @@ export function initTOCToggle() {
   if (!tocToggle || !tocPanel || !tocOverlay || !tocList) return;
 
   let keyboardAPI = null;
+
+  if (!tocPanel.hasAttribute("tabindex")) {
+    tocPanel.tabIndex = -1;
+  }
 
   function openTOC() {
     tocToggle.textContent = ICON_OPEN;
@@ -57,37 +67,34 @@ export function initTOCToggle() {
     document.body.classList.add("no-scroll");
     tocPanel.setAttribute("aria-hidden", "false");
 
-    // ✅ 1. Garante que o TOC abre sempre no topo
     tocPanel.scrollTop = 0;
     tocList.scrollTop = 0;
 
-    // ✅ 2. Inicializa teclado uma única vez
     keyboardAPI ??= initTOCKeyboardNavigation({
       tocList,
       onClose: closeTOC
     });
 
-    // ✅ 3. Foco seguro: container primeiro (não rola)
     tocPanel.focus({ preventScroll: true });
 
-    // ✅ 4. Depois de estabilizar, move foco lógico
     requestAnimationFrame(() => {
       keyboardAPI.focusFirst();
     });
   }
 
   function closeTOC() {
-    tocToggle.focus({ preventScroll: true });
-
     tocToggle.textContent = ICON_CLOSED;
     tocToggle.setAttribute("aria-label", "Open Rulebook Index");
 
     tocPanel.classList.remove("open");
     tocOverlay.classList.remove("active");
-    document.body.classList.remove("no-scroll");
     tocPanel.setAttribute("aria-hidden", "true");
 
+    // 🔑 reset definitivo de scroll e layout
+    unlockBodyScroll();
+
     keyboardAPI?.reset();
+    tocToggle.focus({ preventScroll: true });
   }
 
   tocToggle.addEventListener("click", () => {
@@ -110,12 +117,11 @@ export function initTOCToggle() {
     const el = document.getElementById(targetId);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
 
-    const safeFocusTarget =
-      document.getElementById("rulebook-content") || tocToggle;
-
-    safeFocusTarget?.focus?.({ preventScroll: true });
     closeTOC();
   });
+
+  // 🛟 segurança extra: resize nunca pode manter body travado
+  window.addEventListener("resize", unlockBodyScroll);
 }
 
 /* =====================================================
@@ -137,6 +143,7 @@ export function renderChapterSelect() {
   });
 
   select.onchange = () => {
+    unlockBodyScroll(); // 👈 evita herdar estado quebrado
     loadRulebookChapter(select.value);
   };
 }
@@ -145,10 +152,12 @@ export function renderChapterSelect() {
    Troca de capítulo por índice
 ===================================================== */
 
-export function switchToChapterByIndex(newIndex, closeTOC = true) {
+export function switchToChapterByIndex(newIndex, shouldCloseTOC = true) {
   if (newIndex < 0 || newIndex >= RULEBOOK_CHAPTERS.length) return;
 
   const chapter = RULEBOOK_CHAPTERS[newIndex];
+
+  unlockBodyScroll(); // 👈 reset antes de tudo
   loadRulebookChapter(chapter.file);
 
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -156,7 +165,7 @@ export function switchToChapterByIndex(newIndex, closeTOC = true) {
   const select = document.getElementById("chapter-select");
   if (select) select.value = chapter.file;
 
-  if (!closeTOC) return;
+  if (!shouldCloseTOC) return;
 
   const tocPanel = document.getElementById("toc-panel");
   const tocOverlay = document.getElementById("toc-overlay");
@@ -166,7 +175,8 @@ export function switchToChapterByIndex(newIndex, closeTOC = true) {
 
   tocPanel.classList.remove("open");
   tocOverlay.classList.remove("active");
-  document.body.classList.remove("no-scroll");
   tocToggle.textContent = ICON_CLOSED;
   tocToggle.setAttribute("aria-label", "Open Rulebook Index");
+
+  unlockBodyScroll();
 }

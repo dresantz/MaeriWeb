@@ -1,26 +1,15 @@
-/*
- * Carrega um capítulo do Rulebook
- * Responsável por:
- * - Buscar o JSON do capítulo
- * - Atualizar estado global
- * - Atualizar URL (?chapter=)
- * - Renderizar conteúdo e TOC
- * - Restaurar tópico (URL ou localStorage)
- * - Ativar observador de scroll
- */
 import { renderRulebookChapter } from "./renderer.js";
-import { renderTOC } from "./toc.js";
+import { renderTOC, renderChapterSelect } from "./toc.js";
 import { setCurrentChapter } from "./state.js";
-import { LAST_CHAPTER_KEY, LAST_TOPIC_KEY } from "./constants.js";
-import { renderChapterSelect } from "./toc.js";
+import { LAST_CHAPTER_KEY } from "./constants.js";
 import { updateChapterNavButtons } from "./navigation.js";
-import { restoreLastTopic } from "./navigation.js";
-import { observeTopics } from "./navigation.js";
+import { restoreLastTopic, observeTopics } from "./navigation.js";
+
+let loadToken = 0;
 
 export function loadRulebookChapter(fileName) {
-  // Caminho do JSON
-  // rulebook.html está em /web/pages/
-  // JSON está em /web/data/rulebook/
+  const currentToken = ++loadToken;
+
   const path = `../data/rulebook/${fileName}`;
 
   /* =========================
@@ -31,7 +20,6 @@ export function loadRulebookChapter(fileName) {
 
   /* =========================
      Atualiza URL (?chapter=)
-     Mantém outros parâmetros (ex: topic)
   ========================= */
   const url = new URL(window.location);
   url.searchParams.set("chapter", fileName);
@@ -46,6 +34,9 @@ export function loadRulebookChapter(fileName) {
       return res.json();
     })
     .then((data) => {
+      // 🚫 ignora resposta obsoleta
+      if (currentToken !== loadToken) return;
+
       /* =========================
          Renderização
       ========================= */
@@ -55,19 +46,27 @@ export function loadRulebookChapter(fileName) {
       updateChapterNavButtons();
 
       /* =========================
-         Restaurar tópico
-         Prioridade:
-         1) URL (?topic=)
-         2) localStorage
-      ========================= */
-      restoreLastTopic();
-
-      /* =========================
-         Ativar scroll spy
+         Scroll spy
+         (observer antes do scroll)
       ========================= */
       observeTopics();
+
+      /* =========================
+         Restaurar tópico
+      ========================= */
+      requestAnimationFrame(() => {
+        restoreLastTopic();
+      });
     })
     .catch((err) => {
+      if (currentToken !== loadToken) return;
+
       console.error("Failed to load rulebook chapter:", err);
+
+      // rollback mínimo
+      const content = document.getElementById("rulebook-content");
+      if (content) {
+        content.innerHTML = "<p>Failed to load chapter.</p>";
+      }
     });
 }

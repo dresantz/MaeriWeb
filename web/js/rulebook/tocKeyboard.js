@@ -22,6 +22,14 @@ export function initTOCKeyboardNavigation({
     return Array.from(tocList.querySelectorAll("a"));
   }
 
+  function clearActive() {
+    const items = getItems();
+    items.forEach(item => {
+      item.classList.remove("active");
+      item.setAttribute("aria-selected", "false");
+    });
+  }
+
   function setActive(index) {
     const items = getItems();
     if (!items.length) return;
@@ -46,12 +54,12 @@ export function initTOCKeyboardNavigation({
     switch (e.key) {
       case "ArrowDown":
         e.preventDefault();
-        setActive(activeIndex + 1);
+        setActive(activeIndex < 0 ? 0 : activeIndex + 1);
         break;
 
       case "ArrowUp":
         e.preventDefault();
-        setActive(activeIndex - 1);
+        setActive(activeIndex <= 0 ? 0 : activeIndex - 1);
         break;
 
       case "Home":
@@ -67,11 +75,17 @@ export function initTOCKeyboardNavigation({
       case "Enter":
       case " ":
         e.preventDefault();
-        items[activeIndex]?.click();
+        if (activeIndex < 0) {
+          setActive(0);
+        } else {
+          items[activeIndex]?.click();
+        }
         break;
 
       case "Escape":
         e.preventDefault();
+        clearActive();
+        activeIndex = -1;
         onClose?.();
         break;
     }
@@ -79,9 +93,13 @@ export function initTOCKeyboardNavigation({
 
   return {
     focusFirst() {
-      requestAnimationFrame(() => setActive(0));
+      requestAnimationFrame(() => {
+        clearActive();
+        setActive(0);
+      });
     },
     reset() {
+      clearActive();
       activeIndex = -1;
     }
   };

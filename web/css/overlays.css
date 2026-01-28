@@ -60,6 +60,8 @@
   z-index: 1095;
   overflow-y: auto;
 
+  box-sizing: border-box;
+
   transform: translateY(-110%);
   opacity: 0;
   pointer-events: none;

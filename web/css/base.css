@@ -16,12 +16,20 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
 body {
+  width: 100%;
   margin: 0;
+  overflow-x: hidden;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
 }
+
 
 body.no-scroll {
   overflow: hidden;
@@ -46,9 +54,12 @@ footer p {
 
 main {
   padding: 1rem;
+  width: 100%;
   max-width: 480px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
+
 
 /* =========================
    Sections (Cards)

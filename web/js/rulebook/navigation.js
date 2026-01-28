@@ -13,7 +13,7 @@ function getCurrentChapterIndex() {
 }
 
 /* =====================================================
-   URL helpers (antes estavam no main.js ❌)
+   URL helpers
 ===================================================== */
 
 export function getTopicFromURL() {
@@ -23,6 +23,10 @@ export function getTopicFromURL() {
 
 export function updateURLTopic(topicId) {
   const url = new URL(window.location);
+  const current = url.searchParams.get("topic");
+
+  // 🔒 evita replaceState desnecessário
+  if (current === topicId) return;
 
   if (topicId) {
     url.searchParams.set("topic", topicId);
@@ -60,23 +64,29 @@ export function initChapterNavigation() {
 
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
+      const index = getCurrentChapterIndex();
+      if (index <= 0) return;
+
       clearSavedTopic();
       updateURLTopic(null);
-      switchToChapterByIndex(getCurrentChapterIndex() - 1, false);
+      switchToChapterByIndex(index - 1, false);
     });
   }
 
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
+      const index = getCurrentChapterIndex();
+      if (index === -1 || index >= RULEBOOK_CHAPTERS.length - 1) return;
+
       clearSavedTopic();
       updateURLTopic(null);
-      switchToChapterByIndex(getCurrentChapterIndex() + 1, false);
+      switchToChapterByIndex(index + 1, false);
     });
   }
 }
 
 /* =====================================================
-   Restauração de tópico
+   Restauração de tópico (SAFE)
 ===================================================== */
 
 export function restoreLastTopic() {
@@ -86,19 +96,34 @@ export function restoreLastTopic() {
   const topicId = topicFromURL || topicFromStorage;
   if (!topicId) return;
 
-  const el = document.getElementById(topicId);
-  if (el) el.scrollIntoView({ behavior: "auto", block: "start" });
+  // 🔒 Espera o layout estabilizar
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      const el = document.getElementById(topicId);
+      if (!el) return;
+
+      el.scrollIntoView({
+        behavior: "auto",
+        block: "start"
+      });
+    });
+  });
 }
 
 /* =====================================================
-   Scroll Spy (observeTopics)
+   Scroll Spy (SAFE)
 ===================================================== */
+
+let topicObserver = null;
 
 export function observeTopics() {
   const topics = document.querySelectorAll("[data-topic]");
   if (!topics.length) return;
 
-  const observer = new IntersectionObserver(
+  // 🔒 evita observers duplicados
+  topicObserver?.disconnect();
+
+  topicObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
@@ -112,9 +137,14 @@ export function observeTopics() {
     },
     {
       rootMargin: "-40% 0px -50% 0px",
-      threshold: 0,
+      threshold: 0
     }
   );
 
-  topics.forEach((topic) => observer.observe(topic));
+  // 🔒 Observa só após DOM estar estável
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      topics.forEach((topic) => topicObserver.observe(topic));
+    });
+  });
 }

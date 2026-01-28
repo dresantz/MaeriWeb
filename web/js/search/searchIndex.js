@@ -1,9 +1,9 @@
 /*
- * Índice global de busca do Rulebook
- * Responsável apenas por:
+ * Índice + motor de busca do Rulebook
+ * Responsável por:
  * - Armazenar dados indexados
  * - Construir o índice a partir dos capítulos
- * - Expor acesso de leitura
+ * - Executar buscas com ranking
  */
 
 import { currentChapterFile } from "../rulebook/state.js";
@@ -14,7 +14,7 @@ const index = [];
    Normalização
 ===================================================== */
 
-function normalizeText(text) {
+function normalizeText(text = "") {
   return text
     .toLowerCase()
     .normalize("NFD")
@@ -51,14 +51,6 @@ export function buildIndex(chaptersData) {
 }
 
 /* =====================================================
-   Leitura
-===================================================== */
-
-export function getIndex() {
-  return index;
-}
-
-/* =====================================================
    Helpers
 ===================================================== */
 
@@ -66,11 +58,15 @@ function extractText(section) {
   let text = section.title || "";
 
   (section.content || []).forEach((block) => {
-    if (block.text) text += " " + block.text;
+    if (block.text) {
+      text += " " + block.text;
+    }
 
     if (Array.isArray(block.items)) {
       block.items.forEach((item) => {
-        if (typeof item === "string") text += " " + item;
+        if (typeof item === "string") {
+          text += " " + item;
+        }
       });
     }
   });
@@ -87,7 +83,6 @@ export function search(query, { limit = 20 } = {}) {
 
   const q = normalizeText(query);
   const terms = q.split(" ").filter(Boolean);
-
   const results = [];
 
   for (const entry of index) {
@@ -95,9 +90,8 @@ export function search(query, { limit = 20 } = {}) {
 
     const topicTitle = entry._topicTitleNorm;
     const chapterTitle = entry._chapterTitleNorm;
-    const text = entry.text; // já normalizado
+    const text = entry.text;
     const words = text.split(" ");
-
     const textLength = text.length || 1;
 
     let topicMatch = false;
@@ -157,9 +151,9 @@ export function search(query, { limit = 20 } = {}) {
     );
 
     if (positions.every((p) => p.length > 0)) {
-      const allPositions = positions.flat();
-      const min = Math.min(...allPositions);
-      const max = Math.max(...allPositions);
+      const all = positions.flat();
+      const min = Math.min(...all);
+      const max = Math.max(...all);
       const windowSize = max - min;
 
       if (windowSize <= 6) score += 6;
@@ -177,11 +171,8 @@ export function search(query, { limit = 20 } = {}) {
 
     if (score <= 0) continue;
 
-    /* =========================
-       Normalização por tamanho
-    ========================= */
     const normalizedScore =
-      Math.max(0, score) / Math.log(textLength + 10);
+      score / Math.log(textLength + 10);
 
     results.push({
       ...entry,
@@ -205,5 +196,5 @@ export function search(query, { limit = 20 } = {}) {
     .slice(0, limit);
 }
 
-// remover quando tivermos a UI
+/* Debug (remover depois) */
 window.__searchIndex = index;

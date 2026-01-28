@@ -5,11 +5,11 @@
  * - Renderizar resultados básicos
  */
 
-import { search } from "./searchEngine.js";
+import { search } from "./searchIndex.js";
 import { loadRulebookChapter } from "../rulebook/loader.js";
 import { updateURLTopic } from "../rulebook/main.js";
 
-let resultsContainer;
+let resultsContainer = null;
 
 /* =====================================================
    Utils
@@ -30,6 +30,7 @@ function escapeHTML(str = "") {
 ===================================================== */
 
 export function initSearchRouter(container) {
+  if (!container) return;
   resultsContainer = container;
 }
 
@@ -59,7 +60,7 @@ export function handleSearch(query) {
       const chapterTitle = escapeHTML(r.chapterTitle);
 
       return `
-        <div 
+        <div
           class="search-result"
           data-chapter="${r.chapterFile}"
           data-topic="${r.topicId}"
@@ -85,29 +86,45 @@ export function bindSearchResultClicks() {
   if (!resultsContainer) return;
 
   resultsContainer.addEventListener("click", activateResult);
+
   resultsContainer.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      activateResult(e);
+    if (e.key !== "Enter" && e.key !== " ") return;
+
+    e.preventDefault();
+
+    // 🔑 teclado deve respeitar foco real
+    const focused = document.activeElement;
+    if (focused?.classList.contains("search-result")) {
+      activateResult({ target: focused, preventDefault() {}, stopPropagation() {} });
     }
   });
+}
 
-  function activateResult(e) {
-    const item = e.target.closest(".search-result");
-    if (!item) return;
+function activateResult(e) {
+  e.preventDefault();
+  e.stopPropagation();
 
-    const { chapter, topic } = item.dataset;
+  const item = e.target.closest(".search-result");
+  if (!item) return;
 
-    loadRulebookChapter(chapter);
-    updateURLTopic(topic);
+  const { chapter, topic } = item.dataset;
 
-    resultsContainer.classList.add("hidden");
-    resultsContainer.setAttribute("aria-hidden", "true");
+  // ✅ 1. Mover foco ANTES de esconder
+  const safeFocusTarget =
+    document.getElementById("rulebook-content") ||
+    document.getElementById("toc-toggle");
 
-    const safeFocusTarget =
-      document.getElementById("rulebook-content") ||
-      document.getElementById("toc-toggle");
-
-    safeFocusTarget?.focus?.({ preventScroll: true });
+  if (safeFocusTarget) {
+    safeFocusTarget.setAttribute("tabindex", "-1");
+    safeFocusTarget.focus({ preventScroll: true });
+    safeFocusTarget.removeAttribute("tabindex");
   }
+
+  // ✅ 2. Agora é seguro esconder a busca
+  resultsContainer.classList.add("hidden");
+  resultsContainer.setAttribute("aria-hidden", "true");
+
+  // ✅ 3. Navegação
+  loadRulebookChapter(chapter);
+  updateURLTopic(topic);
 }

@@ -24,6 +24,8 @@ export function initSearchUI() {
   if (!searchInput || !searchResults) return;
 
   searchInput.addEventListener("input", onSearchInput);
+
+  // ❗ remove capture global destrutivo
   document.addEventListener("click", onOutsideClick);
 
   initSearchRouter(searchResults);
@@ -51,6 +53,8 @@ function onSearchInput(e) {
 ===================================================== */
 
 function initHighlightObserver() {
+  if (!searchResults) return;
+
   observer = new MutationObserver(() => {
     requestAnimationFrame(applyHighlight);
   });
@@ -61,23 +65,12 @@ function initHighlightObserver() {
   });
 }
 
-
-function highlightTerm(text, term) {
-  if (!term) return text;
-
-  const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const regex = new RegExp(`(${escaped})`, "gi");
-
-  return text.replace(regex, "<mark>$1</mark>");
-}
-
 function applyHighlight() {
-  if (!currentQuery) return;
+  if (!currentQuery || !searchResults) return;
 
   const items = searchResults.querySelectorAll(".search-result");
 
   items.forEach((item) => {
-    // 🔥 remove marcação antiga se existir
     item.querySelectorAll("mark").forEach((m) => {
       m.replaceWith(document.createTextNode(m.textContent));
     });
@@ -86,13 +79,11 @@ function applyHighlight() {
   });
 }
 
-
 function highlightNode(element, term) {
   const walker = document.createTreeWalker(
     element,
     NodeFilter.SHOW_TEXT,
-    null,
-    false
+    null
   );
 
   const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -122,11 +113,20 @@ function highlightNode(element, term) {
 ===================================================== */
 
 function clearResults() {
-  const safeFocusTarget =
-    document.getElementById("rulebook-content") ||
-    searchInput;
+  if (!searchResults) return;
 
-  safeFocusTarget?.focus?.();
+  const active = document.activeElement;
+
+  // 🔒 Só move foco se ele estiver DENTRO da busca
+  if (active && active.closest("#search-results")) {
+    const safeTarget =
+      document.getElementById("rulebook-content") ||
+      searchInput;
+
+    safeTarget?.setAttribute("tabindex", "-1");
+    safeTarget?.focus({ preventScroll: true });
+    safeTarget?.removeAttribute("tabindex");
+  }
 
   searchResults.innerHTML = "";
   searchResults.classList.add("hidden");
@@ -134,6 +134,10 @@ function clearResults() {
 }
 
 function onOutsideClick(e) {
+  // Só reage se a busca estiver aberta
+  if (searchResults.classList.contains("hidden")) return;
+
   if (e.target.closest(".search-container")) return;
+
   clearResults();
 }

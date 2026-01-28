@@ -3,8 +3,20 @@ export function renderRulebookChapter(chapterData) {
   const container = document.getElementById("rulebook-content");
   if (!container) return;
 
-  // Limpa conteúdo anterior
+  /* =========================
+     RESET SEGURO DE LAYOUT
+  ========================= */
+
+  // Remove foco interno antes de mexer no DOM
+  if (container.contains(document.activeElement)) {
+    container.blur?.();
+  }
+
+  // Limpa conteúdo
   container.innerHTML = "";
+
+  // 🔒 Força reflow para limpar estado visual anterior
+  container.offsetHeight;
 
   /* =========================
      Chapter Title
@@ -44,6 +56,17 @@ export function renderRulebookChapter(chapterData) {
 
     container.appendChild(sectionEl);
   });
+
+  /* =========================
+     LAYOUT STABILIZATION BARRIER
+  ========================= */
+
+  // Aguarda dois frames → layout totalmente calculado
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      // nada aqui: apenas estabilização
+    });
+  });
 }
 
 /* =====================================================
@@ -66,7 +89,6 @@ function renderParagraph(container, block) {
   container.appendChild(p);
 }
 
-/* ✅ LISTA ATUALIZADA */
 function renderList(container, block) {
   const style = block.style || "unordered";
   const listEl = document.createElement(
@@ -76,21 +98,17 @@ function renderList(container, block) {
   (block.items || []).forEach((item) => {
     const li = document.createElement("li");
 
-    // 🟢 Lista simples (string)
     if (typeof item === "string") {
       li.textContent = item;
       listEl.appendChild(li);
       return;
     }
 
-    // 🟢 Lista estruturada (objeto)
     if (typeof item === "object" && item !== null) {
       if (item.text) {
-        const textNode = document.createTextNode(item.text);
-        li.appendChild(textNode);
+        li.appendChild(document.createTextNode(item.text));
       }
 
-      // Subitens
       if (Array.isArray(item.subitems) && item.subitems.length > 0) {
         const subUl = document.createElement("ul");
 
