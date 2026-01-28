@@ -52,7 +52,7 @@ function onSearchInput(e) {
 
 function initHighlightObserver() {
   observer = new MutationObserver(() => {
-    applyHighlight();
+    requestAnimationFrame(applyHighlight);
   });
 
   observer.observe(searchResults, {
@@ -60,6 +60,7 @@ function initHighlightObserver() {
     subtree: true
   });
 }
+
 
 function highlightTerm(text, term) {
   if (!term) return text;
@@ -76,12 +77,15 @@ function applyHighlight() {
   const items = searchResults.querySelectorAll(".search-result");
 
   items.forEach((item) => {
-    if (item.dataset.highlighted) return;
+    // 🔥 remove marcação antiga se existir
+    item.querySelectorAll("mark").forEach((m) => {
+      m.replaceWith(document.createTextNode(m.textContent));
+    });
 
     highlightNode(item, currentQuery);
-    item.dataset.highlighted = "true";
   });
 }
+
 
 function highlightNode(element, term) {
   const walker = document.createTreeWalker(

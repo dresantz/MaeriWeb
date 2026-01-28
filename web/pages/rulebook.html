@@ -3,107 +3,168 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Maeri RPG – Rulebook</title>
 
   <meta name="description" content="Maeri RPG Core Rulebook" />
 
-  <link rel="stylesheet" href="../css/main.css" />
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/overlays.css" />
 </head>
 
 <body>
+  <!-- =========================
+       Header + Search
+  ========================== -->
   <header>
     <h1>Maeri RPG</h1>
     <p>Core Rulebook</p>
-        <div id="rulebook-search" class="search-container">
-      <input type="search" id="search-input"
-        placeholder="Buscar regra, termo ou ação..." autocomplete="off"/>
-      <div id="search-results" class="search-results hidden"></div>
+
+    <div
+      id="rulebook-search"
+      class="search-container"
+      role="search"
+      aria-label="Search rules"
+    >
+      <input
+        type="search"
+        id="search-input"
+        placeholder="Search rule, term or action..."
+        autocomplete="off"
+      />
+      <div
+        id="search-results"
+        class="search-results hidden"
+        aria-live="polite"
+      ></div>
     </div>
   </header>
 
-  <!-- Rulebook Index Toggle -->
-<button id="toc-toggle" aria-label="Open Rulebook Index">☰</button>
+  <!-- =========================
+       Rulebook TOC
+  ========================== -->
 
-<!-- TOC Overlay -->
-<div id="toc-overlay"></div>
+  <!-- Toggle -->
+  <button
+    id="toc-toggle"
+    aria-label="Open Rulebook Index"
+    aria-expanded="false"
+  >
+    ☰
+  </button>
 
-<!-- TOC Panel -->
-<div id="toc-panel" aria-hidden="true">
-  <div class="toc-header">
-    <h2>Index</h2>
+  <!-- Overlay -->
+  <div id="toc-overlay"></div>
+
+  <!-- Panel -->
+  <div
+    id="toc-panel"
+    aria-hidden="true"
+    role="navigation"
+    aria-label="Rulebook Index"
+  >
+    <div class="toc-header">
+      <h2>Index</h2>
+    </div>
+
+    <p id="toc-chapter-title" class="toc-chapter-title">—</p>
+
+    <select
+      id="chapter-select"
+      aria-label="Select chapter"
+    ></select>
+
+    <div class="chapter-nav">
+      <button id="chapter-prev" type="button">
+        ← Previous
+      </button>
+      <button id="chapter-next" type="button">
+        Next →
+      </button>
+    </div>
+
+    <ul id="toc-list"></ul>
   </div>
 
-  <p id="toc-chapter-title" class="toc-chapter-title">—</p>
-
-  <select id="chapter-select" aria-label="Select Chapter"></select>
-
-  <div class="chapter-nav">
-    <button id="chapter-prev" type="button">← Previous</button>
-    <button id="chapter-next" type="button">Next →</button>
-  </div>
-
-  <ul id="toc-list"></ul>
-
-</div>
-
-
+  <!-- =========================
+       Main Content
+  ========================== -->
   <main class="rulebook">
     <div id="rulebook-content"></div>
   </main>
 
+  <!-- =========================
+       Footer
+  ========================== -->
   <footer>
     <p>
       <a href="../index.html">← Back to Home</a>
     </p>
   </footer>
 
-  <!-- Dice Roller Floating Button -->
-<button id="dice-toggle" aria-label="Open Dice Roller">
-  🎲
-</button>
+  <!-- =========================
+       Dice Roller (Global)
+  ========================== -->
 
-<!-- Dice Roller Panel -->
-<div id="dice-overlay"></div>
-<div id="dice-panel">
-  <header>
-    <h2>Dice Roller</h2>
-  </header>
+  <!-- Toggle -->
+  <button id="dice-toggle" aria-label="Open Dice Roller">
+    🎲
+  </button>
 
-  <section>
-    <label for="dice-type"><strong>Dice Type</strong></label>
-    <select id="dice-type">
-      <option value="2">d2</option>
-      <option value="3">d3</option>
-      <option value="6" selected>d6</option>
-    </select>
-  </section>
+  <!-- Overlay -->
+  <div id="dice-overlay"></div>
 
-  <section>
-    <label for="dice-amount"><strong>Number of Dice</strong></label>
-    <input type="number" id="dice-amount" min="1" max="20" value="1" />
-  </section>
+  <!-- Panel -->
+  <div id="dice-panel">
+    <header>
+      <h2>Dice Roller</h2>
+    </header>
 
-  <section>
-    <button id="roll-button">Roll</button>
-  </section>
+    <section>
+      <label for="dice-type"><strong>Dice Type</strong></label>
+      <select id="dice-type">
+        <option value="2">d2</option>
+        <option value="3">d3</option>
+        <option value="6" selected>d6</option>
+      </select>
+    </section>
 
-  <section id="result">
-    <p><strong>Rolls:</strong></p>
-    <p id="result-output">—</p>
+    <section>
+      <label for="dice-amount"><strong>Number of Dice</strong></label>
+      <input
+        type="number"
+        id="dice-amount"
+        min="1"
+        max="20"
+        value="1"
+      />
+    </section>
 
-    <p><strong>Total:</strong></p>
-    <p id="total-output">—</p>
-  </section>
+    <section>
+      <button id="roll-button">Roll</button>
+    </section>
 
-  <section id="history">
-    <h3>History</h3>
-    <ul id="history-output"></ul>
-    <button id="clear-history">Clear</button>
-  </section>
-</div>
+    <section id="result">
+      <p><strong>Rolls:</strong></p>
+      <p id="result-output">—</p>
 
+      <p><strong>Total:</strong></p>
+      <p id="total-output">—</p>
+    </section>
+
+    <section id="history">
+      <h3>History</h3>
+      <ul id="history-output"></ul>
+      <button id="clear-history">Clear</button>
+    </section>
+  </div>
+
+  <!-- =========================
+       Scripts
+  ========================== -->
   <script src="../js/dice.js"></script>
   <script type="module" src="../js/rulebook/main.js"></script>
-
 </body>
 </html>

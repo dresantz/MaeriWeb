@@ -1,0 +1,202 @@
+/* =========================
+   Maeri Web – Base Styles
+   Dark Theme | Mobile First
+========================= */
+
+:root {
+  --bg-color: #121212;
+  --card-color: #1e1e1e;
+  --text-color: #eaeaea;
+  --muted-text: #b5b5b5;
+  --accent-color: #8b7dff;
+  --border-radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+header,
+footer {
+  text-align: center;
+  padding: 1rem;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+header p,
+footer p {
+  margin: 0.3rem 0 0;
+  color: var(--muted-text);
+}
+
+main {
+  padding: 1rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* =========================
+   Sections (Cards)
+========================= */
+
+section {
+  background-color: var(--card-color);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* =========================
+   Form Elements
+========================= */
+
+label {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--muted-text);
+}
+
+select,
+input[type="number"] {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid #333;
+  background-color: #2a2a2a;
+  color: var(--text-color);
+}
+
+select:focus,
+input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+/* =========================
+   Buttons
+========================= */
+
+button {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--accent-color);
+  color: #121212;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* =========================
+   Results / History
+========================= */
+
+#result-output,
+#total-output {
+  font-size: 1.2rem;
+  margin: 0.2rem 0 0.8rem;
+}
+
+#total-output {
+  font-weight: bold;
+}
+
+#history-output {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#history-output li {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #333;
+  font-size: 0.95rem;
+}
+
+/* =========================
+   Footer
+========================= */
+
+footer a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* =========================
+   Rulebook – Long Form Reading
+========================= */
+
+.rulebook {
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.rulebook h1 {
+  font-size: 1.8rem;
+  margin: 0 0 0.6rem;
+}
+
+.rulebook h2 {
+  font-size: 1.35rem;
+  margin: 1.4rem 0 0.6rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid #333;
+}
+
+.rulebook h3 {
+  font-size: 1.1rem;
+  margin: 1rem 0 0.4rem;
+  color: var(--accent-color);
+}
+
+.rulebook p {
+  margin: 0.5rem 0 0.9rem;
+  color: var(--text-color);
+}
+
+.rulebook ul {
+  margin: 0.4rem 0 1rem 1.2rem;
+}
+
+.rulebook li {
+  margin: 0.35rem 0;
+}
+
+.rulebook a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.rulebook a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .rulebook {
+    font-size: 1.1rem;
+  }
+}

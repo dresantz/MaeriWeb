@@ -3,19 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Maeri RPG – Dice Roller</title>
 
-  <meta name="description" content="Maeri RPG Dice Roller – Roll d2, d3 and d6 dice using the Maeri system." />
+  <meta
+    name="description"
+    content="Maeri RPG Dice Roller – Roll d2, d3 and d6 dice using the Maeri system."
+  />
 
-  <link rel="stylesheet" href="../css/main.css" />
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
 </head>
 
 <body>
+  <!-- =========================
+       Header
+  ========================== -->
   <header>
     <h1>Dice Roller</h1>
     <p>Maeri RPG – MVP Tool</p>
   </header>
 
+  <!-- =========================
+       Main
+  ========================== -->
   <main>
     <section>
       <label for="dice-type"><strong>Dice Type</strong></label>
@@ -56,17 +68,20 @@
       <ul id="history-output"></ul>
       <button id="clear-history">Clear</button>
     </section>
-
-
   </main>
 
+  <!-- =========================
+       Footer
+  ========================== -->
   <footer>
     <p>
       <a href="../index.html">← Back to Home</a>
     </p>
   </footer>
 
+  <!-- =========================
+       Script
+  ========================== -->
   <script src="../js/dice.js"></script>
-  
 </body>
 </html>

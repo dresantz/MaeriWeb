@@ -3,13 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Maeri RPG</title>
 
   <!-- Basic metadata -->
-  <meta name="description" content="Maeri is an original tabletop role-playing game system. Play using only your smartphone." />
+  <meta
+    name="description"
+    content="Maeri is an original tabletop role-playing game system. Play using only your smartphone."
+  />
 
-  <!-- Styles (to be added later) -->
-  <link rel="stylesheet" href="css/main.css" />
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/overlays.css" />
 </head>
 
 <body>
@@ -22,13 +28,13 @@
     <section>
       <p>
         MaeriWeb is the official web application for the Maeri RPG system.
-        It is designed to help players access rules and tools quickly during in-person sessions,
-        using only their smartphones.
+        It is designed to help players access rules and tools quickly during
+        in-person sessions, using only their smartphones.
       </p>
     </section>
 
     <section>
-      <nav>
+      <nav aria-label="Main navigation">
         <ul>
           <li>
             <a href="pages/rulebook.html">📘 Core Rulebook</a>
@@ -47,53 +53,64 @@
     </p>
   </footer>
 
-  <!-- Dice Roller Floating Button -->
-<button id="dice-toggle" aria-label="Open Dice Roller">
-  🎲
-</button>
+  <!-- =========================
+       Dice Roller (Global)
+  ========================== -->
 
-<!-- Dice Roller Panel -->
-<div id="dice-overlay"></div>
+  <!-- Floating Toggle -->
+  <button id="dice-toggle" aria-label="Open Dice Roller">
+    🎲
+  </button>
 
-<div id="dice-panel">
-  <header>
-    <h2>Dice Roller</h2>
-  </header>
+  <!-- Overlay -->
+  <div id="dice-overlay"></div>
 
-  <section>
-    <label for="dice-type"><strong>Dice Type</strong></label>
-    <select id="dice-type">
-      <option value="2">d2</option>
-      <option value="3">d3</option>
-      <option value="6" selected>d6</option>
-    </select>
-  </section>
+  <!-- Panel -->
+  <div id="dice-panel">
+    <header>
+      <h2>Dice Roller</h2>
+    </header>
 
-  <section>
-    <label for="dice-amount"><strong>Number of Dice</strong></label>
-    <input type="number" id="dice-amount" min="1" max="20" value="1" />
-  </section>
+    <section>
+      <label for="dice-type"><strong>Dice Type</strong></label>
+      <select id="dice-type">
+        <option value="2">d2</option>
+        <option value="3">d3</option>
+        <option value="6" selected>d6</option>
+      </select>
+    </section>
 
-  <section>
-    <button id="roll-button">Roll</button>
-  </section>
+    <section>
+      <label for="dice-amount"><strong>Number of Dice</strong></label>
+      <input
+        type="number"
+        id="dice-amount"
+        min="1"
+        max="20"
+        value="1"
+      />
+    </section>
 
-  <section id="result">
-    <p><strong>Rolls:</strong></p>
-    <p id="result-output">—</p>
+    <section>
+      <button id="roll-button">Roll</button>
+    </section>
 
-    <p><strong>Total:</strong></p>
-    <p id="total-output">—</p>
-  </section>
+    <section id="result">
+      <p><strong>Rolls:</strong></p>
+      <p id="result-output">—</p>
 
-  <section id="history">
-    <h3>History</h3>
-    <ul id="history-output"></ul>
-    <button id="clear-history">Clear</button>
-  </section>
-</div>
+      <p><strong>Total:</strong></p>
+      <p id="total-output">—</p>
+    </section>
 
-<script src="js/dice.js"></script>
+    <section id="history">
+      <h3>History</h3>
+      <ul id="history-output"></ul>
+      <button id="clear-history">Clear</button>
+    </section>
+  </div>
 
+  <!-- Scripts -->
+  <script src="js/dice.js"></script>
 </body>
 </html>

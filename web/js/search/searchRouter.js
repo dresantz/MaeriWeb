@@ -7,10 +7,23 @@
 
 import { search } from "./searchEngine.js";
 import { loadRulebookChapter } from "../rulebook/loader.js";
-import { updateURLTopic, clearSavedTopic } from "../rulebook/main.js";
-
+import { updateURLTopic } from "../rulebook/main.js";
 
 let resultsContainer;
+
+/* =====================================================
+   Utils
+===================================================== */
+
+function escapeHTML(str = "") {
+  return str.replace(/[&<>"']/g, (m) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[m]);
+}
 
 /* =====================================================
    Inicialização
@@ -36,31 +49,36 @@ export function handleSearch(query) {
       </div>
     `;
     resultsContainer.classList.remove("hidden");
+    resultsContainer.setAttribute("aria-hidden", "false");
     return;
   }
 
   resultsContainer.innerHTML = results
-    .map(
-      (r) => `
-      <div 
-        class="search-result"
-        data-chapter="${r.chapterFile}"
-        data-topic="${r.topicId}"
-        role="button"
-        tabindex="0"
-      >
-        <strong>${r.topicTitle}</strong>
-        <span>${r.chapterTitle}</span>
-      </div>
-    `
-    )
+    .map((r) => {
+      const topicTitle = escapeHTML(r.topicTitle);
+      const chapterTitle = escapeHTML(r.chapterTitle);
+
+      return `
+        <div 
+          class="search-result"
+          data-chapter="${r.chapterFile}"
+          data-topic="${r.topicId}"
+          role="button"
+          tabindex="0"
+        >
+          <strong>${topicTitle}</strong>
+          <span>${chapterTitle}</span>
+        </div>
+      `;
+    })
     .join("");
 
   resultsContainer.classList.remove("hidden");
+  resultsContainer.setAttribute("aria-hidden", "false");
 }
 
 /* =====================================================
-   Clique em resultado
+   Clique / teclado em resultado
 ===================================================== */
 
 export function bindSearchResultClicks() {
@@ -68,26 +86,28 @@ export function bindSearchResultClicks() {
 
   resultsContainer.addEventListener("click", activateResult);
   resultsContainer.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") activateResult(e);
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      activateResult(e);
+    }
   });
 
   function activateResult(e) {
     const item = e.target.closest(".search-result");
     if (!item) return;
 
-    e.preventDefault();
-
     const { chapter, topic } = item.dataset;
-
-    const safeFocusTarget =
-      document.getElementById("rulebook-content") ||
-      document.getElementById("toc-toggle");
-
-    safeFocusTarget?.focus?.();
 
     loadRulebookChapter(chapter);
     updateURLTopic(topic);
 
     resultsContainer.classList.add("hidden");
+    resultsContainer.setAttribute("aria-hidden", "true");
+
+    const safeFocusTarget =
+      document.getElementById("rulebook-content") ||
+      document.getElementById("toc-toggle");
+
+    safeFocusTarget?.focus?.({ preventScroll: true });
   }
 }
