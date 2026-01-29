@@ -64,3 +64,8 @@ Community feedback will be welcome as the project evolves.
 ## 📜 License
 
 License information will be defined in the future.
+
+## 🚧 Tests
+
+Maeri Web is tested and supported on Chromium-based browsers (Chrome, Edge).
+Opera GX may present layout issues in PWA mode.

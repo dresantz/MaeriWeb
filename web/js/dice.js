@@ -79,17 +79,37 @@ function initDiceToggle() {
 
   const STORAGE_KEY = "maeriDiceOpen";
 
+  function forceReflow() {
+    // leitura síncrona que força o browser a recalcular layout
+    document.documentElement.getBoundingClientRect();
+  }
+
   function openDice() {
     dicePanel.classList.add("open");
     diceOverlay.classList.add("active");
+
+    // força o layout a reconhecer os elementos fixed
+    forceReflow();
+
     document.body.classList.add("no-scroll");
+
+    // força novo reflow após mudar overflow
+    forceReflow();
+
     localStorage.setItem(STORAGE_KEY, "true");
   }
+
 
   function closeDice() {
     dicePanel.classList.remove("open");
     diceOverlay.classList.remove("active");
+
+    forceReflow();
+
     document.body.classList.remove("no-scroll");
+
+    forceReflow();
+
     localStorage.setItem(STORAGE_KEY, "false");
   }
 
@@ -103,10 +123,12 @@ function initDiceToggle() {
   // Click outside (overlay)
   diceOverlay.addEventListener("click", closeDice);
 
-  /* ---------- Restore state ---------- */
-  if (localStorage.getItem(STORAGE_KEY) === "true") {
+/* ---------- Restore state (after layout) ---------- */
+if (localStorage.getItem(STORAGE_KEY) === "true") {
+  window.addEventListener("load", () => {
     openDice();
-  }
+  }, { once: true });
+}
 
   /* ---------- Swipe Down to Close ---------- */
   let startY = null;
