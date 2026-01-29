@@ -3,6 +3,20 @@ import { currentChapterFile } from "./state.js";
 import { switchToChapterByIndex } from "./toc.js";
 
 /* =====================================================
+   🔒 CONTROLE DE SCROLL DO NAVEGADOR (NOVO)
+===================================================== */
+
+// Impede o browser de restaurar scroll automaticamente
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+// Detecta se a navegação é um reload real (F5)
+const navigationEntry = performance.getEntriesByType("navigation")[0];
+const isReload =
+  navigationEntry && navigationEntry.type === "reload";
+
+/* =====================================================
    Estado
 ===================================================== */
 
@@ -83,13 +97,19 @@ export function initChapterNavigation() {
       switchToChapterByIndex(index + 1, false);
     });
   }
+
+    // 🆕 Back to Top
+  initBackToTopButton();
 }
 
 /* =====================================================
-   Restauração de tópico (SAFE)
+   Restauração de tópico (SAFE + CORRIGIDO)
 ===================================================== */
 
 export function restoreLastTopic() {
+  // 🔒 Só restaura se for reload real (F5)
+  if (!isReload) return;
+
   const topicFromURL = getTopicFromURL();
   const topicFromStorage = localStorage.getItem(LAST_TOPIC_KEY);
 
@@ -146,5 +166,30 @@ export function observeTopics() {
     requestAnimationFrame(() => {
       topics.forEach((topic) => topicObserver.observe(topic));
     });
+  });
+}
+/* =====================================================
+   Botão Back to Top
+===================================================== */
+
+function initBackToTopButton() {
+  const btn = document.getElementById("back-to-top");
+  if (!btn) return;
+
+  // Estado inicial
+  btn.style.display = "none";
+
+  // Scroll suave ao topo
+  btn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
+  // Exibe apenas após certo scroll
+  window.addEventListener("scroll", () => {
+    btn.style.display =
+      window.scrollY > 300 ? "flex" : "none";
   });
 }

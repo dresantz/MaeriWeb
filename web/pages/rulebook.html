@@ -91,9 +91,30 @@
   <!-- =========================
        Main Content
   ========================== -->
-  <main class="rulebook">
+  <main class="rulebook" role:"main">
     <div id="rulebook-content"></div>
   </main>
+
+  <!-- =========================
+     Rulebook Navigation Buttons
+  ========================== -->
+
+  <button
+    id="back-to-top"
+    aria-label="Back to Top"
+    title="Back to Top"
+  >
+    ↑
+  </button>
+
+  <a
+    href="../index.html"
+    id="back-to-home"
+    aria-label="Back to Home"
+    title="Back to Home"
+  >
+    ⌂
+  </a>
 
   <!-- =========================
        Footer
@@ -109,7 +130,11 @@
   ========================== -->
 
   <!-- Toggle -->
-  <button id="dice-toggle" aria-label="Open Dice Roller">
+  <button
+  id="dice-toggle"
+  aria-label="Open Dice Roller"
+  aria-expanded="false"
+>
     🎲
   </button>
 

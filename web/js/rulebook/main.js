@@ -8,9 +8,8 @@
 
 import { initTOCToggle } from "./toc.js";
 import { loadRulebookChapter } from "./loader.js";
-import { RULEBOOK_CHAPTERS } from "./constants.js";
+import { RULEBOOK_CHAPTERS, LAST_TOPIC_KEY } from "./constants.js";
 import { currentChapterFile } from "./state.js";
-import { LAST_TOPIC_KEY } from "./constants.js";
 import { initChapterNavigation } from "./navigation.js";
 import { buildIndex } from "../search/searchIndex.js";
 import { initSearchUI } from "../search/searchUI.js";
