@@ -25,7 +25,7 @@
   width: 100%;
   max-height: 80vh;
   background-color: var(--card-color);
-  padding: 1rem;
+  padding: 0.75rem;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.6);
@@ -54,6 +54,65 @@
 
 #dice-panel h2 {
   margin: 0;
+}
+
+#dice-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.dice-btn {
+  text-align: center;
+}
+
+.dice-btn button {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: var(--accent-color);
+  color: #121212;
+  border: none;
+  cursor: pointer;
+}
+
+.dice-btn .counter {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--muted-text);
+}
+
+.dice-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.dice-actions button {
+  flex: 1;
+}
+
+.dice-content {
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.dice-btn.locked button {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(1);
+}
+
+.dice-btn .counter.limit {
+  color: #ff8c8c;
+  font-weight: bold;
+}
+
+.dice-btn.locked {
+  transition: opacity 0.2s ease;
 }
 
 /* =========================

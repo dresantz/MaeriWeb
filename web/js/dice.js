@@ -11,46 +11,85 @@ function rollDie(sides) {
 /* ---------- Dice Roller Component ---------- */
 
 function initDiceRoller() {
-  const rollButton = document.getElementById("roll-button");
-  const diceTypeSelect = document.getElementById("dice-type");
-  const diceAmountInput = document.getElementById("dice-amount");
+  const diceButtons = document.querySelectorAll(".dice-btn");
   const resultOutput = document.getElementById("result-output");
   const totalOutput = document.getElementById("total-output");
   const historyOutput = document.getElementById("history-output");
+  const rollButton = document.getElementById("roll-button");
+  const clearAllButton = document.getElementById("clear-all");
   const clearHistoryButton = document.getElementById("clear-history");
 
-  // If core elements are missing, do not initialize
-  if (
-    !rollButton ||
-    !diceTypeSelect ||
-    !diceAmountInput ||
-    !resultOutput ||
-    !totalOutput ||
-    !historyOutput
-  ) {
-    return;
-  }
+  if (!diceButtons.length || !rollButton) return;
 
+  const dicePool = {
+    2: 0,
+    3: 0,
+    6: 0
+  };
+
+  const MAX_DICE = 16;
   const history = [];
 
-  rollButton.addEventListener("click", () => {
-    const diceType = parseInt(diceTypeSelect.value);
-    const diceAmount = parseInt(diceAmountInput.value);
+  function getTotalDice() {
+    return Object.values(dicePool).reduce((sum, qty) => sum + qty, 0);
+  }
 
-    const results = [];
+/* ---------- Visual Control Dice Limit ---------- */
+
+  function updateLimitState() {
+    const limitReached = getTotalDice() >= MAX_DICE;
+
+    diceButtons.forEach(wrapper => {
+      const button = wrapper.querySelector("button");
+      const counter = wrapper.querySelector(".counter");
+
+      button.disabled = limitReached;
+      wrapper.classList.toggle("locked", limitReached);
+      counter.classList.toggle("limit", limitReached);
+    });
+  }
+
+  /* ---------- Dice Button Logic ---------- */
+  diceButtons.forEach(wrapper => {
+    const sides = wrapper.dataset.sides;
+    const counter = wrapper.querySelector(".counter");
+    const button = wrapper.querySelector("button");
+
+    button.addEventListener("click", () => {
+      if (getTotalDice() >= MAX_DICE) return;
+
+      dicePool[sides]++;
+      counter.textContent = dicePool[sides];
+
+      updateLimitState();
+    });
+
+  });
+
+  /* ---------- Roll ---------- */
+  rollButton.addEventListener("click", () => {
+    const resultsByDie = [];
     let total = 0;
 
-    for (let i = 0; i < diceAmount; i++) {
-      const roll = rollDie(diceType);
-      results.push(roll);
-      total += roll;
-    }
+    Object.entries(dicePool).forEach(([sides, amount]) => {
+      if (amount === 0) return;
 
-    resultOutput.textContent = results.join(", ");
-    totalOutput.textContent = total;
+      const rolls = [];
+      for (let i = 0; i < amount; i++) {
+        const roll = rollDie(Number(sides));
+        rolls.push(roll);
+        total += roll;
+      }
 
-    history.unshift(`d${diceType} x${diceAmount} → ${results.join(", ")}`);
-    if (history.length > 3) history.pop();
+      resultsByDie.push(`d${sides}: ${rolls.join(", ")}`);
+      history.unshift(`d${sides} x${amount} → ${rolls.join(", ")}`);
+    });
+
+    if (history.length > 3) history.length = 3;
+
+    resultOutput.textContent =
+      resultsByDie.length > 0 ? resultsByDie.join(" | ") : "—";
+    totalOutput.textContent = total > 0 ? total : "—";
 
     historyOutput.innerHTML = "";
     history.forEach(entry => {
@@ -60,6 +99,20 @@ function initDiceRoller() {
     });
   });
 
+  /* ---------- Clear All ---------- */
+  clearAllButton.addEventListener("click", () => {
+    Object.keys(dicePool).forEach(sides => {
+      dicePool[sides] = 0;
+      document.getElementById(`count-d${sides}`).textContent = "0";
+    });
+
+    resultOutput.textContent = "—";
+    totalOutput.textContent = "—";
+
+    updateLimitState();
+  });
+
+  /* ---------- Clear History ---------- */
   if (clearHistoryButton) {
     clearHistoryButton.addEventListener("click", () => {
       history.length = 0;
@@ -99,7 +152,6 @@ function initDiceToggle() {
     localStorage.setItem(STORAGE_KEY, "true");
   }
 
-
   function closeDice() {
     dicePanel.classList.remove("open");
     diceOverlay.classList.remove("active");
@@ -124,11 +176,11 @@ function initDiceToggle() {
   diceOverlay.addEventListener("click", closeDice);
 
 /* ---------- Restore state (after layout) ---------- */
-if (localStorage.getItem(STORAGE_KEY) === "true") {
-  window.addEventListener("load", () => {
-    openDice();
-  }, { once: true });
-}
+  if (localStorage.getItem(STORAGE_KEY) === "true") {
+    window.addEventListener("load", () => {
+      openDice();
+    }, { once: true });
+  }
 
   /* ---------- Swipe Down to Close ---------- */
   let startY = null;
@@ -151,7 +203,6 @@ if (localStorage.getItem(STORAGE_KEY) === "true") {
     startY = null;
   });
 }
-
 
 /* ---------- Init on DOM Ready ---------- */
 
