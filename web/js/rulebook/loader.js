@@ -2,14 +2,17 @@ import { renderRulebookChapter } from "./renderer.js";
 import { renderTOC, renderChapterSelect } from "./toc.js";
 import { setCurrentChapter } from "./state.js";
 import { LAST_CHAPTER_KEY } from "./constants.js";
-import { updateChapterNavButtons } from "./navigation.js";
-import { restoreLastTopic, observeTopics } from "./navigation.js";
+import {
+  updateChapterNavButtons,
+  restoreLastTopic,
+  observeTopics,
+  updateURLTopic
+} from "./navigation.js";
 
 let loadToken = 0;
 
-export function loadRulebookChapter(fileName) {
+export function loadRulebookChapter(fileName, topicOverride = null) {
   const currentToken = ++loadToken;
-
   const path = `../data/rulebook/${fileName}`;
 
   /* =========================
@@ -19,11 +22,16 @@ export function loadRulebookChapter(fileName) {
   localStorage.setItem(LAST_CHAPTER_KEY, fileName);
 
   /* =========================
-     Atualiza URL (?chapter=)
+     URL (?chapter + reset topic)
   ========================= */
   const url = new URL(window.location);
-  url.searchParams.set("chapter", fileName);
-  window.history.replaceState({}, "", url);
+  const currentChapter = url.searchParams.get("chapter");
+
+  if (currentChapter !== fileName) {
+    url.searchParams.set("chapter", fileName);
+    url.searchParams.delete("topic"); // troca de capítulo invalida tópico
+    window.history.replaceState({}, "", url);
+  }
 
   /* =========================
      Fetch do capítulo
@@ -46,16 +54,22 @@ export function loadRulebookChapter(fileName) {
       updateChapterNavButtons();
 
       /* =========================
-         Scroll spy
+         Scroll Spy
          (observer antes do scroll)
       ========================= */
       observeTopics();
 
       /* =========================
-         Restaurar tópico
+         Restore de tópico
+         prioridade: override > URL > storage
       ========================= */
       requestAnimationFrame(() => {
-        restoreLastTopic();
+        restoreLastTopic(topicOverride);
+
+        // se veio por override (ex: busca), sincroniza URL
+        if (topicOverride) {
+          updateURLTopic(topicOverride);
+        }
       });
     })
     .catch((err) => {
@@ -63,7 +77,6 @@ export function loadRulebookChapter(fileName) {
 
       console.error("Failed to load rulebook chapter:", err);
 
-      // rollback mínimo
       const content = document.getElementById("rulebook-content");
       if (content) {
         content.innerHTML = "<p>Failed to load chapter.</p>";

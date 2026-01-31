@@ -1,8 +1,9 @@
-import { RULEBOOK_CHAPTERS, LAST_TOPIC_KEY } from "./constants.js";
+import { RULEBOOK_CHAPTERS } from "./constants.js";
 import { currentChapterFile } from "./state.js";
 import { loadRulebookChapter } from "./loader.js";
 import { initTOCKeyboardNavigation } from "./tocKeyboard.js";
 import { unlockBodyScroll } from "./uiReset.js";
+import { updateURLTopic } from "./navigation.js";
 
 /* =====================================================
    Renderização do TOC
@@ -90,9 +91,7 @@ export function initTOCToggle() {
     tocOverlay.classList.remove("active");
     tocPanel.setAttribute("aria-hidden", "true");
 
-    // 🔑 reset definitivo de scroll e layout
     unlockBodyScroll();
-
     keyboardAPI?.reset();
     tocToggle.focus({ preventScroll: true });
   }
@@ -112,15 +111,15 @@ export function initTOCToggle() {
     const targetId = link.getAttribute("href")?.slice(1);
     if (!targetId) return;
 
-    localStorage.setItem(LAST_TOPIC_KEY, targetId);
+    updateURLTopic(targetId);
 
-    const el = document.getElementById(targetId);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    document
+      .getElementById(targetId)
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
 
     closeTOC();
   });
 
-  // 🛟 segurança extra: resize nunca pode manter body travado
   window.addEventListener("resize", unlockBodyScroll);
 }
 
@@ -143,7 +142,7 @@ export function renderChapterSelect() {
   });
 
   select.onchange = () => {
-    unlockBodyScroll(); // 👈 evita herdar estado quebrado
+    unlockBodyScroll();
     loadRulebookChapter(select.value);
   };
 }
@@ -152,12 +151,11 @@ export function renderChapterSelect() {
    Troca de capítulo por índice
 ===================================================== */
 
-export function switchToChapterByIndex(newIndex, shouldCloseTOC = true) {
-  if (newIndex < 0 || newIndex >= RULEBOOK_CHAPTERS.length) return;
+export function switchToChapterByIndex(index, shouldCloseTOC = true) {
+  const chapter = RULEBOOK_CHAPTERS[index];
+  if (!chapter) return;
 
-  const chapter = RULEBOOK_CHAPTERS[newIndex];
-
-  unlockBodyScroll(); // 👈 reset antes de tudo
+  unlockBodyScroll();
   loadRulebookChapter(chapter.file);
 
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -167,16 +165,14 @@ export function switchToChapterByIndex(newIndex, shouldCloseTOC = true) {
 
   if (!shouldCloseTOC) return;
 
-  const tocPanel = document.getElementById("toc-panel");
-  const tocOverlay = document.getElementById("toc-overlay");
-  const tocToggle = document.getElementById("toc-toggle");
+  document.getElementById("toc-panel")?.classList.remove("open");
+  document.getElementById("toc-overlay")?.classList.remove("active");
 
-  if (!tocPanel || !tocOverlay || !tocToggle) return;
-
-  tocPanel.classList.remove("open");
-  tocOverlay.classList.remove("active");
-  tocToggle.textContent = ICON_CLOSED;
-  tocToggle.setAttribute("aria-label", "Open Rulebook Index");
+  const toggle = document.getElementById("toc-toggle");
+  if (toggle) {
+    toggle.textContent = ICON_CLOSED;
+    toggle.setAttribute("aria-label", "Open Rulebook Index");
+  }
 
   unlockBodyScroll();
 }

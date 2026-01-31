@@ -2,15 +2,18 @@
  * Main entry point do Rulebook
  * Responsável por:
  * - Inicializar eventos globais
- * - Controlar troca de capítulos
- * - Ativar persistência de tópico por scroll
+ * - Bootstrap da navegação
  */
 
 import { initTOCToggle } from "./toc.js";
 import { loadRulebookChapter } from "./loader.js";
-import { RULEBOOK_CHAPTERS, LAST_TOPIC_KEY } from "./constants.js";
+import { RULEBOOK_CHAPTERS } from "./constants.js";
 import { currentChapterFile } from "./state.js";
-import { initChapterNavigation } from "./navigation.js";
+import {
+  initChapterNavigation,
+  restoreLastTopic,
+  clearSavedTopic
+} from "./navigation.js";
 import { buildIndex } from "../search/searchIndex.js";
 import { initSearchUI } from "../search/searchUI.js";
 
@@ -22,17 +25,17 @@ async function preloadSearchIndex() {
   const chaptersData = [];
 
   for (const chapter of RULEBOOK_CHAPTERS) {
-    const path = `../data/rulebook/${chapter.file}`;
+    try {
+      const res = await fetch(`../data/rulebook/${chapter.file}`);
+      if (!res.ok) continue;
 
-    const res = await fetch(path);
-    if (!res.ok) continue;
+      const data = await res.json();
+      data.__file = chapter.file;
 
-    const data = await res.json();
-
-    // Marca o capítulo de origem (sem afetar render)
-    data.__file = chapter.file;
-
-    chaptersData.push(data);
+      chaptersData.push(data);
+    } catch {
+      // falha silenciosa: busca não é crítica
+    }
   }
 
   buildIndex(chaptersData);
@@ -54,11 +57,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 /* =====================================================
-   Capítulo inicial (URL / localStorage / fallback)
+   Capítulo inicial
 ===================================================== */
 
 function loadInitialChapter() {
-  loadRulebookChapter(currentChapterFile || RULEBOOK_CHAPTERS[0].file);
+  const chapter =
+    currentChapterFile || RULEBOOK_CHAPTERS[0].file;
+
+  loadRulebookChapter(chapter);
+
+  // restaura tópico após render
+  restoreLastTopic();
 }
 
 /* =====================================================
@@ -66,76 +75,12 @@ function loadInitialChapter() {
 ===================================================== */
 
 function initChapterSelect() {
-  const chapterSelect = document.getElementById("chapter-select");
-  if (!chapterSelect) return;
+  const select = document.getElementById("chapter-select");
+  if (!select) return;
 
-  chapterSelect.addEventListener("change", (e) => {
+  select.addEventListener("change", (e) => {
     clearSavedTopic();
     loadRulebookChapter(e.target.value);
-    scrollToTop();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
-}
-
-/* =====================================================
-   Scroll Spy – persistência do último tópico lido
-===================================================== */
-
-export function observeTopics() {
-  const topics = document.querySelectorAll("section[data-topic]");
-  if (!topics.length) return;
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-
-        const topicId = entry.target.id;
-        if (!topicId) return;
-
-        localStorage.setItem(LAST_TOPIC_KEY, topicId);
-        updateURLTopic(topicId);
-      });
-    },
-    {
-      root: null,
-      rootMargin: "0px 0px -70% 0px",
-      threshold: 0
-    }
-  );
-
-  topics.forEach((topic) => observer.observe(topic));
-}
-
-/* =====================================================
-   Helpers
-===================================================== */
-
-export function clearSavedTopic() {
-  localStorage.removeItem(LAST_TOPIC_KEY);
-}
-
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-export function getTopicFromURL() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get("topic");
-}
-
-/* =====================================================
-   URL de tópicos
-===================================================== */
-
-export function updateURLTopic(topicId) {
-  const params = new URLSearchParams(window.location.search);
-
-  if (topicId) {
-    params.set("topic", topicId);
-  } else {
-    params.delete("topic");
-  }
-
-  const newURL = `${window.location.pathname}?${params.toString()}`;
-  window.history.replaceState({}, "", newURL);
 }

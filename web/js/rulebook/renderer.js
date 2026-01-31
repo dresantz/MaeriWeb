@@ -3,51 +3,67 @@ export function renderRulebookChapter(chapterData) {
   const container = document.getElementById("rulebook-content");
   if (!container) return;
 
-  /* =========================
-     RESET SEGURO DE LAYOUT
-  ========================= */
+  /* =====================================================
+     RESET SEGURO
+  ===================================================== */
 
-  // Remove foco interno antes de mexer no DOM
   if (container.contains(document.activeElement)) {
     container.blur?.();
   }
 
-  // Limpa conteúdo
   container.innerHTML = "";
+  container.offsetHeight; // força reflow
 
-  // 🔒 Força reflow para limpar estado visual anterior
-  container.offsetHeight;
+  /* =====================================================
+     Chapter Header
+  ===================================================== */
 
-  /* =========================
-     Chapter Title
-  ========================= */
-  const title = createElement("h1", null, chapterData.title || "Rulebook");
-  container.appendChild(title);
+  const header = document.createElement("header");
+  header.className = "chapter-header";
 
-  /* =========================
-     Chapter Description
-  ========================= */
+  const title = createElement(
+    "h1",
+    null,
+    chapterData.title || "Rulebook"
+  );
+  header.appendChild(title);
+
   if (chapterData.description) {
-    const desc = createElement(
-      "p",
-      "chapter-description",
-      chapterData.description
+    header.appendChild(
+      createElement(
+        "p",
+        "chapter-description",
+        chapterData.description
+      )
     );
-    container.appendChild(desc);
   }
 
-  /* =========================
+  container.appendChild(header);
+
+  /* =====================================================
      Sections (Topics)
-  ========================= */
+  ===================================================== */
+
   (chapterData.sections || []).forEach((section) => {
     const sectionEl = document.createElement("section");
+    sectionEl.className = "chapter-section";
 
     if (section.id) {
       sectionEl.id = section.id;
       sectionEl.dataset.topic = "true";
+      sectionEl.setAttribute("aria-labelledby", `${section.id}-title`);
     }
 
-    const h2 = createElement("h2", null, section.title || "Untitled Section");
+    const h2 = createElement(
+      "h2",
+      "section-title",
+      section.title || "Untitled Section"
+    );
+
+    if (section.id) {
+      h2.id = `${section.id}-title`;
+    }
+
     sectionEl.appendChild(h2);
 
     (section.content || []).forEach((block) => {
@@ -56,21 +72,10 @@ export function renderRulebookChapter(chapterData) {
 
     container.appendChild(sectionEl);
   });
-
-  /* =========================
-     LAYOUT STABILIZATION BARRIER
-  ========================= */
-
-  // Aguarda dois frames → layout totalmente calculado
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      // nada aqui: apenas estabilização
-    });
-  });
 }
 
 /* =====================================================
-   Helper
+   Helpers
 ===================================================== */
 
 function createElement(tag, className, text) {
@@ -85,14 +90,14 @@ function createElement(tag, className, text) {
 ===================================================== */
 
 function renderParagraph(container, block) {
-  const p = createElement("p", null, block.text || "");
-  container.appendChild(p);
+  container.appendChild(
+    createElement("p", null, block.text || "")
+  );
 }
 
 function renderList(container, block) {
-  const style = block.style || "unordered";
   const listEl = document.createElement(
-    style === "ordered" ? "ol" : "ul"
+    block.style === "ordered" ? "ol" : "ul"
   );
 
   (block.items || []).forEach((item) => {
@@ -100,29 +105,21 @@ function renderList(container, block) {
 
     if (typeof item === "string") {
       li.textContent = item;
-      listEl.appendChild(li);
-      return;
-    }
+    } else if (item?.text) {
+      li.appendChild(document.createTextNode(item.text));
 
-    if (typeof item === "object" && item !== null) {
-      if (item.text) {
-        li.appendChild(document.createTextNode(item.text));
-      }
-
-      if (Array.isArray(item.subitems) && item.subitems.length > 0) {
+      if (Array.isArray(item.subitems)) {
         const subUl = document.createElement("ul");
-
         item.subitems.forEach((sub) => {
-          const subLi = document.createElement("li");
-          subLi.textContent = sub;
-          subUl.appendChild(subLi);
+          subUl.appendChild(
+            createElement("li", null, sub)
+          );
         });
-
         li.appendChild(subUl);
       }
-
-      listEl.appendChild(li);
     }
+
+    listEl.appendChild(li);
   });
 
   container.appendChild(listEl);
@@ -130,25 +127,21 @@ function renderList(container, block) {
 
 function renderTable(container, block) {
   if (block.caption) {
-    const caption = createElement(
-      "p",
-      "table-caption",
-      block.caption
+    container.appendChild(
+      createElement("p", "table-caption", block.caption)
     );
-    container.appendChild(caption);
   }
 
   const wrapper = createElement("div", "table-wrapper");
   const table = document.createElement("table");
 
-  if (block.columns && block.columns.length > 0) {
+  if (block.columns?.length) {
     const thead = document.createElement("thead");
     const tr = document.createElement("tr");
 
-    block.columns.forEach((colName) => {
-      const th = createElement("th", null, colName);
-      tr.appendChild(th);
-    });
+    block.columns.forEach((col) =>
+      tr.appendChild(createElement("th", null, col))
+    );
 
     thead.appendChild(tr);
     table.appendChild(thead);
@@ -160,8 +153,7 @@ function renderTable(container, block) {
     const tr = document.createElement("tr");
 
     row.forEach((cell) => {
-      const td = createElement("td", null, cell);
-      tr.appendChild(td);
+      tr.appendChild(createElement("td", null, cell));
     });
 
     tbody.appendChild(tr);
@@ -173,21 +165,20 @@ function renderTable(container, block) {
 }
 
 function renderSubsections(container, block) {
-  const subsections = block.items || [];
+  (block.items || []).forEach((sub) => {
+    const wrap = createElement("div", "subsection");
 
-  subsections.forEach((sub) => {
-    const subWrap = createElement("div", "subsection");
+    if (sub.id) wrap.id = sub.id;
 
-    if (sub.id) subWrap.id = sub.id;
+    wrap.appendChild(
+      createElement("h3", null, sub.title || "Untitled")
+    );
 
-    const title = createElement("h3", null, sub.title || "Untitled");
-    subWrap.appendChild(title);
+    (sub.content || []).forEach((subBlock) =>
+      renderContentBlock(wrap, subBlock)
+    );
 
-    (sub.content || []).forEach((subBlock) => {
-      renderContentBlock(subWrap, subBlock);
-    });
-
-    container.appendChild(subWrap);
+    container.appendChild(wrap);
   });
 }
 
@@ -196,47 +187,40 @@ function renderSubsections(container, block) {
 ===================================================== */
 
 function renderContentBlock(container, block) {
-  if (!block || !block.type) return;
+  if (!block?.type) return;
 
   switch (block.type) {
     case "paragraph":
-      renderParagraph(container, block);
-      break;
+      return renderParagraph(container, block);
 
     case "list":
-      renderList(container, block);
-      break;
+      return renderList(container, block);
 
     case "table":
-      renderTable(container, block);
-      break;
+      return renderTable(container, block);
 
     case "subsections":
-      renderSubsections(container, block);
-      break;
+      return renderSubsections(container, block);
 
     case "nestedList": {
-      const ul = document.createElement("ul");
-      ul.classList.add("nested-list");
+      const ul = createElement("ul", "nested-list");
 
-      block.items.forEach((item) => {
+      block.items?.forEach((item) => {
         const li = document.createElement("li");
 
         if (item.title) {
-          const title = document.createElement("strong");
-          title.textContent = item.title;
-          li.appendChild(title);
+          li.appendChild(
+            createElement("strong", null, item.title)
+          );
         }
 
         if (Array.isArray(item.items)) {
           const subUl = document.createElement("ul");
-
-          item.items.forEach((subItem) => {
-            const subLi = document.createElement("li");
-            subLi.textContent = subItem;
-            subUl.appendChild(subLi);
-          });
-
+          item.items.forEach((sub) =>
+            subUl.appendChild(
+              createElement("li", null, sub)
+            )
+          );
           li.appendChild(subUl);
         }
 
@@ -244,7 +228,7 @@ function renderContentBlock(container, block) {
       });
 
       container.appendChild(ul);
-      break;
+      return;
     }
 
     default:

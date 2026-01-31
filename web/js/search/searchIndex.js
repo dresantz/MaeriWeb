@@ -195,6 +195,3 @@ export function search(query, { limit = 20 } = {}) {
     })
     .slice(0, limit);
 }
-
-/* Debug (remover depois) */
-window.__searchIndex = index;

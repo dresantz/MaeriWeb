@@ -3,21 +3,18 @@ import { currentChapterFile } from "./state.js";
 import { switchToChapterByIndex } from "./toc.js";
 
 /* =====================================================
-   🔒 CONTROLE DE SCROLL DO NAVEGADOR (NOVO)
+   Scroll restoration control
 ===================================================== */
 
-// Impede o browser de restaurar scroll automaticamente
 if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";
 }
 
-// Detecta se a navegação é um reload real (F5)
-const navigationEntry = performance.getEntriesByType("navigation")[0];
-const isReload =
-  navigationEntry && navigationEntry.type === "reload";
+const navEntry = performance.getEntriesByType("navigation")[0];
+const isReload = navEntry?.type === "reload";
 
 /* =====================================================
-   Estado
+   Helpers
 ===================================================== */
 
 function getCurrentChapterIndex() {
@@ -26,20 +23,14 @@ function getCurrentChapterIndex() {
   );
 }
 
-/* =====================================================
-   URL helpers
-===================================================== */
-
 export function getTopicFromURL() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get("topic");
+  return new URLSearchParams(window.location.search).get("topic");
 }
 
 export function updateURLTopic(topicId) {
   const url = new URL(window.location);
   const current = url.searchParams.get("topic");
 
-  // 🔒 evita replaceState desnecessário
   if (current === topicId) return;
 
   if (topicId) {
@@ -56,138 +47,132 @@ export function clearSavedTopic() {
 }
 
 /* =====================================================
-   Botões Previous / Next
+   Chapter navigation
 ===================================================== */
 
 export function updateChapterNavButtons() {
-  const prevBtn = document.getElementById("chapter-prev");
-  const nextBtn = document.getElementById("chapter-next");
+  const prev = document.getElementById("chapter-prev");
+  const next = document.getElementById("chapter-next");
 
-  if (!prevBtn || !nextBtn) return;
+  if (!prev || !next) return;
 
   const index = getCurrentChapterIndex();
 
-  prevBtn.disabled = index <= 0;
-  nextBtn.disabled =
+  prev.disabled = index <= 0;
+  next.disabled =
     index === -1 || index >= RULEBOOK_CHAPTERS.length - 1;
 }
 
 export function initChapterNavigation() {
-  const prevBtn = document.getElementById("chapter-prev");
-  const nextBtn = document.getElementById("chapter-next");
+  const prev = document.getElementById("chapter-prev");
+  const next = document.getElementById("chapter-next");
 
-  if (prevBtn) {
-    prevBtn.addEventListener("click", () => {
-      const index = getCurrentChapterIndex();
-      if (index <= 0) return;
+  prev?.addEventListener("click", () => navigateChapter(-1));
+  next?.addEventListener("click", () => navigateChapter(1));
 
-      clearSavedTopic();
-      updateURLTopic(null);
-      switchToChapterByIndex(index - 1, false);
-    });
-  }
-
-  if (nextBtn) {
-    nextBtn.addEventListener("click", () => {
-      const index = getCurrentChapterIndex();
-      if (index === -1 || index >= RULEBOOK_CHAPTERS.length - 1) return;
-
-      clearSavedTopic();
-      updateURLTopic(null);
-      switchToChapterByIndex(index + 1, false);
-    });
-  }
-
-    // 🆕 Back to Top
   initBackToTopButton();
 }
 
+function navigateChapter(direction) {
+  const index = getCurrentChapterIndex();
+  const target = index + direction;
+
+  if (target < 0 || target >= RULEBOOK_CHAPTERS.length) return;
+
+  // 🔑 PATCH: reset explícito de estado antes da troca
+  clearSavedTopic();
+  updateURLTopic(null);
+
+  // 🔑 PATCH: TOC decide se fecha ou não
+  switchToChapterByIndex(target, false);
+}
+
 /* =====================================================
-   Restauração de tópico (SAFE + CORRIGIDO)
+   Topic restore
 ===================================================== */
 
-export function restoreLastTopic() {
-  // 🔒 Só restaura se for reload real (F5)
-  if (!isReload) return;
+export function restoreLastTopic(override = null) {
+  // só restaura automaticamente em reload
+  // OU quando há override explícito (ex: busca)
+  if (!override && !isReload) return;
 
-  const topicFromURL = getTopicFromURL();
-  const topicFromStorage = localStorage.getItem(LAST_TOPIC_KEY);
+  const topicId =
+    override ||
+    getTopicFromURL() ||
+    localStorage.getItem(LAST_TOPIC_KEY);
 
-  const topicId = topicFromURL || topicFromStorage;
   if (!topicId) return;
 
-  // 🔒 Espera o layout estabilizar
+  // 🛡️ garante que o tópico existe no capítulo atual
+  const target = document.getElementById(topicId);
+  if (!target) return;
+
+  // 🧘 double RAF garante DOM + layout prontos
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      const el = document.getElementById(topicId);
-      if (!el) return;
-
-      el.scrollIntoView({
-        behavior: "auto",
-        block: "start"
-      });
+      target.scrollIntoView({ block: "start" });
     });
   });
 }
 
+
 /* =====================================================
-   Scroll Spy (SAFE)
+   Scroll Spy (anti-spam patch)
 ===================================================== */
 
-let topicObserver = null;
+let observer = null;
+let lastActiveTopic = null;
 
 export function observeTopics() {
   const topics = document.querySelectorAll("[data-topic]");
   if (!topics.length) return;
 
-  // 🔒 evita observers duplicados
-  topicObserver?.disconnect();
+  observer?.disconnect();
 
-  topicObserver = new IntersectionObserver(
+  observer = new IntersectionObserver(
     (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
 
         const id = entry.target.id;
-        if (!id) return;
+        if (!id) continue;
+
+        // 🛡️ PATCH: evita spam de URL / localStorage
+        if (id === lastActiveTopic) return;
+
+        lastActiveTopic = id;
 
         localStorage.setItem(LAST_TOPIC_KEY, id);
         updateURLTopic(id);
-      });
+      }
     },
     {
-      rootMargin: "-40% 0px -50% 0px",
+      rootMargin: "0px 0px -70% 0px",
       threshold: 0
     }
   );
 
-  // 🔒 Observa só após DOM estar estável
+  // 🧘 garante DOM estável antes de observar
   requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      topics.forEach((topic) => topicObserver.observe(topic));
-    });
+    topics.forEach((t) => observer.observe(t));
   });
 }
+
+
 /* =====================================================
-   Botão Back to Top
+   Back to Top
 ===================================================== */
 
 function initBackToTopButton() {
   const btn = document.getElementById("back-to-top");
   if (!btn) return;
 
-  // Estado inicial
   btn.style.display = "none";
 
-  // Scroll suave ao topo
-  btn.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  });
+  btn.addEventListener("click", () =>
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  );
 
-  // Exibe apenas após certo scroll
   window.addEventListener("scroll", () => {
     btn.style.display =
       window.scrollY > 300 ? "flex" : "none";
