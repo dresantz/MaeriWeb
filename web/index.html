@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,50 +19,78 @@
 </head>
 
 <body>
-  <header>
-    <h1>Maeri RPG</h1>
-    <p>An original tabletop role-playing game system</p>
-  </header>
-
-  <main>
-    <section>
-      <p>
-        MaeriWeb is the official web application for the Maeri RPG system.
-        It is designed to help players access rules and tools quickly during
-        in-person sessions, using only their smartphones.
-      </p>
-    </section>
-
-    <section>
-      <nav aria-label="Main navigation">
-        <ul>
-          <li>
-            <a href="pages/rulebook.html">📘 Core Rulebook</a>
-          </li>
-          <li>
-            <a href="pages/dice.html">🎲 Dice Roller</a>
-          </li>
-        </ul>
-      </nav>
-    </section>
-  </main>
-
-  <footer>
-    <p>
-      Project status: <strong>Early development (MVP)</strong>
-    </p>
-  </footer>
 
   <!-- =========================
-      Dice Roller (Global)
+        Header
+  ========================== -->
+  <header class="app-header">
+    <h1>Maeri RPG</h1>
+  </header>
+
+  <!-- =========================
+        Main Navigation
+  ========================== -->
+  <main class="home">
+
+    <nav class="main-menu" aria-label="Main navigation">
+
+      <div class="menu-row">
+        <a href="pages/rulebook.html" class="menu-button">
+          📚 Livros
+        </a>
+
+        <a href="pages/shield.html" class="menu-button">
+          🛡️ Escudo
+        </a>
+      </div>
+
+      <div class="menu-row">
+        <a href="pages/lore.html" class="menu-button">
+          📖 Lore
+        </a>
+
+        <a href="pages/construction.html" class="menu-button">
+          🧱 Construção
+        </a>
+      </div>
+
+    </nav>
+
+  </main>
+
+  <!-- =========================
+        Fixed Modal Buttons
+  ========================== -->
+  <aside class="quick-actions">
+
+    <button
+      class="quick-button"
+      id="sheet-button"
+      aria-label="Open Character Sheet"
+    >
+      📄 Ficha
+    </button>
+
+    <button
+      class="quick-button"
+      id="spells-button"
+      aria-label="Open Spells"
+    >
+      ✨ Magias
+    </button>
+
+  </aside>
+
+  <!-- =========================
+        Dice Roller (Global)
   ========================== -->
 
   <!-- Toggle -->
   <button
-  id="dice-toggle"
-  aria-label="Open Dice Roller"
-  aria-expanded="false"
->
+    id="dice-toggle"
+    aria-label="Open Dice Roller"
+    aria-expanded="false"
+  >
     🎲
   </button>
 
@@ -95,7 +123,6 @@
         <button id="clear-all">Clear</button>
       </section>
 
-
       <section id="result">
         <div class="result-line">
           <strong>Rolls:</strong>
@@ -119,5 +146,6 @@
 
   <!-- Scripts -->
   <script src="js/dice.js"></script>
+
 </body>
 </html>

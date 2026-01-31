@@ -12,6 +12,12 @@
   --border-radius: 8px;
 }
 
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -39,12 +45,13 @@ body.no-scroll {
 header,
 footer {
   text-align: center;
-  padding: 1rem;
+  padding: 1.2rem 1rem 0.8rem;
 }
 
 header h1 {
   margin: 0;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
+  letter-spacing: 0.5px;
 }
 
 header p,
@@ -56,11 +63,31 @@ footer p {
 main {
   padding: 1rem;
   width: 100%;
-  max-width: 480px;
+  max-width: 420px;
   margin-left: auto;
   margin-right: auto;
 }
 
+.main-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.menu-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* remove highlight azul */
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
 
 /* =========================
    Sections (Cards)
@@ -94,47 +121,59 @@ button:active {
   transform: scale(0.97);
 }
 
-/* =========================
-   Top and Home Buttons
-========================= */
-
-#back-to-top,
-#back-to-home {
-  position: fixed;
-  width: 48px;
-  height: 48px;
-
+.menu-button {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  font-size: 1.2rem;
-  cursor: pointer;
+  min-height: 72px;
+  padding: 1rem;
 
-  border: none;
-  border-radius: 50%;
+  background-color: var(--card-color);
+  color: var(--text-color);
+  text-decoration: none;
 
-  background: var(--accent-color);
-  color: var(--ui-fg, #fff);
+  font-size: 1.1rem;
+  font-weight: 600;
 
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  z-index: 1000;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+
+  transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
-/* Hover feedback */
-#back-to-top:hover,
-#back-to-home:hover {
-  transform: scale(1.05);
+/* =========================
+   Floating Buttons
+========================= */
+
+.menu-button:active {
+  transform: scale(0.96);
+  background-color: #252525;
 }
 
-/* Positioning */
-#back-to-top {
+
+.quick-actions {
+  position: fixed;
   bottom: 1rem;
   right: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  z-index: 100;
 }
 
-#back-to-home {
-  bottom: 4.5rem;
-  right: 1rem;
-  text-decoration: none;
+.quick-button {
+  width: auto;
+  min-width: 56px;
+  height: 56px;
+  padding: 0 1rem;
+
+  border-radius: 999px;
+
+  font-size: 0.95rem;
+  font-weight: bold;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
 }
