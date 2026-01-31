@@ -1,0 +1,183 @@
+/* =========================
+   Rulebook – Long Form Reading
+========================= */
+
+.rulebook {
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.rulebook h1 {
+  font-size: 1.8rem;
+  margin: 0 0 0.6rem;
+}
+
+.rulebook h2 {
+  font-size: 1.35rem;
+  margin: 1.4rem 0 0.6rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid #333;
+}
+
+.rulebook h3 {
+  font-size: 1.1rem;
+  margin: 1rem 0 0.4rem;
+  color: var(--accent-color);
+}
+
+.rulebook p {
+  margin: 0.5rem 0 0.9rem;
+  color: var(--text-color);
+}
+
+.rulebook ul {
+  margin: 0.4rem 0 1rem 1.2rem;
+}
+
+.rulebook li {
+  margin: 0.35rem 0;
+}
+
+.rulebook a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.rulebook a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .rulebook {
+    font-size: 1.1rem;
+  }
+}
+
+/* =========================
+   Rulebook Blocks
+========================= */
+
+.table-caption {
+  color: var(--muted-text);
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  margin: 0.75rem 0 1rem;
+  border: 1px solid #333;
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 520px;
+}
+
+th,
+td {
+  padding: 0.6rem;
+  border-bottom: 1px solid #333;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+th {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.subsection {
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed #333;
+}
+
+.warning {
+  color: #ff8c8c;
+  font-size: 0.95rem;
+}
+
+/* =========================
+   Nested Lists
+========================= */
+
+.nested-list {
+  margin: 0.75rem 0 1rem;
+  padding-left: 1.2rem;
+}
+
+.nested-list > li {
+  margin-bottom: 0.6rem;
+}
+
+.nested-list strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.nested-list ul {
+  list-style: disc;
+  margin-top: 0.25rem;
+  padding-left: 1.2rem;
+}
+
+/* =========================
+   Search
+========================= */
+
+.search-container {
+  position: sticky;
+  top: 0;
+  background: #111;
+  padding: 0.75rem;
+  z-index: 10;
+}
+
+#search-input {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+}
+
+.search-results {
+  background: #1b1b1b;
+  border: 1px solid #333;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.search-results.hidden {
+  display: none;
+}
+
+.search-result {
+  padding: 0.5rem;
+  cursor: pointer;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.search-result:hover {
+  background: #2a2a2a;
+}
+
+.search-result-title {
+  font-weight: bold;
+}
+
+.search-result-meta {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* =========================
+   Highlight
+========================= */
+mark {
+  background: var(--accent-color);
+  color: #000;
+  padding: 0 2px;
+  border-radius: 3px;
+}

@@ -75,33 +75,6 @@ section {
 }
 
 /* =========================
-   Form Elements
-========================= */
-
-label {
-  display: block;
-  margin-bottom: 0.3rem;
-  color: var(--muted-text);
-}
-
-select,
-input[type="number"] {
-  width: 100%;
-  padding: 0.6rem;
-  font-size: 1rem;
-  border-radius: var(--border-radius);
-  border: 1px solid #333;
-  background-color: #2a2a2a;
-  color: var(--text-color);
-}
-
-select:focus,
-input:focus {
-  outline: none;
-  border-color: var(--accent-color);
-}
-
-/* =========================
    Buttons
 ========================= */
 
@@ -122,7 +95,7 @@ button:active {
 }
 
 /* =========================
-   Rulebook Fixed Buttons
+   Top and Home Buttons
 ========================= */
 
 #back-to-top,
@@ -164,97 +137,4 @@ button:active {
   bottom: 4.5rem;
   right: 1rem;
   text-decoration: none;
-}
-
-
-/* =========================
-   Results / History
-========================= */
-
-#result-output,
-#total-output {
-  font-size: 1.2rem;
-  margin: 0.2rem 0 0.8rem;
-}
-
-#total-output {
-  font-weight: bold;
-}
-
-#history-output {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#history-output li {
-  padding: 0.4rem 0;
-  border-bottom: 1px solid #333;
-  font-size: 0.95rem;
-}
-
-/* =========================
-   Footer
-========================= */
-
-footer a {
-  color: var(--accent-color);
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* =========================
-   Rulebook – Long Form Reading
-========================= */
-
-.rulebook {
-  font-size: 1.05rem;
-  line-height: 1.7;
-}
-
-.rulebook h1 {
-  font-size: 1.8rem;
-  margin: 0 0 0.6rem;
-}
-
-.rulebook h2 {
-  font-size: 1.35rem;
-  margin: 1.4rem 0 0.6rem;
-  padding-bottom: 0.35rem;
-  border-bottom: 1px solid #333;
-}
-
-.rulebook h3 {
-  font-size: 1.1rem;
-  margin: 1rem 0 0.4rem;
-  color: var(--accent-color);
-}
-
-.rulebook p {
-  margin: 0.5rem 0 0.9rem;
-  color: var(--text-color);
-}
-
-.rulebook ul {
-  margin: 0.4rem 0 1rem 1.2rem;
-}
-
-.rulebook li {
-  margin: 0.35rem 0;
-}
-
-.rulebook a {
-  color: var(--accent-color);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.rulebook a:hover {
-  text-decoration: underline;
-}
-
-@media (min-width: 768px) {
-  .rulebook {
-    font-size: 1.1rem;
-  }
 }

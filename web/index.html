@@ -14,8 +14,8 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/components.css" />
-  <link rel="stylesheet" href="css/overlays.css" />
+  <link rel="stylesheet" href="css/dice.css" />
+  <link rel="stylesheet" href="css/toc.css" />
 </head>
 
 <body>
@@ -54,11 +54,15 @@
   </footer>
 
   <!-- =========================
-       Dice Roller (Global)
+      Dice Roller (Global)
   ========================== -->
 
-  <!-- Floating Toggle -->
-  <button id="dice-toggle" aria-label="Open Dice Roller">
+  <!-- Toggle -->
+  <button
+  id="dice-toggle"
+  aria-label="Open Dice Roller"
+  aria-expanded="false"
+>
     🎲
   </button>
 
@@ -67,47 +71,50 @@
 
   <!-- Panel -->
   <div id="dice-panel">
-    <header>
-      <h2>Dice Roller</h2>
-    </header>
+    <div class="dice-content">
 
-    <section>
-      <label for="dice-type"><strong>Dice Type</strong></label>
-      <select id="dice-type">
-        <option value="2">d2</option>
-        <option value="3">d3</option>
-        <option value="6" selected>d6</option>
-      </select>
-    </section>
+      <section id="dice-buttons">
+        <div class="dice-btn" data-sides="2">
+          <button>d2</button>
+          <span class="counter" id="count-d2">0</span>
+        </div>
 
-    <section>
-      <label for="dice-amount"><strong>Number of Dice</strong></label>
-      <input
-        type="number"
-        id="dice-amount"
-        min="1"
-        max="20"
-        value="1"
-      />
-    </section>
+        <div class="dice-btn" data-sides="3">
+          <button>d3</button>
+          <span class="counter" id="count-d3">0</span>
+        </div>
 
-    <section>
-      <button id="roll-button">Roll</button>
-    </section>
+        <div class="dice-btn" data-sides="6">
+          <button>d6</button>
+          <span class="counter" id="count-d6">0</span>
+        </div>
+      </section>
 
-    <section id="result">
-      <p><strong>Rolls:</strong></p>
-      <p id="result-output">—</p>
+      <section class="dice-actions">
+        <button id="roll-button">Roll</button>
+        <button id="clear-all">Clear</button>
+      </section>
 
-      <p><strong>Total:</strong></p>
-      <p id="total-output">—</p>
-    </section>
 
-    <section id="history">
-      <h3>History</h3>
-      <ul id="history-output"></ul>
-      <button id="clear-history">Clear</button>
-    </section>
+      <section id="result">
+        <div class="result-line">
+          <strong>Rolls:</strong>
+          <span id="result-output">—</span>
+        </div>
+
+        <div class="result-line total">
+          <strong>Total:</strong>
+          <span id="total-output">—</span>
+        </div>
+      </section>
+
+      <section id="history">
+        <h3>History</h3>
+        <ul id="history-output"></ul>
+        <button id="clear-history">Clear</button>
+      </section>
+
+    </div>
   </div>
 
   <!-- Scripts -->
