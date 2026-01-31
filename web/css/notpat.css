@@ -1,0 +1,66 @@
+/* =========================
+   NotPat – News / Patch Notes
+   Home Exclusive Component
+========================= */
+
+.notpat-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Botão central */
+.notpat-button {
+  background-color: var(--accent-color);
+  color: #121212;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* Card de conteúdo */
+.notpat-content {
+  background-color: var(--card-color);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+
+  /* animação base */
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* Estado animado ao trocar conteúdo */
+.notpat-content.is-switching {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+/* Listas */
+.notpat-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notpat-content li {
+  padding: 0.6rem 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--text-color);
+}
+
+/* Separador sutil */
+.notpat-content li + li {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Datas / versões em destaque */
+.notpat-content strong {
+  color: var(--accent-color);
+  font-weight: 600;
+}

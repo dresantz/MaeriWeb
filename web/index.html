@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/dice.css" />
   <link rel="stylesheet" href="css/toc.css" />
+  <link rel="stylesheet" href="css/notpat.css" />
 </head>
 
 <body>
@@ -55,6 +56,33 @@
       </div>
 
     </nav>
+
+    <!-- =========================
+          News / Patch Notes
+    ========================== -->
+    <section class="notpat-section">
+
+      <button
+        id="notpat-toggle"
+        class="notpat-button"
+        aria-pressed="false"
+      >
+        Notícias
+      </button>
+
+      <div
+        id="notpat-content"
+        class="notpat-content"
+        aria-live="polite"
+      >
+        <ul class="news-list">
+          <li><strong>29/01</strong> — Bem-vindo ao Maeri RPG WebApp.</li>
+          <li><strong>30/01</strong> — Sistema de dados atualizado.</li>
+          <li><strong>31/01</strong> — Nova interface mobile-first.</li>
+        </ul>
+      </div>
+
+    </section>
 
   </main>
 
@@ -146,6 +174,7 @@
 
   <!-- Scripts -->
   <script src="js/dice.js"></script>
+  <script src="js/notpad.js"></script>
 
 </body>
 </html>
