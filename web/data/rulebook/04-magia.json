@@ -2,17 +2,1200 @@
   "id": "magia",
   "title": "Capítulo Quatro - Magia",
   "order": 4,
-  "description": "Como funciona magia no sistema e lista de magias que podem ser aprendidas.",
+  "description": "Como funciona magia e lista de magias que podem ser aprendidas.",
   "sections": [
     {
       "id": "magia",
-      "title": "magia",
+      "title": "Magia",
       "content": [
         {
           "type": "paragraph",
-          "text": "Texto sobre magia."
+          "text": "São quatro os Estudos Mágicos: Neófita, Bruxaria, Divinação e Feitiçaria. Cada um funciona exatamente como um Estudo, podendo ser adquirido com Aspectos, porém é obrigatório aprender as Neófitas antes; sem ela, não é possível investir Aspectos nas outras três."
+        },
+        {
+          "type": "paragraph",
+          "text": "Magias são Conhecimentos no que envolve regras. O mago tem S campos para alocar magias, podendo inclusive trocar de magia com 10 xpm e uma Fonte por repouso total. Existem magias de nível 1, 3 e 5, e o conjurador só pode aprender magias do seu nível. As magias neófitas são todas de nível 1."
+        },
+        {
+          "type": "paragraph",
+          "text": "O custo para usar uma magia estará descrito como algo por alguma coisa, por exemplo: 1 xpm/uso, que significa 1 xpm por uso; 2 xpm/1 Vit, que significa 2 xpm para cada 1 ponto de Vit; ou 1 Con/alvo, que significa que pode conjurar a magia em mais de um alvo no mesmo turno ao custo de 1 Con para cada."
+        },
+        {
+          "type": "paragraph",
+          "text": "Considerações Importantes:"
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Algumas magias usam Con abrindo uma linha de Con mágico. Quando o Con mágico acaba, o mago não pode mais usar magias que consomem Con. O Con mágico é consumido mesmo que o conjurador falhe no embate. Quando o Con mágico zera, o mago tem uma chance de realizar um efeito mágico aleatório, positivo ou negativo, determinado pelo mestre.",
+            "Usos criativos das magias são incentivados, mas devem ser acordados com o mestre e o grupo.",
+            "Magias que não possuem embate de S não podem ser usadas em combate. Algumas magias podem ser feitas com embate de S apenas à distância, o que significa que se o conjurador estiver engajado ele não pode usar essa magia. Todas as magias que podem ser usadas em combate consomem uma ação, a não ser que especificado diferente na descrição. Magias que afetam aliados só precisam de embate se o conjurador estiver sendo alvo de uma ação.",
+            "Não importa o valor da redução de dano que uma magia possa proporcionar: toda habilidade que resulte em dano sempre causará pelo menos 1 de dano.",
+            "O alcance padrão de toda magia equivale a S do personagem em Esp. Se não estiver descrito na magia o alcance de algo, ele é automaticamente padrão. Diferente dos disparos, o alcance de uma magia não é um alcance de precisão, isso significa que a magia se extingue ao chegar no limite do seu alcance.",
+            "A não ser que esteja especificado o contrário, magias podem ser canceladas a qualquer momento pelo mago que as conjurou ou desaparecem naturalmente após o combate ou cena.",
+            "Magias exigem movimentos com ao menos uma das mãos e palavras; portanto, se impedido de falar ou mover ao menos uma das mãos, o mago não pode fazer magia. O mestre pode conceder testes para que o mago faça magias de maneira discreta, sussurrando e fazendo movimentos curtos, sem que outros percebam.",
+            "Algumas magias podem ser mantidas de forma verbal ou de forma manual. Uma magia manual permite que o mago mantenha ou dispare outras magias com a outra mão; porém, uma magia verbal não permite que outras magias sejam disparadas ou mantidas.",
+            "Nenhum bônus ou penalidade concedido por magia é cumulativo com outros usos seguidos da mesma magia, a não ser que esteja especificado na descrição.",
+            "Caso a magia peça um teste do alvo, a dificuldade sugerida será a S do conjurador +5, a não ser que especificado diferente ou que o mestre decida fazer diferente após considerar a situação.",
+            "O conjurador deve fazer um teste de V para continuar mantendo a magia caso sofra as consequências de alguma ação.",
+            "Efeitos Menores podem ser conjurados sem custo por qualquer um que tenha o Estudo e não são considerados Conhecimentos."
+          ]
         }
-        ]
+      ]
+    },
+    {
+          "id": "invocacoes-e-criaturas",
+          "title": "Invocações e Criaturas",
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Magias de invocação permitem invocar criaturas para lutar pelo jogador. Criatura é o termo genérico do sistema para definir qualquer tipo de personagem do mestre que possa ser usado como desafio de combate para os personagens dos jogadores."
+            },
+            {
+              "type": "paragraph",
+              "text": "Monstros, bestas, humanoides e até objetos animados podem ser considerados criaturas. Por isso, as características de uma criatura nem sempre significam o mesmo que as de um humanoide: um animal pode ter S9 e ser muito esperto, mas ainda agir por instinto."
+            },
+            {
+              "type": "paragraph",
+              "text": "Uma magia de invocação será descrita de maneira padronizada, indicando o tipo de criatura invocada, seus valores de ficha e as ações específicas, conforme as regras abaixo."
+            },
+            {
+              "type": "paragraph",
+              "text": "Considerações sobre Invocação de Criaturas:"
+            },
+            {
+              "type": "list",
+              "style": "unordered",
+              "items": [
+                "Magias de invocação estarão com a palavra Invocar antes do nome, seguida dos valores da ficha, com as ações específicas entre parênteses ao lado de cada característica usada pela ação.",
+                "Se nada na descrição disser o contrário, todas as criaturas invocadas possuem Vit igual a F mais V, e Con igual a S mais I.",
+                "O controle sobre a criatura invocada é feito através de comandos (gesto) no caso de criaturas com S igual a 1 ou menos. Sem ordens, elas não agem por si só, ficando Indefesas.",
+                "Criaturas com S maior que 1 raciocinam por conta própria e agem visando a melhor maneira de servir o invocador, seja sob controle do mestre ou através de um elo mental natural sob controle do jogador.",
+                "Se a criatura for abandonada, ela se torna errante com o tempo, e o controle sobre ela se perde para sempre.",
+                "A não ser que a descrição da magia diga o contrário, a criatura invocada sempre aparece no local escolhido dentro do alcance em Esp equivalente a S, desde que o local seja sólido, firme, não ocupado, podendo inclusive surgir engajada.",
+                "Criaturas invocadas usando Con não permitem que o valor gasto seja regenerado até que sejam desconjuradas ou se tornem errantes.",
+                "O turno das criaturas invocadas em combate acontece logo após o turno do conjurador."
+              ]
+            }
+          ]
+        },
+        {
+      "id": "neofita",
+      "title": "Neófita",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "A magia dos iniciados, a primeira etapa antes de um conjurador se especializar. Se o conjurador quiser aprender Estudos Mágicos, ele precisa aprender magia Neófita antes, gastando um Aspecto."
+        },
+        {
+          "type": "spellList",
+          "category": "neofita",
+          "level": 1,
+          "spells": [
+            {
+              "type": "spell",
+              "id": "ascendente",
+              "name": "Ascendente",
+              "school": "neofita",
+              "level": 1,
+              "combat": true,
+              "cost": "1 Con/uso",
+              "tags": ["movimento", "controle", "utilidade"],
+              "description": "Joga um alvo para o alto em S em Esp. O alvo tem direito a um teste de D para cair em pé; se falhar, fica Caído. O conjurador pode usar de forma controlada em si ou outros alvos para alcançar locais altos."
+            },
+            {
+              "type": "spell",
+              "id": "punho-invisivel",
+              "name": "Punho Invisível",
+              "school": "neofita",
+              "level": 1,
+              "combat": true,
+              "cost": "1 Con/uso",
+              "tags": ["dano", "contusao"],
+              "description": "Bate em um alvo com a força de um soco muito forte, causando 1d2+1 de dano de contusão."
+            },
+            {
+              "type": "spell",
+              "id": "degrau",
+              "name": "Degrau",
+              "school": "neofita",
+              "level": 1,
+              "combat": false,
+              "cost": "1 Con/degrau",
+              "tags": ["movimento", "utilidade"],
+              "description": "Cria uma plataforma cristalina de quarenta centímetros de diâmetro, imóvel no ar, em qualquer ângulo, que aguenta S em Pes e possui 1 Res."
+            },
+            {
+              "type": "spell",
+              "id": "revelador",
+              "name": "Revelador",
+              "school": "neofita",
+              "level": 1,
+              "combat": true,
+              "cost": "2 Con/uso",
+              "tags": ["detecção", "utilidade"],
+              "description": "Um pulso que revela coisas invisíveis cuja fonte seja mágica. Alerta para a possibilidade de alvos próximos ou aponta para algo que o conjurador queira, desde que ele conheça o alvo, tudo dentro de um raio de S em Esp."
+            },
+            {
+              "type": "spell",
+              "id": "flecha",
+              "name": "Flecha",
+              "school": "neofita",
+              "level": 1,
+              "combat": true,
+              "cost": "1 Con/uso",
+              "tags": ["dano", "rastreamento"],
+              "description": "Dispara uma flecha de energia mística que causa 1 de dano perfurante. A flecha rastreia o alvo, concedendo +2S para esse ataque. O alvo não precisa estar visível, mas o conjurador precisa saber que ele está por perto e já tê-lo visto."
+            },
+            {
+              "type": "spell",
+              "id": "puxao",
+              "name": "Puxão",
+              "school": "neofita",
+              "level": 1,
+              "combat": true,
+              "cost": "1 Con/uso",
+              "tags": ["controle", "movimento", "dano"],
+              "description": "Empurra um alvo na direção escolhida pelo conjurador em 1d6+1 Esp. Pode ser usado em objetos de até 4 Pes que não estejam presos ou segurados, causando 1d3 de dano de tipo dependente do objeto, ou apenas arremessando o objeto para a mão do conjurador ou de outro alvo dentro do alcance."
+            },
+            {
+              "type": "spell",
+              "id": "ofuscar",
+              "name": "Ofuscar",
+              "school": "neofita",
+              "level": 1,
+              "combat": true,
+              "cost": "1 Con/uso",
+              "tags": ["controle", "cegueira"],
+              "description": "Cria um pulso de luz e fagulhas que cega o alvo até o final do próximo turno dele. O conjurador precisa estar dentro do raio de visão do alvo."
+            },
+            {
+              "type": "spell",
+              "id": "corda-magica",
+              "name": "Corda Mágica",
+              "school": "neofita",
+              "level": 1,
+              "combat": false,
+              "cost": "1 Con/uso",
+              "tags": ["controle", "utilidade"],
+              "description": "Amarra um ou mais alvos em uma corda. O conjurador pode fazer a outra extremidade surgir em sua mão. Não pode ser usada em combate. O limite do tamanho da corda é a S do conjurador em metros."
+            },
+            {
+              "type": "spell",
+              "id": "sorriso",
+              "name": "Sorriso",
+              "school": "neofita",
+              "level": 1,
+              "combat": true,
+              "cost": "1 Con/uso",
+              "tags": ["controle", "debilitacao"],
+              "description": "Faz o alvo rir descontroladamente. Usada em combate, causa -1 em todas as características do alvo até que ele tenha sucesso em um teste de V no fim do turno dele."
+            },
+            {
+              "type": "spell",
+              "id": "feixe-de-combate",
+              "name": "Feixe de Combate",
+              "school": "neofita",
+              "level": 1,
+              "combat": true,
+              "cost": "1 Con/uso",
+              "tags": ["dano", "explosao"],
+              "description": "Dispara um feixe de energia contra um alvo, causando 1d3 de dano de explosão."
+            },
+            {
+              "type": "spell",
+              "id": "bolha-de-agua",
+              "name": "Bolha de Água",
+              "school": "neofita",
+              "level": 1,
+              "combat": true,
+              "cost": "1 Con/uso",
+              "tags": ["dano", "agua"],
+              "description": "Dispara bolhas de água contra um alvo. Ele fica molhado até o fim do combate ou cena e sofre 1d3 de dano de água."
+            },
+            {
+              "type": "spell",
+              "id": "disparate",
+              "name": "Disparate",
+              "school": "neofita",
+              "level": 1,
+              "combat": false,
+              "cost": "1 xpm/uso",
+              "tags": ["controle", "distracao"],
+              "description": "Cria um pequeno inseto voador que chama a atenção do alvo, deixando-o distraído, distante e desatento. O alvo sofre -3A até o fim da cena. Não pode ser usado em combate."
+            },
+            {
+              "type": "spell",
+              "id": "artificio",
+              "name": "Artifício",
+              "school": "neofita",
+              "level": 1,
+              "combat": true,
+              "cost": "1 Con/uso",
+              "tags": ["dano", "fogo"],
+              "description": "Acerta o alvo com chamas multicoloridas muito brilhantes, causando 1d3+1 de dano de fogo."
+            },
+            {
+              "type": "spell",
+              "id": "incognito",
+              "name": "Incógnito",
+              "school": "neofita",
+              "level": 1,
+              "combat": false,
+              "cost": "1 Con/alvo",
+              "tags": ["furtividade", "ilusao"],
+              "description": "Faz o alvo assumir as mesmas cores do ambiente, recebendo +3D para ocultamento."
+            },
+            {
+              "type": "spell",
+              "id": "secar",
+              "name": "Secar",
+              "school": "neofita",
+              "level": 1,
+              "combat": false,
+              "cost": "1 Con/alvo",
+              "tags": ["utilidade"],
+              "description": "Evapora líquidos com ponto de ebulição menor ou igual ao da água sem usar calor. Pode ser usado como guarda-chuva. Não funciona em alvos submersos."
+            },
+            {
+              "type": "spell",
+              "id": "glamour",
+              "name": "Glamour",
+              "school": "neofita",
+              "level": 1,
+              "combat": false,
+              "cost": "1 Con/alvo",
+              "tags": ["ilusao", "social"],
+              "description": "Ilusão que permite mudar levemente detalhes da aparência do alvo, como maquiagem, linhas do rosto, cheiro, unhas e penteado. Permite alinhar, secar, alisar e limpar roupas. Ações contra o alvo cancelam a magia."
+            },
+            {
+              "type": "spell",
+              "id": "magnificar",
+              "name": "Magnificar",
+              "school": "neofita",
+              "level": 1,
+              "combat": false,
+              "cost": "1 Con/uso",
+              "tags": ["percepcao", "utilidade"],
+              "description": "O conjurador forma um círculo com o indicador e o polegar, enxergando melhor coisas pequenas e distantes através dele, recebendo +3 para qualquer teste envolvendo visão."
+            },
+            {
+              "type": "spell",
+              "id": "reparar",
+              "name": "Reparar",
+              "school": "neofita",
+              "level": 1,
+              "combat": false,
+              "cost": "1 xpm e 1 Con/uso",
+              "tags": ["utilidade", "objetos"],
+              "description": "Permite restaurar 1 Res de objetos de forma rudimentar, como soldar ou colar materiais. Não restaura armas ou objetos complexos, podendo apenas juntar partes sem fazê-las funcionar."
+            },
+            {
+              "type": "spell",
+              "id": "manto-arcano",
+              "name": "Manto Arcano",
+              "school": "neofita",
+              "level": 1,
+              "combat": true,
+              "cost": "2 Con/uso",
+              "tags": ["buff", "combate"],
+              "description": "Usado em combate com sucesso em embate de S, concede ao conjurador +1 de dano mágico para ataques feitos com F até o fim da cena ou combate."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bruxaria",
+      "title": "Bruxaria",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Rituais profanos, artes obscuras, xamanismo, magia negra, existem vários nomes e muitas vezes não há nome nenhum. Esse tipo de magia não é visto com bons olhos em toda a Maeri, pois gira ao redor de magia perdida e antiga, maldições, pragas e invocações."
+        },
+        {
+          "type": "paragraph",
+          "text": "Efeitos Menores:"
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Decompor ou preservar material biológico inanimado.",
+            "Atrair pequenos seres espectrais.",
+            "Fazer alvo sentir algum tipo de desconforto.",
+            "Fazer um alvo ter pensamentos negativos.",
+            "Matar plantas e flores pequenas.",
+            "Assustar animal de pequeno ou médio porte.",
+            "Criar em si próprio aparência de decomposição.",
+            "Criar um dente ou unha facilmente destacável na superfície de um alvo que funciona como parte dele para maldições.",
+            "Criar um bolso dimensional que permite guardar até 3 Pes inanimados que não conta nos limites de carga."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Nível 1"
+        },
+        {
+          "type": "spellList",
+          "category": "bruxaria",
+          "level": 1,
+          "spells": [
+            {
+              "type": "spell",
+              "id": "aura-vampirica",
+              "name": "Aura Vampírica",
+              "school": "bruxaria",
+              "level": 1,
+              "combat": true,
+              "cost": "1 Con/uso",
+              "tags": ["dano", "necrótico", "cura"],
+              "description": "Com sucesso em embate de S, rouba a força vital de um alvo, causando 1d3+1 de dano necrótico e recuperando o mesmo valor no conjurador ou em outro alvo."
+            },
+            {
+              "type": "spell",
+              "id": "maldicao-presenca-fantasma",
+              "name": "Maldição da Presença Fantasma",
+              "school": "bruxaria",
+              "level": 1,
+              "combat": false,
+              "cost": "1 parte do alvo, 3 xpm/alvo, 2 Con/visão",
+              "tags": ["maldição", "informação", "espionagem"],
+              "description": "Usando parte do corpo ou pertence do alvo, permite vê-lo, saber o que está fazendo e observar até três objetos ao redor. Com sucesso em A, o alvo percebe sombras fantasmagóricas do observador, mas não consegue identificá-lo. Enquanto a maldição estiver mantida manualmente, novas visões podem ser obtidas."
+            },
+            {
+              "type": "spell",
+              "id": "maldicao-linha-destino",
+              "name": "Maldição Linha do Destino",
+              "school": "bruxaria",
+              "level": 1,
+              "combat": true,
+              "cost": "2 xpm e 2 Con/alvo",
+              "tags": ["maldição", "condicional", "dano"],
+              "description": "O alvo sofre 1d6+1 de dano de trovão sempre que uma condição especificada pelo conjurador for atendida. A condição deve ser evitável. Em combate, o dano é causado sempre que o alvo realizar uma ação contra um alvo escolhido. Não pode ser usada mais de uma vez no mesmo personagem."
+            },
+            {
+              "type": "spell",
+              "id": "maldicao-marca-negra",
+              "name": "Maldição da Marca Negra",
+              "school": "bruxaria",
+              "level": 1,
+              "combat": true,
+              "cost": "3 Con/uso",
+              "tags": ["maldição", "fogo", "marca"],
+              "description": "Marca um alvo causando 1d6 de dano de fogo. Pessoas que conhecem o símbolo e seu significado reconhecem a marca mesmo sob roupas ou armaduras. Em combate, é possível repetir apenas o dano em alvos já marcados com embates de S."
+            },
+            {
+              "type": "spell",
+              "id": "maldicao-feridas",
+              "name": "Maldição das Feridas",
+              "school": "bruxaria",
+              "level": 1,
+              "combat": true,
+              "cost": "1 Con e 1 xpm/alvo",
+              "tags": ["maldição", "sangramento", "sustentada"],
+              "description": "Usada em combate como ataque à distância com S. Enquanto mantida manualmente, qualquer dano causado ao alvo gera +1d2 de dano de corte adicional além do dano normal."
+            },
+            {
+              "type": "spell",
+              "id": "invocar-familiar",
+              "name": "Invocar Familiar",
+              "school": "bruxaria",
+              "level": 1,
+              "combat": false,
+              "cost": "1 Con/animal",
+              "tags": ["invocação", "utilidade", "sentidos"],
+              "description": "Conjura um ou mais animais mágicos de pequeno porte (limite igual à S do conjurador), incapazes de atacar. Tocando o familiar, o conjurador pode experimentar tudo o que ele vivenciou. Se um familiar for morto, o conjurador sofre 1 Ferimento."
+            },
+            {
+              "type": "spell",
+              "id": "massa-de-vacuo",
+              "name": "Massa de Vácuo",
+              "school": "bruxaria",
+              "level": 1,
+              "combat": true,
+              "cost": "3 xpm/uso",
+              "tags": ["controle", "exaustão", "ambiente"],
+              "description": "Com sucesso em embate de S, deixa um alvo Exaurido até 2xS em Esp, impondo desvantagem em testes e embates e -3 Esp de movimento. A magia deve ser mantida verbalmente. O alvo pode resistir com teste de V no início do turno. Também anula efeitos de vento e voo."
+            },
+            {
+              "type": "spell",
+              "id": "pulso-de-lentidao",
+              "name": "Pulso de Lentidão",
+              "school": "bruxaria",
+              "level": 1,
+              "combat": true,
+              "cost": "1 Con/alvo",
+              "tags": ["controle", "movimento", "tempo"],
+              "description": "Com sucesso em embate de S, desacelera o alvo, reduzindo seu movimento em -3 Esp por turno até que seja bem-sucedido em teste de V no final do próximo turno. Fora de combate, desacelera quedas ou voos de alvos e objetos até o limite de Pes equivalente à S do conjurador."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Nível 3"
+        },
+        {
+          "type": "spellList",
+          "category": "bruxaria",
+          "level": 1,
+          "spells": [
+            {
+              "type": "spell",
+              "id": "maldicao-altar-profano",
+              "name": "Maldição do Altar Profano",
+              "school": "bruxaria",
+              "level": 3,
+              "combat": false,
+              "cost": "4 xpm/altar",
+              "tags": ["maldição", "território", "medo", "visão"],
+              "description": "Cria um altar fixo. Em um raio de 50 Esp ao redor dele, o conjurador pode criar sombras e enxergar através dos olhos delas. Alvos podem perceber as sombras com teste de A e, se falharem em teste de V, ficam Amedrontados. Destruir o altar encerra a maldição."
+            },
+            {
+              "type": "spell",
+              "id": "invocar-objeto-amaldicoado",
+              "name": "Invocar Objeto Amaldiçoado",
+              "school": "bruxaria",
+              "level": 3,
+              "combat": true,
+              "cost": "2 Con/objeto",
+              "tags": ["invocação", "objeto", "sustentada"],
+              "description": "Com sucesso em embate de S a distância, anima um objeto de até 3 Res que passa a flutuar e atacar alvos. O tipo e valor do dano são determinados pelo mestre conforme o objeto animado. A maldição deve ser mantida manualmente."
+            },
+            {
+              "type": "spell",
+              "id": "amuleto-anulador",
+              "name": "Amuleto Anulador",
+              "school": "bruxaria",
+              "level": 3,
+              "combat": true,
+              "cost": "3 xpm + 3 Con/amuleto",
+              "tags": ["anulação", "interrupção", "preparação"],
+              "description": "Prepara um amuleto que pode ser consumido como interrupção para cancelar o sucesso de uma magia que use apenas Con, anulando a ação e seu custo. Fora de combate, pode cancelar efeitos mágicos menores de até 12 xpm e/ou 12 Con. A Con gasta não se regenera até o amuleto ser usado."
+            },
+            {
+              "type": "spell",
+              "id": "piara",
+              "name": "Piara",
+              "school": "bruxaria",
+              "level": 3,
+              "combat": true,
+              "cost": "1 Con/uso",
+              "tags": ["transformação", "mobilidade", "evasão"],
+              "description": "O conjurador se transforma em uma revoada de pequenas criaturas, recebendo +3D para voar, ficando imune a técnicas e sofrendo apenas bônus em embates contra si. Pode ser ativada no início do turno e revertida sem custo no início de um turno."
+            },
+            {
+              "type": "spell",
+              "id": "cranio-venenoso",
+              "name": "Crânio Venenoso",
+              "school": "bruxaria",
+              "level": 3,
+              "combat": true,
+              "cost": "3 xpm/crânio",
+              "tags": ["dano", "ácido", "sustentada"],
+              "description": "Com sucesso em embate de S, conjura um crânio envolto em aura verde que pode ser mantido manualmente. Dispara rajadas de 1d6+1 de dano ácido. Enquanto mantido, disparos adicionais não possuem custo. Alvos atingidos sofrem -1F não cumulativo até o fim da cena ou combate."
+            },
+            {
+              "type": "spell",
+              "id": "necrofrago-ectoplasmico",
+              "name": "Necrófago Ectoplásmico",
+              "school": "bruxaria",
+              "level": 3,
+              "combat": true,
+              "cost": "2 Con/uso",
+              "tags": ["cura", "necrótico", "morte"],
+              "description": "Com sucesso em embate de S a distância, permite curar 2 Vit em si ou em outro alvo para cada inimigo morto em combate. Um mesmo morto não pode ser contado mais de uma vez, mesmo por conjuradores diferentes."
+            },
+            {
+              "type": "spell",
+              "id": "fardo-pesado",
+              "name": "Fardo Pesado",
+              "school": "bruxaria",
+              "level": 3,
+              "combat": true,
+              "cost": "1 Con/uso",
+              "tags": ["controle", "peso", "sustentada"],
+              "description": "Com sucesso em embate de S, impõe ao alvo os efeitos negativos de excesso de carga, causando desvantagem em testes de CF. A magia deve ser mantida manualmente. Fora de combate, aumenta o peso de pessoas ou objetos."
+            },
+            {
+              "type": "spell",
+              "id": "enxame",
+              "name": "Enxame",
+              "school": "bruxaria",
+              "level": 3,
+              "combat": true,
+              "cost": "2 Con/uso",
+              "tags": ["dano", "cegueira", "controle"],
+              "description": "Com sucesso em embate de S, o conjurador libera um enxame de insetos que deixa o alvo Cego até o fim do próximo turno e causa 1d6 de dano perfurante."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Nível 5"
+        },
+        {
+          "type": "spellList",
+          "category": "bruxaria",
+          "level": 5,
+          "spells": [
+            {
+              "type": "spell",
+              "id": "maldicao-da-possessao",
+              "name": "Maldição da Possessão",
+              "school": "bruxaria",
+              "level": 5,
+              "combat": false,
+              "cost": "4 xpm/alvo",
+              "tags": ["maldição", "controle", "possessão"],
+              "description": "Permite possuir o corpo de um alvo fora de ação (dormindo ou inconsciente). O corpo do conjurador permanece Indefeso enquanto a possessão durar. F, V e D passam a ser do possuído, enquanto S, A e I permanecem do conjurador. Se o corpo possuído ou o corpo original do conjurador sofrer qualquer ação, a maldição se desfaz."
+            },
+            {
+              "type": "spell",
+              "id": "maldicao-circense",
+              "name": "Maldição Circense",
+              "school": "bruxaria",
+              "level": 5,
+              "combat": true,
+              "cost": "3 Con e 2 xpm/uso",
+              "tags": ["maldição", "transformação", "controle"],
+              "description": "Com sucesso em embate de S, transforma o alvo e seus itens em um animal de médio porte. O alvo mantém sua S e Vit, mas todas as demais características, inclusive Con, tornam-se 1. Seu dano passa a ser 1d2 de contusão ou perfuração. A maldição termina se o alvo sofrer uma ação, for beijado (Ajuda) ou se o conjurador cancelá-la com um gesto."
+            },
+            {
+              "type": "spell",
+              "id": "escrutinio",
+              "name": "Escrutínio",
+              "school": "bruxaria",
+              "level": 5,
+              "combat": false,
+              "cost": "3 xpm/pergunta",
+              "tags": ["controle", "verdade", "mente"],
+              "description": "Obriga um alvo a responder uma pergunta da forma mais sincera e completa possível com o que acredita ser verdade. O alvo pode resistir com teste de V para ficar em silêncio, mas jamais poderá mentir ou distorcer a resposta. A mesma pergunta ou outra que exija a mesma resposta não pode ser repetida."
+            },
+            {
+              "type": "spell",
+              "id": "filacteria",
+              "name": "Filactéria",
+              "school": "bruxaria",
+              "level": 5,
+              "combat": false,
+              "cost": "-1 Vit e 30 xpm/filactéria",
+              "tags": ["ritual", "imortalidade", "morte"],
+              "description": "O conjurador perde permanentemente 1 Vit para criar um objeto pequeno com 1 Vit. Quando sua Vit chegar a zero e ele morrer, permanecerá morto por 1d6 temporadas e então reviverá no local da filactéria, que é destruída no processo. A Vit sacrificada não pode ser recuperada."
+            },
+            {
+              "type": "spell",
+              "id": "dominio-mental",
+              "name": "Domínio Mental",
+              "school": "bruxaria",
+              "level": 5,
+              "combat": true,
+              "cost": "3 Con/uso",
+              "tags": ["controle", "mente", "ação"],
+              "description": "Com sucesso em embate de S, permite controlar o próximo turno de um alvo, inclusive forçando-o a agir contra outro alvo. Fora de combate, o alvo pode resistir com teste de S; se falhar, o conjurador o controla por até dez segundos."
+            },
+            {
+              "type": "spell",
+              "id": "invocar-zumbi",
+              "name": "Invocar Zumbi",
+              "school": "bruxaria",
+              "level": 5,
+              "combat": true,
+              "cost": "1 cadáver humanoide, 2 Con e 6 xpm/zumbi",
+              "tags": ["invocação", "morto-vivo", "criatura"],
+              "description": "Anima um cadáver humanoide que se torna um zumbi com F1 (1d6-3 contusão), V1, D1, A0, I0 e S0. Zumbis largam armas, perdem armaduras, são imunes a fome, sono, falta de ar, envenenamento e cura mágica."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "divinacao",
+      "title": "Divinação",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Divinação é a magia considerada divina, sagrada, concedida por divindades, pelos espíritos ancestrais, seres sagrados ou pela natureza. É, por tanto, o tipo mais bem aceito de magia em Maeri, desde que seja usado por membros reconhecidos da sociedade ou de alguma fé, caso contrário, pode ser considerada profanação."
+        },
+        {
+          "type": "paragraph",
+          "text": "Efeitos Menores:"
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Fazer os olhos brilharem",
+            "Causar um tremor suave de terra",
+            "Emitir luz ao redor do próprio corpo",
+            "Criar uma lufada de vento",
+            "Deslocar sombras",
+            "Criar globos de luz ao redor de si",
+            "Fazer cabelos flutuarem",
+            "Fazer roupas esvoaçarem",
+            "Acender, apagar ou mudar a cor ou intensidade de chamas pequenas",
+            "Aumentar o volume da própria voz",
+            "Fazer brotar plantas e flores pequenas"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Nível 1"
+        },
+        {
+          "type": "spellList",
+          "category": "divinacao",
+          "level": 1,
+          "spells": [
+            {
+              "type": "spell",
+              "id": "protecao-mistica",
+              "name": "Proteção Mística",
+              "school": "divinacao",
+              "level": 1,
+              "combat": true,
+              "cost": "2 Con/uso",
+              "tags": ["interrupção", "defesa", "suporte"],
+              "description": "Ao custo de uma interrupção, permite usar S em embates nulos, em vez de apenas D e V, não possui nenhuma outra ação além de conceder a possibilidade de se defender com uma característica diferente."
+            },
+            {
+              "type": "spell",
+              "id": "santuario-belico",
+              "name": "Santuário Bélico",
+              "school": "divinacao",
+              "level": 1,
+              "combat": true,
+              "cost": "2 xpm e 2 Con/uso",
+              "tags": ["suporte", "buff", "combate"],
+              "description": "Sucesso em embate de S concede +1 em F, D e V para todos os aliados em combate. A magia precisa ser mantida verbalmente."
+            },
+            {
+              "type": "spell",
+              "id": "campo-elemental",
+              "name": "Campo Elemental",
+              "school": "divinacao",
+              "level": 1,
+              "combat": true,
+              "cost": "2 Con/uso",
+              "tags": ["dano", "elemental", "area"],
+              "description": "Sucesso em embate de S a distância permite escolher um alvo e um tipo de dano elemental. Todos que iniciarem seus turnos engajados com o alvo da magia recebem 2 de dano mágico do tipo elemental escolhido. A magia precisa ser mantida manualmente."
+            },
+            {
+              "type": "spell",
+              "id": "cura",
+              "name": "Cura",
+              "school": "divinacao",
+              "level": 1,
+              "combat": true,
+              "cost": "1 Con/uso",
+              "tags": ["cura", "suporte"],
+              "description": "Sucesso em embate de S permite curar 1d6 Vit de um alvo em combate. Fora de combate, o conjurador pode escolher o valor da cura até o limite de 6 Vit."
+            },
+            {
+              "type": "spell",
+              "id": "paz-espiritual",
+              "name": "Paz Espiritual",
+              "school": "divinacao",
+              "level": 1,
+              "combat": false,
+              "cost": "1 Con/alvo",
+              "tags": ["cura", "mental", "proteção"],
+              "description": "Sucesso em embate de S cura e deixa o alvo imune por uma temporada a condições mentais como Amedrontado, Aterrorizado, Traumatizado, Confuso e Encantado."
+            },
+            {
+              "type": "spell",
+              "id": "cintilar",
+              "name": "Cintilar",
+              "school": "divinacao",
+              "level": 1,
+              "combat": true,
+              "cost": "1 Con/uso",
+              "tags": ["movimento", "teleporte"],
+              "description": "Sucesso em embate de S permite que o conjurador se teletransporte para até sua S em Esp, desde que seja um local para onde poderia ir a pé. É possível atravessar portas ou janelas abertas, mas não alcançar locais inacessíveis como telhados."
+            },
+            {
+              "type": "spell",
+              "id": "passo-leve",
+              "name": "Passo Leve",
+              "school": "divinacao",
+              "level": 1,
+              "combat": false,
+              "cost": "1 Con/uso",
+              "tags": ["movimento", "buff", "utilidade"],
+              "description": "Sucesso em embate de S a distância concede +3D em testes e deslocamento para o conjurador e aliados durante uma cena. Os alvos podem caminhar sobre a água e terrenos que causem Restrição sem sofrer penalidades. Não há limite de alvos por turno."
+            },
+            {
+              "type": "spell",
+              "id": "guia-divino",
+              "name": "Guia Divino",
+              "school": "divinacao",
+              "level": 1,
+              "combat": true,
+              "cost": "1 Con/uso",
+              "tags": ["dano", "radiante", "buff"],
+              "description": "Sucesso em embate de S concede ao próximo ataque do conjurador o dano normal da arma acrescido de +2 de dano radiante. A magia não exige palavras ou gestos, mas requer o uso de uma arma."
+            },
+            {
+              "type": "spell",
+              "id": "grilhoes",
+              "name": "Grilhões",
+              "school": "divinacao",
+              "level": 1,
+              "combat": true,
+              "cost": "1 Con/alvo",
+              "tags": ["controle", "imobilização"],
+              "description": "Sucesso em embate de S invoca correntes, mãos ou formas similares que prendem o alvo ao chão, tornando-o incapaz de se mover, embora ainda possa realizar ações. Criaturas voadoras são trazidas ao solo."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Nível 3"
+        },
+        {
+          "type": "spellList",
+          "category": "divinacao",
+          "level": 3,
+          "spells": [
+            {
+              "type": "spell",
+              "id": "altar-sagrado",
+              "name": "Altar Sagrado",
+              "school": "divinacao",
+              "level": 3,
+              "combat": true,
+              "cost": "6 xpm/altar",
+              "tags": ["proteção", "radiante", "area", "suporte"],
+              "description": "Cria um altar fixo que gera uma área de até 20 Esp de raio de proteção contra maldições. Maldições são canceladas em alvos que já estejam dentro da área no momento da criação. Personagens amaldiçoados que entrarem na área mantêm a maldição ativa, mas seus efeitos cessam até que saiam. Dentro da área do altar, o conjurador pode, ao custo de um gesto, conceder +1 de dano radiante para todos os alvos dentro dela."
+            },
+            {
+              "type": "spell",
+              "id": "escudo-de-vida",
+              "name": "Escudo de Vida",
+              "school": "divinacao",
+              "level": 3,
+              "combat": true,
+              "cost": "2 Con/uso",
+              "tags": ["defesa", "proteção", "reação"],
+              "description": "Pode ser conjurada como uma interrupção para criar um escudo de 3 Vit que reduz o dano sofrido por um alvo. A Vit restante do escudo desaparece ao final do cálculo de redução de dano, caso não tenha sido reduzida a zero. Fora de combate, o conjurador pode concentrar o poder para aumentar o tamanho do escudo para até S em Esp e sua resistência para Sx3 Vit."
+            },
+            {
+              "type": "spell",
+              "id": "dispersar-feitico",
+              "name": "Dispersar Feitiço",
+              "school": "divinacao",
+              "level": 3,
+              "combat": true,
+              "cost": "2 Con/uso",
+              "tags": ["anulação", "controle", "magia"],
+              "description": "Sucesso em embate de S permite cancelar uma magia mantida manual ou verbalmente, uma invocação, um efeito mágico ativo sobre um alvo, uma maldição ou uma condição. Fora de combate, pode ser usada para cancelar efeitos mágicos conjurados com até 12 xpm e/ou 12 Con."
+            },
+            {
+              "type": "spell",
+              "id": "epifania",
+              "name": "Epifania",
+              "school": "divinacao",
+              "level": 3,
+              "combat": false,
+              "cost": "2 xpm e 4 Con/uso",
+              "tags": ["conhecimento", "suporte"],
+              "description": "Concede ao alvo a aquisição temporária de um Conhecimento não mágico, válido para apenas um teste que envolva exclusivamente S."
+            },
+            {
+              "type": "spell",
+              "id": "martelo-do-julgamento",
+              "name": "Martelo do Julgamento",
+              "school": "divinacao",
+              "level": 3,
+              "combat": true,
+              "cost": "1 Con/uso",
+              "tags": ["dano", "contusão", "fogo"],
+              "description": "Sucesso em embate de S dispara um cubo do tamanho de um tijolo contra um alvo, causando 1d6 de dano de contusão e +2 de dano de fogo."
+            },
+            {
+              "type": "spell",
+              "id": "aura-de-cura",
+              "name": "Aura de Cura",
+              "school": "divinacao",
+              "level": 3,
+              "combat": true,
+              "cost": "3 Con/uso",
+              "tags": ["cura", "area", "suporte"],
+              "description": "Sucesso em embate de S cria uma aura translúcida com raio de S em Esp ao redor do conjurador. Enquanto mantiver verbalmente a aura ativa, ele pode gastar um gesto para curar 1d6 Vit de si ou de qualquer aliado dentro da área."
+            },
+            {
+              "type": "spell",
+              "id": "visao-do-alem",
+              "name": "Visão do Além",
+              "school": "divinacao",
+              "level": 3,
+              "combat": true,
+              "cost": "2 Con/uso",
+              "tags": ["controle", "medo", "mental"],
+              "description": "Sucesso em embate de S concede ao alvo uma visão divina aterradora, como a própria morte vindo buscá-lo, deixando-o Aterrorizado (sem movimento e com todos os embates nulos). O efeito termina se o alvo for bem-sucedido em um teste de V no final do seu próximo turno."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Nível 5"
+        },
+        {
+          "type": "spellList",
+          "category": "divinacao",
+          "level": 5,
+          "spells": [
+            {
+              "type": "spell",
+              "id": "selo-magico",
+              "name": "Selo Mágico",
+              "school": "divinacao",
+              "level": 5,
+              "combat": true,
+              "cost": "Qualquer quantidade de xpm/selo fora de combate, 1 Con/uso em combate",
+              "tags": ["controle", "proteção", "campo", "interrupção"],
+              "description": "Permite selar um objeto ou local com magia, podendo trancar salas, baús ou mochilas, ou criar um campo de força ao redor de uma região de até 20 Esp. O conjurador define quem pode entrar ou sair e pode estabelecer regras mágicas de acesso, como recitar uma palavra, portar um objeto específico, condições lunares ou resolver um enigma. Em combate, pode ser usada como interrupção para anular o sucesso da ação de um personagem engajado ou flanqueando o conjurador. Um selo pode ser quebrado investindo a mesma quantidade de xpm em um contrafeitiço; o valor exato só pode ser descoberto com teste de S. Personagens com Estudo mágico podem usar Con no lugar de xpm para desfazer o selo. Nem mesmo o conjurador pode desfazê-lo sem atender aos requisitos estabelecidos."
+            },
+            {
+              "type": "spell",
+              "id": "oraculo",
+              "name": "Oráculo",
+              "school": "divinacao",
+              "level": 5,
+              "combat": false,
+              "cost": "3 xpm/dado",
+              "tags": ["destino", "previsao", "suporte"],
+              "description": "O conjurador rola 1d6 e pode substituir esse resultado por qualquer rolagem de dado futura, seja de um aliado ou inimigo. O valor pode ser entregue a outro jogador, que decide quando utilizá-lo. O conjurador também pode tentar usar esta magia para obter revelações, visões ou mensagens determinadas pelo mestre. Caso falhe nesse uso narrativo, o xpm gasto não é perdido."
+            },
+            {
+              "type": "spell",
+              "id": "voar",
+              "name": "Voar",
+              "school": "divinacao",
+              "level": 5,
+              "combat": true,
+              "cost": "2 Con/uso",
+              "tags": ["movimento", "aereo", "utilidade"],
+              "description": "Sucesso em embate de S permite que o conjurador voe, deslocando-se com velocidade e altura equivalentes a D até o fim do combate ou da cena. Ele pode carregar peso conforme sua F permitir. Caso seja atingido por qualquer ação, cairá imediatamente."
+            },
+            {
+              "type": "spell",
+              "id": "invocar-servo",
+              "name": "Invocar Servo",
+              "school": "divinacao",
+              "level": 5,
+              "combat": true,
+              "cost": "6 xpm e 3 Con/servo",
+              "tags": ["invocacao", "controle", "utilidade"],
+              "description": "Conjura uma criatura de pouco mais de um metro, feita de escuridão pura, coberta por um manto branco e dourado com um único olho no centro do capuz. O servo possui F3 (contusão, 1d2), V2, D2, A3, I2 e S3. Ele pode usar armas, mas não armaduras, flutua à altura das pessoas, mas sofre dano de queda normalmente. Não é capaz de falar e desaparece imediatamente ao ser alvo de qualquer ação."
+            },
+            {
+              "type": "spell",
+              "id": "prostar",
+              "name": "Prostar",
+              "school": "divinacao",
+              "level": 5,
+              "combat": true,
+              "cost": "2 Con/alvo",
+              "tags": ["dano", "controle", "vento"],
+              "description": "Sucesso em embate de S faz com que uma pressão súbita esmague os alvos, causando 1d6 de dano de vento em cada um. Alvos que falharem em testes de D ficam Caídos."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feiticaria",
+      "title": "Feitiçaria",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "É chamado de arcanismo por estudiosos e de feitiçaria entre a população comum. Feiticeiros não são bem-vistos pela fé, porém, sua praticidade faz deles figuras constantes em conselhos nobres e populares, entre oficiais superiores de exércitos, em guildas e até mesmo em tribos."
+        },
+        {
+          "type": "paragraph",
+          "text": "Efeitos Menores:"
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Criar e controlar uma pequena nuvem que faz chover uma água que seca após uma cena.",
+            "Mudar a cor de um objeto ou de uma área pequena.",
+            "Limpar sujeira superficial de objetos ou superfícies.",
+            "Criar pequenos enfeites e brilhos mágicos que duram uma temporada.",
+            "Esquentar ou esfriar líquidos e objetos em temperaturas moderadas.",
+            "Levitar entre as mãos objetos com Pes menor que 1.",
+            "Criar uma chuva ou um redemoinho de partículas ou detritos fantasmagóricos.",
+            "Fazer desaparecer e reaparecer entre as mãos e/ou a boca um objeto com Pes menor que 1."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Nível 1"
+        },
+        {
+          "type": "spellList",
+          "category": "divinacao",
+          "level": 1,
+          "spells": [
+            {
+              "type": "spell",
+              "id": "pulso",
+              "name": "Pulso",
+              "school": "feiticaria",
+              "level": 1,
+              "combat": true,
+              "cost": "1 Con/uso",
+              "tags": ["dano", "contusão", "empurrão", "controle"],
+              "description": "Sucesso em embate de S libera um pulso de energia que empurra um alvo 3 Esp e causa 1d6+1 de dano de contusão mágica."
+            },
+            {
+              "type": "spell",
+              "id": "trovao-paralisante",
+              "name": "Trovão Paralisante",
+              "school": "feiticaria",
+              "level": 1,
+              "combat": true,
+              "cost": "2 Con/uso",
+              "tags": ["dano", "trovão", "controle", "condição"],
+              "description": "Sucesso em embate de S permite que o conjurador dispare arcos elétricos contra um alvo causando 1d3+2 de dano de trovão mágico. O alvo deve fazer um teste de V; se falhar, seu turno seguinte será nulo."
+            },
+            {
+              "type": "spell",
+              "id": "transformar",
+              "name": "Transformar",
+              "school": "feiticaria",
+              "level": 1,
+              "combat": false,
+              "cost": "1 Con/alvo",
+              "tags": ["transformação", "utilidade", "furtividade"],
+              "description": "O conjurador pode transformar a si mesmo ou aliados dispostos em um objeto pequeno qualquer junto de roupas e itens. O alvo pode se mover a 1 Esp por turno, não pode realizar ações além de se mover, e o efeito acaba se sofrer dano ou se for cancelado voluntariamente."
+            },
+            {
+              "type": "spell",
+              "id": "pressentir",
+              "name": "Pressentir",
+              "school": "feiticaria",
+              "level": 1,
+              "combat": true,
+              "cost": "1 Con/uso",
+              "tags": ["detecção", "divinação", "utilidade"],
+              "description": "Permite pressentir vida em uma área de 4xS em Esp de raio, revelando se formas de vida estão vivas ou mortas, sua direção geral, quantidade aproximada e se estão se movendo. Em combate, pode revelar até dois alvos invisíveis como uma interrupção."
+            },
+            {
+              "type": "spell",
+              "id": "invisibilidade",
+              "name": "Invisibilidade",
+              "school": "feiticaria",
+              "level": 1,
+              "combat": true,
+              "cost": "3 Con/uso",
+              "tags": ["furtividade", "ilusão", "controle"],
+              "description": "Torna um alvo (pessoa ou objeto de até 10 Pes) invisível junto de roupas e itens. Contra ele, há desvantagem em embates e -3A em combate. A magia termina se o alvo fizer ou sofrer uma ação, ou se mover mais rápido que D-1 (mínimo 1 Esp). Pode ser usada em combate com sucesso em embate de S."
+            },
+            {
+              "type": "spell",
+              "id": "idolo",
+              "name": "Ídolo",
+              "school": "feiticaria",
+              "level": 1,
+              "combat": false,
+              "cost": "2 xpm/ídolo",
+              "tags": ["ilusão", "disfarce", "utilidade"],
+              "description": "Conjura um pequeno objeto que permite ao conjurador ou outro alvo mudar sua aparência para a de outro humanoide, incluindo roupas e físico dentro de proporções razoáveis. A magia termina se o conjurador sofrer uma ação, cancelá-la, ou se o ídolo for destruído ou removido."
+            },
+            {
+              "type": "spell",
+              "id": "troca-mistica",
+              "name": "Troca Mística",
+              "school": "feiticaria",
+              "level": 1,
+              "combat": true,
+              "cost": "1 xpm/uso",
+              "tags": ["teleporte", "movimento", "controle"],
+              "description": "Sucesso em embate de S permite distorcer tempo e espaço para trocar de lugar dois alvos dispostos, incluindo o próprio conjurador."
+            },
+            {
+              "type": "spell",
+              "id": "imagens-mentais",
+              "name": "Imagens Mentais",
+              "school": "feiticaria",
+              "level": 1,
+              "combat": true,
+              "cost": "1 xpm e 2 Con/uso",
+              "tags": ["ilusão", "utilidade", "defesa"],
+              "description": "Permite recriar imagens mentais vistas pelo conjurador em uma área com S em metros de diâmetro, incluindo sons, cheiros e gostos. Dura uma cena. Em combate, pode ser usada para utilizar S no lugar de D em Esquivas."
+            },
+            {
+              "type": "spell",
+              "id": "mensagem-magica",
+              "name": "Mensagem Mágica",
+              "school": "feiticaria",
+              "level": 1,
+              "combat": true,
+              "cost": "1 Con/uso",
+              "tags": ["comunicação", "utilidade", "controle"],
+              "description": "Permite projetar a voz a até 2xS de distância, copiar vozes, ditar textos para pergaminhos, criar mensagens condicionais e, com sucesso em embate de S, gritar contra um alvo deixando-o Atordoado até o início do próximo turno dele."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Nível 3"
+        },
+        {
+          "type": "spellList",
+          "category": "divinacao",
+          "level": 3,
+          "spells": [
+            {
+              "type": "spell",
+              "id": "raio-de-brasas",
+              "name": "Raio de Brasas",
+              "school": "feiticaria",
+              "level": 3,
+              "combat": true,
+              "cost": "3 Con/uso",
+              "tags": ["dano", "fogo", "elemental"],
+              "description": "Sucesso em embate de S permite que o mago dispare uma rajada de fogo que dispersa fagulhas no local de impacto, causando 1d6+3 de dano elemental de fogo mágico no alvo. Qualquer pessoa engajada com o alvo, inclusive o conjurador, sofre 1 de dano de fogo mágico. Fora de combate, o conjurador pode usar essa magia para efeitos menores sem custo em Con, como acender fogueira, cachimbo, tocha ou vela, além de esquentar ou ferver alimento ou bebida."
+            },
+            {
+              "type": "spell",
+              "id": "petrificar",
+              "name": "Petrificar",
+              "school": "feiticaria",
+              "level": 3,
+              "combat": true,
+              "cost": "2 Con/uso",
+              "tags": ["controle", "terra", "restricao"],
+              "description": "Sucesso em embate de S causa 1d3+2 de dano de terra mágica e aplica Restrição Total, impondo -3 Esp por turno e penalidade de -2 em testes e embates de D e F. Criaturas voadoras perdem a capacidade de voar. O efeito dura até que o alvo tenha sucesso em um teste de V ou F no início do seu turno. Fora de combate, permite moldar a superfície de rochas com as mãos sem custo em Con, mas não permite escavá-las."
+            },
+            {
+              "type": "spell",
+              "id": "veu-glacial",
+              "name": "Véu Glacial",
+              "school": "feiticaria",
+              "level": 3,
+              "combat": true,
+              "cost": "3 Con/uso",
+              "tags": ["dano", "gelo", "area"],
+              "description": "Sucesso em embate de S causa 1d6 de dano de gelo mágico em todos os alvos em uma linha reta posicionada pelo conjurador. O comprimento máximo da linha é igual à S do conjurador em Esp. A linha cria um véu semitranslúcido de cores boreais até o início do próximo turno do conjurador. Qualquer criatura que inicie seu turno na linha ou a atravesse sofre 1d3 de dano de gelo."
+            },
+            {
+              "type": "spell",
+              "id": "invocar-corda-oceanica",
+              "name": "Invocar Corda Oceânica",
+              "school": "feiticaria",
+              "level": 3,
+              "combat": true,
+              "cost": "3 Con/corda",
+              "tags": ["controle", "invocacao", "imobilizacao"],
+              "description": "F5 (contusão, 1d3+2), Imobilizar, V0 D0 A0 I0 S0. Sucesso em embate de S à distância permite ao conjurador gastar um gesto para invocar uma corda feita de água. Seu comprimento pode chegar a até 3xS do conjurador em Esp. A corda é mantida verbalmente e possui 3 Res. Um ataque que cause 4 de dano ou mais a destrói imediatamente; danos menores não são cumulativos e não têm efeito."
+            },
+            {
+              "type": "spell",
+              "id": "passo-fantasma",
+              "name": "Passo Fantasma",
+              "school": "feiticaria",
+              "level": 3,
+              "combat": true,
+              "cost": "2 Con/uso",
+              "tags": ["mobilidade", "defesa", "intangibilidade"],
+              "description": "Permite que o mago atravesse superfícies de até um palmo de espessura. Ele não pode permanecer parado dentro desse espaço. Em combate, pode ser usada como uma interrupção para anular o sucesso de um inimigo em um embate contra o conjurador, fazendo com que o ataque, golpe ou magia o atravesse. Pode ser usada em aliados ou objetos caso o conjurador consiga tocá-los."
+            },
+            {
+              "type": "spell",
+              "id": "invocar-hesperia",
+              "name": "Invocar Hesperia",
+              "school": "feiticaria",
+              "level": 3,
+              "combat": false,
+              "cost": "1 xpm/mariposa",
+              "tags": ["invocacao", "comunicacao", "utilidade"],
+              "description": "F0 V0 D10 A0 I0 S0. Invoca uma pequena mariposa feita de material dos sonhos. Ela se desloca com grande velocidade e pode se teletransportar por distâncias de até 10 Esp para locais que consiga enxergar com sucesso em embate de D. Pode reproduzir mensagens visuais, formadas por um pó que libera, e mensagens auditivas previamente gravadas. O conjurador pode invocar mais de uma e usá-las como comunicadores posicionados na cabeça; o alcance máximo é de aproximadamente 1 km."
+            },
+            {
+              "type": "spell",
+              "id": "compreensao-universal",
+              "name": "Compreensão Universal",
+              "school": "feiticaria",
+              "level": 3,
+              "combat": false,
+              "cost": "2 Con/uso",
+              "tags": ["comunicacao", "utilidade", "mental"],
+              "description": "Com sucesso em um teste de I, o conjurador capta intenções e sentimentos superficiais e os transforma em linguagem compreensível durante uma cena. Ele consegue se comunicar com sua S em alvos mesmo que não falem a mesma língua. Funciona com pessoas, animais e plantas, mas não funciona com monstros, seres confusos, controlados por terceiros ou que não possuam sentimentos."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Nível 5"
+        },
+        {
+          "type": "spellList",
+          "category": "divinacao",
+          "level": 3,
+          "spells":[
+            {
+              "type": "spell",
+              "id": "esfera-negra",
+              "name": "Esfera Negra",
+              "school": "feiticaria",
+              "level": 5,
+              "combat": true,
+              "cost": "3 Con/uso",
+              "tags": ["area", "controle", "dano", "vento"],
+              "description": "Sucesso em embate de S permite que o conjurador crie um pequeno buraco negro dentro do alcance de sua S. A esfera ocupa 1 Esp. Todos que iniciarem seus turnos dentro de um raio de 1 Esp da esfera sofrem 1d6 de dano de vento mágico. Criaturas a até 2 Esp devem realizar um teste de F ou V no início de seus turnos ou serão arrastadas 1 Esp em direção à esfera."
+            },
+            {
+              "type": "spell",
+              "id": "invocar-golem",
+              "name": "Invocar Golem",
+              "school": "feiticaria",
+              "level": 5,
+              "combat": true,
+              "cost": "12 xpm/golem",
+              "tags": ["invocacao", "criatura", "controle"],
+              "description": "F2 (contusão, 1d6), V2, D2, A2, I2, S2. Invoca uma criatura que se assemelha a uma armadura oca feita principalmente de argila. O golem não pode usar armaduras ou armas. Para cada 4 xpm adicionais investidos, o conjurador concede +1 em uma característica à escolha, até um limite de +4 pontos no total, sendo no máximo +2 na mesma característica. A característica D não pode ser elevada acima de 2. Requer 1 Esp de contato para ser conjurado."
+            },
+            {
+              "type": "spell",
+              "id": "patrono",
+              "name": "Patrono",
+              "school": "feiticaria",
+              "level": 5,
+              "combat": false,
+              "cost": "5 Con/magia",
+              "tags": ["suporte", "utilidade", "transferencia"],
+              "description": "Concede a um alvo um uso de qualquer magia que o conjurador conheça. Caso a magia concedida possua custo em xpm, o conjurador deve fornecer o xpm necessário. Após conceder um ou mais usos de magias, o conjurador só pode conceder novas magias, para o mesmo ou outros alvos, quando todos os usos concedidos anteriormente tiverem sido utilizados."
+            },
+            {
+              "type": "spell",
+              "id": "espaco-dimensional",
+              "name": "Espaço Dimensional",
+              "school": "feiticaria",
+              "level": 5,
+              "combat": false,
+              "cost": "30 xpm e 10 Con/criação, 2 Con/abrir portal",
+              "tags": ["dimensao", "utilidade", "controle"],
+              "description": "O conjurador cria um portal para o centro de uma dimensão paralela de até 20 Esp, onde pode armazenar quaisquer objetos ou criaturas. Uma vez dentro, o portal pode ser fechado, mas só pode ser reaberto no mesmo local onde foi criado. É possível aprisionar pessoas no espaço dimensional; contudo, conjuradores que conheçam esta magia podem forçar a saída, reabrindo o portal no último local onde ele foi fechado. Após criado, o espaço dimensional não pode ser cancelado por nenhum meio."
+            },
+            {
+              "type": "spell",
+              "id": "telecinese",
+              "name": "Telecinese",
+              "school": "feiticaria",
+              "level": 5,
+              "combat": true,
+              "cost": "3 Con/uso",
+              "tags": ["controle", "dano", "movimento"],
+              "description": "Sucesso em embate de S à distância permite que, por uma cena ou combate, o conjurador mova, ataque e arremesse objetos e pessoas como se possuísse F6 e D6. Ataques realizados dessa forma causam dano de contusão (1d6) e podem ser feitos à distância."
+            }
+          ]
+        } 
+      ]
     }
-    ]
+  ]
 }

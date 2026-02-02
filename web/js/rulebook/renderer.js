@@ -95,6 +95,51 @@ function renderParagraph(container, block) {
   );
 }
 
+function renderSpellList(container, block) {
+  if (!Array.isArray(block.spells)) return;
+
+  block.spells.forEach((spell) => {
+    renderContentBlock(container, {
+      ...spell,
+      type: "spell"
+    });
+  });
+}
+
+function renderSpellAsParagraph(container, spell) {
+  const parts = [];
+
+  // Nome da magia
+  if (spell.name) {
+    parts.push(
+      spell.name.endsWith(".")
+        ? spell.name
+        : `${spell.name}.`
+    );
+  }
+
+  // Descrição
+  if (spell.description) {
+    parts.push(spell.description.trim());
+  }
+
+  // Custo (ex: "4 xpm/alvo")
+  if (spell.cost) {
+    parts.push(
+      spell.cost.endsWith(".")
+        ? spell.cost
+        : `${spell.cost}.`
+    );
+  }
+
+  const text = parts.join(" ");
+
+  container.appendChild(
+    createElement("p", null, text)
+  );
+}
+
+
 function renderList(container, block) {
   const listEl = document.createElement(
     block.style === "ordered" ? "ol" : "ul"
@@ -201,6 +246,13 @@ function renderContentBlock(container, block) {
 
     case "subsections":
       return renderSubsections(container, block);
+
+    case "spellList":
+      return renderSpellList(container, block);
+
+    case "spell":
+      return renderSpellAsParagraph(container, block);
+
 
     case "nestedList": {
       const ul = createElement("ul", "nested-list");

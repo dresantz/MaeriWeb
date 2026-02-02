@@ -35,8 +35,12 @@
           "text": "Importante: toda ação que cause dano sempre causará no mínimo 1 de dano, mesmo que as penalidades, independente da origem, superem o valor total do dado mais os bônus."
         },
         {
+          "type": "paragraph",
+          "text": "Ações de Combate:"
+        },
+        {
           "type": "list",
-          "text": "Ações de Combate",
+          "style": "unordered",
           "items": [
             {
               "title": "Ataque",
@@ -78,8 +82,12 @@
           "text": "Um embate nulo acontece quando um personagem só pode responder a um embate usando V ou D e sem ter direito a uma ação. Existem várias situações que exigem embates nulos de um personagem."
         },
         {
+          "type": "paragraph",
+          "text": "Situações de embate nulo:"
+        },
+        {
           "type": "list",
-          "text": "Situações de embate nulo",
+          "style": "unordered",
           "items": [
             "Quando o personagem já teve a oportunidade de realizar sua ação na rodada, ele poderá continuar se defendendo com embates nulos.",
             "Quando um alvo não tem como responder a um embate a distância, ele só poderá se defender com um embate nulo.",
@@ -109,8 +117,12 @@
           "text": "Uma interrupção, por sua vez, pode ser usada nos mais diversos momentos, geralmente detalhado na interrupção específica, cancelando a ação de um alvo, antes do seu turno ou depois. Uma interrupção simula uma técnica, habilidade ou magia que esteja preparada para partir em auxílio de um aliado, atrapalhar um inimigo ou interromper um acontecimento."
         },
         {
+          "type": "paragraph",
+          "text": "Regras de interrupção:"
+        },
+        {
           "type": "list",
-          "text": "Regras de interrupção",
+          "style": "unordered",
           "items": [
             "Uma interrupção não gasta ação, gesto ou movimento, mas só é possível realizar uma por rodada."
           ]
@@ -160,8 +172,12 @@
         "text": "O mestre deve sempre julgar os casos com atenção, mas algumas regras:"
       },
       {
+        "type": "paragraph",
+        "text": "Regras de Gesto, Movimento e Ação:"
+      },
+      {
         "type": "list",
-        "text": "Regras de Gesto, Movimento e Ação",
+        "style": "unordered",
         "items": [
           "Em caso de dúvida se algo é um gesto ou ação, o mestre pode pedir um teste para ser considerado gesto.",
           "Movimento, gesto e ação podem acontecer em qualquer ordem, mas ações só podem ser feitas contra a alvo que o personagem ganhou o embate.",
@@ -172,8 +188,12 @@
         ]
       },
       {
+        "type": "paragraph",
+        "text": "Exemplos de Gestos:"
+      },
+      {
         "type": "list",
-        "text": "Exemplos de Gestos",
+        "style": "unordered",
         "items": [
           "jogar algo para um aliado pegar",
           "pegar algo jogado",
@@ -214,8 +234,12 @@
           "text": "Após o embate de liderança, haverá um embate de S chamado Estratégia. O grupo vencedor poderá colocar seus membros na ordem de turnos como achar melhor."
         },
         {
+          "type": "paragraph",
+          "text": "Resumo de embates:"
+        },
+        {
           "type": "list",
-          "text": "Resumo de embates",
+          "style": "unordered",
           "items": [
             "Embate de I. Liderança: determina posição de aliados e inimigos.",
             "Embate de S. Estratégia: determina posição dos aliados na ordem de turnos."
@@ -246,16 +270,24 @@
           "text": "A segunda rodada, portanto, é definida da seguinte maneira:"
         },
         {
+          "type": "paragraph",
+          "text": "Regras da segunda rodada:"
+        },
+        {
           "type": "list",
-          "text": "Regras da segunda rodada",
+          "style": "unordered",
           "items": [
             "O vencedor de um embate em que escolheu gastar uma ação passa na frente do perdedor.",
             "O perdedor de um embate em que escolheu gastar uma ação faz seu turno após o vencedor."
           ]
         },
         {
+          "type": "paragraph",
+          "text": "Observações extras:"
+        },
+        {
           "type": "list",
-          "text": "Observações extras",
+          "style": "unordered",
           "items": [
             "Sucesso em uma Emboscada (DxA) conta como uma vitória automática de Liderança e Estratégia.",
             "É um costume no RPG que os jogadores queiram predeterminar a posição dos personagens antes mesmo de entrar em uma masmorra, nesse caso, sucesso no Embate de Liderança determina a posição apenas dos oponentes, assim como flanqueados e afastados."
@@ -322,8 +354,12 @@
           "text": "Importante: penalidades iguais em um personagem com mais de uma dessas condições não se acumulam, apenas a maior é considerada."
         },
         {
+          "type": "paragraph",
+          "text": "Lista de Condições:"
+        },
+        {
           "type": "list",
-          "text": "Lista de Condições",
+          "style": "unordered",
           "items": [
             "Atordoado. Desvantagem em qualquer embate e -3S em combate. Personagens que estão embriagados, ou que sofreram alguma concussão.",
             "Desmaiado. Fica indefeso, acorda após teste de V por cena ou combate, ou imediatamente ao ser atacado ou ajudado (tópico Técnicas).",
@@ -365,8 +401,12 @@
           "text": "Dadas certas situações, o mestre também pode permitir a aplicação de algumas dessas técnicas a distância usando Assimilação, mas com penalidades, como no caso de disparar uma flecha na roupa do alvo para prendê-la à parede, por exemplo."
         },
         {
+          "type": "paragraph",
+          "text": "Lista de Técnicas:"
+        },
+        {
           "type": "list",
-          "text": "Lista de Técnicas",
+          "style": "unordered",
           "items": [
             "Segurar. Impedir que um alvo use movimentos, ele só ficará livre se passar em teste de F no início do seu próximo turno ou for bem-sucedido no próximo embate contra quem estiver segurando-o.",
             "Imobilizar. O personagem agarra o alvo e fica paralisado junto dele (não pode usar movimentação e estará indefeso), ambos são obrigados a gastar suas ações com embates de F para continuar ou se livrar dessa situação, e o usuário deve fazer teste de V para não soltar sempre que ele ou o alvo forem atacados.",
@@ -408,8 +448,12 @@
           "text": "Os tipos de danos são maneiras de como alguém pode se ferir em Maeri. Seres comuns podem ser feridos por qualquer coisa, mas há criaturas que só podem ser feridas por tipos específicos de dano, assim como existem armaduras especializadas em proteger de tipos específicos. Cada arma tem um tipo de dano principal, o qual ela foi feita para provocar, mas o mestre pode aprovar tipos diferentes de dano impondo penalidades, como no caso de o personagem querer dar uma coronhada com uma espada."
         },
         {
+          "type": "paragraph",
+          "text": "Tipos de Dano:"
+        },
+        {
           "type": "list",
-          "text": "Tipos de Dano",
+          "style": "unordered",
           "items": [
             "Contusão. Golpes de impacto, vindo de maças, martelos e marretas que causam luxações e esmagam ossos.",
             "Corte. Tipo de dano causado por espadas e machados, tem como objetivo penetrar e rasgar ao mesmo tempo.",
@@ -455,8 +499,12 @@
           "text": "As regras de Esp permitem que o mestre use a própria base da miniatura como uma estimativa de Esp entre criaturas e, mesmo assim, caso queira ser ainda mais exato, ele pode usar uma régua (1 Esp terá algo em torno de 2,5 cm)."
         },
         {
+          "type": "paragraph",
+          "text": "Regras de Miniaturas:"
+        },
+        {
           "type": "list",
-          "text": "Regras de Miniaturas",
+          "style": "unordered",
           "items": [
             "Uma miniatura só está considerada dentro de uma área de efeito de algo quando está com mais da metade inserida na área, incluindo a área de alcance de uma flecha, por exemplo. E para todos os efeitos, como medir exatamente a distância que ela se move, é considerado o centro da miniatura e não a base.",
             "Uma miniatura não pode compartilhar o mesmo Esp de outra, mas o mestre pode permitir testes para que um personagem cruze o mesmo Esp da outra, seja passando por baixo das pernas ou saltando sobre.",
@@ -492,8 +540,12 @@
       "title": "Áreas de Efeito",
       "content": [
         {
+          "type": "paragraph",
+          "text": "Tipos de Áreas de Efeito:"
+        },
+        {
           "type": "list",
-          "text": "Tipos de Áreas de Efeito",
+          "style": "unordered",
           "items": [
             "Linha. Uma magia, poder, armadilha que se mova em linha acertará todos os alvos dentro de um Esp de largura até o limite do alcance máximo dela.",
             "Cone. Uma magia, poder ou armadilha que se dissipe em forma de cone, como o sopro de um dragão, terá 1 Esp de largura no primeiro Esp de alcance, 2 Esp no segundo, 3 no terceiro e assim consecutivamente até o limite do seu alcance, ou seja, a largura será igual a distância.",

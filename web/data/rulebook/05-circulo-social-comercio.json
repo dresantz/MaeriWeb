@@ -1,0 +1,18 @@
+{
+  "id": "circulo-social-comercio",
+  "title": "Capítulo Cinco - Círculo Social e Comércio",
+  "order": 5,
+  "description": "Circulo de aliados e como acessar o comércio.",
+  "sections": [
+    {
+      "id": "magia",
+      "title": "magia",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Texto sobre magia."
+        }
+        ]
+    }
+    ]
+}
