@@ -1,13 +1,9 @@
 import { observeTopics, restoreLastTopic } from "./navigation.js";
 
-
 // Renderiza um capítulo inteiro do rulebook
 export function renderRulebookChapter(chapterData) {
   const container = document.getElementById("rulebook-content");
   if (!container) return;
-
-  observeTopics();
-  restoreLastTopic();
 
   /* =====================================================
      RESET SEGURO
@@ -78,6 +74,13 @@ export function renderRulebookChapter(chapterData) {
 
     container.appendChild(sectionEl);
   });
+
+  /* =====================================================
+     Pós-render: navegação
+  ===================================================== */
+
+  observeTopics();
+  restoreLastTopic();
 }
 
 /* =====================================================
@@ -115,7 +118,6 @@ function renderSpellList(container, block) {
 function renderSpellAsParagraph(container, spell) {
   const parts = [];
 
-  // Nome da magia
   if (spell.name) {
     parts.push(
       spell.name.endsWith(".")
@@ -124,12 +126,10 @@ function renderSpellAsParagraph(container, spell) {
     );
   }
 
-  // Descrição
   if (spell.description) {
     parts.push(spell.description.trim());
   }
 
-  // Custo (ex: "4 xpm/alvo")
   if (spell.cost) {
     parts.push(
       spell.cost.endsWith(".")
@@ -138,13 +138,10 @@ function renderSpellAsParagraph(container, spell) {
     );
   }
 
-  const text = parts.join(" ");
-
   container.appendChild(
-    createElement("p", null, text)
+    createElement("p", null, parts.join(" "))
   );
 }
-
 
 function renderList(container, block) {
   const listEl = document.createElement(
@@ -233,8 +230,8 @@ function renderSubsections(container, block) {
   });
 }
 
-/* =====================================================
-   Dispatcher
+/* ===================================================== 
+    Dispatcher 
 ===================================================== */
 
 function renderContentBlock(container, block) {
@@ -243,23 +240,16 @@ function renderContentBlock(container, block) {
   switch (block.type) {
     case "paragraph":
       return renderParagraph(container, block);
-
     case "list":
       return renderList(container, block);
-
     case "table":
       return renderTable(container, block);
-
     case "subsections":
       return renderSubsections(container, block);
-
     case "spellList":
       return renderSpellList(container, block);
-
     case "spell":
       return renderSpellAsParagraph(container, block);
-
-
     case "nestedList": {
       const ul = createElement("ul", "nested-list");
 
@@ -288,7 +278,6 @@ function renderContentBlock(container, block) {
       container.appendChild(ul);
       return;
     }
-
     default:
       container.appendChild(
         createElement(

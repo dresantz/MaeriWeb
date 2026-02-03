@@ -18,10 +18,13 @@ const isReload = navEntry?.type === "reload";
 ===================================================== */
 
 function getCurrentChapterIndex() {
+  if (!currentChapterFile) return -1;
+
   return RULEBOOK_CHAPTERS.findIndex(
     (ch) => ch.file === currentChapterFile
   );
 }
+
 
 export function getTopicFromURL() {
   return new URLSearchParams(window.location.search).get("topic");
@@ -91,6 +94,7 @@ function navigateChapter(direction) {
    Topic restore
 ===================================================== */
 
+// override força restauração mesmo sem reload (ex: busca)
 export function restoreLastTopic(override = null) {
   // só restaura automaticamente em reload
   // OU quando há override explícito (ex: busca)
@@ -147,6 +151,8 @@ export function observeTopics() {
   if (!topics.length) return;
 
   observer?.disconnect();
+  lastActiveTopic = null;
+
 
   observer = new IntersectionObserver(
     (entries) => {

@@ -22,19 +22,19 @@ export function loadRulebookChapter(fileName, topicOverride = null) {
   localStorage.setItem(LAST_CHAPTER_KEY, fileName);
 
   /* =========================
-     URL (?chapter + reset topic)
+     URL (?chapter)
   ========================= */
   const url = new URL(window.location);
   const currentChapter = url.searchParams.get("chapter");
 
   if (currentChapter !== fileName) {
     url.searchParams.set("chapter", fileName);
-    url.searchParams.delete("topic"); // troca de capítulo invalida tópico
+    url.searchParams.delete("topic");
     window.history.replaceState({}, "", url);
   }
 
   /* =========================
-     Fetch do capítulo
+     Fetch
   ========================= */
   fetch(path)
     .then((res) => {
@@ -42,11 +42,10 @@ export function loadRulebookChapter(fileName, topicOverride = null) {
       return res.json();
     })
     .then((data) => {
-      // 🚫 ignora resposta obsoleta
       if (currentToken !== loadToken) return;
 
       /* =========================
-         Renderização
+         Render
       ========================= */
       renderRulebookChapter(data);
       renderTOC(data);
@@ -55,18 +54,16 @@ export function loadRulebookChapter(fileName, topicOverride = null) {
 
       /* =========================
          Scroll Spy
-         (observer antes do scroll)
       ========================= */
       observeTopics();
 
       /* =========================
          Restore de tópico
-         prioridade: override > URL > storage
+         (APENAS UMA VEZ)
       ========================= */
       requestAnimationFrame(() => {
         restoreLastTopic(topicOverride);
 
-        // se veio por override (ex: busca), sincroniza URL
         if (topicOverride) {
           updateURLTopic(topicOverride);
         }
