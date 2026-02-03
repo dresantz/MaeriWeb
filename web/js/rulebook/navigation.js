@@ -96,12 +96,31 @@ export function restoreLastTopic(override = null) {
   // OU quando há override explícito (ex: busca)
   if (!override && !isReload) return;
 
-  const topicId =
-    override ||
-    getTopicFromURL() ||
-    localStorage.getItem(LAST_TOPIC_KEY);
+  let saved = override || getTopicFromURL() || localStorage.getItem(LAST_TOPIC_KEY);
+  if (!saved) return;
+
+  let topicId = saved;
+  let chapterIndex = null;
+
+  // se veio do localStorage (JSON)
+  try {
+    const parsed = JSON.parse(saved);
+    topicId = parsed.topicId;
+    chapterIndex = parsed.chapterIndex;
+  } catch {
+    // segue fluxo antigo (URL override, por exemplo)
+  }
+
 
   if (!topicId) return;
+
+  if (
+  chapterIndex !== null &&
+  chapterIndex !== getCurrentChapterIndex()
+  ) {
+    switchToChapterByIndex(chapterIndex, false);
+    return; // ⛔ espera o capítulo renderizar
+  }
 
   // 🛡️ garante que o tópico existe no capítulo atual
   const target = document.getElementById(topicId);
@@ -142,7 +161,16 @@ export function observeTopics() {
 
         lastActiveTopic = id;
 
-        localStorage.setItem(LAST_TOPIC_KEY, id);
+        const chapterIndex = getCurrentChapterIndex();
+
+        localStorage.setItem(
+          LAST_TOPIC_KEY,
+          JSON.stringify({
+            topicId: id,
+            chapterIndex
+          })
+        );
+
         updateURLTopic(id);
       }
     },

@@ -1,7 +1,13 @@
+import { observeTopics, restoreLastTopic } from "./navigation.js";
+
+
 // Renderiza um capítulo inteiro do rulebook
 export function renderRulebookChapter(chapterData) {
   const container = document.getElementById("rulebook-content");
   if (!container) return;
+
+  observeTopics();
+  restoreLastTopic();
 
   /* =====================================================
      RESET SEGURO

@@ -158,8 +158,6 @@ export function switchToChapterByIndex(index, shouldCloseTOC = true) {
   unlockBodyScroll();
   loadRulebookChapter(chapter.file);
 
-  window.scrollTo({ top: 0, behavior: "smooth" });
-
   const select = document.getElementById("chapter-select");
   if (select) select.value = chapter.file;
 
@@ -176,3 +174,4 @@ export function switchToChapterByIndex(index, shouldCloseTOC = true) {
 
   unlockBodyScroll();
 }
+
