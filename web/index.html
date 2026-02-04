@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="css/dice.css" />
   <link rel="stylesheet" href="css/toc.css" />
   <link rel="stylesheet" href="css/notpat.css" />
+
+  <link rel="stylesheet" href="css/sheet.css" />
 </head>
 
 <body>
@@ -172,8 +174,94 @@
     </div>
   </div>
 
+  <!-- =========================
+        Character Sheet Modal
+  ========================== -->
+
+  <!-- Overlay -->
+<div
+  id="sheet-overlay"
+  class="sheet-overlay"
+  aria-hidden="true"
+  inert
+></div>
+
+
+  <!-- Modal -->
+<section
+  id="sheet-modal"
+  class="sheet-modal"
+  aria-hidden="true"
+  inert
+>
+
+    <!-- Header -->
+    <header class="sheet-header">
+      <h2 id="sheet-title">Ficha de Personagem</h2>
+
+      <button
+        id="sheet-close"
+        class="sheet-close"
+        aria-label="Close Character Sheet"
+      >
+        ✕
+      </button>
+    </header>
+
+    <!-- Content -->
+    <div class="sheet-content">
+
+      <!-- Personagem -->
+      <section class="sheet-section">
+        <label for="character-name">Personagem</label>
+        <input
+          type="text"
+          id="character-name"
+          placeholder="Nome do personagem"
+        />
+      </section>
+
+      <!-- Atributos -->
+      <section class="sheet-section attributes">
+        <h3>Atributos</h3>
+
+        <div class="attributes-grid">
+          <label>F <input type="number" min="0" /></label>
+          <label>V <input type="number" min="0" /></label>
+          <label>D <input type="number" min="0" /></label>
+          <label>S <input type="number" min="0" /></label>
+          <label>I <input type="number" min="0" /></label>
+          <label>A <input type="number" min="0" /></label>
+        </div>
+      </section>
+
+      <!-- Informações -->
+      <section class="sheet-section">
+        <label for="character-info">Informações</label>
+        <textarea
+          id="character-info"
+          placeholder="Habilidades, estudos, magias, anotações..."
+          rows="6"
+        ></textarea>
+      </section>
+
+      <!-- Itens -->
+      <section class="sheet-section">
+        <label for="character-items">Itens</label>
+        <textarea
+          id="character-items"
+          placeholder="Inventário do personagem"
+          rows="4"
+        ></textarea>
+      </section>
+
+    </div>
+
+  </section>
+
   <!-- Scripts -->
   <script src="js/dice.js"></script>
+  <script src="js/sheet.js"></script>
   <script src="js/notpad.js"></script>
 
 </body>
