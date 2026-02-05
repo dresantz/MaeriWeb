@@ -1,6 +1,16 @@
 /* =========================
    Character Sheet – UI Control
+   + Persistence Integration
 ========================= */
+
+import {
+  loadCharacterSheet,
+  getCharacterSheet,
+  setCharacterName,
+  setAttribute,
+  setInfo,
+  setItems
+} from "./characterSheetStore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const sheetButton = document.getElementById("sheet-button");
@@ -13,10 +23,92 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-    let lastFocusedElement = null;
+  // Inputs
+  const nameInput = document.getElementById("character-name");
+  const infoTextarea = document.getElementById("character-info");
+  const itemsTextarea = document.getElementById("character-items");
+  const attributeInputs = sheetModal.querySelectorAll(
+    ".attributes-grid input"
+  );
 
-    function openSheet() {
+  let lastFocusedElement = null;
+
+  /* =========================
+     Data → UI
+  ========================= */
+
+  function hydrateSheet() {
+    const sheet = getCharacterSheet();
+
+    if (nameInput) {
+      nameInput.value = sheet.character.name || "";
+    }
+
+    if (infoTextarea) {
+      infoTextarea.value = sheet.info || "";
+    }
+
+    if (itemsTextarea) {
+      itemsTextarea.value = sheet.items || "";
+    }
+
+    attributeInputs.forEach((input) => {
+      const key = input
+        .closest("label")
+        ?.textContent.trim()
+        ?.charAt(0);
+
+      if (key && sheet.attributes[key] !== undefined) {
+        input.value = sheet.attributes[key];
+      }
+    });
+  }
+
+  /* =========================
+     UI → Data (Autosave)
+  ========================= */
+
+  if (nameInput) {
+    nameInput.addEventListener("input", (e) => {
+      setCharacterName(e.target.value);
+    });
+  }
+
+  if (infoTextarea) {
+    infoTextarea.addEventListener("input", (e) => {
+      setInfo(e.target.value);
+    });
+  }
+
+  if (itemsTextarea) {
+    itemsTextarea.addEventListener("input", (e) => {
+      setItems(e.target.value);
+    });
+  }
+
+  attributeInputs.forEach((input) => {
+    input.addEventListener("input", (e) => {
+      const key = e.target
+        .closest("label")
+        ?.textContent.trim()
+        ?.charAt(0);
+
+      if (key) {
+        setAttribute(key, e.target.value);
+      }
+    });
+  });
+
+  /* =========================
+     Modal Control
+  ========================= */
+
+  function openSheet() {
     lastFocusedElement = document.activeElement;
+
+    // Ensure data is loaded
+    loadCharacterSheet();
+    hydrateSheet();
 
     sheetModal.setAttribute("aria-hidden", "false");
     sheetOverlay.setAttribute("aria-hidden", "false");
@@ -26,13 +118,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.body.classList.add("no-scroll");
 
-    const firstInput = sheetModal.querySelector("input, textarea, button");
-    if (firstInput) {
-        firstInput.focus();
-    }
-    }
+    const firstInput = sheetModal.querySelector(
+      "input, textarea, button"
+    );
+    firstInput?.focus();
+  }
 
-    function closeSheet() {
+  function closeSheet() {
     document.activeElement?.blur();
 
     sheetModal.setAttribute("aria-hidden", "true");
@@ -43,23 +135,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.body.classList.remove("no-scroll");
 
-    if (lastFocusedElement) {
-        lastFocusedElement.focus();
-    }
-    }
+    lastFocusedElement?.focus();
+  }
 
+  /* =========================
+     Events
+  ========================= */
 
-
-  // Open
   sheetButton.addEventListener("click", openSheet);
-
-  // Close
   sheetClose.addEventListener("click", closeSheet);
   sheetOverlay.addEventListener("click", closeSheet);
 
-  // Optional: ESC key support
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && sheetModal.getAttribute("aria-hidden") === "false") {
+    if (
+      event.key === "Escape" &&
+      sheetModal.getAttribute("aria-hidden") === "false"
+    ) {
       closeSheet();
     }
   });
