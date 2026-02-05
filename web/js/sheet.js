@@ -4,6 +4,10 @@
 ========================= */
 
 import {
+  resetCharacterSheet
+} from "./characterSheetStore.js";
+
+import {
   loadCharacterSheet,
   getCharacterSheet,
   setCharacterName,
@@ -18,10 +22,38 @@ document.addEventListener("DOMContentLoaded", () => {
   const sheetOverlay = document.getElementById("sheet-overlay");
   const sheetClose = document.getElementById("sheet-close");
 
+  const clearButton = document.getElementById("clear-sheet-button");
+  const confirmBox = document.getElementById("clear-confirmation");
+  const confirmClear = document.getElementById("confirm-clear-sheet");
+  const cancelClear = document.getElementById("cancel-clear-sheet");
+
+
   if (!sheetButton || !sheetModal || !sheetOverlay || !sheetClose) {
     console.warn("Sheet modal elements not found.");
     return;
   }
+
+  if (clearButton && confirmBox && confirmClear && cancelClear) {
+
+  clearButton.addEventListener("click", () => {
+    confirmBox.hidden = false;
+    clearButton.disabled = true;
+  });
+
+  cancelClear.addEventListener("click", () => {
+    confirmBox.hidden = true;
+    clearButton.disabled = false;
+  });
+
+  confirmClear.addEventListener("click", () => {
+    resetCharacterSheet();
+    hydrateSheet();
+
+    confirmBox.hidden = true;
+    clearButton.disabled = false;
+  });
+}
+
 
   // Inputs
   const nameInput = document.getElementById("character-name");
