@@ -1,0 +1,108 @@
+/* ======================================
+   Floating Buttons System
+   Mobile First | PWA Friendly
+====================================== */
+
+/* =========================
+   Base Interaction
+========================= */
+
+.floating-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  border: none;
+  font-weight: bold;
+  background: var(--accent-color);
+  color: var(--ui-fg, #fff);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.floating-button:active {
+  transform: scale(0.96);
+}
+
+.floating-button:hover {
+  transform: scale(1.05);
+}
+
+/* =========================
+   Floating Container
+========================= */
+
+.floating-actions {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  z-index: 1000;
+}
+
+/* =========================
+   Button Sizes
+========================= */
+
+/* Circular buttons (Top / Home) */
+.floating-button--circle {
+  width: 48px;
+  height: 48px;
+
+  padding: 0.25rem;
+
+  border-radius: 50%;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Pill buttons (Ficha / Magias) */
+.floating-button--pill {
+  height: 52px;
+  min-width: 52px;
+
+  padding: 0 0.9rem;
+
+  border-radius: 999px;
+  font-size: 0.95rem;
+}
+
+/* =========================
+   Semantic Variants
+========================= */
+
+.floating-button {
+  background: var(--accent-color);
+}
+
+/* =========================
+   Visibility Helpers
+========================= */
+
+.floating-button.hidden {
+  display: none;
+}
+
+/* =========================
+   Optional Animations
+========================= */
+
+.floating-button.fade-in {
+  animation: fadeIn 0.25s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

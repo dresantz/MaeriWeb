@@ -10,14 +10,15 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/floatingButtons.css" />
   <link rel="stylesheet" href="../css/toc.css" />
   <link rel="stylesheet" href="../css/dice.css" />
   <link rel="stylesheet" href="../css/rulebook.css" />
-  <link rel="stylesheet" href="../css/top-home.css" />
   <link rel="stylesheet" href="../css/sheet.css" />
 </head>
 
 <body>
+
   <!-- =========================
        Header + Search
   ========================== -->
@@ -68,9 +69,6 @@
     role="navigation"
     aria-label="Rulebook Index"
   >
-    <div class="toc-header">
-      <h2>Index</h2>
-    </div>
 
     <p id="toc-chapter-title" class="toc-chapter-title">—</p>
 
@@ -80,10 +78,10 @@
     ></select>
 
     <div class="chapter-nav">
-      <button id="chapter-prev" type="button">
+      <button id="chapter-prev" type="button" class="button">
         ← Previous
       </button>
-      <button id="chapter-next" type="button">
+      <button id="chapter-next" type="button" class="button">
         Next →
       </button>
     </div>
@@ -94,41 +92,62 @@
   <!-- =========================
        Main Content
   ========================== -->
-  <main class="rulebook" role:"main">
+  <main class="rulebook" role="main">
     <div id="rulebook-content"></div>
   </main>
 
   <!-- =========================
-     Rulebook Navigation Buttons
+       Floating Action Buttons
   ========================== -->
+  <aside class="floating-actions" aria-label="Rulebook actions">
 
-  <button
-    id="back-to-top"
-    aria-label="Back to Top"
-    title="Back to Top"
-  >
-    ↑
-  </button>
+    <button
+      id="back-to-top"
+      class="floating-button floating-button--pill floating-button--icon"
+      aria-label="Back to Top"
+      title="Back to Top"
+    >
+      ↑
+    </button>
 
-  <a
-    href="../index.html"
-    id="back-to-home"
-    aria-label="Back to Home"
-    title="Back to Home"
-  >
-    ⌂
-  </a>
+    <a
+      href="../index.html"
+      id="back-to-home"
+      class="floating-button floating-button--pill floating-button--icon"
+      aria-label="Back to Home"
+      title="Back to Home"
+    >
+      ⌂
+    </a>
+
+    <button
+      id="sheet-button"
+      class="floating-button floating-button--pill floating-button--primary"
+      aria-label="Open Character Sheet"
+    >
+      Ficha
+    </button>
+
+    <button
+      id="spells-button"
+      class="floating-button floating-button--pill floating-button--secondary"
+      aria-label="Open Spells"
+    >
+      Magias
+    </button>
+
+  </aside>
 
   <!-- =========================
-       Dice Roller (Global)
+        Dice Roller (Global)
   ========================== -->
 
   <!-- Toggle -->
   <button
-  id="dice-toggle"
-  aria-label="Open Dice Roller"
-  aria-expanded="false"
->
+    id="dice-toggle"
+    aria-label="Open Dice Roller"
+    aria-expanded="false"
+  >
     🎲
   </button>
 
@@ -157,10 +176,9 @@
       </section>
 
       <section class="dice-actions">
-        <button id="roll-button">Roll</button>
-        <button id="clear-all">Clear</button>
+        <button id="roll-button" class="button">Roll</button>
+        <button id="clear-all" class="button">Clear</button>
       </section>
-
 
       <section id="result">
         <div class="result-line">
@@ -177,40 +195,16 @@
       <section id="history">
         <h3>History</h3>
         <ul id="history-output"></ul>
-        <button id="clear-history">Clear</button>
+        <button id="clear-history" class="button">Clear</button>
       </section>
 
     </div>
   </div>
 
   <!-- =========================
-        Fixed Modal Buttons
-  ========================== -->
-  <aside class="quick-actions">
-
-    <button
-      class="quick-button"
-      id="sheet-button"
-      aria-label="Open Character Sheet"
-    >
-      📄 Ficha
-    </button>
-
-    <button
-      class="quick-button"
-      id="spells-button"
-      aria-label="Open Spells"
-    >
-      ✨ Magias
-    </button>
-
-  </aside>
-  
-  <!-- =========================
-      Character Sheet Modal
+        Character Sheet Modal
   ========================== -->
 
-    <!-- Overlay -->
   <div
     id="sheet-overlay"
     class="sheet-overlay"
@@ -218,8 +212,6 @@
     inert
   ></div>
 
-
-    <!-- Modal -->
   <section
     id="sheet-modal"
     class="sheet-modal"
@@ -227,23 +219,20 @@
     inert
   >
 
-      <!-- Header -->
-      <header class="sheet-header">
-        <h2 id="sheet-title">Ficha de Personagem</h2>
+    <header class="sheet-header">
+      <h2 id="sheet-title">Ficha de Personagem</h2>
 
-        <button
-          id="sheet-close"
-          class="sheet-close"
-          aria-label="Close Character Sheet"
-        >
-          ✕
-        </button>
-      </header>
+      <button
+        id="sheet-close"
+        class="sheet-close"
+        aria-label="Close Character Sheet"
+      >
+        ✕
+      </button>
+    </header>
 
-      <!-- Content -->
-      <div class="sheet-content">
+    <div class="sheet-content">
 
-        <!-- Personagem -->
       <section class="sheet-section">
         <label for="character-name">Personagem</label>
         <input
@@ -254,83 +243,76 @@
         />
       </section>
 
+      <section class="sheet-section attributes">
+        <h3>Atributos</h3>
 
-        <!-- Atributos -->
-        <section class="sheet-section attributes">
-          <h3>Atributos</h3>
+        <div class="attributes-grid">
+          <label>F <input type="number" min="0" name="attrF" /></label>
+          <label>V <input type="number" min="0" name="attrV" /></label>
+          <label>D <input type="number" min="0" name="attrD" /></label>
+          <label>S <input type="number" min="0" name="attrS" /></label>
+          <label>I <input type="number" min="0" name="attrI" /></label>
+          <label>A <input type="number" min="0" name="attrA" /></label>
+        </div>
+      </section>
 
-          <div class="attributes-grid">
-            <label>F <input type="number" min="0" name="attrF"/></label>
-            <label>V <input type="number" min="0" name="attrV"/></label>
-            <label>D <input type="number" min="0" name="attrD"/></label>
-            <label>S <input type="number" min="0" name="attrS"/></label>
-            <label>I <input type="number" min="0" name="attrI"/></label>
-            <label>A <input type="number" min="0" name="attrA"/></label>
+      <section class="sheet-section">
+        <label for="character-info">Informações</label>
+        <textarea
+          id="character-info"
+          name="characterInfo"
+          placeholder="Habilidades, estudos, magias, anotações..."
+          rows="6"
+        ></textarea>
+      </section>
+
+      <section class="sheet-section">
+        <label for="character-items">Itens</label>
+        <textarea
+          id="character-items"
+          name="characterItems"
+          placeholder="Inventário do personagem"
+          rows="4"
+        ></textarea>
+      </section>
+
+      <section class="sheet-section sheet-danger">
+        <button
+          id="clear-sheet-button"
+          class="sheet-clear-button"
+          type="button"
+        >
+          Limpar ficha
+        </button>
+
+        <div
+          id="clear-confirmation"
+          class="clear-confirmation"
+          hidden
+        >
+          <p>Tem certeza? Essa ação não pode ser desfeita.</p>
+
+          <div class="clear-actions">
+            <button
+              id="confirm-clear-sheet"
+              class="danger"
+              type="button"
+            >
+              Sim, apagar
+            </button>
+
+            <button
+              id="cancel-clear-sheet"
+              type="button"
+            >
+              Cancelar
+            </button>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- Informações -->
-        <section class="sheet-section">
-          <label for="character-info">Informações</label>
-          <textarea
-            id="character-info"
-            name="characterInfo"
-            placeholder="Habilidades, estudos, magias, anotações..."
-            rows="6"
-          ></textarea>
-        </section>
-
-
-        <!-- Itens -->
-        <section class="sheet-section">
-          <label for="character-items">Itens</label>
-          <textarea
-            id="character-items"
-            name="characterItems"
-            placeholder="Inventário do personagem"
-            rows="4"
-          ></textarea>
-        </section>
-
-        <!-- Danger Zone -->
-        <section class="sheet-section sheet-danger">
-          <button
-            id="clear-sheet-button"
-            class="sheet-clear-button"
-            type="button"
-          >
-            Limpar ficha
-          </button>
-
-          <div
-            id="clear-confirmation"
-            class="clear-confirmation"
-            hidden
-          >
-            <p>Tem certeza? Essa ação não pode ser desfeita.</p>
-
-            <div class="clear-actions">
-              <button
-                id="confirm-clear-sheet"
-                class="danger"
-                type="button"
-              >
-                Sim, apagar
-              </button>
-
-              <button
-                id="cancel-clear-sheet"
-                type="button"
-              >
-                Cancelar
-              </button>
-            </div>
-          </div>
-        </section>
-
-        </section>
-
-      </div>
+    </div>
+  </section>
 
   <!-- =========================
        Scripts

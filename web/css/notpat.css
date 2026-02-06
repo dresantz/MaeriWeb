@@ -11,11 +11,15 @@
 
 /* Botão central */
 .notpat-button {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: var(--border-radius);
   background-color: var(--accent-color);
   color: #121212;
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 0.3px;
+  cursor: pointer;
 }
 
 /* Card de conteúdo */
