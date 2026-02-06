@@ -18,7 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const searchInput = document.getElementById("spells-search");
     const sortButtons = document.querySelectorAll(".spells-sort button");
-    const columns = document.querySelectorAll(".spells-column");
+    const spellsList = document.getElementById("spells-list");
+
     
     if (!spellsButton || !spellsModal || !spellsOverlay || !spellsClose) {
   console.warn("Spells modal elements not found.");
@@ -50,7 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
     spellsOverlay.setAttribute("aria-hidden", "false");
 
     document.body.classList.add("no-scroll");
-
     searchInput?.focus();
     }
 
@@ -201,38 +201,23 @@ document.addEventListener("DOMContentLoaded", () => {
     ========================= */
     
     function renderSpells() {
-    columns.forEach(col => (col.innerHTML = ""));
+    spellsList.innerHTML = "";
 
-    const columnCount = columns.length;
-    if (columnCount === 0) return;
-
-    const total = filteredSpells.length;
-    const rowCount = Math.ceil(total / columnCount);
-
-    for (let row = 0; row < rowCount; row++) {
-        for (let col = 0; col < columnCount; col++) {
-        const index = row * columnCount + col;
-        if (index >= total) return;
-
-        const spell = filteredSpells[index];
-
+    filteredSpells.forEach(spell => {
         const li = document.createElement("li");
         li.className = "spell-item";
         li.dataset.id = spell.id;
 
         li.innerHTML = `
-            <div class="spell-name">${spell.name}</div>
-            <div class="spell-meta">
+        <div class="spell-name">${spell.name}</div>
+        <div class="spell-meta">
             ${spell.school} · Nível ${spell.level}
-            </div>
+        </div>
         `;
 
-        columns[col].appendChild(li);
-        }
+        spellsList.appendChild(li);
+    });
     }
-    }
-
-
     
     /* =========================
        Init
