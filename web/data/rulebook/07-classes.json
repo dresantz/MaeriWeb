@@ -1,0 +1,18 @@
+{
+  "id": "classes",
+  "title": "Capítulo Sete - Classes",
+  "order": 7,
+  "description": "O caminho da evolução de cada um é diferente.",
+  "sections": [
+    {
+      "id": "o-que-sao-classes",
+      "title": "O Que São classes",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Texto."
+        }
+        ]
+    }
+    ]
+}

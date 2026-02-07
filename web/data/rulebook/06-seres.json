@@ -1,0 +1,18 @@
+{
+  "id": "seres",
+  "title": "Capítulo Seis - Seres",
+  "order": 6,
+  "description": "Criaturas, raças, espécies, seres são ideias de tipos diferentes de povos que o jogador pode interpretar.",
+  "sections": [
+    {
+      "id": "o-que-sao-seres",
+      "title": "O Que São Seres",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Texto."
+        }
+        ]
+    }
+    ]
+}

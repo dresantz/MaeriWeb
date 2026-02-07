@@ -5,14 +5,521 @@
   "description": "Circulo de aliados e como acessar o comércio.",
   "sections": [
     {
-      "id": "magia",
-      "title": "magia",
+      "id": "construindo-um-circulo",
+      "title": "Construindo Um Círculo",
       "content": [
         {
           "type": "paragraph",
-          "text": "Texto sobre magia."
+          "text": "Um círculo é um grupo de pessoas que representa a capacidade de um personagem de exercer influência no mundo, são pessoas em quem ele pode confiar, que ele tem interesse em proteger e que podem ajudá-lo de forma prática em suas aventuras."
+        },
+        {
+          "type": "paragraph",
+          "text": "O Círculo pode ser formado de membros da família ou não, desde que exista uma conexão emocional, e suas características são de pessoas comuns (2 em todas). Eles podem entrar em combate pelo jogador, porém não é de interesse delas e nem do próprio personagem do jogador que elas o façam."
+        },
+        {
+          "type": "paragraph",
+          "text": "Em caso de morte não natural de um membro do Círculo, o personagem terá uma linha de Con Perda zerada e, até que recupere tudo, sofrerá de Trauma e estará sempre inclinado à vingança, ou justiça, como preferir chamar, além de reagir de forma violenta a situações que o façam lembrar-se do trauma."
         }
         ]
+    },
+    {
+      "id": "acampamento",
+      "title": "Acampamento",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Um acampamento é um local que atende as necessidades de repouso onde a maioria dos Contatos dos personagens dos jogadores se reúne. Muitos dos contatos podem achar lucrativo acompanhar os jogadores pelos locais seguros de suas viagens e então erguer um acampamento lá, visto que jamais acompanham o grupo em território selvagem. Acampamento, porém, é um termo genérico para um local qualquer, ou seja, ele pode ser uma taverna, casa abandonada, caverna, navio ou qualquer outro lugar."
+        },
+        {
+          "type": "paragraph",
+          "text": "Os membros do acampamento sempre irão viajar mais devagar que os personagens dos jogadores, geralmente 1 Esp por Temporada, e alguns contatos só concederão as suas vantagens aos jogadores quando o acampamento estiver totalmente erguido, o que pode demorar uma temporada ou mais dependendo das condições da região ou outros fatores que o mestre possa considerar nessas situações."
+        },
+        {
+          "type": "paragraph",
+          "text": "Tarefas de Acampamento."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Fortificar. Um personagem gasta uma temporada colocando uma armadilha próximo do acampamento. A armadilha pode causar 3d6 de dano de contusão, perfuração ou corte a escolha do personagem, ou então causar Paralisia. Em combate próximo do acampamento, sucesso em embate de D permite que um personagem atraia um alvo para a armadilha causando o mesmo efeito. ",
+            "Cozinhar. Coletando um pouco de cada personagem no acampamento, um personagem pode gastar uma temporada cozinhando para que nenhum xpl seja gasto naquela temporada.",
+            "Treinar. Treinar pode ser solitário ou em grupo, com os outros personagens jogadores, no primeiro caso o personagem recebe +1 não cumulativo para apenas um dos seus embates nos combates vindouros, no caso do treino em grupo o líder ganha +1 para embate de liderança em um combate e o estrategista +1 para embate de estratégia em um dos próximos combates.",
+            "Meditar. O personagem passa uma temporada meditando e testando rituais, ele recebe +1 Con Mágico temporário, não cumulativo, que não é recuperado depois de gasto, a não ser com outras meditações durante o acampamento.",
+            "Outros. Os personagens não precisam se limitar às tarefas de acampamento, pois existem outras coisas já contempladas pelas regras normais: Caçar, Coletar, Pescar, Patrulhar, Explorar, Vigiar, Repousar, Construir, Estudar."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feiras-e-comercio",
+      "title": "Feiras e Comércio",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "As maiores cidades de Maeri possuem população de dez até vinte mil pessoas, o que significa que a grande maioria das outras cidades é, na verdade, bem pequena, com algumas poucas lojas e uma feira onde se vende alimentos, animais e outros materiais produzidos em fazendas, pescados, minerados ou produtos de madeira, dependendo da localização e da especialidade da cidade."
+        },
+        {
+          "type": "paragraph",
+          "text": "Isso significa que não haverá lojas de armas ou de itens de magia nesses locais. Aventureiros não são tão comuns, e ninguém lucraria com esse tipo de comércio em uma cidade pequena. Qualquer item muito específico não poderá ser facilmente encontrado e, na maioria das vezes, precisará ser encomendado."
+        },
+        {
+          "type": "paragraph",
+          "text": "Para adquirir itens especializados é necessário possuir contatos específicos, e é aí que reside a importância de um bom Círculo. Para obter esse tipo de item, o personagem precisará ir até uma cidade grande ou contar com um contato que busque esse tipo de mercadoria."
+        },
+        {
+          "type": "paragraph",
+          "text": "Um personagem pode, é claro, encomendar uma espada ao ferreiro que normalmente fabrica pregos, mas o resultado será, no mínimo, uma arma de má qualidade."
+        },
+        {
+          "type": "paragraph",
+          "text": "Essas limitações também se aplicam às vendas. Uma espada é inútil para pessoas comuns que já possuem seus machados de lenhar e martelos de abate. Nobres, soldados e cavaleiros normalmente já possuem seus equipamentos ou os recebem de seus soberanos."
+        },
+        {
+          "type": "paragraph",
+          "text": "Na melhor das hipóteses, um ferreiro pode querer comprar a espada de um aventureiro para reaproveitar o material, pagando apenas o valor bruto do metal — um preço irrisório que muitas vezes não compensa sequer o transporte."
+        },
+        {
+          "type": "paragraph",
+          "text": "Apenas com o Contato certo o personagem poderá realizar compras e vendas justas de certos tipos especializados de produto."
+        },
+        {
+          "type": "paragraph",
+          "text": "O jogador deve anotar em seu inventário qualquer item que não seja destinado à manutenção básica do personagem, representada por xpl e xpm. Isso inclui qualquer coisa que não sejam roupas básicas (torso, pernas e íntimas), comida, kits de Estudos e, no máximo, uma sacola de pano para carregar esses itens."
+        }
+      ]
+    },
+    {
+      "id": "regras-de-armas-e-resistencia",
+      "title": "Regras de Armas e Resistência",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Este tópico tem como objetivo restabelecer alguns conceitos utilizados na construção dos sistemas de uso de armas e proteções. A ideia não é ser melhor ou mais realista, mas sim apresentar um diferencial, além de fornecer aos jogadores uma base interpretativa sólida."
+        },
+        {
+          "type": "paragraph",
+          "text": "Material e Resistência. As armas em Maeri são feitas de ligas metálicas, como aço, ou de madeira, podendo quebrar com relativa facilidade. Para representar isso, toda arma possui uma característica chamada Resistência (Res)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Fora de combate, para causar dano a um objeto, o dano precisa ser maior que a Res do objeto. Quando isso ocorre, o objeto perde 1 ponto de Res, independentemente do dano causado. Em combate, sempre que um personagem obtiver um crítico bem-sucedido em um embate de F ou V, ele pode escolher um objeto visível do alvo para reduzir sua Res em 1 ponto. Ao alcançar zero, o item está quebrado e inutilizável."
+        },
+        {
+          "type": "paragraph",
+          "text": "O mestre pode, a seu critério, considerar uma redução de categoria do item quebrado. Por exemplo, uma espada longa (corte longo), quando danificada, pode ter seu dano reduzido para o de uma adaga (corte curto). Objetos sem Res definida possuem automaticamente 1 ponto de Res. Outros fatores também podem reduzir a Res de um equipamento, como longos períodos sem manutenção, custando 1xpm."
+        },
+        {
+          "type": "paragraph",
+          "text": "Dano Crítico e Alvo Indefeso. Dano crítico concede +1d6 ao dano principal da arma. Dano em alvo indefeso permite que o jogador escolha entre causar o dano máximo ou mínimo da arma, ou apenas desmaiar o alvo."
+        },
+        {
+          "type": "paragraph",
+          "text": "Algumas armas possuem um modificador x2 ou x3 em sua descrição. Armas x2 concedem +2d6 em dano crítico e duplicam o dano total da arma contra alvos indefesos. Armas x3 concedem +3d6 em dano crítico e triplicam o dano máximo contra alvos indefesos."
+        },
+        {
+          "type": "paragraph",
+          "text": "Armas de Duas Mãos. Armas de combate corpo-a-corpo não possuem diferenças de peso tão significativas. Mesmo uma claymore, espada quase da altura de um homem, não precisa necessariamente ser usada com as duas mãos, já que armas historicamente pesadas raramente ultrapassavam três quilos. Lanças, por exemplo, podem ser firmadas sob um braço ou erguidas sobre o ombro. Dessa forma, o conceito de arma de duas mãos não existe neste sistema."
+        },
+        {
+          "type": "paragraph",
+          "text": "Uma Arma em Cada Mão. Usar uma arma em cada mão permite que o personagem gaste seu gesto para ganhar um embate bônus exclusivamente para Atacar (F) com a arma secundária. Esse ataque sofre uma penalidade de -2F, e não é permitido usar duas armas longas ou pesadas simultaneamente."
+        },
+        {
+          "type": "paragraph",
+          "text": "Desarmado. Atacar com as mãos vazias causa 1d2 de dano de contusão."
+        },
+        {
+          "type": "paragraph",
+          "text": "Armas de Arremesso. Qualquer arma pode ser arremessada utilizando um embate de A, com alcance equivalente a F em Esp, causando o dano normal da arma."
+        },
+        {
+          "type": "paragraph",
+          "text": "Afastado e Engajado (a/e). Armas com essa sigla podem ser usadas tanto em combate afastado quanto engajado. Em alguns casos, podem existir valores de dano diferentes para cada posição. Para se aproximar de um inimigo que esteja portando uma arma desse tipo, é necessário obter sucesso em um embate de D."
+        },
+        {
+          "type": "paragraph",
+          "text": "Improvisando Armas. As armas são classificadas de forma geral pelo tipo de dano e pelo tamanho. Sempre que um personagem precisar improvisar uma arma, o mestre pode observar essas características e definir o dano correspondente. Por se tratar de uma arma improvisada, o mestre também pode impor penalidades apropriadas."
+        }
+      ]
+    },
+    {
+      "id": "contatos-de-mercado",
+      "title": "Contatos de Mercado",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Os Contatos de Mercado representam personagens especializados na venda de bens específicos. Apenas por meio desses contatos é possível adquirir ou negociar itens de qualidade adequada, justa ou especializada."
+        },
+
+        {
+          "type": "paragraph",
+          "text": "Armeiro. Contato que vende armas de combate corpo-a-corpo. As armas listadas aqui representam o padrão alto de qualidade. Armas improvisadas ou adquiridas sem um contato adequado são de pior qualidade, sofrendo penalidades no dano e na Resistência."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Corte Curto. Adagas, facões de cozinha, peixeira. 1d3+1 (x3). 1Pes. 4Res. 1Fo.",
+            "Corte Médio. Espada média, gládios ou machadas. 1d6 (x2). 2Pes. 4Res. 2Fo.",
+            "Corte Longo. Espadas longas ou machados. 1d6+1. 3Pes. 4Res. 4Fo.",
+            "Perfuração Curta. Punhal, sai, faca de arremesso. 1d3 (x3). 1Pes. 3Res. 8Dp.",
+            "Perfuração Média. Florete, sabre, rapieira. 1d6, +1 Ataque. 3Pes. 2Res. 3Fo.",
+            "Perfuração Longa. Lança, tridente. 1d6+1 (a/e). 5Pes. 3Res. 4Fo.",
+            "Contusão Leve. Soqueira, kubaton. 1d2+1. 0Pes. 3Res. 1Fo.",
+            "Contusão Média. Porrete, cacetete, tacape. 1d3+1. 1Pes. 6Res. 4Dp.",
+            "Contusão Média Longa. Bastão. 1d6+1 (a/e). 2Pes. 4Res. 5Dp.",
+            "Contusão Pesada. Maça, martelo ou clava. 1d6+2, retira 1Res com resultados 5 e 6 e 2Res com resultados 6 e 6. 4Pes. 5Res. 4Fo.",
+            "Contusão Pesada Longa. Maça, martelo ou clava em haste longa. 1d6+3 (a), 1d6 (e), retira 1Res com resultados 5 e 6 e 2Res com resultados 6 e 6. 5Pes. 5Res. 5Fo."
+          ]
+        },
+
+        {
+          "type": "paragraph",
+          "text": "Bowyer. Contato que vende armas de combate à distância que utilizam munição. A precisão indica o limite de alcance sem necessidade de testes para acertar. Alvos além da precisão exigem testes. Recarregar uma arma custa um gesto."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Arco Curto. 1d6. A+6 Esp de precisão. 2Pes. 2Res. 1Fo.",
+            "Arco Longo. 1d6+1. A+10 Esp de precisão. 3Pes. 2Res. 3Fo.",
+            "Balestra Curta. 1d6. A+8 Esp de precisão. 2Pes. 1Res. 2Fo.",
+            "Balestra Longa. 1d6+2. A+6 Esp de precisão. 3Pes. 2Res. 3Fo.",
+            "Munição. 30 unidades. Dano de perfuração. 1Pes a cada 10. 2Dp.",
+            "Aljava. Munição passa a pesar 1Pes a cada 30 unidades. 3Dp."
+          ]
+        },
+
+        {
+          "type": "paragraph",
+          "text": "Armoreiro. Contato que vende armaduras. Os itens listados representam peças incompletas. Para uma armadura completa do tipo escolhido, aplique o acréscimo descrito em Armadura Completa. Vestir ou remover uma armadura completa leva cerca de 20 minutos, uma incompleta leva 10 minutos. É possível usar até dois tipos de materiais diferentes simultaneamente, somando seus bônus. Armaduras reduzem o dano sofrido na Vit até o mínimo de 1."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Tecido. Não precisa ser removida para Repouso. 0Pes. 1Res. 1Fo.",
+            "Acolchoada. -1 dano contra Contusão, +1V para resistir a ferimentos, protege contra frio. 1Pes. 2Res. 2Fo.",
+            "Couro. -1 dano contra Corte, +1V para resistir a ferimentos, protege contra frio. 2Pes. 2Res. 2Fo.",
+            "Malha. -1 dano contra Perfuração, +1V para resistir a ferimentos. 3Pes. 2Res. 2Fo.",
+            "Escamas. -1 dano contra Corte e Contusão, +1V, -1D em ocultação e esquiva, impede magia. 3Pes. 3Res. 5Fo.",
+            "Carapaça. -1 dano contra Perfuração e Contusão, +1V, -1D em ocultação e esquiva, impede magia. 4Pes. 4Res. 6Fo.",
+            "Placas. -1 dano contra Perfuração e Corte, +1V, -1D em ocultação e esquiva, impede magia. 4Pes. 4Res. 8Fo.",
+            "Armadura Completa. +1V extra, +1Pes, +2Res, +2Fo.",
+            "Escudo Pequeno (broquel). Pode ser amarrado no braço. +1V contra F ou A. 1Pes. 1Res. 1Fo.",
+            "Escudo Médio (targe). Ocupa uma mão. +1V contra F ou A, permite Empurrar com F. 2Pes. 2Res. 2Fo.",
+            "Escudo Grande (torre ou pipa). Ocupa uma mão. +2V contra F ou A, -1D geral, permite Empurrar com F. 2Pes. 3Res. 3Fo."
+          ]
+        },
+
+        {
+          "type": "paragraph",
+          "text": "Alfaiate. Contato que vende tecidos, panos, roupas, sacos e acessórios diversos."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Mochila. Limite de carga sem penalidade passa a ser Fx3. 3Dp.",
+            "Algibeira. 100 moedas passam a equivaler a 1Pes. 1Dp.",
+            "Roupas. Vendem xpl em forma de tecidos; o mestre define o valor por repouso.",
+            "Corda de Cânhamo (10m). 1Pes. 1Dp.",
+            "Espelho de Mão. 1Fo.",
+            "Tenda. Conforto para repouso de 1 a 10 pessoas. 1Pes e 5Dp por pessoa.",
+            "Saco de Dormir. Conforto para repouso de uma pessoa. 1Pes. 5Dp.",
+            "Cantil de Couro. Armazena 30 temporadas de água. 2Dp.",
+            "Sela de Montaria. +1A em testes de montaria equipada. 1Fo."
+          ]
+        },
+
+        {
+          "type": "paragraph",
+          "text": "Escriba. Estudiosos e copiadores de livros, geralmente ligados a instituições religiosas ou acadêmicas. Vendem itens de escrita, símbolos e itens de canalização. Um usuário de magia só pode se beneficiar de um item de canalização por vez."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Pergaminho. Armazena uma magia de custo em Con. Uso único. Requer Estudos específicos. 1Dp por Con da magia.",
+            "Volume. Armazena 1 Conhecimento. Pode ser Fonte. 1Pes. 1Res. 3Fo.",
+            "Códice. Armazena 2 Conhecimentos. Pode ser Fonte. 1Pes. 1Res. 4Fo.",
+            "Grimório. Armazena 4 Conhecimentos. Pode ser Fonte. 1Pes. 1Res. 8Fo.",
+            "Cajado. Contusão média. +1 dificuldade em magias. 4Pes. 3Res. 24Fo.",
+            "Cetro. Contusão média. +3 Esp de alcance em magias. 2Pes. 3Res. 16Fo.",
+            "Varinha. +1 dano do tipo da magia conjurada. 1Pes. 1Res. 20Fo.",
+            "Óculos. +1S para adquirir ou substituir Conhecimento. 2Fo."
+          ]
+        },
+
+        {
+          "type": "paragraph",
+          "text": "Apotecário. Especialista em medicamentos, preventivos e venenos. Apesar de malvistos por pessoas comuns, são relativamente comuns, especialmente onde não há curandeiros."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Infusão de Láudano. Recupera até 3 Vit (divisível). 2Dp.",
+            "Infusão de Salix. Recupera até 6 Vit (divisível). 4Dp.",
+            "Semente Fermentada de Caiena. -3 dano de fogo, gelo e vento. 1Dp.",
+            "Goma de Aguapé. Impermeabiliza e permite respirar em água ou fumaça por 1 temporada. -3 dano de água e ácido. 2Dp.",
+            "Antídoto. Neutraliza diversos venenos comuns. 2Dp.",
+            "Óleo de Salamandra. Chama radiante difícil de apagar. 1Dp.",
+            "Sono Vivo. Paralisia consciente por 3 temporadas. 4Dp.",
+            "Nota de Sangue. Veneno letal em 5 temporadas. 3Dp.",
+            "Febre Negra. Violência extrema por 2d6 temporadas. 4Dp.",
+            "Poção do Amor. Encantamento condicional por 1d6 temporadas. 4Dp.",
+            "Mnemos. Amnésia total por 1d6 temporadas. 5Dp.",
+            "Toque do Demônio. Morte em 1d6 horas ou veneno por contato. 10Dp.",
+            "Darpid. Dano ácido 1d6+2 e Envenenado. 10Dp.",
+            "Nabee. Paralisação no próximo ataque. 6Dp.",
+            "Somnia. Torpor sugestivo por 1d6 horas. 6Dp.",
+            "Olho da Lua. Amedronta até teste de V. 5Dp.",
+            "Lactuca. Sonífero em múltiplas formas. 1Dp (farelo), 4Dp (frasco), 8Dp (pedra)."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "contatos-de-acampamento",
+      "title": "Contatos de Acampamento",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Os Contatos de Acampamento são personagens que acompanham ou se estabelecem junto ao acampamento dos jogadores, oferecendo benefícios contínuos, utilidades logísticas e suporte estratégico durante as aventuras."
+        },
+
+        {
+          "type": "paragraph",
+          "text": "Almocreve. Um vendedor andarilho de generalidades, responsável por suprir o acampamento com uma ampla variedade de itens comuns e incomuns."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Cachimbo, cera de selo, anel sinete, instrumento musical, cartas de baralho, dados, castiçal, joias, facas, linha, anzol, cantil, funda, martelo, facões, tochas, lonas, bancos retráteis, barris, baús, apitos, lente de aumento, ímã, frasco, panelas, telescópio, caixas, barbante, pé-de-cabra, pregos, talheres, cadeados, fole, sabão, vela, lanterna de óleo, lâmpada de óleo, caneca, caderno, concha marinha, pedra semipreciosa, cigarros, bebidas, cortador de vidro, moedas falsas, estetoscópio, gancho, prótese, incenso, tesoura, canivete."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Ferreiro. Ter um ferreiro no acampamento permite que armas e armaduras sejam consertadas sem custo algum."
+        },
+        {
+          "type": "paragraph",
+          "text": "Cozinheiro. Permite que os personagens sempre tenham alimento disponível no acampamento, não sendo necessário gastar xpl nas temporadas passadas ali."
+        },
+        {
+          "type": "paragraph",
+          "text": "Courier. Existem três formas principais de envio de mensagens a longa distância em Maeri: entrega pessoal, animais entregadores ou a magia Hesperia. Um courier é habilidoso em todas essas formas e também pode ser utilizado para interceptar mensagens alheias."
+        },
+        {
+          "type": "paragraph",
+          "text": "Moneyer. Banqueiros muito comuns em Maeri. Podem guardar dinheiro e itens importantes em locais fortificados, realizar trocas de moedas e conceder empréstimos, sempre cobrando uma pequena taxa de conveniência."
+        },
+        {
+          "type": "paragraph",
+          "text": "Curandeiro. A presença de um curandeiro no acampamento faz com que repousos totais curem completamente os ferimentos e a Vit dos personagens."
+        },
+        {
+          "type": "paragraph",
+          "text": "Espião. Um contato voltado para aventuras específicas, especializado em se infiltrar e se manter inserido em grupos, locais ou instituições."
+        },
+        {
+          "type": "paragraph",
+          "text": "Guia. Especialista em estudar mapas e regiões desconhecidas pelos jogadores, conduzindo o grupo até seus destinos. Também pode orientar sobre onde obter mapas e quais são os caminhos mais curtos ou seguros."
+        },
+        {
+          "type": "paragraph",
+          "text": "Professor. Especialista em um tipo específico de Estudo. Com um professor, o jogador não precisa de Fontes para mudar um Conhecimento relacionado ao Estudo do professor."
+        },
+        {
+          "type": "paragraph",
+          "text": "Marinheiro. Dono de um barco que pode ser usado tanto como meio de transporte quanto como acampamento. Útil apenas para aventuras próximas a rios, lagos ou mares."
+        },
+        {
+          "type": "paragraph",
+          "text": "Pajem. Um aprendiz de aventureiro. Diferente dos demais contatos, que possuem ficha com 2 em todas as características, o pajem possui 3 em todas. Pode ser utilizado em qualquer atividade de acampamento e também fora dele."
+        }
+      ]
+    },
+    {
+      "id": "contatos-de-mercado-secreto",
+      "title": "Contatos de Mercado Secreto",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Itens mágicos são raríssimos em Maeri, e alguns podem ser únicos em todo o mundo conhecido. Muitos são passados como herança entre as mais importantes dinastias ou foram perdidos em regiões perigosas e inóspitas."
+        },
+        {
+          "type": "paragraph",
+          "text": "É comum que o mestre exija testes para que um personagem consiga identificar um item mágico e compreender seu funcionamento. Um personagem que não seja capaz de identificar um item mágico também não é capaz de ativar seus poderes."
+        },
+
+        {
+          "type": "paragraph",
+          "text": "Antiquarista Místico. Um contato com vasto conhecimento histórico, capaz de encontrar pistas sobre itens mágicos e identificá-los. Para os materiais abaixo, o jogador adquire uma arma ou armadura normalmente e, ao gastar um Segredo, soma as habilidades mágicas do material escolhido ao item, incluindo seus valores de Pes e Res. Só é possível usar até 2 armas mágicas ao mesmo tempo (uma em cada mão) e apenas 1 material de armadura."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Sicamora. Madeira para armas. +1 em testes para resistir a efeitos mágicos e +1 em embates contra magia.",
+            "Oricalco. Material para armas e armaduras. Armaduras anulam penalidades em D, recebem -2Pes, +6Res e +1 Esp de movimento. Armas pesam -1Pes e possuem +3Res.",
+            "Diamantina. Material de armadura. +2V para resistir a ferimentos. +2Pes. +3Res.",
+            "Metal Carvão. Material de arma. Incendeia ao ser desembainhada por uma cena ou combate, causando +1 dano de fogo. +1Res.",
+            "Ectoplasma. Material de arma. Substitui o dano por dano Psíquico e reduz Con Medo do alvo; ao zerar, o alvo fica Amedrontado até passar em teste de V.",
+            "Aço Frio. Material de arma. Causa perda adicional de +1Res em críticos de F ou V.",
+            "Espectra. Material de arma. Anula bonificações concedidas por escudos e armaduras."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Joalheiro Místico. Só é possível utilizar até 10 anéis diferentes, 1 amuleto e 1 capa ao mesmo tempo."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Capa de Brasa. O usuário sofre -3 de dano elemental de fogo.",
+            "Capa de Escuridão. Concede +1 em testes de ocultação.",
+            "Anel do Espírito. Concede +1 Con ao usuário.",
+            "Anel do Preparo. Concede 2 xpm renováveis com Repouso Total, apenas para magias.",
+            "Anel do Feiticeiro. Concede ao conjurador uma magia de custo apenas em Con, utilizável uma vez por repouso sem custo.",
+            "Anel da Força. +1F para testes de forçar e escalar, alcance de arremesso e limites de carga.",
+            "Anel da Proteção Mágica. +1 em testes contra magias.",
+            "Anel da Conexão. Encanta uma arma ou flecha; gastando gesto e movimento, o usuário se teletransporta até onde o item for arremessado ou disparado dentro de sua A em Esp.",
+            "Anel da Forja. Recupera 1Res de um item com pequenos remendos.",
+            "Amuleto dos Mares. Permite respirar sob a água, caminhar sobre ela, mergulhar sem penalidade em D e sem molhar a si ou sua carga.",
+            "Amuleto do Olhar Divino. Permite enxergar longas distâncias, seres invisíveis, no escuro e através de fumaça e objetos sólidos com até 2 cm.",
+            "Amuleto do Retorno. Permite armazenar uma magia de custo apenas em Con usada contra o usuário após embate bem-sucedido de S.",
+            "Amuleto Protetor. Ao custo de 6 Con mágico e uma interrupção, anula totalmente um dano não letal.",
+            "Amuleto do Azar. Ao custo de 6 Con mágico e uma interrupção, causa falha automática em um teste de um alvo.",
+            "Amuleto da Sorte. Ao custo de 6 Con mágico e uma interrupção, causa sucesso automático em um teste de um alvo."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Mercador Místico. Um contato que negocia artefatos mágicos raros, amaldiçoados ou de funcionamento incomum."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Apanhador. Vara com filtro de sonhos. Permite enxergar sonhos de pessoas dormindo e concede +3 em embates de D para capturar hesperias.",
+            "Instrumento Mágico. Permite usar I em vez de S em embates mágicos. Ocupa as duas mãos, mas é considerado mão livre para conjuração.",
+            "Pólvora. Cada 1Pes causa 4d6 de dano explosivo em 2 Esp de raio. Pólvora não armazenada invoca Bestas da Pólvora por turno.",
+            "Arpéu. Corda extremamente resistente lançada por braçadeira. Permite puxar alvos ou o usuário em até 6 Esp, podendo ser usada em combate.",
+            "Fundo Compartilhado. Até seis bolsas compartilham o mesmo espaço extradimensional, com diversas restrições de uso.",
+            "Bola de Cristal. Extensão sensorial e mágica do usuário. Permite ver, ouvir e conjurar à distância. Limite de duas por usuário.",
+            "Braço Estático. Membro metálico voador controlado por gestos, capaz de aplicar força equivalente a F8 fora de combate ou atacar em combate."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "linguas",
+      "title": "Línguas",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Tradutor. Um especialista nas diversas línguas de Maeri, atuando também como guia cultural. O tradutor conhece costumes regionais e pode ajudar grupos estrangeiros a se integrarem melhor, evitando chamar atenção indesejada."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Avehosi. Falado em Avehos, Azores, Porto dos Ventos, Escudo Leste, no Istmo dos Vales, em Vargos e Drulskirf.",
+            "Brahmosi. Falado no Planalto de Fogo, em alguns locais de Drulskirf, no Martelo de Guerra, nas Colinas Geladas e no Alce.",
+            "Iacaniano. Falado em Iacan e no Arquipélago Minguante.",
+            "Harda. Falado apenas entre os povos harda no Istmo dos Vales.",
+            "Daramoniano. Língua falada pela maioria das tribos nativas.",
+            "Lanet. Língua morta que originou o Avehosi, sendo o equivalente ao latim de Maeri.",
+            "Thirke. Uma das muitas línguas místicas, utilizada por magos para a execução de feitiços."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tecnicas-marcais",
+      "title": "Técnicas Marciais",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Mestre. Um mestre pode ser uma pessoa ou uma instituição, como um templo ou escola. O importante é que ele ensine artes marciais. Em termos de regras, cada uma das opções abaixo pode ser adquirida ao custo de um Aspecto."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Estilo de Luta. Ataques desarmados causam 1d6 de dano. O usuário pode escolher entre dano de contusão, corte ou perfuração no momento de aplicá-lo.",
+            "Golpe Especial. Permite substituir os bônus de Defesa obtidos em sucessos de embate em V (+1 em qualquer característica, +1 de dano para o embate seguinte que cause dano, incluindo +1V para resistir a ferimentos) por 1d6 de dano explosivo no próximo sucesso em embate de F, substituindo o dano da arma ou do ataque desarmado. Assim como a Defesa, o bônus acumula até três vezes, causando até 3d6 de dano, sendo reiniciado apenas após ser gasto.",
+            "Técnica. Permite realizar ataques desarmados usando D ou F, à escolha do jogador. Também permite usar Empurrar, Desmontar, Desarmar e Derrubar com sucesso em embates de F ou D.",
+            "Posturas de Combate. Em combate, é possível remover 1 ponto de uma característica física (F, V ou D) e realocá-lo para outra, ao custo de um gesto.",
+            "Movimento Fluido. Permite receber +3D em uma Esquiva caso o usuário opte por não realizar nenhuma ação. Além disso, concede +2 Esp de deslocamento e salto.",
+            "Versátil. Permite ao personagem aproveitar plenamente armas exóticas, que são descritas na seção Armeiro Exótico."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Armeiro Exótico. O jogador deve adquirir uma ou mais armas conforme a necessidade da modificação e, então, adquirir a modificação desejada. Armas com essas modificações são consideradas exóticas e não concedem as vantagens descritas abaixo caso o personagem não possua a característica Versátil. Cabe ao mestre decidir, com base na descrição do jogador, se uma arma pode receber mais de uma modificação. Duas armas unidas por uma secção são consideradas uma única arma."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Secção Curta. Une duas armas de combate engajado com uma corrente ou corda curta. O personagem pode alternar entre as armas sem gastar gesto, e sempre que troca recebe +1 de dano no ataque seguinte com a arma atual. +1Dp.",
+            "Secção Longa. Une duas armas de combate engajado com uma corrente ou corda longa. O personagem pode alternar entre as armas sem gastar gesto e pode lutar afastado ou atacar a até 2 Esp. +2Dp.",
+            "Gancho. Após um ataque bem-sucedido, o alvo não pode se afastar do usuário até o início do próximo turno do usuário. Se estiver ligada a uma secção longa, puxa o alvo em 1d6 Esp na direção do usuário. +1Dp.",
+            "Ponta. A arma possui uma ponta adicional voltada para defesa, concedendo +1V em embates. +1Dp.",
+            "Retornável. O design da arma permite que ela seja arremessada e retorne para o usuário. +3Dp.",
+            "Maleável. A arma funciona como um chicote ou similar, permitindo atacar a até 6 Esp. +1Dp.",
+            "Agarradeira. A arma funciona como uma rede ou boleadeira. Se o ataque à distância for bem-sucedido, o alvo fica paralisado até gastar um gesto para se livrar da arma. +1Dp."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "montarias",
+      "title": "Montarias",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Um personagem em cima de uma montaria terá a velocidade de movimento dela e ocupará o mesmo Esp. O jogador pode substituir sua ação pela ação da montaria, mas montarias muito grandes podem impedir que o cavaleiro realize ações. Montar ou desmontar custa um gesto; em situações adversas, como estar flanqueado, o mestre pode pedir testes de A, e uma falha crítica pode fazer o personagem cair e ficar Caído."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Montaria. Para carregar alguém confortavelmente, a criatura precisa ter no mínimo 3x o peso da pessoa, ou seja, sua F deve ser três vezes maior que a do cavaleiro. Montarias típicas possuem a característica Carregador, que multiplica sua F por dois ao definir limites de peso.",
+            "Montar criaturas indispostas pode exigir testes de doma.",
+            "Embate de D contra alguém montado concede a ação Desmontar, permitindo derrubar o montador.",
+            "Apenas animais realmente conectados com seus donos tentarão defendê-los; caso contrário, irão fugir ou ignorar o combate.",
+            "Animais sem treino são passivos. Mesmo com a característica Treinado, comandos complicados podem exigir testes ou tempo de aprendizagem, sendo o ensino facilitado por personagens com Estudo Exploração ou Conhecimento do animal específico."
+          ]
+        },
+        {
+          "type": "npc",
+          "title": "Estribeiro",
+          "text": "Vende montarias, geralmente equinos, e cuida das montarias dos personagens quando não estão em uso, evitando que consumam xpl. Todos os equinos possuem as características Carregador e Corredor."
+        },
+        {
+          "type": "npc",
+          "title": "Treinamento",
+          "text": "Concede a um animal a característica Treinado, permitindo que ele obedeça ordens simples (buscar, vir, ir, esperar, deitar, rolar, procurar) e sempre encontre o caminho para lugares já conhecidos. Requer mínimo de 5 Fo."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "title": "Tipos de Equinos",
+          "items": [
+            "Equino Pequeno. Mulas, burros, pôneis, garranos. F2 V4 D3 A2 I1 S5. Patada, 1d3 de dano de contusão. Média de 5 a 10 Fo.",
+            "Equino Médio. Cavalo de tração (para trabalho pesado), palafrém (de transporte e estimação). F4 V4 D5 A3 I2 S3. Patada, 1d6 de dano de contusão. Média de 10 a 20 Fo.",
+            "Equino Grande. Cavalo de batalha (criado para combate), corcel sangue-morno (de linhagem mista), puro-sangue (de linhagem pura). F5 V4 D6 A3 I2 S4. Patada, causa 1d6+2 de dano de contusão. Mínimo de 20 Fo."
+
+          ]
+        }
+      ]
     }
-    ]
+  ]
 }

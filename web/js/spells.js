@@ -25,8 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
   console.warn("Spells modal elements not found.");
   return;
 }
-
-
     /* =========================
        State
     ========================= */
