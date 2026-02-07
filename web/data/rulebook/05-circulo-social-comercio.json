@@ -499,20 +499,15 @@
           ]
         },
         {
-          "type": "npc",
-          "title": "Estribeiro",
-          "text": "Vende montarias, geralmente equinos, e cuida das montarias dos personagens quando não estão em uso, evitando que consumam xpl. Todos os equinos possuem as características Carregador e Corredor."
-        },
-        {
-          "type": "npc",
-          "title": "Treinamento",
-          "text": "Concede a um animal a característica Treinado, permitindo que ele obedeça ordens simples (buscar, vir, ir, esperar, deitar, rolar, procurar) e sempre encontre o caminho para lugares já conhecidos. Requer mínimo de 5 Fo."
+          "type": "paragraph",
+          "text": "Estribeiro. Vende montarias, geralmente equinos, e cuida das montarias dos personagens quando não estão em uso, evitando que consumam xpl. Todos os equinos possuem as características Carregador e Corredor."
         },
         {
           "type": "list",
           "style": "unordered",
           "title": "Tipos de Equinos",
           "items": [
+            "Treinamento. Concede a um animal a característica Treinado, ele será capaz de obedecer ordens simples, como buscar, vir, ir, esperar, deitar, rolar, procurar, assim como sempre encontrará o caminho para qualquer lugar em que já esteve. Mínimo de 5 Fo.",
             "Equino Pequeno. Mulas, burros, pôneis, garranos. F2 V4 D3 A2 I1 S5. Patada, 1d3 de dano de contusão. Média de 5 a 10 Fo.",
             "Equino Médio. Cavalo de tração (para trabalho pesado), palafrém (de transporte e estimação). F4 V4 D5 A3 I2 S3. Patada, 1d6 de dano de contusão. Média de 10 a 20 Fo.",
             "Equino Grande. Cavalo de batalha (criado para combate), corcel sangue-morno (de linhagem mista), puro-sangue (de linhagem pura). F5 V4 D6 A3 I2 S4. Patada, causa 1d6+2 de dano de contusão. Mínimo de 20 Fo."
