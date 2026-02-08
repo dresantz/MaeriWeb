@@ -6,13 +6,178 @@
   "sections": [
     {
       "id": "o-que-sao-seres",
-      "title": "O Que São Seres",
+      "title": "O que são Seres",
       "content": [
         {
           "type": "paragraph",
-          "text": "Texto."
+          "text": "Ser é o termo usado para as criaturas que o jogador pode interpretar em seus jogos, incluindo humanos. Em outros RPGs esse termo pode ser encontrado como Raça ou Espécie. Nesse livro são introduzidos oito seres jogáveis com regras únicas, as quais o jogador pode escolher interpretar sem nenhum tipo de custo extra. Lembrando: as características associadas exclusivamente a um ser são chamadas de Anatômicas."
+        },
+        {
+          "type": "paragraph",
+          "text": "Os humanos são os seres dominantes em Maeri, porém, se você somar os números de todos os outros seres descritos aqui, os humanos estarão em desvantagem. Boa parte da população de uma cidade ou região é de seres diferentes, e existem inúmeras comunidades exclusivas deles, sendo que as relações entre os diferentes seres são as mais variadas possíveis."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "items": [
+            "Nenhuma das características anatômicas faz algo além do que está descrito, qualquer uso criativo da característica deve ser acordado com o mestre e o grupo.",
+            "Qualquer característica que não estiver especificada na descrição de um ser poderá ser considerada exatamente igual a de um humano comum, ou o mais próximo possível.",
+            "A não ser que especificado o contrário em alguma das características anatômicas, seres podem adquirir quaisquer Estudos e características de classe."
+          ]
         }
-        ]
+      ]
+    },
+    {
+      "id": "humano",
+      "title": "Humano",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Balanceados. Ao terminar de distribuir os pontos da mentalidade, ganham +1 ponto para distribuir em uma característica em que não tenha sido colocado nenhum."
+        },
+        {
+          "type": "paragraph",
+          "text": "Descrição. São os seres mais comuns de Maeri, tão numerosos que, se somar os números de todos os outros seres, ainda não será possível alcançar a quantidade total de humanos. Eles são bastante diversos e os outros seres de Maeri costumam vê-los como inconstantes e confusos."
+        }
+      ]
+    },
+    {
+      "id": "oniro",
+      "title": "Oniro",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Asas. São capazes de voos com sua D em velocidade por uma quantidade de turnos equivalente ao seu V antes de ficarem Exaustos por uma cena, são capazes de carregar sua F-2 em voo, sofrem Queda se sofrerem dano e ficam Caídos."
+        },
+        {
+          "type": "paragraph",
+          "text": "Descrição. Oniros são como mariposas gigantes humanoides, variando nas mesmas cores das mais diversas espécies, possuem antenas delicadas em formato de folha que são seus receptores olfativos (eles não possuem narinas) e estabilizadores de voo, olhos grandes e uma juba ao redor do pescoço, eles possuem a peculiaridade de adorar coisas brilhantes. Oniros surgem no mundo de maneira totalmente diferente do normal, pois eles não nascem, eles são sonhados. Sonhadores poderosos, capazes de criar oniros, são chamados de mestres da noite, e tornam-se nobres nas sociedades de Oniros."
+        }
+      ]
+    },
+    {
+      "id": "dredlim",
+      "title": "Dredlim",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Sangue Grosso. São imunes a ferimentos, mesmo que recebam dano maior que sua V."
+        },
+        {
+          "type": "paragraph",
+          "text": "Olho Negro. Teste de A permite que enxerguem a energia da morte, rastros de fantasmas, pessoas condenadas, rastros de portais para o mundo dos mortos e qualquer outra coisa relacionada à morte."
+        },
+        {
+          "type": "paragraph",
+          "text": "Carniçais. São imunes a doenças naturais, podem comer carne crua ou podre sem penalidades."
+        },
+        {
+          "type": "paragraph",
+          "text": "Descrição. São humanos cuja pele varia em tons de cinza, o olho direito é totalmente negro. A partir desse olho, marcas brancas ou negras se espalham na pele nas mais diversas variações, de listras retas ou raiadas, até ondulações, manchas e círculos; alguns parecem desenhados e outros totalmente aleatórios. Dredlins são criaturas que desafiam o conceito de vida e morte, pois existem entre ambos os estados. Isso significa que eles possuem características de vivos, como órgãos funcionais, e outras de mortos, como a de não ser afetado por doenças naturais. Um dredlim nasce morto a partir de humanos comuns e, se o destino lhe conferir a benção de não ter seu corpo destruído, ele renasce depois de alguns dias já com o olho negro. Se o bebê for resgatado, ele crescerá normalmente até a idade adulta, quando então simplesmente irá começar a envelhecer muito mais lentamente."
+        }
+      ]
+    },
+    {
+      "id": "karnakin",
+      "title": "Karnakin",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Visão Quadrimensional. Eles são capazes de projetar sua visão em qualquer lugar a 1 Esp de distância, mesmo através de paredes."
+        },
+        {
+          "type": "paragraph",
+          "text": "Órbita. Eles são capazes de levitar objetos que estejam a até 1 Esp de distância deles com F igual a 1, não permite atacar e não conta como um objeto empunhado para o caso de itens mágicos."
+        },
+        {
+          "type": "paragraph",
+          "text": "Premonição. Adquirem um ponto de Segredo não cumulativo por repouso total; não gastando, o ponto se perde. O ponto pode ser gasto apenas para adquirir +1 em qualquer característica por apenas um teste."
+        },
+        {
+          "type": "paragraph",
+          "text": "Descrição. São criaturas humanoides cuja pele quase não reflete luz, fazendo com que sejam praticamente uma silhueta negra. Seus cabelos variam apenas em duas cores: branco como osso, ou na mesma cor da pele. Apenas duas coisas se distinguem na profunda escuridão dos seus corpos: uma boca sem lábios e um par de olhos arredondados preenchidos por apenas uma cor, geralmente branca ou amarela. Karnakins são geralmente estudiosos; sua visão quadrimensional os permite, por exemplo, ler as páginas de um livro sem precisar abri-lo. Eles adoram procedimentos e regras, é muito comum que adotem práticas e rituais para complementar suas rotinas e se sentem incomodados quando essas práticas são quebradas."
+        }
+      ]
+    },
+    {
+      "id": "mogu",
+      "title": "Mogu",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Camuflagem. Eles são capazes de cobrir corpo e roupas como uma camada de esporos da coloração variada, recebendo +2D para testes de ocultar. Esses esporos podem ser bioluminescentes."
+        },
+        {
+          "type": "paragraph",
+          "text": "Decomposição. Eles não possuem dentes; sua boca decompõe matéria orgânica quando eles querem comer. Eles não atacam com a boca mais do que um humano comum, mas suas mordidas causam dano necrótico. São imunes a envenenamento."
+        },
+        {
+          "type": "paragraph",
+          "text": "Descrição. A principal característica que os distingue é possuírem chapéus de cogumelos na cabeça no lugar de cabelo, e esse chapéu pode ser de praticamente qualquer espécie de cogumelo natural e funciona como cabelo; cortá-lo não os machuca e pode crescer novamente. A quantidade de cores e variações dos mogu são inúmeras, e mesmo que nasçam de pais iguais eles podem sair totalmente diferentes. Mogus são capazes de manipular esporos que saem dos seus corpos, muito parecido com uma poeira densa, para se camuflar ou criar luz. Sua digestão produz álcool e outros elementos psicotrópicos, por isso eles parecem sempre estar sob o efeito de algo. Eles nascem de pequenos ovos, que são enterrados pelos pais e então nascem primeiro como cogumelos em meio a vários outros, e os que ficam maiores e mais fortes se tornam crianças mogu. Em comunidades exclusivas de mogus, raramente possuem relação paternal, pois são incubados juntos de outros mogu e criados por todos."
+        }
+      ]
+    },
+    {
+      "id": "caribo",
+      "title": "Caribo",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Calda. Um quinto membro com três vezes o alcance do braço, permite pegar itens, mas não atacar, +1F em teste de segurar (F)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Ágeis. Possuem um gesto extra por turno para coisas que não envolvam ataques, magia e ações de combate no geral."
+        },
+        {
+          "type": "paragraph",
+          "text": "Resistência. Sofre -1 de dano de um tipo elemental quase sempre associado à sua origem."
+        },
+        {
+          "type": "paragraph",
+          "text": "Descrição. Caribos são humanoides com uma média de altura menor que a dos humanos, cobertos por uma fina camada de pelugem que varia muito de cor. Suas orelhas são enormes e peludas, do tamanho de um antebraço; possuem caldas longas como de um macaco e seus olhos são como os de gatos. Além disso, caribos mais velhos também podem desenvolver pequenas galhadas. A característica que mais se destaca, porém, é a joia vermelha na testa que brilha como carvão quente. A grande maioria das sociedades de caribos vive nas florestas, onde costumam ganhar a tonalidade marrom; em cavernas nascem os cinzentos; em montanhas, os azuis; existem os rosados nos prados floridos e os verdes dos pântanos, entre outros. Eles são ferrenhos defensores dos lugares onde formam suas sociedades devido à maneira como se reproduzem. A joia em suas testas é, na verdade, uma semente. Quando eles morrem, essa semente cai no chão e, com o tempo, mesmo que caia na rocha, ela se torna uma árvore multicolorida, parcialmente espelhada, que absorve as cores do local em que está e emana uma aura mística. Cada árvore dá cerca de quarenta até oitenta frutos antes de morrer, e em alguns desses frutos são gerados novos caribos. A cor do caribo é determinada pelo local onde a árvore foi plantada."
+        }
+      ]
+    },
+    {
+      "id": "conchilu",
+      "title": "Conchilu",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Casca. Só podem ser flanqueados por três em vez de quatro inimigos; como dormem dentro da casca, não ficam indefesos dormindo."
+        },
+        {
+          "type": "paragraph",
+          "text": "Pele Rígida. Recebem +1 Vit extra."
+        },
+        {
+          "type": "paragraph",
+          "text": "Casa. Eles recebem +2F para calcular limites de carga e peso do conchilu."
+        },
+        {
+          "type": "paragraph",
+          "text": "Descrição. Conchilus são humanoides de proporções semelhantes às humanas, mas com traços de caramujo, inclusive uma enorme concha espiral nas costas que possui cerca de metade do seu peso corporal total. Sua pele espessa possui a textura de couro; seus rostos possuem uma pequena boca com duas pequenas extensões membranosas nas laterais ou no queixo que lembram bigodes, e os olhos podem ser estendidos por cerca de dois palmos para fora do rosto na ponta de hastes que parecem antenas. Conchilus são pacatos, mas adoram sair em viagens, pois costumam dizer que estão sempre levando suas casas consigo. Diferente de gastrópodes comuns, eles não possuem órgãos dentro da concha; na verdade, não há nada lá, o que os permite guardar coisas lá dentro. Isso, somado à sua capacidade de tração, fez com que fossem imediatamente incorporados em sociedades humanas como transportadores. Conchilus já possuíam pequenas sociedades e um comércio bastante ativo e, quando os humanos tentaram utilizar seus serviços de forma forçada, eles resistiram e lutaram, o que acabou exterminando várias famílias de conchilus."
+        }
+      ]
+    },
+    {
+      "id": "kerbero",
+      "title": "Kerbero",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Latido. São capazes de projetar sua força através de poderosos gritos de guerra, podendo usar Empurrar com F, à distância de F em Esp."
+        },
+        {
+          "type": "paragraph",
+          "text": "Fúria. Com um gesto eles recebem +1 para testes de intimidação, +1 Esp de movimento e +1V para testes e embates durante combate ou cena."
+        },
+        {
+          "type": "paragraph",
+          "text": "Descrição. São humanoides de unhas negras afiadas, pernas digitígradas como de cães, orelhas pontudas e dentes fortes com caninos protuberantes. Kerberos revelam sua verdadeira forma quando sob grande estresse; seus olhos se tornam totalmente negros, sua boca dispersa fumaça, seus músculos enrijecem e algo como fuligem parece se desprender deles, flutuando e desaparecendo no ar. Outra característica que se destaca neles é a potência de suas vozes, capazes de empurrar alguém que esteja diante deles. Kerberos são os únicos seres diferentes capazes de se reproduzir com humanos, sendo que o fruto dessas relações tem a mesma chance de nascer humano ou kerbero e, em alguns casos, a criança nasce humana, porém, um dia, quando exposta ao estresse, se transforma em kerbero."
+        }
+      ]
     }
-    ]
+  ]
 }

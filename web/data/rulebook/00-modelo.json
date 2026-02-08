@@ -1,0 +1,27 @@
+{
+  "id": "titulo",
+  "title": "Capítulo Zero - Título",
+  "order": 0,
+  "description": "modelo de json.",
+  "sections": [
+    {
+      "id": "primeiro-topico",
+      "title": "Primeiro Tópico",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Texto."
+        },
+        {
+            "type":"list",
+            "style": "unordered",
+            "items":[
+                "item 1",
+                "item 2",
+                "item 3"
+            ]
+        }
+        ]
+    }
+    ]
+}
