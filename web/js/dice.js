@@ -127,8 +127,13 @@ function initDiceToggle() {
   const diceToggle = document.getElementById("dice-toggle");
   const dicePanel = document.getElementById("dice-panel");
   const diceOverlay = document.getElementById("dice-overlay");
+  const diceClose = document.getElementById("dice-close");
 
   if (!diceToggle || !dicePanel || !diceOverlay) return;
+
+  if (diceClose) {
+    diceClose.addEventListener("click", closeDice);
+  }
 
   const STORAGE_KEY = "maeriDiceOpen";
 
