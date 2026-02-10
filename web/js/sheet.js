@@ -38,7 +38,16 @@ document.addEventListener("DOMContentLoaded", () => {
   clearButton.addEventListener("click", () => {
     confirmBox.hidden = false;
     clearButton.disabled = true;
+
+    // espera o layout atualizar antes de rolar
+    requestAnimationFrame(() => {
+      confirmBox.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
+    });
   });
+
 
   cancelClear.addEventListener("click", () => {
     confirmBox.hidden = true;
