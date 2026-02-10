@@ -18,22 +18,6 @@
    Floating Dice Roller
 ========================= */
 
-#dice-toggle {
-  position: fixed;
-  bottom: 1rem;
-  left: 1rem;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  background-color: var(--accent-color);
-  color: #121212;
-  border: none;
-  cursor: pointer;
-  z-index: 1000;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
 #dice-panel {
   position: fixed;
   bottom: 0;
