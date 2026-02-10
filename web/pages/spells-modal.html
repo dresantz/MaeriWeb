@@ -1,0 +1,54 @@
+<!-- =========================
+     Spells Modal
+========================== -->
+
+<!-- Overlay -->
+<div
+  id="spells-overlay"
+  class="spells-overlay"
+  aria-hidden="true"
+  inert
+></div>
+
+<!-- Modal -->
+<section
+  id="spells-modal"
+  class="spells-modal"
+  aria-hidden="true"
+  inert
+>
+
+  <header class="spells-header">
+    <h2>Magias</h2>
+
+    <button
+      id="spells-close"
+      class="spells-close"
+      aria-label="Close Spells"
+    >
+      ✕
+    </button>
+  </header>
+
+  <div class="spells-toolbar">
+
+    <input
+      type="search"
+      id="spells-search"
+      placeholder="Buscar magia..."
+      aria-label="Search spells"
+    />
+
+    <div class="spells-sort">
+      <button data-sort="name" class="active">A–Z</button>
+      <button data-sort="school">Escola</button>
+      <button data-sort="level">Nível</button>
+    </div>
+
+  </div>
+
+  <div class="spells-content">
+    <ul id="spells-list" class="spells-list"></ul>
+  </div>
+
+</section>

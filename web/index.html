@@ -6,12 +6,6 @@
 
   <title>Maeri RPG</title>
 
-  <!-- Basic metadata -->
-  <meta
-    name="description"
-    content="Maeri is an original tabletop role-playing game system. Play using only your smartphone."
-  />
-
   <!-- Styles -->
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/floatingButtons.css" />
@@ -20,348 +14,70 @@
   <link rel="stylesheet" href="css/notpat.css" />
   <link rel="stylesheet" href="css/sheet.css" />
   <link rel="stylesheet" href="css/spells.css" />
-
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
-
 </head>
 
 <body>
-
-  <!-- =========================
-        Header
-  ========================== -->
   <header class="app-header">
     <h1>Maeri RPG</h1>
   </header>
 
-  <!-- =========================
-        Main Navigation
-  ========================== -->
   <main class="home">
-
     <nav class="main-menu" aria-label="Main navigation">
-
       <div class="menu-row">
-        <a href="pages/rulebook.html" class="menu-button">
-          📚 Livros
-        </a>
-
-        <a href="pages/shield.html" class="menu-button">
-          🛡️ Escudo
-        </a>
+        <a href="pages/rulebook.html" class="menu-button">📚 Livros</a>
+        <a href="pages/shield.html" class="menu-button">🛡️ Escudo</a>
       </div>
-
       <div class="menu-row">
-        <a href="pages/lore.html" class="menu-button">
-          📖 Lore
-        </a>
-
-        <a href="pages/construction.html" class="menu-button">
-          🧱 Construção
-        </a>
+        <a href="pages/lore.html" class="menu-button">📖 Lore</a>
+        <a href="pages/construction.html" class="menu-button">🧱 Construção</a>
       </div>
-
     </nav>
 
-    <!-- =========================
-          News / Patch Notes
-    ========================== -->
     <section class="notpat-section">
-
-      <button
-        id="notpat-toggle"
-        class="notpat-button"
-        aria-pressed="false"
-      >
-        Notícias
-      </button>
-
-      <div
-        id="notpat-content"
-        class="notpat-content"
-        aria-live="polite"
-      >
+      <button id="notpat-toggle" class="notpat-button" aria-pressed="false">Notícias</button>
+      <div id="notpat-content" class="notpat-content" aria-live="polite">
         <ul class="news-list">
           <li><strong>29/01</strong> — Bem-vindo ao Maeri RPG WebApp.</li>
           <li><strong>30/01</strong> — Sistema de dados atualizado.</li>
           <li><strong>31/01</strong> — Nova interface mobile-first.</li>
         </ul>
       </div>
-
     </section>
-
   </main>
 
-  <!-- =========================
-        Floating Action Buttons
-  ========================== -->
   <aside class="floating-actions" aria-label="Quick actions">
-
-    <button
-      id="sheet-button"
-      class="floating-button floating-button--pill floating-button--primary"
-      aria-label="Open Character Sheet"
-    >
-      Ficha
-    </button>
-
-    <button
-      id="spells-button"
-      class="floating-button floating-button--pill floating-button--secondary"
-      aria-label="Open Spells"
-    >
-      Magias
-    </button>
-
-    <button
-      id="dice-toggle"
-      class="floating-button floating-button--pill"
-      aria-label="Open Dice Roller"
-      aria-expanded="false"
-    >
-      Dados
-    </button>
-
+    <button id="sheet-button" class="floating-button floating-button--pill floating-button--primary" aria-label="Open Character Sheet">Ficha</button>
+    <button id="spells-button" class="floating-button floating-button--pill floating-button--secondary" aria-label="Open Spells">Magias</button>
+    <button id="dice-toggle" class="floating-button floating-button--pill" aria-label="Open Dice Roller" aria-expanded="false">Dados</button>
   </aside>
 
-  <!-- =========================
-        Dice Roller (Global)
-  ========================== -->
-  <!-- Overlay -->
-  <div id="dice-overlay"></div>
+  <!-- Root onde os modais serão injetados -->
+  <div id="modal-root"></div>
 
-  <!-- Panel -->
-  <div id="dice-panel">
-    <div class="dice-content">
+  <!-- 🔹 Scripts -->
+  <!-- Primeiro o notpad.js (sem módulo) -->
+  <script src="js/notpad.js" defer></script>
+  
+  <!-- Depois os módulos -->
+<script type="module">
+  import { loadGlobalModals } from "./js/modalLoader.js";
 
-      <header class="dice-header">
-        <h2>Dice Roller</h2>
-        <button id="dice-close" aria-label="Close">✕</button>
-      </header>
+  console.log('🚀 Starting Maeri RPG app...');
 
-      <section id="dice-buttons">
-        <div class="dice-btn" data-sides="2">
-          <button>d2</button>
-          <span class="counter" id="count-d2">0</span>
-        </div>
+  // Carregar scripts dependentes após modais
+  document.addEventListener('modals:loaded', () => {
+    console.log('📦 Loading dependent modules...');
+    import("./js/dice.js").then(() => console.log('🎲 Dice loaded'));
+    import("./js/sheet.js").then(() => console.log('📄 Sheet loaded'));
+    import("./js/spells.js").then(() => console.log('✨ Spells loaded'));
+  });
 
-        <div class="dice-btn" data-sides="3">
-          <button>d3</button>
-          <span class="counter" id="count-d3">0</span>
-        </div>
-
-        <div class="dice-btn" data-sides="6">
-          <button>d6</button>
-          <span class="counter" id="count-d6">0</span>
-        </div>
-      </section>
-
-      <section class="dice-actions">
-        <button id="roll-button" class="button">Roll</button>
-        <button id="clear-all" class="button">Clear</button>
-      </section>
-
-      <section id="result">
-        <div class="result-line">
-          <strong>Rolls:</strong>
-          <span id="result-output">—</span>
-        </div>
-
-        <div class="result-line total">
-          <strong>Total:</strong>
-          <span id="total-output">—</span>
-        </div>
-      </section>
-
-      <section id="history">
-        <h3>History</h3>
-        <ul id="history-output"></ul>
-        <button id="clear-history" class="button">Clear</button>
-      </section>
-
-    </div>
-  </div>
-
-<!-- =========================
-     Spells Modal
-========================== -->
-
-<!-- Overlay -->
-<div
-  id="spells-overlay"
-  class="spells-overlay"
-  aria-hidden="true"
-  inert
-></div>
-
-<!-- Modal -->
-<section
-  id="spells-modal"
-  class="spells-modal"
-  aria-hidden="true"
-  inert
->
-
-  <!-- Header -->
-  <header class="spells-header">
-    <h2>Magias</h2>
-
-    <button
-      id="spells-close"
-      class="spells-close"
-      aria-label="Close Spells"
-    >
-      ✕
-    </button>
-  </header>
-
-  <!-- Toolbar -->
-  <div class="spells-toolbar">
-
-    <input
-      type="search"
-      id="spells-search"
-      placeholder="Buscar magia..."
-      aria-label="Search spells"
-    />
-
-    <div class="spells-sort">
-      <button data-sort="name" class="active">A–Z</button>
-      <button data-sort="school">Escola</button>
-      <button data-sort="level">Nível</button>
-    </div>
-
-  </div>
-
-  <!-- Content -->
-  <div class="spells-content">
-    <ul id="spells-list" class="spells-list"></ul>
-  </div>
-
-</section>
-
-  <!-- =========================
-        Character Sheet Modal
-  ========================== -->
-
-  <!-- Overlay -->
-  <div
-    id="sheet-overlay"
-    class="sheet-overlay"
-    aria-hidden="true"
-    inert
-  ></div>
-
-  <!-- Modal -->
-  <section
-    id="sheet-modal"
-    class="sheet-modal"
-    aria-hidden="true"
-    inert
-  >
-
-    <header class="sheet-header">
-      <h2 id="sheet-title">Ficha de Personagem</h2>
-
-      <button
-        id="sheet-close"
-        class="sheet-close"
-        aria-label="Close Character Sheet"
-      >
-        ✕
-      </button>
-    </header>
-
-    <div class="sheet-content">
-
-      <section class="sheet-section">
-        <label for="character-name">Personagem</label>
-        <input
-          type="text"
-          id="character-name"
-          name="characterName"
-          placeholder="Nome do personagem"
-        />
-      </section>
-
-      <section class="sheet-section attributes">
-        <h3>Atributos</h3>
-
-        <div class="attributes-grid">
-          <label>F <input type="number" min="0" name="attrF" /></label>
-          <label>V <input type="number" min="0" name="attrV" /></label>
-          <label>D <input type="number" min="0" name="attrD" /></label>
-          <label>S <input type="number" min="0" name="attrS" /></label>
-          <label>I <input type="number" min="0" name="attrI" /></label>
-          <label>A <input type="number" min="0" name="attrA" /></label>
-        </div>
-      </section>
-
-      <section class="sheet-section">
-        <label for="character-info">Informações</label>
-        <textarea
-          id="character-info"
-          name="characterInfo"
-          placeholder="Habilidades, estudos, magias, anotações..."
-          rows="6"
-        ></textarea>
-      </section>
-
-      <section class="sheet-section">
-        <label for="character-items">Itens</label>
-        <textarea
-          id="character-items"
-          name="characterItems"
-          placeholder="Inventário do personagem"
-          rows="4"
-        ></textarea>
-      </section>
-
-      <section class="sheet-section sheet-danger">
-        <button
-          id="clear-sheet-button"
-          class="sheet-clear-button"
-          type="button"
-        >
-          Limpar ficha
-        </button>
-
-        <div
-          id="clear-confirmation"
-          class="clear-confirmation"
-          hidden
-        >
-          <p>Tem certeza? Essa ação não pode ser desfeita.</p>
-
-          <div class="clear-actions">
-            <button
-              id="confirm-clear-sheet"
-              class="danger"
-              type="button"
-            >
-              Sim, apagar
-            </button>
-
-            <button
-              id="cancel-clear-sheet"
-              type="button"
-            >
-              Cancelar
-            </button>
-          </div>
-        </div>
-      </section>
-
-    </div>
-  </section>
-
-  <!-- =========================
-        Scripts
-  ========================== -->
-  <script src="js/dice.js"></script>
-  <script type="module" src="js/sheet.js"></script>
-  <script src="js/notpad.js"></script>
-  <script src="js/spells.js"></script>
-
+  // Inicializar modais
+  console.log('🔧 Loading global modals...');
+  loadGlobalModals().catch(err => {
+    console.error('❌ Failed to load modals:', err);
+  });
+</script>
+  </script>
 </body>
 </html>

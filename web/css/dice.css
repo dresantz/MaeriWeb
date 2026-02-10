@@ -118,12 +118,9 @@
   height: 52px;
   border-radius: 10px;
   font-size: 1rem;
-
-  background: var(--accent-color);
-  color: #121212;
-  border: none;
-
   cursor: pointer;
+  border: 1px solid var(--gold);
+  background: linear-gradient(145deg, var(--gold), #a98c45);
 }
 
 .dice-btn .counter {

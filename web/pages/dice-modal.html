@@ -1,0 +1,58 @@
+<!-- =========================
+     Dice Roller
+========================== -->
+
+<!-- Overlay -->
+<div id="dice-overlay"></div>
+
+<!-- Panel -->
+<div id="dice-panel">
+  <div class="dice-content">
+
+    <header class="dice-header">
+      <h2>Dice Roller</h2>
+      <button id="dice-close" aria-label="Close">✕</button>
+    </header>
+
+    <section id="dice-buttons">
+      <div class="dice-btn" data-sides="2">
+        <button>d2</button>
+        <span class="counter" id="count-d2">0</span>
+      </div>
+
+      <div class="dice-btn" data-sides="3">
+        <button>d3</button>
+        <span class="counter" id="count-d3">0</span>
+      </div>
+
+      <div class="dice-btn" data-sides="6">
+        <button>d6</button>
+        <span class="counter" id="count-d6">0</span>
+      </div>
+    </section>
+
+    <section class="dice-actions">
+      <button id="roll-button" class="button">Roll</button>
+      <button id="clear-all" class="button">Clear</button>
+    </section>
+
+    <section id="result">
+      <div class="result-line">
+        <strong>Rolls:</strong>
+        <span id="result-output">—</span>
+      </div>
+
+      <div class="result-line total">
+        <strong>Total:</strong>
+        <span id="total-output">—</span>
+      </div>
+    </section>
+
+    <section id="history">
+      <h3>History</h3>
+      <ul id="history-output"></ul>
+      <button id="clear-history" class="button">Clear</button>
+    </section>
+
+  </div>
+</div>

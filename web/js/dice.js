@@ -1,5 +1,6 @@
 /* =========================
    Maeri RPG – Global Dice Roller
+   Robust Version | Waits for modals
 ========================= */
 
 /* ---------- Utilities ---------- */
@@ -8,7 +9,24 @@ function rollDie(sides) {
   return Math.floor(Math.random() * sides) + 1;
 }
 
-/* ---------- Dice Roller Component ---------- */
+/* =========================
+   Main Init
+========================= */
+
+function initDiceSystem() {
+  /* =========================
+     Prevent double init
+  ========================= */
+  if (document.body.dataset.diceInitialized === "true") return;
+  document.body.dataset.diceInitialized = "true";
+
+  initDiceRoller();
+  initDiceToggle();
+}
+
+/* =========================
+   Dice Roller Component
+========================= */
 
 function initDiceRoller() {
   const diceButtons = document.querySelectorAll(".dice-btn");
@@ -24,7 +42,7 @@ function initDiceRoller() {
   const dicePool = {
     2: 0,
     3: 0,
-    6: 0
+    6: 0,
   };
 
   const MAX_DICE = 16;
@@ -34,8 +52,7 @@ function initDiceRoller() {
     return Object.values(dicePool).reduce((sum, qty) => sum + qty, 0);
   }
 
-/* ---------- Visual Control Dice Limit ---------- */
-
+  /* ---------- Visual Control Dice Limit ---------- */
   function updateLimitState() {
     const limitReached = getTotalDice() >= MAX_DICE;
 
@@ -63,7 +80,6 @@ function initDiceRoller() {
 
       updateLimitState();
     });
-
   });
 
   /* ---------- Roll ---------- */
@@ -103,7 +119,8 @@ function initDiceRoller() {
   clearAllButton.addEventListener("click", () => {
     Object.keys(dicePool).forEach(sides => {
       dicePool[sides] = 0;
-      document.getElementById(`count-d${sides}`).textContent = "0";
+      const counter = document.getElementById(`count-d${sides}`);
+      if (counter) counter.textContent = "0";
     });
 
     resultOutput.textContent = "—";
@@ -121,7 +138,9 @@ function initDiceRoller() {
   }
 }
 
-/* ---------- Floating Toggle ---------- */
+/* =========================
+   Floating Toggle
+========================= */
 
 function initDiceToggle() {
   const diceToggle = document.getElementById("dice-toggle");
@@ -131,14 +150,11 @@ function initDiceToggle() {
 
   if (!diceToggle || !dicePanel || !diceOverlay) return;
 
-  if (diceClose) {
-    diceClose.addEventListener("click", closeDice);
-  }
+  if (diceClose) diceClose.addEventListener("click", closeDice);
 
   const STORAGE_KEY = "maeriDiceOpen";
 
   function forceReflow() {
-    // leitura síncrona que força o browser a recalcular layout
     document.documentElement.getBoundingClientRect();
   }
 
@@ -146,12 +162,8 @@ function initDiceToggle() {
     dicePanel.classList.add("open");
     diceOverlay.classList.add("active");
 
-    // força o layout a reconhecer os elementos fixed
     forceReflow();
-
     document.body.classList.add("no-scroll");
-
-    // força novo reflow após mudar overflow
     forceReflow();
 
     localStorage.setItem(STORAGE_KEY, "true");
@@ -162,9 +174,7 @@ function initDiceToggle() {
     diceOverlay.classList.remove("active");
 
     forceReflow();
-
     document.body.classList.remove("no-scroll");
-
     forceReflow();
 
     localStorage.setItem(STORAGE_KEY, "false");
@@ -174,44 +184,43 @@ function initDiceToggle() {
     dicePanel.classList.contains("open") ? closeDice() : openDice();
   }
 
-  // Toggle button
   diceToggle.addEventListener("click", toggleDice);
-
-  // Click outside (overlay)
   diceOverlay.addEventListener("click", closeDice);
 
-/* ---------- Restore state (after layout) ---------- */
-  if (localStorage.getItem(STORAGE_KEY) === "true") {
-    window.addEventListener("load", () => {
-      openDice();
-    }, { once: true });
-  }
+  // Restore state
+  if (localStorage.getItem(STORAGE_KEY) === "true") openDice();
 
-  /* ---------- Swipe Down to Close ---------- */
+  // Swipe down to close
   let startY = null;
 
-  dicePanel.addEventListener("touchstart", (e) => {
+  dicePanel.addEventListener("touchstart", e => {
     startY = e.touches[0].clientY;
   });
 
-  dicePanel.addEventListener("touchend", (e) => {
+  dicePanel.addEventListener("touchend", e => {
     if (startY === null) return;
 
     const endY = e.changedTouches[0].clientY;
     const diffY = endY - startY;
 
-    // Swipe down threshold
-    if (diffY > 80) {
-      closeDice();
-    }
-
+    if (diffY > 80) closeDice();
     startY = null;
   });
 }
 
-/* ---------- Init on DOM Ready ---------- */
+/* =========================
+   Wait for modals to exist
+========================= */
 
-document.addEventListener("DOMContentLoaded", () => {
-  initDiceRoller();
-  initDiceToggle();
-});
+function waitForModalsAndInit() {
+  const dicePanelExists = () => document.getElementById("dice-panel");
+
+  if (dicePanelExists()) {
+    initDiceSystem();
+  } else {
+    document.addEventListener("modals:loaded", initDiceSystem);
+  }
+}
+
+// Auto-init
+waitForModalsAndInit();

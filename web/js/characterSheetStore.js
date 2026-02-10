@@ -10,11 +10,9 @@ const STORAGE_KEY = "maeri.characterSheet.v1";
  */
 const DEFAULT_SHEET = {
   version: 1,
-
   character: {
     name: ""
   },
-
   attributes: {
     F: 0,
     V: 0,
@@ -23,10 +21,8 @@ const DEFAULT_SHEET = {
     I: 0,
     A: 0
   },
-
   info: "",
   items: "",
-
   updatedAt: null
 };
 
@@ -34,6 +30,9 @@ const DEFAULT_SHEET = {
  * Internal in-memory state
  */
 let sheetState = null;
+
+// 🔹 Controle para evitar loops de sincronização
+let isSyncing = false;
 
 /* =========================
    Helpers
@@ -51,6 +50,69 @@ function clone(obj) {
  */
 function touch(sheet) {
   sheet.updatedAt = new Date().toISOString();
+}
+
+/**
+ * Validar e mesclar dados recebidos
+ */
+function validateAndMerge(current, incoming) {
+  if (!incoming || incoming.version !== DEFAULT_SHEET.version) {
+    return current;
+  }
+  
+  return {
+    ...current,
+    character: {
+      ...current.character,
+      ...(incoming.character || {})
+    },
+    attributes: {
+      ...current.attributes,
+      ...(incoming.attributes || {})
+    },
+    info: incoming.info !== undefined ? incoming.info : current.info,
+    items: incoming.items !== undefined ? incoming.items : current.items,
+    updatedAt: incoming.updatedAt || current.updatedAt
+  };
+}
+
+/* =========================
+   Sincronização entre abas
+========================= */
+
+/**
+ * Inicializar sincronização via eventos storage
+ */
+export function initSheetSync() {
+  // 🔹 Ouvir alterações no localStorage de outras abas
+  window.addEventListener('storage', (event) => {
+    if (event.key === STORAGE_KEY && event.newValue && !isSyncing) {
+      try {
+        isSyncing = true;
+        const incoming = JSON.parse(event.newValue);
+        
+        // Mesclar dados recebidos
+        if (sheetState) {
+          sheetState = validateAndMerge(sheetState, incoming);
+        } else {
+          sheetState = incoming;
+        }
+        
+        // 🔹 Disparar evento para atualizar a UI
+        window.dispatchEvent(new CustomEvent('characterSheet:updated', {
+          detail: sheetState
+        }));
+        
+        console.log('📡 Ficha sincronizada de outra aba');
+      } catch (error) {
+        console.error('Erro na sincronização:', error);
+      } finally {
+        isSyncing = false;
+      }
+    }
+  });
+  
+  console.log('Sincronização de ficha inicializada');
 }
 
 /* =========================
@@ -101,18 +163,24 @@ export function getCharacterSheet() {
 /**
  * Persist current sheet state to localStorage
  */
-export function saveCharacterSheet() {
+function saveToStorage() {
   if (!sheetState) return;
-
+  
   touch(sheetState);
-
+  
   try {
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(sheetState)
-    );
+    isSyncing = true;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(sheetState));
+    
+    // 🔹 Disparar evento customizado para a aba atual
+    window.dispatchEvent(new CustomEvent('characterSheet:saved', {
+      detail: sheetState
+    }));
+    
   } catch (error) {
     console.error("Failed to save character sheet:", error);
+  } finally {
+    setTimeout(() => { isSyncing = false; }, 100);
   }
 }
 
@@ -121,7 +189,7 @@ export function saveCharacterSheet() {
  */
 export function resetCharacterSheet() {
   sheetState = clone(DEFAULT_SHEET);
-  saveCharacterSheet();
+  saveToStorage();
   return sheetState;
 }
 
@@ -130,23 +198,33 @@ export function resetCharacterSheet() {
 ========================= */
 
 export function setCharacterName(name) {
-  sheetState.character.name = name;
-  saveCharacterSheet();
+  if (!sheetState) loadCharacterSheet();
+  sheetState.character.name = String(name || "");
+  saveToStorage();
 }
 
 export function setAttribute(key, value) {
-  if (key in sheetState.attributes) {
-    sheetState.attributes[key] = Number(value) || 0;
-    saveCharacterSheet();
+  if (!sheetState) loadCharacterSheet();
+  
+  const validKeys = Object.keys(DEFAULT_SHEET.attributes);
+  if (validKeys.includes(key)) {
+    const numValue = parseInt(value) || 0;
+    sheetState.attributes[key] = Math.max(0, numValue);
+    saveToStorage();
   }
 }
 
 export function setInfo(text) {
-  sheetState.info = text;
-  saveCharacterSheet();
+  if (!sheetState) loadCharacterSheet();
+  sheetState.info = String(text || "");
+  saveToStorage();
 }
 
 export function setItems(text) {
-  sheetState.items = text;
-  saveCharacterSheet();
+  if (!sheetState) loadCharacterSheet();
+  sheetState.items = String(text || "");
+  saveToStorage();
 }
+
+// 🔹 Inicializar sincronização automaticamente quando o módulo carrega
+initSheetSync();
