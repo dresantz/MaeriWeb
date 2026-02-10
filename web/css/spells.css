@@ -33,7 +33,7 @@
 
   background-color: var(--bg-color);
 
-  transform: translateY(100%);
+  transform: translateY(120%);
   transition: transform 0.25s ease;
 
   z-index: 1000;
