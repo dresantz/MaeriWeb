@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="../css/toc.css" />
   <link rel="stylesheet" href="../css/dice.css" />
   <link rel="stylesheet" href="../css/rulebook.css" />
+  <link rel="stylesheet" href="../css/spells.css" />
   <link rel="stylesheet" href="../css/sheet.css" />
 </head>
 
@@ -315,9 +316,68 @@
   </section>
 
   <!-- =========================
+      Spells Modal
+  ========================== -->
+
+  <!-- Overlay -->
+  <div
+    id="spells-overlay"
+    class="spells-overlay"
+    aria-hidden="true"
+    inert
+  ></div>
+
+  <!-- Modal -->
+  <section
+    id="spells-modal"
+    class="spells-modal"
+    aria-hidden="true"
+    inert
+  >
+
+    <!-- Header -->
+    <header class="spells-header">
+      <h2>Magias</h2>
+
+      <button
+        id="spells-close"
+        class="spells-close"
+        aria-label="Close Spells"
+      >
+        ✕
+      </button>
+    </header>
+
+    <!-- Toolbar -->
+    <div class="spells-toolbar">
+
+      <input
+        type="search"
+        id="spells-search"
+        placeholder="Buscar magia..."
+        aria-label="Search spells"
+      />
+
+      <div class="spells-sort">
+        <button data-sort="name" class="active">A–Z</button>
+        <button data-sort="school">Escola</button>
+        <button data-sort="level">Nível</button>
+      </div>
+
+    </div>
+
+    <!-- Content -->
+    <div class="spells-content">
+      <ul id="spells-list" class="spells-list"></ul>
+    </div>
+
+  </section>
+
+  <!-- =========================
        Scripts
   ========================== -->
   <script type="module" src="../js/sheet.js"></script>
+  <script type="module" src="../js/spells.js"></script>
   <script src="../js/dice.js"></script>
   <script type="module" src="../js/rulebook/main.js"></script>
 

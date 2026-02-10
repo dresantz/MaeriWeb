@@ -5,13 +5,19 @@
 #dice-overlay {
   position: fixed;
   inset: 0;
-  background: transparent;
+
+  background: rgba(0, 0, 0, 0.65);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+
   z-index: 1000;
-  display: none;
 }
 
 #dice-overlay.active {
-  display: block;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* =========================
@@ -24,50 +30,77 @@
   left: 0;
   width: 100%;
   max-height: 80vh;
-  background-color: var(--card-color);
-  padding: 0.75rem;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--bg-color);
+
+  transform: translateY(110%);
+  transition: transform 0.25s ease;
+
   z-index: 1100;
-  overflow-y: auto;
-
-  box-sizing: border-box;
-
-  transform: translateY(100%);
-  opacity: 0;
-  pointer-events: none;
-
-  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
+/* aberto */
 #dice-panel.open {
   transform: translateY(0);
-  opacity: 1;
-  pointer-events: auto;
+}
+
+/* =========================
+   Header
+========================= */
+
+#dice-panel header {
+  position: relative;
+  text-align: center;
+
+  padding: 1rem;
+
+  background-color: var(--card-color);
+  border-bottom: 1px solid #2a2a2a;
+}
+
+#dice-panel h2 {
+  margin: 0;
+  font-size: 1.3rem;
 }
 
 #dice-close {
   position: absolute;
-  right: 0;
+  right: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  background: transparent;
+
+  background: none;
   border: none;
   color: var(--text-color);
   font-size: 1.2rem;
   cursor: pointer;
 }
 
-#dice-panel header {
-  position: relative;
-  text-align: center;
-  margin-bottom: 0.5rem;
+/* =========================
+   Content
+========================= */
+
+.dice-content {
+  flex: 1;
+  overflow-y: auto;
+
+  padding: 1rem;
+
+  width: 100%;
+  max-width: 680px;   /* pode ajustar */
+  margin: 0 auto;
+
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
-#dice-panel h2 {
-  margin: 0;
-}
+
+/* =========================
+   Dice Buttons
+========================= */
 
 #dice-buttons {
   display: flex;
@@ -85,9 +118,11 @@
   height: 52px;
   border-radius: 10px;
   font-size: 1rem;
+
   background: var(--accent-color);
   color: #121212;
   border: none;
+
   cursor: pointer;
 }
 
@@ -96,21 +131,6 @@
   margin-top: 0.25rem;
   font-size: 0.85rem;
   color: var(--muted-text);
-}
-
-.dice-actions {
-  display: flex;
-  gap: 0.5rem;
-  margin: 0.5rem 0;
-}
-
-.dice-actions button {
-  flex: 1;
-}
-
-.dice-content {
-  max-width: 580px;
-  margin: 0 auto;
 }
 
 .dice-btn.locked button {
@@ -124,8 +144,19 @@
   font-weight: bold;
 }
 
-.dice-btn.locked {
-  transition: opacity 0.2s ease;
+/* =========================
+   Actions
+========================= */
+
+.dice-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  width: 100%;
+}
+
+.dice-actions button {
+  flex: 1;
 }
 
 /* =========================
@@ -153,3 +184,10 @@
   border-bottom: 1px solid #333;
   font-size: 0.95rem;
 }
+
+#result-output,
+#total-output,
+#history-output li {
+  word-break: break-word;
+}
+
