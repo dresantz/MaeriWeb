@@ -1,8 +1,8 @@
 {
   "id": "Maeri",
   "title": "Capítulo Maeri - Maeri",
-  "order": 0,
-  "description": "modelo de json.",
+  "order": 8,
+  "description": "Um pouco do cenário.",
   "sections": [
         {
         "id": "o-mundo",
