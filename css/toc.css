@@ -16,7 +16,7 @@
   color: #1a1a1a;
   border: 2px solid var(--gold);
   cursor: pointer;
-  z-index: 900;
+  z-index: 1001;
   -webkit-tap-highlight-color: transparent;
   outline: none;
 }
@@ -32,7 +32,7 @@
   top: 0; left: 0;
   width: 100%; height: 100%;
   background: rgba(0,0,0,0.5);
-  z-index: 850;
+  z-index: 990;
 }
 #toc-overlay.active { display: block; }
 
@@ -47,7 +47,7 @@
   border-bottom: 3px solid var(--gold);
   border-radius: 0 0 var(--radius) var(--radius);
   padding: 1.5rem;
-  z-index: 1095;
+  z-index: 1003;
   overflow-y: auto;
   box-shadow: var(--shadow);
   flex-direction: column;
