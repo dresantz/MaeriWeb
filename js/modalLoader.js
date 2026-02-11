@@ -9,19 +9,24 @@ const MODAL_PATHS = [
 ];
 
 const MODAL_SCRIPTS = [
-  './js/sheet.js',
-  './js/spells.js',
-  './js/dice.js'
+  'js/sheet.js',
+  'js/spells.js',
+  'js/dice.js'
 ];
 
 export async function loadGlobalModals() {
   const root = document.getElementById('modal-root');
   if (!root || root.dataset.loaded === 'true') return;
   
+  // Detecta se está em pages/ ou raiz
+  const isInPages = window.location.pathname.includes('/pages/');
+  const prefix = isInPages ? '../' : './';
+  
   try {
     // 1. Carrega HTML dos modais
     for (const path of MODAL_PATHS) {
-      const response = await fetch(path);
+      const fullPath = isInPages ? `../${path}` : path;
+      const response = await fetch(fullPath);
       if (!response.ok) continue;
       const html = await response.text();
       root.innerHTML += html;
@@ -31,13 +36,13 @@ export async function loadGlobalModals() {
     
     // 2. Carrega scripts dos modais
     for (const scriptPath of MODAL_SCRIPTS) {
+      const fullPath = isInPages ? `../${scriptPath}` : scriptPath;
       const script = document.createElement('script');
-      script.src = scriptPath;
+      script.src = fullPath;
       script.type = 'module';
       document.body.appendChild(script);
     }
     
-    // 3. Dispara evento
     document.dispatchEvent(new CustomEvent('modals:loaded'));
     
   } catch (error) {
@@ -45,7 +50,6 @@ export async function loadGlobalModals() {
   }
 }
 
-// Inicializa quando DOM estiver pronto
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', loadGlobalModals);
 } else {
