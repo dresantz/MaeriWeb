@@ -45,16 +45,47 @@
   transform: translateY(0);
 }
 
+/* =========================
+   Botões especiais - Início e Topo
+========================= */
+
+#back-to-home,
+#back-to-top {
+  background: var(--bronze);
+  color: white;
+  border: 1px solid var(--gold);
+  border-radius: 50px;
+  min-width: 50px;
+  width: 50px;
+  padding: 0;
+}
+
+#back-to-home:hover,
+#back-to-top:hover {
+  background: #9b8261;
+  border-color: var(--gold);
+}
+
+#back-to-home .floating-icon,
+#back-to-top .floating-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+#back-to-home .floating-label,
+#back-to-top .floating-label {
+  display: none;
+}
+
 @media (min-width: 768px) {
-  .floating-actions {
-    padding: 0.8rem;
-    gap: 1.5rem;
+  #back-to-home,
+  #back-to-top {
+    min-width: 55px;
+    width: 55px;
   }
   
-  .floating-button {
-    padding: 0.9rem 1.5rem;
-    min-width: 80px;
-    height: 50px;
-    font-size: 0.95rem;
+  #back-to-home .floating-icon,
+  #back-to-top .floating-icon {
+    font-size: 1.6rem;
   }
 }
