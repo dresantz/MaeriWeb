@@ -59,25 +59,20 @@
   <script src="js/notpad.js" defer></script>
   
   <!-- Depois os módulos -->
-<script type="module">
-  import { loadGlobalModals } from "./js/modalLoader.js";
+    <script type="module">
+      import { loadGlobalModals } from "./js/modalLoader.js";
 
-  console.log('🚀 Starting Maeri RPG app...');
+      // Carregar scripts dependentes após modais
+      document.addEventListener('modals:loaded', () => {
+        import("./js/dice.js");
+        import("./js/sheet.js");
+        import("./js/spells.js");
+      });
 
-  // Carregar scripts dependentes após modais
-  document.addEventListener('modals:loaded', () => {
-    console.log('📦 Loading dependent modules...');
-    import("./js/dice.js").then(() => console.log('🎲 Dice loaded'));
-    import("./js/sheet.js").then(() => console.log('📄 Sheet loaded'));
-    import("./js/spells.js").then(() => console.log('✨ Spells loaded'));
-  });
-
-  // Inicializar modais
-  console.log('🔧 Loading global modals...');
-  loadGlobalModals().catch(err => {
-    console.error('❌ Failed to load modals:', err);
-  });
-</script>
-  </script>
+      // Inicializar modais
+      loadGlobalModals().catch(err => {
+        console.error('❌ Failed to load modals:', err);
+      });
+    </script>
 </body>
 </html>

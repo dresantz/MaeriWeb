@@ -19,11 +19,9 @@ let isModalOpen = false;
 let isInitialized = false;
 
 function initSheetModal() {
-  console.log('🚀 Initializing sheet modal...');
   
   // Prevent double init
   if (isInitialized) {
-    console.log('Sheet modal already initialized');
     return;
   }
   isInitialized = true;
@@ -46,8 +44,6 @@ function initSheetModal() {
     return;
   }
 
-  console.log('✅ All sheet elements found');
-
   const clearButton = document.getElementById("clear-sheet-button");
   const confirmBox = document.getElementById("clear-confirmation");
   const confirmClear = document.getElementById("confirm-clear-sheet");
@@ -66,7 +62,6 @@ function initSheetModal() {
   ========================= */
   function hydrateSheet() {
     const sheet = getCharacterSheet();
-    console.log('💾 Hydrating sheet with data:', sheet);
 
     if (nameInput) {
       nameInput.value = sheet.character.name || "";
@@ -93,7 +88,6 @@ function initSheetModal() {
   ========================= */
   if (nameInput) {
     nameInput.addEventListener("input", (e) => {
-      console.log('✏️ Character name changed:', e.target.value);
       setCharacterName(e.target.value);
     });
   }
@@ -114,7 +108,6 @@ function initSheetModal() {
     input.addEventListener("input", (e) => {
       const key = e.target.dataset.key;
       const value = e.target.value;
-      console.log(`⚙️ Attribute ${key} changed to:`, value);
       setAttribute(key, value);
     });
   });
@@ -142,7 +135,6 @@ function initSheetModal() {
     });
 
     confirmClear.addEventListener("click", () => {
-      console.log('🗑️ Clearing character sheet');
       resetCharacterSheet();
       hydrateSheet();
       confirmBox.hidden = true;
@@ -156,7 +148,6 @@ function initSheetModal() {
   function openSheet() {
     if (isModalOpen) return;
     
-    console.log('📖 Opening sheet modal...');
     lastFocusedElement = document.activeElement;
     isModalOpen = true;
 
@@ -182,17 +173,14 @@ function initSheetModal() {
       const firstInput = nameInput || sheetModal.querySelector("input, textarea, button");
       if (firstInput && firstInput.focus) {
         firstInput.focus();
-        console.log('🎯 Focus set to:', firstInput.id || firstInput.tagName);
       }
     }, 50);
     
-    console.log('✅ Sheet modal opened successfully');
   }
 
   function closeSheet() {
     if (!isModalOpen) return;
     
-    console.log('📕 Closing sheet modal...');
     isModalOpen = false;
     
     // Esconder modal e overlay
@@ -214,7 +202,6 @@ function initSheetModal() {
           document.body.contains(lastFocusedElement) && 
           lastFocusedElement.focus) {
         lastFocusedElement.focus();
-        console.log('↩️ Focus returned to:', lastFocusedElement.id || lastFocusedElement.tagName);
       }
     }, 10);
   }
@@ -257,7 +244,6 @@ function initSheetModal() {
   
   // 🔹 Atualizar UI quando ficha for atualizada em outra aba
   window.addEventListener('characterSheet:updated', (event) => {
-    console.log('🔄 Sheet updated from sync, refreshing UI');
     if (isModalOpen) {
       hydrateSheet();
     }
@@ -265,13 +251,11 @@ function initSheetModal() {
   
   // 🔹 Também ouvir eventos de save da aba atual
   window.addEventListener('characterSheet:saved', (event) => {
-    console.log('💾 Sheet saved in current tab');
   });
   
   // 🔹 Fallback: ouvir eventos storage diretamente
   window.addEventListener('storage', (event) => {
     if (event.key === "maeri.characterSheet.v1") {
-      console.log('📡 Storage event detected');
       setTimeout(() => {
         if (isModalOpen) {
           hydrateSheet();
@@ -285,12 +269,9 @@ function initSheetModal() {
     e.stopPropagation();
   });
   
-  console.log('✅ Sheet modal initialization complete');
-  
   // 🔹 Teste inicial: tentar abrir se houver algum dado
   const sheet = getCharacterSheet();
   if (sheet.character.name || sheet.info || sheet.items) {
-    console.log('📝 Found existing character data');
   }
 }
 
@@ -300,24 +281,20 @@ function initSheetModal() {
 
 // Método 1: Quando modais carregarem
 document.addEventListener("modals:loaded", () => {
-  console.log('📦 Modals loaded, initializing sheet');
   // Pequeno delay para garantir que o DOM está pronto
   setTimeout(initSheetModal, 100);
 });
 
 // Método 2: Se já carregou (fallback)
 if (document.getElementById('modal-root')?.dataset.loaded === 'true') {
-  console.log('⚡ Modals already loaded, initializing immediately');
   setTimeout(initSheetModal, 200);
 }
 
 // Método 3: Quando DOM estiver pronto (segundo fallback)
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('🏠 DOM ready, checking if we should init sheet');
   // Verificar após 1 segundo se ainda não inicializou
   setTimeout(() => {
     if (!isInitialized && document.getElementById('sheet-modal')) {
-      console.log('🔄 Fallback: Initializing sheet from DOMContentLoaded');
       initSheetModal();
     }
   }, 1000);

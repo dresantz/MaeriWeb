@@ -37,12 +37,10 @@ const MODAL_PATHS = [
 export async function loadGlobalModals() {
   // 🔹 Evitar múltiplas chamadas simultâneas
   if (isLoading) {
-    console.log('Modal loading already in progress');
     return;
   }
   
   if (isLoaded) {
-    console.log('Modals already loaded');
     return;
   }
   
@@ -62,8 +60,7 @@ export async function loadGlobalModals() {
   isLoading = true;
   
   try {
-    console.log('Starting to load modals...');
-    
+
     const requests = MODAL_PATHS.map(path => fetch(path));
     const responses = await Promise.all(requests);
 
@@ -84,7 +81,6 @@ export async function loadGlobalModals() {
     const seenIds = new Set();
     allModals.forEach(modal => {
       if (seenIds.has(modal.id)) {
-        console.log(`Removing duplicate modal: ${modal.id}`);
         modal.remove();
       } else {
         seenIds.add(modal.id);
@@ -99,7 +95,6 @@ export async function loadGlobalModals() {
       }
     });
     document.dispatchEvent(event);
-    console.log("Global modals loaded successfully.");
   } catch (error) {
     console.error("Error loading modals:", error);
     isLoaded = false;
@@ -112,7 +107,6 @@ export async function loadGlobalModals() {
  * Auto-init: aguarda DOM ready
  */
 function initModalLoader() {
-  console.log('Modal loader initializing...');
   
   // 🔹 Garantir que só inicialize uma vez
   if (document.body.dataset.modalLoaderInitialized) return;
@@ -120,11 +114,9 @@ function initModalLoader() {
   
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {
-      console.log('DOMContentLoaded - Loading modals');
       loadGlobalModals();
     });
   } else {
-    console.log('DOM already ready - Loading modals');
     loadGlobalModals();
   }
 }

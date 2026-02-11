@@ -103,7 +103,6 @@ export function initSheetSync() {
           detail: sheetState
         }));
         
-        console.log('📡 Ficha sincronizada de outra aba');
       } catch (error) {
         console.error('Erro na sincronização:', error);
       } finally {
@@ -112,7 +111,6 @@ export function initSheetSync() {
     }
   });
   
-  console.log('Sincronização de ficha inicializada');
 }
 
 /* =========================
