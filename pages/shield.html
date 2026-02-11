@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a12">
+  
+  <title>Maeri RPG - Escudo do Mestre</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../icons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../icons/android-chrome-192x192.png">
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/floatingButtons.css" />
+  <link rel="stylesheet" href="../css/dice.css" />
+  <link rel="stylesheet" href="../css/toc.css" />
+  <link rel="stylesheet" href="../css/notpat.css" />
+  <link rel="stylesheet" href="../css/sheet.css" />
+  <link rel="stylesheet" href="../css/spells.css" />
+  <link rel="stylesheet" href="../css/shield.css" />
+</head>
+
+<body>
+  <header class="app-header">
+    <h1>Escudo do Mestre</h1>
+    <p>Regras fundamentais ao alcance</p>
+  </header>
+
+  <main class="shield">
+    <a href="../index.html" class="back-link">Voltar ao início</a>
+    
+    <div class="shield-grid">
+      
+      <!-- Ações e Combate -->
+      <section class="shield-category">
+        <h2>Combate</h2>
+        <div class="shield-buttons">
+          <button class="shield-button">Iniciativa</button>
+          <button class="shield-button">Ataque</button>
+          <button class="shield-button">Defesa</button>
+          <button class="shield-button">Dano</button>
+          <button class="shield-button">Crítico</button>
+          <button class="shield-button">Cobertura</button>
+          <button class="shield-button">Flanqueamento</button>
+          <button class="shield-button">Montaria</button>
+        </div>
+      </section>
+      
+      <!-- Magias e Feitiços -->
+      <section class="shield-category">
+        <h2>Magia</h2>
+        <div class="shield-buttons">
+          <button class="shield-button">Conjurar</button>
+          <button class="shield-button">Resistência</button>
+          <button class="shield-button">Dissipar</button>
+          <button class="shield-button">Contramagia</button>
+          <button class="shield-button">Foco</button>
+          <button class="shield-button">Canalizar</button>
+          <button class="shield-button">Círculo</button>
+        </div>
+      </section>
+      
+      <!-- Perícias e Atributos -->
+      <section class="shield-category">
+        <h2>Perícias</h2>
+        <div class="shield-buttons">
+          <button class="shield-button">Percepção</button>
+          <button class="shield-button">Furtividade</button>
+          <button class="shield-button">Diplomacia</button>
+          <button class="shield-button">Intimidação</button>
+          <button class="shield-button">Arrombamento</button>
+          <button class="shield-button">Sobrevivência</button>
+          <button class="shield-button">Medicina</button>
+          <button class="shield-button">Arcanismo</button>
+          <button class="shield-button">Religião</button>
+        </div>
+      </section>
+      
+      <!-- Condições e Estados -->
+      <section class="shield-category">
+        <h2>Condições</h2>
+        <div class="shield-buttons">
+          <button class="shield-button">Caído</button>
+          <button class="shield-button">Imobilizado</button>
+          <button class="shield-button">Cego</button>
+          <button class="shield-button">Surdo</button>
+          <button class="shield-button">Envenenado</button>
+          <button class="shield-button">Queimando</button>
+          <button class="shield-button">Enfeitiçado</button>
+          <button class="shield-button">Paralisado</button>
+          <button class="shield-button">Inconsciente</button>
+        </div>
+      </section>
+      
+      <!-- Movimento e Deslocamento -->
+      <section class="shield-category">
+        <h2>Movimento</h2>
+        <div class="shield-buttons">
+          <button class="shield-button">Andar</button>
+          <button class="shield-button">Correr</button>
+          <button class="shield-button">Escalar</button>
+          <button class="shield-button">Nadar</button>
+          <button class="shield-button">Saltar</button>
+          <button class="shield-button">Esquivar</button>
+          <button class="shield-button">Rastejar</button>
+        </div>
+      </section>
+      
+      <!-- Interação e Ambiente -->
+      <section class="shield-category">
+        <h2>Ambiente</h2>
+        <div class="shield-buttons">
+          <button class="shield-button">Escuridão</button>
+          <button class="shield-button">Clima</button>
+          <button class="shield-button">Terreno difícil</button>
+          <button class="shield-button">Queda</button>
+          <button class="shield-button">Afogamento</button>
+          <button class="shield-button">Armadilha</button>
+        </div>
+      </section>
+      
+      <!-- Descanso e Recursos -->
+      <section class="shield-category">
+        <h2>Descanso</h2>
+        <div class="shield-buttons">
+          <button class="shield-button">Descanso curto</button>
+          <button class="shield-button">Descanso longo</button>
+          <button class="shield-button">Cura</button>
+          <button class="shield-button">Recuperar magias</button>
+          <button class="shield-button">Inspiração</button>
+        </div>
+      </section>
+      
+    </div>
+  </main>
+
+  <aside class="floating-actions" aria-label="Quick actions">
+    <button id="sheet-button" class="floating-button floating-button--pill floating-button--primary" aria-label="Open Character Sheet">
+      <span class="floating-label">Ficha</span>
+    </button>
+    <button id="spells-button" class="floating-button floating-button--pill floating-button--secondary" aria-label="Open Spells">
+      <span class="floating-label">Magias</span>
+    </button>
+    <button id="dice-toggle" class="floating-button floating-button--pill" aria-label="Open Dice Roller" aria-expanded="false">
+      <span class="floating-label">Dados</span>
+    </button>
+  </aside>
+
+  <!-- Root onde os modais serão injetados -->
+  <div id="modal-root"></div>
+
+  <!-- Modal Loader -->
+  <script type="module">
+    import { loadGlobalModals } from '../js/modalLoader.js';
+    loadGlobalModals();
+  </script>
+
+  <!-- Scripts dos modais -->
+  <script type="module">
+    function initModals() {
+      if (document.getElementById('sheet-modal')) {
+        import('../js/sheet.js');
+        import('../js/spells.js');
+        import('../js/dice.js');
+      } else {
+        setTimeout(initModals, 50);
+      }
+    }
+    
+    initModals();
+    document.addEventListener('modals:loaded', initModals);
+  </script>
+
+  <script src="../js/notpad.js" defer></script>
+</body>
+</html>

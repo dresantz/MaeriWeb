@@ -1,0 +1,81 @@
+/* =========================
+   Maeri RPG - Escudo do Mestre
+   Estilos específicos para a página Shield
+========================= */
+
+.shield-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 0.5rem 0 1rem;
+}
+
+.shield-category {
+  background: var(--surface);
+  border: 2px solid rgba(212,175,55,0.3);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  box-shadow: var(--shadow);
+}
+
+.shield-category h2 {
+  color: var(--gold);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(212,175,55,0.3);
+  font-family: 'Cinzel', serif;
+}
+
+.shield-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.shield-button {
+  background: var(--surface-light);
+  border: 1px solid rgba(212,175,55,0.2);
+  border-radius: 50px;
+  padding: 0.7rem 1.2rem;
+  color: var(--text);
+  font-family: 'Crimson Text', serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 0 0 auto;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+.shield-button:hover {
+  background: var(--gold);
+  color: var(--bg-dark);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.shield-button:active {
+  transform: translateY(0);
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--gold);
+}
+
+.back-link::before {
+  content: "←";
+  margin-right: 0.5rem;
+}
