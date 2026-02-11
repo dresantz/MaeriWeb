@@ -7,15 +7,12 @@
   
   <title>Maeri RPG</title>
 
-  <!-- Favicon para diferentes dispositivos -->
+  <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="icons/android-chrome-192x192.png">
-  
-  <!-- Manifest com caminho correto -->
-  <link rel="manifest" href="data/manifest.json">
 
-  <!-- Fontes temáticas -->
+  <!-- Fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
@@ -67,62 +64,43 @@
 
   <aside class="floating-actions" aria-label="Quick actions">
     <button id="sheet-button" class="floating-button floating-button--pill floating-button--primary" aria-label="Open Character Sheet">
-      <span class="floating-icon">🧙</span>
       <span class="floating-label">Ficha</span>
     </button>
     <button id="spells-button" class="floating-button floating-button--pill floating-button--secondary" aria-label="Open Spells">
-      <span class="floating-icon">✨</span>
       <span class="floating-label">Magias</span>
     </button>
     <button id="dice-toggle" class="floating-button floating-button--pill" aria-label="Open Dice Roller" aria-expanded="false">
-      <span class="floating-icon">🎲</span>
       <span class="floating-label">Dados</span>
     </button>
   </aside>
 
-  <!-- Root onde os modais serão injetados -->
-  <div id="modal-root"></div>
+<!-- Root onde os modais serão injetados -->
+<div id="modal-root"></div>
 
-  <!-- 🔹 Scripts -->
-  <!-- Primeiro o notpad.js (sem módulo) -->
-  <script src="js/notpad.js" defer></script>
-  
-  <!-- Depois os módulos -->
-  <script type="module">
-    import { loadGlobalModals } from "./js/modalLoader.js";
+<!-- Modal Loader - PRIMEIRO carrega os modais -->
+<script type="module">
+  import { loadGlobalModals } from './js/modalLoader.js';
+  loadGlobalModals();
+</script>
 
-    // Carregar scripts dependentes após modais
-    document.addEventListener('modals:loaded', () => {
-      import("./js/dice.js");
-      import("./js/sheet.js");
-      import("./js/spells.js");
-    });
-
-    // Inicializar modais
-    loadGlobalModals().catch(err => {
-      console.error('❌ Failed to load modals:', err);
-    });
-    
-    // Registrar Service Worker
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js')
-          .then(registration => {
-            console.log('✅ Service Worker registrado com sucesso:', registration.scope);
-          })
-          .catch(error => {
-            console.log('⚠️ Falha no registro do Service Worker:', error);
-          });
-      });
+<!-- Scripts dos modais - DEPOIS que os modais existirem -->
+<script type="module">
+  function initModals() {
+    if (document.getElementById('sheet-modal')) {
+      import('./js/sheet.js');
+      import('./js/spells.js');
+      import('./js/dice.js');
+    } else {
+      setTimeout(initModals, 50);
     }
-    
-    // Detectar se é PWA instalado
-    window.addEventListener('DOMContentLoaded', () => {
-      if (window.matchMedia('(display-mode: standalone)').matches) {
-        console.log('📱 Executando como PWA instalado');
-        document.body.classList.add('pwa-mode');
-      }
-    });
-  </script>
+  }
+  
+  // Tenta carregar os scripts quando os modais estiverem prontos
+  initModals();
+  document.addEventListener('modals:loaded', initModals);
+</script>
+
+<!-- notpad.js -->
+<script src="js/notpad.js" defer></script>
 </body>
 </html>

@@ -1,26 +1,16 @@
 /*
- * Main entry point do Rulebook
- * Responsável por:
- * - Inicializar eventos globais
- * - Bootstrap da navegação
+ * main.js - Livro de Regras
  */
 
-import { initTOCToggle } from "./toc.js";
+import { initTOCToggle, renderChapterSelect } from "./toc.js";
 import { loadRulebookChapter } from "./loader.js";
 import { RULEBOOK_CHAPTERS } from "./constants.js";
 import { currentChapterFile } from "./state.js";
-import {
-  initChapterNavigation,
-  restoreLastTopic,
-  clearSavedTopic
-} from "./navigation.js";
-import { buildIndex } from "../../web/js/search/searchIndex.js";
-import { initSearchUI } from "../../web/js/search/searchUI.js";
+import { initChapterNavigation, restoreLastTopic } from "./navigation.js";
+import { buildIndex } from "../search/searchIndex.js";
+import { initSearchUI } from "../search/searchUI.js";
 
-/* =====================================================
-   Pre-indexation
-===================================================== */
-
+// Índice de busca
 async function preloadSearchIndex() {
   const chaptersData = [];
 
@@ -28,59 +18,25 @@ async function preloadSearchIndex() {
     try {
       const res = await fetch(`../data/rulebook/${chapter.file}`);
       if (!res.ok) continue;
-
       const data = await res.json();
       data.__file = chapter.file;
-
       chaptersData.push(data);
-    } catch {
-      // falha silenciosa: busca não é crítica
-    }
+    } catch {}
   }
 
   buildIndex(chaptersData);
 }
 
-/* =====================================================
-   Entry point
-===================================================== */
-
+// Inicialização
 document.addEventListener("DOMContentLoaded", async () => {
   await preloadSearchIndex();
 
   initTOCToggle();
-  initChapterSelect();
+  renderChapterSelect();
   initChapterNavigation();
   initSearchUI();
 
-  loadInitialChapter();
-});
-
-/* =====================================================
-   Capítulo inicial
-===================================================== */
-
-function loadInitialChapter() {
-  const chapter =
-    currentChapterFile || RULEBOOK_CHAPTERS[0].file;
-
+  const chapter = currentChapterFile || RULEBOOK_CHAPTERS[0].file;
   loadRulebookChapter(chapter);
-
-  // restaura tópico após render
   restoreLastTopic();
-}
-
-/* =====================================================
-   Select de capítulos
-===================================================== */
-
-function initChapterSelect() {
-  const select = document.getElementById("chapter-select");
-  if (!select) return;
-
-  select.addEventListener("change", (e) => {
-    clearSavedTopic();
-    loadRulebookChapter(e.target.value);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-}
+});

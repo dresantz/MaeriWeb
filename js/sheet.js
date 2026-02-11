@@ -1,323 +1,113 @@
-/* =========================
-   Character Sheet – UI Control
-   + Persistence Integration
-========================= */
+// sheet.js - Controle da ficha de personagem
 
-import {
-  resetCharacterSheet,
-  loadCharacterSheet,
-  getCharacterSheet,
-  setCharacterName,
-  setAttribute,
-  setInfo,
-  setItems,
-  initSheetSync
-} from "./characterSheetStore.js";
+let isSheetOpen = false;
 
-// 🔹 Controle de estado do modal
-let isModalOpen = false;
-let isInitialized = false;
-
-function initSheetModal() {
+function openSheet() {
+  const modal = document.getElementById('sheet-modal');
+  const overlay = document.getElementById('sheet-overlay');
   
-  // Prevent double init
-  if (isInitialized) {
-    return;
-  }
-  isInitialized = true;
+  if (isSheetOpen || !modal || !overlay) return;
   
-  // Garantir que a sincronização está ativa
-  initSheetSync();
+  isSheetOpen = true;
+  modal.classList.add('active');
+  overlay.classList.add('active');
+  document.body.classList.add('no-scroll');
+  loadSheetData();
+}
 
-  const sheetButton = document.getElementById("sheet-button");
-  const sheetModal = document.getElementById("sheet-modal");
-  const sheetOverlay = document.getElementById("sheet-overlay");
-  const sheetClose = document.getElementById("sheet-close");
+function closeSheet() {
+  const modal = document.getElementById('sheet-modal');
+  const overlay = document.getElementById('sheet-overlay');
+  
+  if (!isSheetOpen || !modal || !overlay) return;
+  
+  isSheetOpen = false;
+  modal.classList.remove('active');
+  overlay.classList.remove('active');
+  document.body.classList.remove('no-scroll');
+  saveSheetData();
+}
 
-  if (!sheetButton || !sheetModal || !sheetOverlay || !sheetClose) {
-    console.error("❌ Sheet modal elements not found:", {
-      sheetButton: !!sheetButton,
-      sheetModal: !!sheetModal,
-      sheetOverlay: !!sheetOverlay,
-      sheetClose: !!sheetClose
-    });
-    return;
-  }
+function saveSheetData() {
+  const data = {
+    name: document.getElementById('character-name')?.value || '',
+    info: document.getElementById('character-info')?.value || '',
+    items: document.getElementById('character-items')?.value || '',
+    attributes: {}
+  };
+  
+  document.querySelectorAll('.rune-input').forEach(input => {
+    const key = input.dataset.key;
+    if (key) data.attributes[key] = input.value || '0';
+  });
+  
+  localStorage.setItem('maeri-sheet', JSON.stringify(data));
+}
 
-  const clearButton = document.getElementById("clear-sheet-button");
-  const confirmBox = document.getElementById("clear-confirmation");
-  const confirmClear = document.getElementById("confirm-clear-sheet");
-  const cancelClear = document.getElementById("cancel-clear-sheet");
-
-  // Inputs
-  const nameInput = document.getElementById("character-name");
-  const infoTextarea = document.getElementById("character-info");
-  const itemsTextarea = document.getElementById("character-items");
-  const attributeInputs = sheetModal.querySelectorAll(".attributes-grid input[data-key]");
-
-  let lastFocusedElement = null;
-
-  /* =========================
-     Data → UI
-  ========================= */
-  function hydrateSheet() {
-    const sheet = getCharacterSheet();
-
-    if (nameInput) {
-      nameInput.value = sheet.character.name || "";
-    }
+function loadSheetData() {
+  const saved = localStorage.getItem('maeri-sheet');
+  if (!saved) return;
+  
+  try {
+    const data = JSON.parse(saved);
+    document.getElementById('character-name').value = data.name || '';
+    document.getElementById('character-info').value = data.info || '';
+    document.getElementById('character-items').value = data.items || '';
     
-    if (infoTextarea) {
-      infoTextarea.value = sheet.info || "";
-    }
-    
-    if (itemsTextarea) {
-      itemsTextarea.value = sheet.items || "";
-    }
-
-    attributeInputs.forEach((input) => {
+    document.querySelectorAll('.rune-input').forEach(input => {
       const key = input.dataset.key;
-      if (key && sheet.attributes[key] !== undefined) {
-        input.value = sheet.attributes[key];
-      }
+      if (key && data.attributes[key]) input.value = data.attributes[key];
     });
-  }
+  } catch (e) {}
+}
 
-  /* =========================
-     UI → Data (Autosave)
-  ========================= */
-  if (nameInput) {
-    nameInput.addEventListener("input", (e) => {
-      setCharacterName(e.target.value);
-    });
-  }
+function initSheet() {
+  const sheetBtn = document.getElementById('sheet-button');
+  const sheetClose = document.getElementById('sheet-close');
+  const sheetOverlay = document.getElementById('sheet-overlay');
   
-  if (infoTextarea) {
-    infoTextarea.addEventListener("input", (e) => {
-      setInfo(e.target.value);
-    });
-  }
+  if (sheetBtn) sheetBtn.addEventListener('click', openSheet);
+  if (sheetClose) sheetClose.addEventListener('click', closeSheet);
+  if (sheetOverlay) sheetOverlay.addEventListener('click', closeSheet);
   
-  if (itemsTextarea) {
-    itemsTextarea.addEventListener("input", (e) => {
-      setItems(e.target.value);
-    });
-  }
-
-  attributeInputs.forEach((input) => {
-    input.addEventListener("input", (e) => {
-      const key = e.target.dataset.key;
-      const value = e.target.value;
-      setAttribute(key, value);
-    });
+  document.addEventListener('input', (e) => {
+    const target = e.target;
+    if (target.id === 'character-name' || 
+        target.id === 'character-info' || 
+        target.id === 'character-items' ||
+        target.classList.contains('rune-input')) {
+      saveSheetData();
+    }
   });
-
-  /* =========================
-     Clear Sheet Logic
-  ========================= */
-  if (clearButton && confirmBox && confirmClear && cancelClear) {
-    clearButton.addEventListener("click", () => {
-      confirmBox.hidden = false;
-      clearButton.disabled = true;
-      
-      // Scroll suave para a confirmação
-      requestAnimationFrame(() => {
-        confirmBox.scrollIntoView({ 
-          behavior: "smooth", 
-          block: "nearest" 
-        });
-      });
-    });
-
-    cancelClear.addEventListener("click", () => {
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isSheetOpen) closeSheet();
+  });
+  
+  const clearBtn = document.getElementById('clear-sheet-button');
+  const confirmBtn = document.getElementById('confirm-clear-sheet');
+  const cancelBtn = document.getElementById('cancel-clear-sheet');
+  const confirmBox = document.getElementById('clear-confirmation');
+  
+  if (clearBtn && confirmBtn && cancelBtn && confirmBox) {
+    clearBtn.addEventListener('click', () => confirmBox.hidden = false);
+    cancelBtn.addEventListener('click', () => confirmBox.hidden = true);
+    
+    confirmBtn.addEventListener('click', () => {
+      document.getElementById('character-name').value = '';
+      document.getElementById('character-info').value = '';
+      document.getElementById('character-items').value = '';
+      document.querySelectorAll('.rune-input').forEach(input => input.value = '0');
+      localStorage.removeItem('maeri-sheet');
       confirmBox.hidden = true;
-      clearButton.disabled = false;
     });
-
-    confirmClear.addEventListener("click", () => {
-      resetCharacterSheet();
-      hydrateSheet();
-      confirmBox.hidden = true;
-      clearButton.disabled = false;
-    });
-  }
-
-  /* =========================
-     Modal Control
-  ========================= */
-  function openSheet() {
-    if (isModalOpen) return;
-    
-    lastFocusedElement = document.activeElement;
-    isModalOpen = true;
-
-    // Carregar dados atuais
-    loadCharacterSheet();
-    hydrateSheet();
-
-    // Mostrar modal e overlay
-    sheetModal.setAttribute("aria-hidden", "false");
-    sheetOverlay.setAttribute("aria-hidden", "false");
-    sheetModal.removeAttribute("inert");
-    sheetOverlay.removeAttribute("inert");
-    
-    // Adicionar classes para estilização
-    sheetModal.classList.add("active", "visible");
-    sheetOverlay.classList.add("active", "visible");
-
-    // Prevenir scroll do body
-    document.body.classList.add("no-scroll", "modal-open");
-
-    // Focar no primeiro campo após pequeno delay
-    setTimeout(() => {
-      const firstInput = nameInput || sheetModal.querySelector("input, textarea, button");
-      if (firstInput && firstInput.focus) {
-        firstInput.focus();
-      }
-    }, 50);
-    
-  }
-
-  function closeSheet() {
-    if (!isModalOpen) return;
-    
-    isModalOpen = false;
-    
-    // Esconder modal e overlay
-    sheetModal.setAttribute("aria-hidden", "true");
-    sheetOverlay.setAttribute("aria-hidden", "true");
-    sheetModal.setAttribute("inert", "true");
-    sheetOverlay.setAttribute("inert", "true");
-    
-    // Remover classes de estilização
-    sheetModal.classList.remove("active", "visible");
-    sheetOverlay.classList.remove("active", "visible");
-
-    // Restaurar scroll do body
-    document.body.classList.remove("no-scroll", "modal-open");
-    
-    // Restaurar foco ao elemento anterior
-    setTimeout(() => {
-      if (lastFocusedElement && 
-          document.body.contains(lastFocusedElement) && 
-          lastFocusedElement.focus) {
-        lastFocusedElement.focus();
-      }
-    }, 10);
-  }
-
-  /* =========================
-     Event Listeners
-  ========================= */
-  
-  // 🔹 Botão para abrir a ficha
-  sheetButton.addEventListener("click", (e) => {
-    e.stopPropagation();
-    openSheet();
-  });
-  
-  // 🔹 Botão de fechar (×)
-  sheetClose.addEventListener("click", (e) => {
-    e.stopPropagation();
-    closeSheet();
-  });
-  
-  // 🔹 Overlay (clique fora para fechar)
-  sheetOverlay.addEventListener("click", (e) => {
-    if (e.target === sheetOverlay) {
-      closeSheet();
-    }
-  });
-  
-  // 🔹 Tecla Escape para fechar
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && isModalOpen) {
-      event.preventDefault();
-      event.stopPropagation();
-      closeSheet();
-    }
-  }, true); // Use capture phase para garantir execução
-
-  /* =========================
-     Sincronização entre abas
-  ========================= */
-  
-  // 🔹 Atualizar UI quando ficha for atualizada em outra aba
-  window.addEventListener('characterSheet:updated', (event) => {
-    if (isModalOpen) {
-      hydrateSheet();
-    }
-  });
-  
-  // 🔹 Também ouvir eventos de save da aba atual
-  window.addEventListener('characterSheet:saved', (event) => {
-  });
-  
-  // 🔹 Fallback: ouvir eventos storage diretamente
-  window.addEventListener('storage', (event) => {
-    if (event.key === "maeri.characterSheet.v1") {
-      setTimeout(() => {
-        if (isModalOpen) {
-          hydrateSheet();
-        }
-      }, 100);
-    }
-  });
-
-  // 🔹 Prevenir que cliques dentro do modal fechem ele
-  sheetModal.addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
-  
-  // 🔹 Teste inicial: tentar abrir se houver algum dado
-  const sheet = getCharacterSheet();
-  if (sheet.character.name || sheet.info || sheet.items) {
   }
 }
 
-/* =========================
-   Inicialização
-========================= */
-
-// Método 1: Quando modais carregarem
-document.addEventListener("modals:loaded", () => {
-  // Pequeno delay para garantir que o DOM está pronto
-  setTimeout(initSheetModal, 100);
-});
-
-// Método 2: Se já carregou (fallback)
-if (document.getElementById('modal-root')?.dataset.loaded === 'true') {
-  setTimeout(initSheetModal, 200);
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initSheet);
+} else {
+  initSheet();
 }
 
-// Método 3: Quando DOM estiver pronto (segundo fallback)
-document.addEventListener('DOMContentLoaded', () => {
-  // Verificar após 1 segundo se ainda não inicializou
-  setTimeout(() => {
-    if (!isInitialized && document.getElementById('sheet-modal')) {
-      initSheetModal();
-    }
-  }, 1000);
-});
-
-// 🔹 Exportar funções para debugging
-window.debugSheet = {
-  openSheet: () => {
-    const btn = document.getElementById('sheet-button');
-    if (btn) btn.click();
-  },
-  closeSheet: () => {
-    const modal = document.getElementById('sheet-modal');
-    if (modal) {
-      modal.classList.remove('active', 'visible');
-      modal.setAttribute('aria-hidden', 'true');
-      modal.setAttribute('inert', 'true');
-      document.body.classList.remove('no-scroll', 'modal-open');
-      isModalOpen = false;
-    }
-  },
-  getState: () => ({ isModalOpen, isInitialized }),
-  hydrate: () => {
-    if (typeof hydrateSheet === 'function') hydrateSheet();
-  }
-};
+document.addEventListener('modals:loaded', initSheet);

@@ -1,70 +1,89 @@
 /* =========================
-   NotPat – News / Patch Notes
-   Home Exclusive Component
+   NotPat – Notícias e Patch Notes
 ========================= */
 
 .notpat-section {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
-/* Botão central */
+/* Botão */
 .notpat-button {
   width: 100%;
-  padding: 0.8rem;
+  padding: 1rem;
+  font-family: 'Cinzel', serif;
   font-size: 1.1rem;
-  font-weight: bold;
-  border: none;
-  border-radius: var(--border-radius);
-  background-color: var(--accent-color);
-  color: #121212;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border: 2px solid var(--bronze);
+  border-radius: var(--radius);
+  background: var(--bronze);
+  color: white;
   cursor: pointer;
+  transition: all 0.25s ease;
+  text-transform: uppercase;
 }
 
-/* Card de conteúdo */
+.notpat-button:hover {
+  background: #9b8261;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139,115,85,0.4);
+}
+
+.notpat-button[aria-pressed="true"] {
+  background: #9b8261;
+  border-color: var(--gold);
+}
+
+/* Conteúdo */
 .notpat-content {
-  background-color: var(--card-color);
-  border-radius: var(--border-radius);
-  padding: 1rem;
-
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-
-  /* animação base */
+  background: var(--parchment);
+  border: 2px solid var(--bronze);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
   opacity: 1;
   transform: translateY(0);
-  transition:
-    opacity 0.25s ease,
-    transform 0.25s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Estado animado ao trocar conteúdo */
 .notpat-content.is-switching {
   opacity: 0;
-  transform: translateY(6px);
+  transform: translateY(8px);
 }
 
-/* Listas */
+/* Lista de notícias/patch notes */
 .notpat-content ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  color: #3a2c1e;
+  font-family: 'Crimson Text', serif;
+  font-size: 1.05rem;
 }
 
 .notpat-content li {
-  padding: 0.6rem 0;
-  font-size: 0.95rem;
-  line-height: 1.4;
-  color: var(--text-color);
+  padding: 0.8rem 0 0.8rem 1.8rem;
+  line-height: 1.5;
+  border-bottom: 1px dashed var(--bronze);
+  position: relative;
 }
 
-/* Separador sutil */
-.notpat-content li + li {
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+.notpat-content li:last-child {
+  border-bottom: none;
 }
 
-/* Datas / versões em destaque */
+.notpat-content li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size: 1.1rem;
+}
+
+/* Destaque para datas/versões */
 .notpat-content strong {
-  color: var(--accent-color);
-  font-weight: 600;
+  color: #5d4a38;
+  font-weight: 700;
 }

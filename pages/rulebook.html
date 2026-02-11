@@ -1,157 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Maeri RPG – Livro de Regras</title>
+  <meta name="description" content="Maeri RPG - Core Rulebook" />
 
-  <title>Maeri RPG – Rulebook</title>
-  <meta name="description" content="Maeri RPG Core Rulebook" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../icons/favicon-16x16.png">
 
-  <!-- Styles -->
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="../css/base.css" />
   <link rel="stylesheet" href="../css/floatingButtons.css" />
-  <link rel="stylesheet" href="../css/toc.css" />
-  <link rel="stylesheet" href="../css/dice.css" />
   <link rel="stylesheet" href="../css/rulebook.css" />
-  <link rel="stylesheet" href="../css/spells.css" />
+  <link rel="stylesheet" href="../css/toc.css" />
   <link rel="stylesheet" href="../css/sheet.css" />
+  <link rel="stylesheet" href="../css/spells.css" />
+  <link rel="stylesheet" href="../css/dice.css" />
 </head>
 
 <body>
 
-  <!-- =========================
-       Header + Search
-  ========================== -->
-  <header>
+  <!-- HEADER padrão -->
+  <header class="app-header">
     <h1>Maeri RPG</h1>
-    <p>Core Rulebook</p>
-
-    <div
-      id="rulebook-search"
-      class="search-container"
-      role="search"
-      aria-label="Search rules"
-    >
-      <input
-        type="search"
-        id="search-input"
-        placeholder="Search rule, term or action..."
-        autocomplete="off"
-      />
-      <div
-        id="search-results"
-        class="search-results hidden"
-        aria-live="polite"
-      ></div>
-    </div>
+    <p>Livro de Regras</p>
   </header>
 
-  <!-- =========================
-       Rulebook TOC
-  ========================== -->
-
-  <button
-    id="toc-toggle"
-    aria-label="Open Rulebook Index"
-    aria-expanded="false"
-  >
-    ☰
-  </button>
-
-  <div id="toc-overlay"></div>
-
-  <div
-    id="toc-panel"
-    aria-hidden="true"
-    role="navigation"
-    aria-label="Rulebook Index"
-  >
-    <p id="toc-chapter-title" class="toc-chapter-title">—</p>
-
-    <select id="chapter-select" aria-label="Select chapter"></select>
-
-    <div class="chapter-nav">
-      <button id="chapter-prev" type="button" class="button">
-        ← Previous
-      </button>
-      <button id="chapter-next" type="button" class="button">
-        Next →
-      </button>
-    </div>
-
-    <ul id="toc-list"></ul>
+  <!-- Busca -->
+  <div id="rulebook-search" class="search-container">
+    <input type="search" id="search-input" placeholder="Buscar regra, termo ou ação...">
+    <div id="search-results" class="search-results hidden"></div>
   </div>
 
-  <!-- =========================
-       Main Content
-  ========================== -->
-  <main class="rulebook" role="main">
+  <!-- TOC - Índice -->
+  <button id="toc-toggle" class="toc-toggle" aria-label="Abrir índice">☰</button>
+  <div id="toc-overlay" class="toc-overlay"></div>
+  
+  <div id="toc-panel" class="toc-panel">
+    <p id="toc-chapter-title" class="toc-chapter-title">—</p>
+    
+    <select id="chapter-select" aria-label="Selecionar capítulo"></select>
+    
+    <div class="chapter-nav">
+      <button id="chapter-prev" class="chapter-nav-button">← Anterior</button>
+      <button id="chapter-next" class="chapter-nav-button">Próximo →</button>
+    </div>
+    
+    <ul id="toc-list" class="toc-list"></ul>
+  </div>
+
+  <!-- Conteúdo principal -->
+  <main class="rulebook">
     <div id="rulebook-content"></div>
   </main>
 
-  <!-- =========================
-       Floating Action Buttons
-  ========================== -->
-  <aside class="floating-actions" aria-label="Rulebook actions">
-
-    <button
-      id="back-to-top"
-      class="floating-button floating-button--pill floating-button--icon"
-      aria-label="Back to Top"
-      title="Back to Top"
-    >
-      ↑
+  <!-- Botões flutuantes - PADRÃO -->
+  <aside class="floating-actions">
+    <button id="sheet-button" class="floating-button floating-button--pill floating-button--primary">
+      <span class="floating-label">Ficha</span>
     </button>
-
-    <a
-      href="../index.html"
-      id="back-to-home"
-      class="floating-button floating-button--pill floating-button--icon"
-      aria-label="Back to Home"
-      title="Back to Home"
-    >
-      ⌂
+    <button id="spells-button" class="floating-button floating-button--pill floating-button--secondary">
+      <span class="floating-label">Magias</span>
+    </button>
+    <button id="dice-toggle" class="floating-button floating-button--pill">
+      <span class="floating-label">Dados</span>
+    </button>
+    <a href="../index.html" class="floating-button floating-button--pill" id="back-to-home">
+      <span class="floating-label">Início</span>
     </a>
-
-    <button
-      id="sheet-button"
-      class="floating-button floating-button--pill floating-button--primary"
-      aria-label="Open Character Sheet"
-    >
-      Ficha
+    <button id="back-to-top" class="floating-button floating-button--pill">
+      <span class="floating-label">Topo</span>
     </button>
-
-    <button
-      id="spells-button"
-      class="floating-button floating-button--pill floating-button--secondary"
-      aria-label="Open Spells"
-    >
-      Magias
-    </button>
-
-    <button
-      id="dice-toggle"
-      class="floating-button floating-button--pill"
-      aria-label="Open Dice Roller"
-      aria-expanded="false"
-    >
-      Dados
-    </button>
-
   </aside>
 
-  <!-- =========================
-        Modal Root (injeção)
-  ========================== -->
+  <!-- Modal Root -->
   <div id="modal-root"></div>
 
-  <!-- =========================
-       Scripts
-  ========================== -->
-  <script type="module" src="../js/modalLoader.js"></script>
+  <!-- Scripts -->
+  <script type="module">
+    import { loadGlobalModals } from '../js/modalLoader.js';
+    loadGlobalModals();
+  </script>
+  
   <script type="module" src="../js/sheet.js"></script>
   <script type="module" src="../js/spells.js"></script>
-  <script src="../js/dice.js"></script>
+  <script type="module" src="../js/dice.js"></script>
   <script type="module" src="../js/rulebook/main.js"></script>
 
 </body>
