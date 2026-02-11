@@ -1,0 +1,24 @@
+{
+  "name": "Maeri RPG",
+  "short_name": "MaeriRPG",
+  "description": "Sistema de RPG de Mesa de Alta Fantasia",
+  "theme_color": "#0a0a12",
+  "background_color": "#0a0a12",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -115,7 +115,7 @@ function initSpellsModal() {
   ========================= */
   async function loadSpells() {
     try {
-      const response = await fetch("/web/data/rulebook/04-magia.json");
+      const response = await fetch("/data/rulebook/04-magia.json");
       const data = await response.json();
 
       spells = extractSpellsFromChapter(data);

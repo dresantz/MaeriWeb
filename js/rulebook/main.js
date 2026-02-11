@@ -14,8 +14,8 @@ import {
   restoreLastTopic,
   clearSavedTopic
 } from "./navigation.js";
-import { buildIndex } from "../search/searchIndex.js";
-import { initSearchUI } from "../search/searchUI.js";
+import { buildIndex } from "../../web/js/search/searchIndex.js";
+import { initSearchUI } from "../../web/js/search/searchUI.js";
 
 /* =====================================================
    Pre-indexation

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a12">
+  
+  <title>Maeri RPG</title>
+
+  <!-- Favicon para diferentes dispositivos -->
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/android-chrome-192x192.png">
+  
+  <!-- Manifest com caminho correto -->
+  <link rel="manifest" href="data/manifest.json">
+
+  <!-- Fontes temáticas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/floatingButtons.css" />
+  <link rel="stylesheet" href="css/dice.css" />
+  <link rel="stylesheet" href="css/toc.css" />
+  <link rel="stylesheet" href="css/notpat.css" />
+  <link rel="stylesheet" href="css/sheet.css" />
+  <link rel="stylesheet" href="css/spells.css" />
+</head>
+
+<body>
+  <header class="app-header">
+    <h1>Maeri RPG</h1>
+    <p>Crônicas de Alta Fantasia</p>
+  </header>
+
+  <main class="home">
+    <nav class="main-menu" aria-label="Main navigation">
+      <a href="pages/rulebook.html" class="menu-button" data-icon="📜">
+        <span>Livros Sagrados</span>
+      </a>
+      <a href="pages/shield.html" class="menu-button" data-icon="🛡️">
+        <span>Escudo do Herói</span>
+      </a>
+      <a href="pages/lore.html" class="menu-button" data-icon="🌌">
+        <span>Crônicas</span>
+      </a>
+      <a href="pages/construction.html" class="menu-button" data-icon="🏰">
+        <span>Fortaleza</span>
+      </a>
+    </nav>
+
+    <section class="notpat-section">
+      <button id="notpat-toggle" class="notpat-button" aria-pressed="false">Notícias do Reino</button>
+      <div id="notpat-content" class="notpat-content" aria-live="polite">
+        <ul class="news-list">
+          <li><strong>29/01</strong> — Bem-vindo ao Maeri RPG WebApp.</li>
+          <li><strong>30/01</strong> — Sistema de dados atualizado.</li>
+          <li><strong>31/01</strong> — Nova interface mobile-first.</li>
+          <li><strong>01/02</strong> — Grimório de magias expandido.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <aside class="floating-actions" aria-label="Quick actions">
+    <button id="sheet-button" class="floating-button floating-button--pill floating-button--primary" aria-label="Open Character Sheet">
+      <span class="floating-icon">🧙</span>
+      <span class="floating-label">Ficha</span>
+    </button>
+    <button id="spells-button" class="floating-button floating-button--pill floating-button--secondary" aria-label="Open Spells">
+      <span class="floating-icon">✨</span>
+      <span class="floating-label">Magias</span>
+    </button>
+    <button id="dice-toggle" class="floating-button floating-button--pill" aria-label="Open Dice Roller" aria-expanded="false">
+      <span class="floating-icon">🎲</span>
+      <span class="floating-label">Dados</span>
+    </button>
+  </aside>
+
+  <!-- Root onde os modais serão injetados -->
+  <div id="modal-root"></div>
+
+  <!-- 🔹 Scripts -->
+  <!-- Primeiro o notpad.js (sem módulo) -->
+  <script src="js/notpad.js" defer></script>
+  
+  <!-- Depois os módulos -->
+  <script type="module">
+    import { loadGlobalModals } from "./js/modalLoader.js";
+
+    // Carregar scripts dependentes após modais
+    document.addEventListener('modals:loaded', () => {
+      import("./js/dice.js");
+      import("./js/sheet.js");
+      import("./js/spells.js");
+    });
+
+    // Inicializar modais
+    loadGlobalModals().catch(err => {
+      console.error('❌ Failed to load modals:', err);
+    });
+    
+    // Registrar Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(registration => {
+            console.log('✅ Service Worker registrado com sucesso:', registration.scope);
+          })
+          .catch(error => {
+            console.log('⚠️ Falha no registro do Service Worker:', error);
+          });
+      });
+    }
+    
+    // Detectar se é PWA instalado
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        console.log('📱 Executando como PWA instalado');
+        document.body.classList.add('pwa-mode');
+      }
+    });
+  </script>
+</body>
+</html>

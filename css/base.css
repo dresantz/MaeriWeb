@@ -1,0 +1,661 @@
+/* =========================
+   Maeri Web – Base Styles
+   Fantasy UI | Mobile First
+   ========================= */
+
+:root {
+  /* Cores principais - temática fantasia medieval */
+  --primary-dark: #0a0a12;
+  --surface-dark: #141421;
+  --surface-medium: #1d1f32;
+  --surface-light: #262842;
+  
+  /* Cores de destaque temáticas */
+  --gold-primary: #d4af37;
+  --gold-secondary: #f4d03f;
+  --silver: #bdc3c7;
+  --bronze: #cd7f32;
+  
+  /* Cores mágicas */
+  --arcane-blue: #5d7bff;
+  --arcane-purple: #9b59b6;
+  --healing-green: #27ae60;
+  --fire-red: #e74c3c;
+  
+  /* Texturas e efeitos */
+  --parchment: #f5e6ca;
+  --aged-paper: #e8d8b6;
+  
+  /* Sombros e profundidade */
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --glow-gold: rgba(212, 175, 55, 0.3);
+  --glow-blue: rgba(93, 123, 255, 0.3);
+  
+  /* Outras variáveis */
+  --border-radius: 12px;
+  --bottom-bar-height: 84px;
+  
+  /* Fontes */
+  --font-heading: 'Cinzel', serif;
+  --font-body: 'Crimson Text', serif;
+  --font-ui: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* =========================
+   Layout
+   ========================= */
+
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1.5rem 1rem;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  margin: 0;
+  overflow-x: hidden;
+  min-height: 100vh;
+  font-family: var(--font-ui);
+  background-color: var(--primary-dark);
+  color: #e6e6e6;
+  
+  /* Textura de fantasia sutil */
+  background-image: 
+    linear-gradient(rgba(10, 10, 18, 0.9), rgba(10, 10, 18, 0.9)),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.08"/></svg>'),
+    linear-gradient(135deg, #0a0a12 0%, #1a1a2e 100%);
+  background-size: cover, 200px 200px, cover;
+  background-attachment: fixed;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+/* =========================
+   Header / Footer
+   ========================= */
+
+.app-header {
+  background: linear-gradient(to bottom, 
+    var(--surface-dark) 0%, 
+    var(--primary-dark) 100%);
+  border-bottom: 2px solid var(--gold-primary);
+  box-shadow: 
+    0 4px 20px var(--shadow-color),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  padding: 1.5rem 1rem;
+  text-align: center;
+}
+
+.app-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--gold-primary), 
+    transparent);
+  border-radius: 0 0 2px 2px;
+}
+
+.app-header h1 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: var(--gold-primary);
+  text-shadow: 
+    0 0 10px var(--glow-gold),
+    0 2px 4px rgba(0, 0, 0, 0.8);
+  position: relative;
+  display: inline-block;
+  padding: 0 20px;
+  margin-bottom: 0.5rem;
+}
+
+.app-header h1::before,
+.app-header h1::after {
+  content: "⚔️";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  opacity: 0.7;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.5));
+}
+
+.app-header h1::before {
+  left: -5px;
+}
+
+.app-header h1::after {
+  right: -5px;
+}
+
+.app-header p {
+  color: var(--silver);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  opacity: 0.8;
+}
+
+footer {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  background: var(--surface-dark);
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  color: var(--silver);
+  font-size: 0.85rem;
+}
+
+/* =========================
+   Main container
+   ========================= */
+
+main {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding-bottom: calc(
+    var(--bottom-bar-height) + env(safe-area-inset-bottom)
+  );
+}
+
+/* =========================
+   Navigation
+   ========================= */
+
+.main-menu {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(20, 20, 33, 0.7);
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.main-menu::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--gold-primary), 
+    transparent);
+}
+
+/* remove highlight azul */
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================
+   Menu Buttons (Home)
+   ========================= */
+
+.menu-button {
+  position: relative;
+  min-height: 100px;
+  padding: 1.5rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: linear-gradient(145deg, 
+    var(--surface-medium) 0%, 
+    var(--surface-dark) 100%);
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Estilo de texto */
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--gold-primary);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.menu-button::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.menu-button::after {
+  content: attr(data-icon);
+  font-size: 2.2rem;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
+  transition: transform 0.3s ease;
+}
+
+.menu-button span {
+  font-size: 0.9rem;
+  color: var(--silver);
+  font-family: var(--font-body);
+  letter-spacing: 0.5px;
+}
+
+.menu-button:hover,
+.menu-button:active,
+.menu-button:focus {
+  transform: translateY(-2px);
+  border-color: var(--gold-primary);
+  box-shadow: 
+    0 6px 20px rgba(212, 175, 55, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.menu-button:hover::after {
+  transform: scale(1.1);
+}
+
+.menu-button:active {
+  transform: translateY(0px);
+  transition: transform 0.1s ease;
+}
+
+/* =========================
+   Sections (Cards)
+   ========================= */
+
+section {
+  margin-bottom: 1.5rem;
+}
+
+.notpat-section {
+  background: linear-gradient(to bottom, 
+    var(--parchment) 0%,
+    var(--aged-paper) 100%);
+  border: 2px solid #8b7355;
+  border-radius: var(--border-radius);
+  box-shadow: 
+    0 8px 32px rgba(139, 115, 85, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  position: relative;
+  overflow: hidden;
+  padding: 1.5rem;
+}
+
+.notpat-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    #8b7355, 
+    var(--gold-primary), 
+    #8b7355);
+}
+
+.notpat-button {
+  background: linear-gradient(to bottom, 
+    #8b7355 0%,
+    #6b5a45 100%);
+  color: white;
+  border: 1px solid #5d4a38;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease;
+}
+
+.notpat-button:hover {
+  background: linear-gradient(to bottom, 
+    #9b8261 0%,
+    #7b6a55 100%);
+  transform: translateY(-1px);
+}
+
+.news-list {
+  color: #3a2c1e;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  list-style: none;
+}
+
+.news-list li {
+  padding: 0.75rem 0;
+  border-bottom: 1px dashed #8b7355;
+  position: relative;
+  padding-left: 1.8rem;
+}
+
+.news-list li:last-child {
+  border-bottom: none;
+}
+
+.news-list li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  color: var(--gold-primary);
+  font-size: 1.1rem;
+}
+
+.news-list strong {
+  color: #5d4a38;
+  font-weight: 700;
+}
+
+/* =========================
+   Floating Buttons Area
+   ========================= */
+
+.floating-actions {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  backdrop-filter: blur(10px);
+  background: rgba(20, 20, 33, 0.85);
+  border-top: 1px solid rgba(212, 175, 55, 0.3);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+}
+
+/* =========================
+   Floating Buttons Base Reset
+   ========================= */
+
+.floating-button {
+  text-decoration: none;
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* =========================
+   Default Buttons (para uso geral)
+   ========================= */
+
+.button {
+  width: 100%;
+  padding: 1rem;
+
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+
+  border-radius: var(--border-radius);
+  border: 2px solid var(--gold-primary);
+
+  background: linear-gradient(145deg, var(--gold-primary), #b8941f);
+  color: #1a1a1a;
+
+  box-shadow: 0 4px 15px rgba(198, 168, 90, 0.35);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.2), 
+    transparent);
+  transition: left 0.5s ease;
+}
+
+.button:hover::before {
+  left: 100%;
+}
+
+button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* =========================
+   Responsive Design
+   ========================= */
+
+@media (min-width: 768px) {
+  .main-menu {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  
+  .menu-button {
+    min-height: 120px;
+    font-size: 1.2rem;
+  }
+  
+  .menu-button span {
+    font-size: 1rem;
+  }
+  
+  .app-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .app-header p {
+    font-size: 1rem;
+  }
+  
+  main {
+    max-width: 800px;
+  }
+  
+  .floating-actions {
+    justify-content: center;
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .main-menu {
+    order: 1;
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  .notpat-section {
+    order: 2;
+    width: 100%;
+    max-width: 800px;
+  }
+}
+
+/* =========================
+   Accessibility & Effects
+   ========================= */
+
+@keyframes subtleGlow {
+  0%, 100% { 
+    box-shadow: 0 0 5px transparent; 
+  }
+  50% { 
+    box-shadow: 0 0 15px var(--glow-gold); 
+  }
+}
+
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0); 
+  }
+  50% { 
+    transform: translateY(-5px); 
+  }
+}
+
+.menu-button:focus,
+.floating-button:focus,
+.notpat-button:focus {
+  animation: subtleGlow 2s infinite;
+  outline: 2px solid var(--gold-primary);
+  outline-offset: 2px;
+}
+
+/* Skip to content link for accessibility */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--gold-primary);
+  color: var(--primary-dark);
+  padding: 8px;
+  z-index: 1001;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.skip-to-content:focus {
+  top: 0;
+}
+
+/* Loading animation */
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(212, 175, 55, 0.3);
+  border-top-color: var(--gold-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 2rem auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Selection color */
+::selection {
+  background-color: rgba(212, 175, 55, 0.5);
+  color: white;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--gold-primary), #b8941f);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #e6c158, #c9a41f);
+}
+
+/* PWA specific styles */
+.pwa-mode .floating-actions {
+  padding-bottom: calc(16px + env(safe-area-inset-bottom) + 20px);
+}
+
+/* Instalar prompt */
+.install-prompt {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--surface-dark);
+  border: 2px solid var(--gold-primary);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  z-index: 9999;
+  display: none;
+  text-align: center;
+  max-width: 90%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.install-prompt.show {
+  display: block;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
