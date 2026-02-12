@@ -1,0 +1,153 @@
+.shield-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.shield-modal.active {
+  display: flex;
+}
+
+.shield-modal-content {
+  background: var(--surface);
+  border: 2px solid var(--gold);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 700px; /* Reduzido de 800px */
+  margin: 2rem auto; /* Margem maior para ver o fundo */
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.shield-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 1.5rem 0.75rem 1.5rem;
+  border-bottom: 1px solid rgba(212,175,55,0.3);
+}
+
+.shield-modal-header h2 {
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.shield-modal-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.shield-modal-close:hover {
+  color: var(--gold);
+}
+
+.shield-modal-body {
+  color: var(--text);
+  font-family: 'Crimson Text', serif;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  padding: 0.5rem 1.5rem 1.5rem 1.5rem;
+  flex: 1;
+}
+
+/* Conteúdo do modal */
+.shield-modal-body p {
+  margin-bottom: 1rem;
+}
+
+.shield-modal-body ul, 
+.shield-modal-body ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.shield-modal-body li {
+  margin-bottom: 0.5rem;
+}
+
+.shield-modal-body .mark {
+  background-color: #fff3cd;
+  border-bottom: 2px solid #ffc107;
+  padding: 0 2px;
+  font-weight: 500;
+  border-radius: 2px;
+}
+
+/* Scroll customizado */
+.shield-modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.shield-modal::-webkit-scrollbar-track {
+  background: rgba(212,175,55,0.1);
+  border-radius: 10px;
+}
+
+.shield-modal::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 10px;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 600px) {
+  .shield-modal-content {
+    max-width: 90%; /* Relativo em vez de fixo */
+    margin: 1.5rem auto;
+    border-radius: 20px;
+  }
+  
+  .shield-modal-header {
+    padding: 1.25rem 1.25rem 0.5rem 1.25rem;
+  }
+  
+  .shield-modal-header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .shield-modal-body {
+    padding: 0.25rem 1.25rem 1.25rem 1.25rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .shield-modal-content {
+    max-width: 95%;
+    margin: 1rem auto;
+    border-radius: 16px;
+  }
+  
+  .shield-modal-header {
+    padding: 1rem 1rem 0.5rem 1rem;
+  }
+  
+  .shield-modal-body {
+    padding: 0.25rem 1rem 1rem 1rem;
+    font-size: 1.1rem;
+  }
+  
+  .shield-modal-body ul, 
+  .shield-modal-body ol {
+    padding-left: 1.25rem;
+  }
+}

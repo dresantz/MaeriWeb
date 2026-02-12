@@ -49,25 +49,6 @@
   transform: translateY(0);
 }
 
-.back-link {
-  display: inline-block;
-  margin-bottom: 0.5rem;
-  color: var(--text-muted);
-  text-decoration: none;
-  font-family: 'Crimson Text', serif;
-  font-size: 1rem;
-  transition: color 0.2s ease;
-}
-
-.back-link:hover {
-  color: var(--gold);
-}
-
-.back-link::before {
-  content: "←";
-  margin-right: 0.5rem;
-}
-
 /* Ajustes para telas pequenas */
 @media (max-width: 600px) {
   .shield {

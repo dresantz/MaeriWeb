@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="../css/sheet.css" />
   <link rel="stylesheet" href="../css/spells.css" />
   <link rel="stylesheet" href="../css/shield.css" />
+  <link rel="stylesheet" href="../css/shield-modal.css" />
 </head>
 
 <body>
@@ -39,8 +40,6 @@
   </header>
 
   <main class="shield">
-    <a href="../index.html" class="back-link">Voltar ao início</a>
-    
     <div class="shield-grid">
       <button class="shield-button">Combate</button>
       <button class="shield-button">Testes</button>
@@ -69,10 +68,25 @@
     <button id="dice-toggle" class="floating-button floating-button--pill" aria-label="Open Dice Roller" aria-expanded="false">
       <span class="floating-label">Dados</span>
     </button>
+        <a href="../index.html" class="floating-button" id="back-to-home">
+      <span class="floating-icon">⌂</span>
+    </a>
   </aside>
 
+  <!-- MODAIS -->
   <div id="modal-root"></div>
 
+  <div id="shield-modal" class="shield-modal">
+    <div class="shield-modal-content">
+      <div class="shield-modal-header">
+        <h2 id="shield-modal-title">Testes</h2>
+        <button class="shield-modal-close" id="shield-modal-close">&times;</button>
+      </div>
+      <div id="shield-modal-body" class="shield-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
   <script type="module">
     import { loadGlobalModals } from '../js/modalLoader.js';
     loadGlobalModals();
@@ -94,5 +108,7 @@
   </script>
 
   <script src="../js/notpad.js" defer></script>
+  <script type="module" src="../js/shield/shield-modal.js"></script>
+
 </body>
 </html>

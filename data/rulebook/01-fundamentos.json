@@ -89,10 +89,12 @@
           "content": [
             {
               "type": "paragraph",
+              "teste_item": "Físico(F)",
               "text": "Físico (F). É a condição física, muscular e bruta do personagem. Ter F1 significa ter pouco mais que o suficiente para se manter em pé, enquanto F9 é o suficiente para lidar com múltiplas vezes o próprio peso."
             },
             {
               "type": "list",
+              "id": "teste_item",
               "style": "unordered",
               "items": [
                 "Forçar. Arrombar, esmagar, dobrar.",
@@ -102,10 +104,12 @@
             },
             {
               "type": "paragraph",
+              "teste_item": "Vigor(V)",
               "text": "Vigor (V). A resistência física e mental, a saúde, a energia vital. V1 seria como ter a saúde de um recém-nascido, enquanto com V9 o personagem pode perder um braço em combate e continuar lutando."
             },
             {
               "type": "list",
+              "id": "teste_item",
               "style": "unordered",
               "items": [
                 "Resistir. Efeitos externos, como calor, frio, pressão.",
@@ -115,14 +119,16 @@
             },
             {
               "type": "paragraph",
+              "teste_item": "Destreza(D)",
               "text": "Destreza (D). A movimentação física, velocidade, controle e noção corporal. Com D1 é possível pouco mais que caminhar, D3 o personagem já sabe nadar, e com D9 estará em nível olímpico de atletismo."
             },
             {
               "type": "list",
+              "id": "teste_item",
               "style": "unordered",
               "items": [
                 "Acrobacia. Saltar, aterrizar, equilibrar.",
-                ", Movimento. Correr, esgueirar, rastejar.",
+                "Movimento. Correr, esgueirar, rastejar.",
                 "Ocultar. Esconder-se.",
                 "Nadar. Movimentar na água.",
                 "Reflexo. Velocidade de resposta do corpo."
@@ -130,11 +136,13 @@
             },
             {
               "type": "paragraph",
+              "teste_item": "Assimilação(A)",
               "text": "Assimilação (A). É a união dos cinco sentidos, a noção espacial e a resposta motora sutil do corpo. A2 é a habilidade motora e perceptiva de um bêbado e A9 é a capacidade de observação de um detetive experiente."
             },
             {
               "type": "list",
               "style": "unordered",
+              "id": "teste_item",
               "items": [
                 "Mira. Acertar um alvo.",
                 "Manobrar. Cavalgar montarias, pilotar embarcações, guiar carroças.",
@@ -145,10 +153,12 @@
             },
             {
               "type": "paragraph",
+              "teste_item": "Influência(I)",
               "text": "Influência (I). É a inteligência interpessoal, a habilidade de se relacionar com outros seres. I1 é a simpatia de alguém que passou a vida em um buraco, I5 é a capacidade de um bom vendedor e I9 é o carisma de um líder político."
             },
             {
               "type": "list",
+              "id": "teste_item",
               "style": "unordered",
               "items": [
                 "Intriga. Lábia, diplomacia, oratória, intimidação, sedução, provocação.",
@@ -159,10 +169,12 @@
             },
             {
               "type": "paragraph",
+              "teste_item": "Sabedoria(S)",
               "text": "Sabedoria (S). Conhecimento de mundo, memória, lógica, conectar informações. Com S1 o personagem é basicamente movido a instintos básicos como fome, S4 já permite ler e escrever de maneira coloquial e rudimentar em sua língua original, e S9 é a mente de um cientista de vanguarda."
             },
             {
               "type": "list",
+              "id": "teste_item",
               "style": "unordered",
               "items": [
                 "Lembrar. Recordar, reconhecer, memorizar.",
