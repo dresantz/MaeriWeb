@@ -47,7 +47,7 @@
   border-bottom: 3px solid var(--gold);
   border-radius: 0 0 var(--radius) var(--radius);
   padding: 1.5rem;
-  z-index: 1003;
+  z-index: 1000;
   overflow-y: auto;
   box-shadow: var(--shadow);
   flex-direction: column;

@@ -58,10 +58,6 @@
             },
             {
               "type": "paragraph",
-              "text": "Uma magia de invocação será descrita de maneira padronizada, indicando o tipo de criatura invocada, seus valores de ficha e as ações específicas, conforme as regras abaixo."
-            },
-            {
-              "type": "paragraph",
               "text": "Considerações sobre Invocação de Criaturas:"
             },
             {
@@ -69,6 +65,7 @@
               "style": "unordered",
               "items": [
                 "Magias de invocação estarão com a palavra Invocar antes do nome, seguida dos valores da ficha, com as ações específicas entre parênteses ao lado de cada característica usada pela ação.",
+                "Criaturas com S maior que 1 irão raciocinar por conta e agir visando a melhor maneira de servir o invocador sem necessidade de comandos (controle do mestre) ou através de um elo mental natural (controle do jogador).",
                 "Se nada na descrição disser o contrário, todas as criaturas invocadas possuem Vit igual a F mais V, e Con igual a S mais I.",
                 "O controle sobre a criatura invocada é feito através de comandos (gesto) no caso de criaturas com S igual a 1 ou menos. Sem ordens, elas não agem por si só, ficando Indefesas.",
                 "Criaturas com S maior que 1 raciocinam por conta própria e agem visando a melhor maneira de servir o invocador, seja sob controle do mestre ou através de um elo mental natural sob controle do jogador.",

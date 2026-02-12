@@ -181,3 +181,9 @@ mark {
   padding: 0 2px;
   border-radius: 3px;
 }
+
+.mark {
+  background-color: #5c5934;
+  padding: 0 2px;
+  border-radius: 2px;
+}
