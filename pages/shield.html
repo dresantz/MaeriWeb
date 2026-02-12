@@ -29,6 +29,10 @@
 </head>
 
 <body>
+  <button id="gmnotes-button" class="gmnotes-button" aria-label="GM Notes">
+    <span class="gmnotes-label">☰</span>
+  </button>
+
   <header class="app-header">
     <h1>Escudo do Mestre</h1>
     <p>Regras fundamentais ao alcance</p>
@@ -38,107 +42,20 @@
     <a href="../index.html" class="back-link">Voltar ao início</a>
     
     <div class="shield-grid">
-      
-      <!-- Ações e Combate -->
-      <section class="shield-category">
-        <h2>Combate</h2>
-        <div class="shield-buttons">
-          <button class="shield-button">Iniciativa</button>
-          <button class="shield-button">Ataque</button>
-          <button class="shield-button">Defesa</button>
-          <button class="shield-button">Dano</button>
-          <button class="shield-button">Crítico</button>
-          <button class="shield-button">Cobertura</button>
-          <button class="shield-button">Flanqueamento</button>
-          <button class="shield-button">Montaria</button>
-        </div>
-      </section>
-      
-      <!-- Magias e Feitiços -->
-      <section class="shield-category">
-        <h2>Magia</h2>
-        <div class="shield-buttons">
-          <button class="shield-button">Conjurar</button>
-          <button class="shield-button">Resistência</button>
-          <button class="shield-button">Dissipar</button>
-          <button class="shield-button">Contramagia</button>
-          <button class="shield-button">Foco</button>
-          <button class="shield-button">Canalizar</button>
-          <button class="shield-button">Círculo</button>
-        </div>
-      </section>
-      
-      <!-- Perícias e Atributos -->
-      <section class="shield-category">
-        <h2>Perícias</h2>
-        <div class="shield-buttons">
-          <button class="shield-button">Percepção</button>
-          <button class="shield-button">Furtividade</button>
-          <button class="shield-button">Diplomacia</button>
-          <button class="shield-button">Intimidação</button>
-          <button class="shield-button">Arrombamento</button>
-          <button class="shield-button">Sobrevivência</button>
-          <button class="shield-button">Medicina</button>
-          <button class="shield-button">Arcanismo</button>
-          <button class="shield-button">Religião</button>
-        </div>
-      </section>
-      
-      <!-- Condições e Estados -->
-      <section class="shield-category">
-        <h2>Condições</h2>
-        <div class="shield-buttons">
-          <button class="shield-button">Caído</button>
-          <button class="shield-button">Imobilizado</button>
-          <button class="shield-button">Cego</button>
-          <button class="shield-button">Surdo</button>
-          <button class="shield-button">Envenenado</button>
-          <button class="shield-button">Queimando</button>
-          <button class="shield-button">Enfeitiçado</button>
-          <button class="shield-button">Paralisado</button>
-          <button class="shield-button">Inconsciente</button>
-        </div>
-      </section>
-      
-      <!-- Movimento e Deslocamento -->
-      <section class="shield-category">
-        <h2>Movimento</h2>
-        <div class="shield-buttons">
-          <button class="shield-button">Andar</button>
-          <button class="shield-button">Correr</button>
-          <button class="shield-button">Escalar</button>
-          <button class="shield-button">Nadar</button>
-          <button class="shield-button">Saltar</button>
-          <button class="shield-button">Esquivar</button>
-          <button class="shield-button">Rastejar</button>
-        </div>
-      </section>
-      
-      <!-- Interação e Ambiente -->
-      <section class="shield-category">
-        <h2>Ambiente</h2>
-        <div class="shield-buttons">
-          <button class="shield-button">Escuridão</button>
-          <button class="shield-button">Clima</button>
-          <button class="shield-button">Terreno difícil</button>
-          <button class="shield-button">Queda</button>
-          <button class="shield-button">Afogamento</button>
-          <button class="shield-button">Armadilha</button>
-        </div>
-      </section>
-      
-      <!-- Descanso e Recursos -->
-      <section class="shield-category">
-        <h2>Descanso</h2>
-        <div class="shield-buttons">
-          <button class="shield-button">Descanso curto</button>
-          <button class="shield-button">Descanso longo</button>
-          <button class="shield-button">Cura</button>
-          <button class="shield-button">Recuperar magias</button>
-          <button class="shield-button">Inspiração</button>
-        </div>
-      </section>
-      
+      <button class="shield-button">Combate</button>
+      <button class="shield-button">Testes</button>
+      <button class="shield-button">Magia</button>
+      <button class="shield-button">Condições</button>
+      <button class="shield-button">Seres</button>
+      <button class="shield-button">Classes</button>
+      <button class="shield-button">Técnicas</button>
+      <button class="shield-button">Estudos</button>
+      <button class="shield-button">Segredos</button>
+      <button class="shield-button">Descanso</button>
+      <button class="shield-button">Armas</button>
+      <button class="shield-button">Proteções</button>
+      <button class="shield-button">Itens Arcanos</button>
+      <button class="shield-button">Montarias</button>
     </div>
   </main>
 
@@ -154,16 +71,13 @@
     </button>
   </aside>
 
-  <!-- Root onde os modais serão injetados -->
   <div id="modal-root"></div>
 
-  <!-- Modal Loader -->
   <script type="module">
     import { loadGlobalModals } from '../js/modalLoader.js';
     loadGlobalModals();
   </script>
 
-  <!-- Scripts dos modais -->
   <script type="module">
     function initModals() {
       if (document.getElementById('sheet-modal')) {

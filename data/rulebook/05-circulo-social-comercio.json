@@ -260,23 +260,23 @@
           "type": "list",
           "style": "unordered",
           "items": [
-            "Infusão de Láudano. Recupera até 3 Vit (divisível). 2Dp.",
-            "Infusão de Salix. Recupera até 6 Vit (divisível). 4Dp.",
-            "Semente Fermentada de Caiena. -3 dano de fogo, gelo e vento. 1Dp.",
-            "Goma de Aguapé. Impermeabiliza e permite respirar em água ou fumaça por 1 temporada. -3 dano de água e ácido. 2Dp.",
-            "Antídoto. Neutraliza diversos venenos comuns. 2Dp.",
-            "Óleo de Salamandra. Chama radiante difícil de apagar. 1Dp.",
-            "Sono Vivo. Paralisia consciente por 3 temporadas. 4Dp.",
-            "Nota de Sangue. Veneno letal em 5 temporadas. 3Dp.",
-            "Febre Negra. Violência extrema por 2d6 temporadas. 4Dp.",
-            "Poção do Amor. Encantamento condicional por 1d6 temporadas. 4Dp.",
-            "Mnemos. Amnésia total por 1d6 temporadas. 5Dp.",
-            "Toque do Demônio. Morte em 1d6 horas ou veneno por contato. 10Dp.",
-            "Darpid. Dano ácido 1d6+2 e Envenenado. 10Dp.",
-            "Nabee. Paralisação no próximo ataque. 6Dp.",
-            "Somnia. Torpor sugestivo por 1d6 horas. 6Dp.",
-            "Olho da Lua. Amedronta até teste de V. 5Dp.",
-            "Lactuca. Sonífero em múltiplas formas. 1Dp (farelo), 4Dp (frasco), 8Dp (pedra)."
+            "Infusão de Láudano. O analgésico e anti-inflamatório (dores em geral, alergias, insônia) mais comum de Maeri, ao ser ingerido permite recuperar 3 Vit, é possível subdividir a cura, tomar o suficiente para recuperar 1 ou 2 Vit e guardar o resto. 2 Dp.",
+            "Infusão de Salix. Feito do pó da casca do salgueiro, é um antibiótico e antisséptico poderoso (gripe, fungos, problemas dentários, náusea, irritações na pele, infecções respiratórias), ao ingerir recupera 6 Vit que podem ser subdivididos. 4 Dp.",
+            "Semente Fermentada de Caiena. Antitérmico, permite manter alguém aquecido mesmo nu em uma geada, ao ser ingerido concede -3 de dano de fogo, gelo e vento. 1 Dp.",
+            "Goma de Aguapé. Ao ser esfregada no corpo, ela se espalhe rapidamente sozinha, deixando o alvo e seus equipamentos impermeáveis, permite respirar sob a água ou em meio a fumaça sem sofrer efeitos negativos durante uma temporada, concede -3 de dano de água e ácido. 2 Dp.",
+            "Antídoto. Policarpo para belladona, folha de amora para meimendro, avicelo para datura, pedra de sapo para acônito e mitridato para mandrágora, mais um pouco de carvão cozido e gordura animal faz vomitar venenos, limpa o estômago e a corrente sanguínea, certos tipos de venenos exigem ingredientes extras especiais. 2 Dp.",
+            "Óleo de Salamandra.  Transforma chamas do tamanho de tochas em chama radiante, só pode ser apagada com terra, não queima com a mesma força (menos dano) e demora 1d6 temporadas para apagar naturalmente. 1 Dp.",
+            "Sono Vivo. Feito à base de belladona, é um veneno que, se ingerido, retira a dor e a capacidade de movimentação, mas mantém o alvo consciente de tudo o que acontece com ele durante três temporadas. 4 Dp.",
+            "Nota de Sangue. Feito à base de belladona, é um veneno poderoso que, se ingerido, fica encubado por três temporadas, tonturas surgem na quarta e na quinta o alvo morre. 3 Dp.",
+            "Febre Negra. Feito à base de meimendro, quando ingerido, deixa o alvo extremamente violento por 2d6 temporadas, tem esse nome pois as pupilas se dilatam tanto que os olhos parecem ficar negros. 4 Dp.",
+            "Poção do Amor. A base de meimendro, o alvo que beber a poção deve fazer um teste de V por temporada para não ficar Encantando pela pessoa que pingar uma gota de sangue na poção (só uma pessoa) por 1d6 temporadas. 4 Dp.",
+            "Mnemos. Feita a base de datura, é uma poção que, se ingerida, causa desmaio seguido de amnésia por 1d6 temporadas, o alvo esquece os Estudos, Conhecimentos, os Contatos e a história do seu personagem. 5 Dp.",
+            "Toque do Demônio. Feita a base de datura, se ingerido o alvo fica imediatamente fora de ação e morre em 1d6 horas, fora do frasco, possui forma de pasta, se essa pasta tocar a pele de um alvo, ele é Envenenado até que passe em teste de V a partir do fim do seu turno seguinte, a pasta pode ser colocada em flechas e armas para um ataque. 10 Dp.",
+            "Darpid. Feito à base de acônito, o frasco deve ser arremessado, criando uma pequena nuvem ao estourar no alvo, causando 1d6+2 de dano ácido e deixando o alvo Envenenado até que passe em teste de V a partir do fim do seu turno seguinte. 10 Dp.",
+            "Nabee. Pasta à base de acônito, chamada também de Perdição do Lobo, ao ser colocado em uma arma, o próximo ataque causará Paralisia, o alvo não pode usar movimentação e estará indefeso até que sofra dano ou passe em teste de V no início do seu próximo turno. 6 Dp.",
+            "Somnia. Feito à base de mandrágora, se ingerida deixa a pessoa em um torpor consciente que a mantém propensa a sugestões simples, como “ande comigo”, “coma isso”, “segure isso”, nada que possa ir contra seus instintos básicos de autopreservação, o efeito dura 1d6 horas. 6 Dp.",
+            "Olho da Lua. Também chamada Delírio da Lua, é uma pasta à base de mandrágora que, passada em uma arma para um ataque, deixa o alvo Amedrontado por qualquer ser até que passe em teste de V a partir do fim do turno seguinte. 5 Dp.",
+            "Lactuca. Resina feita a partir da flor do mesmo nome, possui função de sonífero, farelo permite melhorar o sono (remove a necessidade dos três critérios de Repouso), frasco faz desmaiar por 1d6 horas ou até ser alvo de uma ação quando colocado em um pano e inalado, uma pedra pode ser colocada em uma tocha para fazer, em alguns minutos, todas as pessoas de um local fechado de até 10 Esp desmaiarem por 1d6 horas ou até serem alvos de ações. 1 Dp farelo, 4 Dp frasco, 8 Dp pedra, um fraco pode ser transformado em 4 farelos e a pedra em 2 frascos."
           ]
         }
       ]
@@ -292,7 +292,7 @@
 
         {
           "type": "paragraph",
-          "text": "Almocreve. Um vendedor andarilho de generalidades, responsável por suprir o acampamento com uma ampla variedade de itens comuns e incomuns."
+          "text": "Almocreve. Um vendedor andarilho de generalidades:"
         },
         {
           "type": "list",
@@ -364,13 +364,13 @@
           "type": "list",
           "style": "unordered",
           "items": [
-            "Sicamora. Madeira para armas. +1 em testes para resistir a efeitos mágicos e +1 em embates contra magia.",
-            "Oricalco. Material para armas e armaduras. Armaduras anulam penalidades em D, recebem -2Pes, +6Res e +1 Esp de movimento. Armas pesam -1Pes e possuem +3Res.",
-            "Diamantina. Material de armadura. +2V para resistir a ferimentos. +2Pes. +3Res.",
-            "Metal Carvão. Material de arma. Incendeia ao ser desembainhada por uma cena ou combate, causando +1 dano de fogo. +1Res.",
-            "Ectoplasma. Material de arma. Substitui o dano por dano Psíquico e reduz Con Medo do alvo; ao zerar, o alvo fica Amedrontado até passar em teste de V.",
-            "Aço Frio. Material de arma. Causa perda adicional de +1Res em críticos de F ou V.",
-            "Espectra. Material de arma. Anula bonificações concedidas por escudos e armaduras."
+            "Sicamora. Madeira usada para materiais de arma, concede +1 para qualquer teste que envolva resistir a algum efeito mágico, e +1 para embates contra magia.",
+            "Oricalco. Material de armaduras e arma que as torna mais leves e resistentes. Anula penalidades em D da armadura. -2Pes. +6Res. +1 Esp de movimento. Armas desse material pesam -1Pes e possuem +3 Res.",
+            "Diamantina. Material de armadura que concede +2V para resistir a ferimentos. +2Pes. +3Res.",
+            "Metal Carvão. Material de arma que incendeia quando em contato com o ar por uma cena ou combate ao ser desembainhada, causando +1 de dano de fogo. +1Res.",
+            "Ectoplasma. Material de armas que substitui o dano da arma por dano Psíquico, retira o mesmo valor em uma linha de Con Medo, quando zerada, o alvo fica Amedrontado até que passe em teste de V no início do seu turno recuperando sua Con.",
+            "Aço Frio. Material de arma que causa a perda de +1Res com críticos em F ou V.",
+            "Espectra. Material de armas que anula bonificações dadas por escudos e armaduras."
           ]
         },
         {
@@ -392,8 +392,8 @@
             "Anel da Forja. Recupera 1Res de um item com pequenos remendos.",
             "Amuleto dos Mares. Permite respirar sob a água, caminhar sobre ela, mergulhar sem penalidade em D e sem molhar a si ou sua carga.",
             "Amuleto do Olhar Divino. Permite enxergar longas distâncias, seres invisíveis, no escuro e através de fumaça e objetos sólidos com até 2 cm.",
-            "Amuleto do Retorno. Permite armazenar uma magia de custo apenas em Con usada contra o usuário após embate bem-sucedido de S.",
-            "Amuleto Protetor. Ao custo de 6 Con mágico e uma interrupção, anula totalmente um dano não letal.",
+            "Amuleto do Retorno. Quando uma magia cujo custo seja apenas Con for usada contra o usuário do amuleto, ele pode se proteger com embate de S, e se for bem-sucedido, ele armazena a magia para usá-la depois, só pode armazenar uma por vez.",
+            "Amuleto Protetor. Ao custo de 6 Con mágico e uma interrupção, anula totalmente um dano qualquer, não mortal, sofrido pelo usuário em combate ou fora de combate.",
             "Amuleto do Azar. Ao custo de 6 Con mágico e uma interrupção, causa falha automática em um teste de um alvo.",
             "Amuleto da Sorte. Ao custo de 6 Con mágico e uma interrupção, causa sucesso automático em um teste de um alvo."
           ]
@@ -406,13 +406,13 @@
           "type": "list",
           "style": "unordered",
           "items": [
-            "Apanhador. Vara com filtro de sonhos. Permite enxergar sonhos de pessoas dormindo e concede +3 em embates de D para capturar hesperias.",
-            "Instrumento Mágico. Permite usar I em vez de S em embates mágicos. Ocupa as duas mãos, mas é considerado mão livre para conjuração.",
-            "Pólvora. Cada 1Pes causa 4d6 de dano explosivo em 2 Esp de raio. Pólvora não armazenada invoca Bestas da Pólvora por turno.",
-            "Arpéu. Corda extremamente resistente lançada por braçadeira. Permite puxar alvos ou o usuário em até 6 Esp, podendo ser usada em combate.",
-            "Fundo Compartilhado. Até seis bolsas compartilham o mesmo espaço extradimensional, com diversas restrições de uso.",
-            "Bola de Cristal. Extensão sensorial e mágica do usuário. Permite ver, ouvir e conjurar à distância. Limite de duas por usuário.",
-            "Braço Estático. Membro metálico voador controlado por gestos, capaz de aplicar força equivalente a F8 fora de combate ou atacar em combate."
+            "Apanhador. Vara com um filtro de sonhos na ponta, enquanto o personagem a empunhar, permite enxergar os sonhos das pessoas dormindo e concede +3 em embates de D para capturar hesperias.",
+            "Instrumento Mágico. Um instrumento que permite usar I em vez de S em embates mágicos, o instrumento ocupa as duas mãos, mas para uso de magia é considerado uma mão livre, não precisa ser um instrumento musical, pode ser um colar para cantores, por exemplo, porém, ele ainda usará as duas mãos para ativar o poder, e o personagem ainda terá uma “mão invisível” para magias.",
+            "Pólvora. Em Maeri a pólvora é amaldiçoada, cada 1 Pes de pólvora (uma granada) causa 4d6 de dano explosivo em 2 Esp de raio, aumento +1 Esp para cada 1 Pes a mais. 1 Pes de pólvora não armazenada em vidro ou cerâmica conjura uma besta da pólvora por turno, criaturas que são como cães negros capazes de disparar fogo pela boca (Besta da Pólvora: F3, D3, V3, A3, I2, S4, besta, língua de fogo (F ou A) 1d6+2 de dano de fogo engajado ou a distância (4 Esp), sua mordida aprimorada causa 1d6 perfurante e aplica a técnica Segurar causando 1d6 de dano de fogo por turno em que o personagem não conseguir se livrar).",
+            "Arpéu. Uma corda fina, mas extremamente resistente, cuja ponta gruda em um alvo quando disparada por uma espécie de braçadeira ao qual ela está presa, permite puxar o alvo 6 Esp, puxar a si mesmo até a direção do alvo 6 Esp, ou usar o momento para se projetar para mais longe, pode ser usada em combate com embate de A. Seu alcance é de 6 Esp, mas permite projetar o usuário para mais 6 Esp.",
+            "Fundo Compartilhado. Até seis bolsas de couro que possuem o mesmo fundo, ou seja, seis personagens diferentes poderão guardar itens, cada um em sua bolsa, e os itens guardados lá serão compartilhados entre os seis, as bolsas se fecham virando bolsas normais e deixando os itens trancados em uma dimensão paralela quando alguém tenta colocar mais que 6 Pes, tenta passar algo contínuo entre uma bolsa e outra, como uma corda, ou quando alguém tenta guardar algo vivo lá dentro.",
+            "Bola de Cristal. Para todos os efeitos, uma bola de cristal é uma extensão do usuário, ela precisa ser ativada com um toque e um teste de S (se falhar só poderá tentar novamente após uma temporada), um usuário pode ver e ouvir através dela e o alcance de suas magias incluirão a bola de cristal como se ela fosse o conjurador, e ela pode flutuar com a D de quem a ativou. Não é possível controlar mais de duas bolas de cristal ao mesmo tempo. A bola irá esquecer o antigo usuário se um novo usuário a ativar.",
+            "Braço Estático. Uma mão com um antebraço voador feito de metal, ele possui uma bola de cristal onde ficaria o cotovelo que, ao ser tocada, identifica e passa a ser controlado pelo usuário ao custo de gestos. Ele é capaz de se mover a uma distância equivalente a I do personagem e aplicar uma força equivalente a F8 fora de combate, inclusive para carregar em voo, já em combate pode ser usado para atacar à distância com a F e a ação do usuário. Não é possível controlar mais de dois braços ao mesmo tempo."
           ]
         }
       ]
@@ -423,7 +423,7 @@
       "content": [
         {
           "type": "paragraph",
-          "text": "Tradutor. Um especialista nas diversas línguas de Maeri, atuando também como guia cultural. O tradutor conhece costumes regionais e pode ajudar grupos estrangeiros a se integrarem melhor, evitando chamar atenção indesejada."
+          "text": "Tradutor. Especialista nas diversas línguas de Maeri, uma espécie também de guia cultural, que pode mostrar os costumes de cada região e permitir que membros de um grupo estrangeiro não chamem muito a atenção."
         },
         {
           "type": "list",
@@ -453,7 +453,7 @@
           "style": "unordered",
           "items": [
             "Estilo de Luta. Ataques desarmados causam 1d6 de dano. O usuário pode escolher entre dano de contusão, corte ou perfuração no momento de aplicá-lo.",
-            "Golpe Especial. Permite substituir os bônus de Defesa obtidos em sucessos de embate em V (+1 em qualquer característica, +1 de dano para o embate seguinte que cause dano, incluindo +1V para resistir a ferimentos) por 1d6 de dano explosivo no próximo sucesso em embate de F, substituindo o dano da arma ou do ataque desarmado. Assim como a Defesa, o bônus acumula até três vezes, causando até 3d6 de dano, sendo reiniciado apenas após ser gasto.",
+            "Golpe Especial. Permite substituir os bônus de Defesa em sucessos de embate em V (+1 em qualquer característica, +1 de dano para o embate seguinte caso seja uma ação que cause dano, incluindo +1V para resistir a ferimentos) por 1d6 de dano explosivo no próximo sucesso em embate de F no lugar do dano da arma ou desarmado, e assim como a Defesa, acumula três vezes para 3d6 de dano e o bônus é reiniciado apenas após ser gasto.",
             "Técnica. Permite realizar ataques desarmados usando D ou F, à escolha do jogador. Também permite usar Empurrar, Desmontar, Desarmar e Derrubar com sucesso em embates de F ou D.",
             "Posturas de Combate. Em combate, é possível remover 1 ponto de uma característica física (F, V ou D) e realocá-lo para outra, ao custo de um gesto.",
             "Movimento Fluido. Permite receber +3D em uma Esquiva caso o usuário opte por não realizar nenhuma ação. Além disso, concede +2 Esp de deslocamento e salto.",

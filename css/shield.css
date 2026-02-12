@@ -3,49 +3,37 @@
    Estilos específicos para a página Shield
 ========================= */
 
+.shield {
+  padding: 1rem;
+  padding-bottom: 6rem; /* Espaço para botões flutuantes */
+}
+
 .shield-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  padding: 0.5rem 0 1rem;
-}
-
-.shield-category {
-  background: var(--surface);
-  border: 2px solid rgba(212,175,55,0.3);
-  border-radius: var(--radius);
-  padding: 1.2rem;
-  box-shadow: var(--shadow);
-}
-
-.shield-category h2 {
-  color: var(--gold);
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(212,175,55,0.3);
-  font-family: 'Cinzel', serif;
-}
-
-.shield-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.5rem;
+  padding: 1rem 0;
+  margin: 0 auto;
+  max-width: 1200px;
 }
 
 .shield-button {
   background: var(--surface-light);
-  border: 1px solid rgba(212,175,55,0.2);
-  border-radius: 50px;
-  padding: 0.7rem 1.2rem;
+  border: 1px solid rgba(212,175,55,0.3);
+  border-radius: 12px; /* Mais quadrado */
+  padding: 1rem 0.3rem;
   color: var(--text);
   font-family: 'Crimson Text', serif;
-  font-size: 0.95rem;
+  font-size: 1.1rem; /* Aumentado */
   font-weight: 600;
+  letter-spacing: 0.5px;
   cursor: pointer;
   transition: all 0.2s ease;
-  flex: 0 0 auto;
+  width: 100%;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   -webkit-tap-highlight-color: transparent;
   outline: none;
 }
@@ -63,7 +51,7 @@
 
 .back-link {
   display: inline-block;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
   color: var(--text-muted);
   text-decoration: none;
   font-family: 'Crimson Text', serif;
@@ -78,4 +66,56 @@
 .back-link::before {
   content: "←";
   margin-right: 0.5rem;
+}
+
+/* Ajustes para telas pequenas */
+@media (max-width: 600px) {
+  .shield {
+    padding-bottom: 5rem;
+  }
+  
+  .shield-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.4rem;
+  }
+  
+  .shield-button {
+    padding: 0.9rem 0.2rem;
+    font-size: 1rem;
+    border-radius: 10px;
+    white-space: normal;
+    line-height: 1.2;
+  }
+}
+
+/* Ajustes para telas muito pequenas */
+@media (max-width: 400px) {
+  .shield-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.4rem;
+  }
+  
+  .shield-button {
+    padding: 0.8rem 0.2rem;
+    font-size: 0.95rem;
+    border-radius: 8px;
+  }
+
+  .gmnotes-button {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  background: var(--gold);
+  color: #1a1a1a;
+  border: 2px solid var(--gold);
+  cursor: pointer;
+  z-index: 1001;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  }
+
 }
