@@ -1,3 +1,4 @@
+// shield-modal.js
 import { RULEBOOK_CHAPTERS } from '../rulebook/constants.js';
 
 const modal = document.getElementById('shield-modal');
@@ -7,7 +8,25 @@ const closeBtn = document.getElementById('shield-modal-close');
 
 let allData = null;
 
-// Carrega TODOS os capítulos uma vez
+// Mapeamento de botões → identificadores
+const BUTTON_CONFIG = {
+  'Testes':        { id: 'teste_item',     prop: 'teste_item',     title: 'Testes' },
+  'Combate':       { id: 'combate_item',   prop: 'combate_item',   title: 'Combate' },
+  'Iniciativa':    { id: 'init_item',      prop: 'init_item',      title: 'Iniciativa' },
+  'Magia':         { id: 'magia_item',     prop: 'magia_item',     title: 'Magia' },
+  'Condições':     { id: 'condic_item',    prop: 'condic_item',    title: 'Condições' },
+  'Seres':         { id: 'seres_item',     prop: 'seres_item',     title: 'Seres' },
+  'Classes':       { id: 'classes_item',   prop: 'classes_item',   title: 'Classes' },
+  'Técnicas':      { id: 'tec_item',       prop: 'tec_item',       title: 'Técnicas' },
+  'Estudos':       { id: 'estudos_item',   prop: 'estudos_item',   title: 'Estudos' },
+  'Segredos':      { id: 'segredos_item',  prop: 'segredos_item',  title: 'Segredos' },
+  'Aventura':      { id: 'aventura_item',  prop: 'aventura_item',  title: 'Aventura' },
+  'Armas':         { id: 'armas_item',     prop: 'armas_item',     title: 'Armas' },
+  'Montarias':     { id: 'montarias_item', prop: 'montarias_item', title: 'Montarias' },
+  'Loja Combate':  { id: 'lojacomb_item',  prop: 'lojacomb_item',  title: 'Loja Combate' },
+  'Loja Arcana':   { id: 'lojarc_item',    prop: 'lojarc_item',    title: 'Loja Arcana' }
+};
+
 async function loadAllChapters() {
   if (allData) return allData;
   
@@ -22,22 +41,27 @@ async function loadAllChapters() {
       console.warn(`Erro ao carregar ${chapter.file}:`, e);
     }
   }
-  
   return allData;
 }
 
-// Busca todos os conteúdos com teste_item ou id="teste_item"
-function findTesteItems(data) {
+// Busca conteúdos por tipo (ex: 'teste_item' ou id: 'teste_item')
+function findItemsByType(data, config) {
   let items = [];
 
   function search(obj) {
     if (!obj) return;
-    if (obj.teste_item) {
-      items.push({ type: 'paragraph', text: obj.teste_item });
+    
+    // Propriedade direta (ex: teste_item: "texto")
+    if (obj[config.prop]) {
+      items.push({ type: 'paragraph', text: obj[config.prop] });
     }
-    if (obj.id === 'teste_item' && obj.items) {
-      items.push({ type: 'list', items: obj.items });
+    
+    // Bloco com id correspondente
+    if (obj.id === config.id) {
+      if (obj.items) items.push({ type: 'list', items: obj.items });
+      if (obj.text) items.push({ type: 'paragraph', text: obj.text });
     }
+    
     if (obj.content) obj.content.forEach(search);
     if (obj.sections) obj.sections.forEach(search);
     if (Array.isArray(obj)) obj.forEach(search);
@@ -47,7 +71,6 @@ function findTesteItems(data) {
   return items;
 }
 
-// Renderiza o conteúdo no modal
 function renderShieldContent(items) {
   if (!modalBody) return;
   modalBody.innerHTML = '';
@@ -70,19 +93,21 @@ function renderShieldContent(items) {
   });
 }
 
-// Abre o modal
-async function openShieldModal() {
+// Abre modal genérico
+async function openShieldModal(buttonText) {
+  const config = BUTTON_CONFIG[buttonText];
+  if (!config) return;
+  
   const data = await loadAllChapters();
-  const items = findTesteItems(data);
-  if (modalTitle) modalTitle.textContent = 'Testes';
+  const items = findItemsByType(data, config);
+  modalTitle.textContent = config.title;
   renderShieldContent(items);
-  if (modal) modal.classList.add('active');
+  modal.classList.add('active');
 }
 
-// Fecha o modal
 function closeShieldModal() {
-  if (modal) modal.classList.remove('active');
-  if (modalBody) modalBody.innerHTML = '';
+  modal.classList.remove('active');
+  modalBody.innerHTML = '';
 }
 
 // Event listeners
@@ -93,8 +118,9 @@ if (modal) modal.addEventListener('click', (e) => {
 
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.shield-button').forEach(btn => {
-    if (btn.textContent.trim() === 'Testes') {
-      btn.addEventListener('click', openShieldModal);
+    const text = btn.textContent.trim();
+    if (BUTTON_CONFIG[text]) {
+      btn.addEventListener('click', () => openShieldModal(text));
     }
   });
 });

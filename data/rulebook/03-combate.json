@@ -14,6 +14,7 @@
         },
         {
           "type": "paragraph",
+          "id": "combate_item",
           "text": "Um turno de combate envolve um embate entre dois personagens durante uma rodada de uma luta. Ambos jogarão 2d6 e somarão a uma característica escolhida por eles, o vencedor será recompensado com uma ação associada com a característica escolhida."
         },
         {
@@ -39,37 +40,40 @@
           "text": "Ações de Combate:"
         },
         {
+          "type": "paragraph",
+          "combate_item": "Ataque (F). Sucesso em embate usando F permite causar dano corpo-a-corpo. O dano é determinado pela arma escolhida e, desarmado, o dano será 1d2. Sucesso crítico concede +1d6 de dano do tipo principal.",
+          "text": "Ataque (F). Sucesso em embate usando F permite causar dano corpo-a-corpo. O dano é determinado pela arma escolhida e, desarmado, o dano será 1d2. Se o jogador que estiver usando um Ataque conseguir um sucesso crítico (dois resultados seis nos dados) e vencer o embate, ele recebe +1d6 do tipo de dano principal do que estiver usando para atacar. Se o personagem tem a opção de atacar de forma a não causar dano, ou causar dano mínimo (1 do dado + quaisquer bônus). Além do dano, ter sucesso num embate usando F permite que o vencedor se desloque para o Esp que o derrotado estava mesmo que já tenha gasto todo seu movimento naquele turno (veremos mais no tópico Gesto e Movimento), o que permite empurrar o derrotado para um Esp adjacente qualquer, inclusive o que o vencedor estava antes, se o Esp para o qual o derrotado estiver ocupado por algum objeto ou parede (não funciona se o Esp estiver ocupado por inimigo, aliado ou terceiro), o vencedor pode optar por causar 1 de dano, ou receber +1F no próximo embate contra aquele alvo (nesse caso o alvo não é movido), ambos simulam o alvo colidindo com objetos do cenário durante o combate."
+        },
+        {
+          "type": "paragraph",
+          "combate_item": "Defesa (V). Sucesso em embate usando V concede +1 em qualquer característica com +1 de dano para o embate seguinte caso seja uma ação que cause dano (incluindo magia), e +1V para resistir a ferimentos em caso de falha, tudo isso cumulativo com outros sucessos seguidos de V até o limite de +3, apenas quando o jogador decidir usar o bônus que ele será zerado novamente.",
+          "text": "Defesa (V). Sucesso em embate usando V concede +1 em qualquer característica com +1 de dano para o embate seguinte caso seja uma ação que cause dano (incluindo magia), e +1V para resistir a ferimentos em caso de falha, tudo isso cumulativo com outros sucessos seguidos de V até o limite de +3, apenas quando o jogador decidir usar o bônus que ele será zerado novamente."
+        },
+        {
+          "type": "paragraph",
+          "id": "combate_item",
+          "text": "Esquiva (D). Sucesso em embate usando D permite aplicar uma Técnica da lista de mesmo nome ainda nesse capítulo."
+        },
+        {
+          "type": "paragraph",
+          "id": "combate_item",
+          "text": "Disparo (A). Sucesso em embate usando A permite causar dano arremessando algo contra um inimigo ou com uma arma de combate a distância. Não é possível usar Disparo enquanto engajado (tópico Posições de Combate). O dano, no caso de armas arremessadas, será o normal da arma, e no caso de objetos, fica a cargo do mestre comparar o objeto às armas para se ter uma ideia do dano."
+        },
+        {
           "type": "list",
           "style": "unordered",
           "items": [
-            {
-              "title": "Ataque",
-              "text": "Sucesso em embate usando F permite causar dano corpo-a-corpo. O dano é determinado pela arma escolhida e, desarmado, o dano será 1d2. Se o jogador que estiver usando um Ataque conseguir um sucesso crítico (dois resultados seis nos dados) e vencer o embate, ele recebe +1d6 do tipo de dano principal do que estiver usando para atacar. Se o personagem tem a opção de atacar de forma a não causar dano, ou causar dano mínimo (1 do dado + quaisquer bônus). Além do dano, ter sucesso num embate usando F permite que o vencedor se desloque para o Esp que o derrotado estava mesmo que já tenha gasto todo seu movimento naquele turno (veremos mais no tópico Gesto e Movimento), o que permite empurrar o derrotado para um Esp adjacente qualquer, inclusive o que o vencedor estava antes, se o Esp para o qual o derrotado estiver ocupado por algum objeto ou parede (não funciona se o Esp estiver ocupado por inimigo, aliado ou terceiro), o vencedor pode optar por causar 1 de dano, ou receber +1F no próximo embate contra aquele alvo (nesse caso o alvo não é movido), ambos simulam o alvo colidindo com objetos do cenário durante o combate."
-            },
-            {
-              "title": "Defesa",
-              "text": "Sucesso em embate usando V concede +1 em qualquer característica com +1 de dano para o embate seguinte caso seja uma ação que cause dano (incluindo magia), e +1V para resistir a ferimentos em caso de falha, tudo isso cumulativo com outros sucessos seguidos de V até o limite de +3, apenas quando o jogador decidir usar o bônus que ele será zerado novamente."
-            },
-            {
-              "title": "Esquiva",
-              "text": "Sucesso em embate usando D permite aplicar uma Técnica da lista de mesmo nome ainda nesse capítulo."
-            },
-            {
-              "title": "Disparo",
-              "text": "Sucesso em embate usando A permite causar dano arremessando algo contra um inimigo ou com uma arma de combate a distância. Não é possível usar Disparo enquanto engajado (tópico Posições de Combate). O dano, no caso de armas arremessadas, será o normal da arma, e no caso de objetos, fica a cargo do mestre comparar o objeto às armas para se ter uma ideia do dano.",
-              "subitems": [
-                "A palavra alcance se refere ao que o personagem consegue disparar com precisão, sem necessidade de teste, e não o alcance máximo, que pode equivaler ao triplo do alcance normal, mas sem nenhuma precisão.",
-                "O alcance de objetos ou armas arremessadas é delimitada pela F em Esp.",
-                "Armas de disparo possuem seu próprio dano e alcance.",
-                "Sucesso crítico concede +1d6 de dano caso o embate seja bem-sucedido.",
-                "Quando o disparado é contra um inimigo que está engajado com um aliado, uma falha crítica no embate pode resultar no ataque acertando o aliado."
-              ]
-            },
-            {
-              "title": "Magia",
-              "text": "Sucesso em embate usando S geralmente permite o uso de alguma magia que o personagem conheça (capítulo Magia)."
-            }
+            "A palavra alcance se refere ao que o personagem consegue disparar com precisão, sem necessidade de teste, e não o alcance máximo, que pode equivaler ao triplo do alcance normal, mas sem nenhuma precisão.",
+            "O alcance de objetos ou armas arremessadas é delimitada pela F em Esp.",
+            "Armas de disparo possuem seu próprio dano e alcance.",
+            "Sucesso crítico concede +1d6 de dano caso o embate seja bem-sucedido.",
+            "Quando o disparado é contra um inimigo que está engajado com um aliado, uma falha crítica no embate pode resultar no ataque acertando o aliado."
           ]
+        },
+        {
+          "type": "paragraph",
+          "id": "combate_item",
+          "text": "Magia (S). Sucesso em embate usando S geralmente permite o uso de alguma magia que o personagem conheça (capítulo Magia)."
         }
       ]
     },
@@ -231,7 +235,7 @@
         },
         {
           "type": "paragraph",
-          "text": "Após o embate de liderança, haverá um embate de S chamado Estratégia. O grupo vencedor poderá colocar seus membros na ordem de turnos como achar melhor."
+          "text": "Após o embate de liderança, haverá um embate de S chamado Estratégia. O grupo vencedor escolher a ordem de turnos das duplas que irão engajar.."
         },
         {
           "type": "paragraph",
@@ -239,10 +243,11 @@
         },
         {
           "type": "list",
+          "id": "init_item",
           "style": "unordered",
           "items": [
             "Embate de I. Liderança: determina posição de aliados e inimigos.",
-            "Embate de S. Estratégia: determina posição dos aliados na ordem de turnos."
+            "Embate de S. Estratégia: determina a ordem de turnos."
           ]
         }
       ]
@@ -253,10 +258,12 @@
       "content": [
         {
           "type": "paragraph",
+          "id": "init_item",
           "text": "Determinada a posição de um grupo na ordem de combate, sempre que um membro de um grupo optar por realizar uma ação contra um alvo no seu turno, o alvo tem a opção de gastar sua ação para realizar uma reação, ou guardar sua ação para depois, optando por um embate nulo. Se ele optar por uma reação e vencer o embate, ele passa na frente do perdedor na próxima rodada, se ele perder, ele entra na ordem de turnos após o vencedor."
         },
         {
           "type": "paragraph",
+          "init_item": "No caso de um dano em área, apenas um dos alvos do dano em área pode tentar uma reação que irá anular a ação do dano em área, se ele falhar, todos os demais devem fazer embates nulos para se proteger.",
           "text": "No caso de um dano em área, como veremos no tópico específico, apenas um dos alvos do dano em área pode tentar uma reação que irá anular a ação do dano em área, se ele falhar, todos os demais devem fazer embates nulos para se proteger."
         }
       ]
@@ -275,6 +282,7 @@
         },
         {
           "type": "list",
+          "id": "init_item",
           "style": "unordered",
           "items": [
             "O vencedor de um embate em que escolheu gastar uma ação passa na frente do perdedor.",
@@ -288,6 +296,7 @@
         {
           "type": "list",
           "style": "unordered",
+          "init_item": "Sucesso em uma Emboscada (DxA) conta como uma vitória automática de Liderança e Estratégia.",
           "items": [
             "Sucesso em uma Emboscada (DxA) conta como uma vitória automática de Liderança e Estratégia.",
             "É um costume no RPG que os jogadores queiram predeterminar a posição dos personagens antes mesmo de entrar em uma masmorra, nesse caso, sucesso no Embate de Liderança determina a posição apenas dos oponentes, assim como flanqueados e afastados."
@@ -359,6 +368,7 @@
         },
         {
           "type": "list",
+          "id": "condic_item",
           "style": "unordered",
           "items": [
             "Atordoado. Desvantagem em qualquer embate e -3S em combate. Personagens que estão embriagados, ou que sofreram alguma concussão.",
@@ -406,6 +416,7 @@
         },
         {
           "type": "list",
+          "id": "tec_item",
           "style": "unordered",
           "items": [
             "Segurar. Impedir que um alvo use movimentos, ele só ficará livre se passar em teste de F no início do seu próximo turno ou for bem-sucedido no próximo embate contra quem estiver segurando-o.",

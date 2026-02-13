@@ -103,10 +103,12 @@
         },
         {
           "type": "paragraph",
+          "id": "armas_item",
           "text": "Fora de combate, para causar dano a um objeto, o dano precisa ser maior que a Res do objeto. Quando isso ocorre, o objeto perde 1 ponto de Res, independentemente do dano causado. Em combate, sempre que um personagem obtiver um crítico bem-sucedido em um embate de F ou V, ele pode escolher um objeto visível do alvo para reduzir sua Res em 1 ponto. Ao alcançar zero, o item está quebrado e inutilizável."
         },
         {
           "type": "paragraph",
+          "armas_item": "O mestre pode, a seu critério, considerar uma redução de categoria do item quebrado. Por exemplo, uma espada longa (corte longo), quando danificada, pode ter seu dano reduzido para o de uma adaga (corte curto).",
           "text": "O mestre pode, a seu critério, considerar uma redução de categoria do item quebrado. Por exemplo, uma espada longa (corte longo), quando danificada, pode ter seu dano reduzido para o de uma adaga (corte curto). Objetos sem Res definida possuem automaticamente 1 ponto de Res. Outros fatores também podem reduzir a Res de um equipamento, como longos períodos sem manutenção, custando 1xpm."
         },
         {
@@ -115,6 +117,7 @@
         },
         {
           "type": "paragraph",
+          "id": "armas_item",
           "text": "Algumas armas possuem um modificador x2 ou x3 em sua descrição. Armas x2 concedem +2d6 em dano crítico e duplicam o dano total da arma contra alvos indefesos. Armas x3 concedem +3d6 em dano crítico e triplicam o dano máximo contra alvos indefesos."
         },
         {
@@ -123,6 +126,7 @@
         },
         {
           "type": "paragraph",
+          "id": "armas_item",
           "text": "Uma Arma em Cada Mão. Usar uma arma em cada mão permite que o personagem gaste seu gesto para ganhar um embate bônus exclusivamente para Atacar (F) com a arma secundária. Esse ataque sofre uma penalidade de -2F, e não é permitido usar duas armas longas ou pesadas simultaneamente."
         },
         {
@@ -131,10 +135,12 @@
         },
         {
           "type": "paragraph",
+          "id": "armas_item",
           "text": "Armas de Arremesso. Qualquer arma pode ser arremessada utilizando um embate de A, com alcance equivalente a F em Esp, causando o dano normal da arma."
         },
         {
           "type": "paragraph",
+          "id": "armas_item",
           "text": "Afastado e Engajado (a/e). Armas com essa sigla podem ser usadas tanto em combate afastado quanto engajado. Em alguns casos, podem existir valores de dano diferentes para cada posição. Para se aproximar de um inimigo que esteja portando uma arma desse tipo, é necessário obter sucesso em um embate de D."
         },
         {
@@ -154,10 +160,12 @@
 
         {
           "type": "paragraph",
+          "lojacomb_item": "ARMEIRO.",
           "text": "Armeiro. Contato que vende armas de combate corpo-a-corpo. As armas listadas aqui representam o padrão alto de qualidade. Armas improvisadas ou adquiridas sem um contato adequado são de pior qualidade, sofrendo penalidades no dano e na Resistência."
         },
         {
           "type": "list",
+          "id": "lojacomb_item",
           "style": "unordered",
           "items": [
             "Corte Curto. Adagas, facões de cozinha, peixeira. 1d3+1 (x3). 1Pes. 4Res. 1Fo.",
@@ -176,10 +184,12 @@
 
         {
           "type": "paragraph",
+          "lojacomb_item": "BOWYER.",
           "text": "Bowyer. Contato que vende armas de combate à distância que utilizam munição. A precisão indica o limite de alcance sem necessidade de testes para acertar. Alvos além da precisão exigem testes. Recarregar uma arma custa um gesto."
         },
         {
           "type": "list",
+          "id": "lojacomb_item",
           "style": "unordered",
           "items": [
             "Arco Curto. 1d6. A+6 Esp de precisão. 2Pes. 2Res. 1Fo.",
@@ -193,10 +203,12 @@
 
         {
           "type": "paragraph",
+          "lojacomb_item": "ARMOREIRO.",
           "text": "Armoreiro. Contato que vende armaduras. Os itens listados representam peças incompletas. Para uma armadura completa do tipo escolhido, aplique o acréscimo descrito em Armadura Completa. Vestir ou remover uma armadura completa leva cerca de 20 minutos, uma incompleta leva 10 minutos. É possível usar até dois tipos de materiais diferentes simultaneamente, somando seus bônus. Armaduras reduzem o dano sofrido na Vit até o mínimo de 1."
         },
         {
           "type": "list",
+          "id": "lojacomb_item",
           "style": "unordered",
           "items": [
             "Tecido. Não precisa ser removida para Repouso. 0Pes. 1Res. 1Fo.",
@@ -215,10 +227,12 @@
 
         {
           "type": "paragraph",
+          "lojacomb_item": "ALFAIATE.",
           "text": "Alfaiate. Contato que vende tecidos, panos, roupas, sacos e acessórios diversos."
         },
         {
           "type": "list",
+          "id": "lojacomb_item",
           "style": "unordered",
           "items": [
             "Mochila. Limite de carga sem penalidade passa a ser Fx3. 3Dp.",
@@ -235,10 +249,12 @@
 
         {
           "type": "paragraph",
+          "lojarc_item": "ESCRIBA",
           "text": "Escriba. Estudiosos e copiadores de livros, geralmente ligados a instituições religiosas ou acadêmicas. Vendem itens de escrita, símbolos e itens de canalização. Um usuário de magia só pode se beneficiar de um item de canalização por vez."
         },
         {
           "type": "list",
+          "id": "lojarc_item",
           "style": "unordered",
           "items": [
             "Pergaminho. Armazena uma magia de custo em Con. Uso único. Requer Estudos específicos. 1Dp por Con da magia.",
@@ -254,10 +270,12 @@
 
         {
           "type": "paragraph",
+          "lojarc_item": "APOTECÁRIO",
           "text": "Apotecário. Especialista em medicamentos, preventivos e venenos. Apesar de malvistos por pessoas comuns, são relativamente comuns, especialmente onde não há curandeiros."
         },
         {
           "type": "list",
+          "id": "lojarc_item",
           "style": "unordered",
           "items": [
             "Infusão de Láudano. O analgésico e anti-inflamatório (dores em geral, alergias, insônia) mais comum de Maeri, ao ser ingerido permite recuperar 3 Vit, é possível subdividir a cura, tomar o suficiente para recuperar 1 ou 2 Vit e guardar o resto. 2 Dp.",
@@ -358,10 +376,12 @@
 
         {
           "type": "paragraph",
+          "lojarc_item": "ANTIQUARISTA MÍSTICO",
           "text": "Antiquarista Místico. Um contato com vasto conhecimento histórico, capaz de encontrar pistas sobre itens mágicos e identificá-los. Para os materiais abaixo, o jogador adquire uma arma ou armadura normalmente e, ao gastar um Segredo, soma as habilidades mágicas do material escolhido ao item, incluindo seus valores de Pes e Res. Só é possível usar até 2 armas mágicas ao mesmo tempo (uma em cada mão) e apenas 1 material de armadura."
         },
         {
           "type": "list",
+          "id": "lojarc_item",
           "style": "unordered",
           "items": [
             "Sicamora. Madeira usada para materiais de arma, concede +1 para qualquer teste que envolva resistir a algum efeito mágico, e +1 para embates contra magia.",
@@ -375,10 +395,12 @@
         },
         {
           "type": "paragraph",
+          "lojarc_item": "JOALHEIRO MÍSTICO",
           "text": "Joalheiro Místico. Só é possível utilizar até 10 anéis diferentes, 1 amuleto e 1 capa ao mesmo tempo."
         },
         {
           "type": "list",
+          "id": "lojarc_item",
           "style": "unordered",
           "items": [
             "Capa de Brasa. O usuário sofre -3 de dano elemental de fogo.",
@@ -400,10 +422,12 @@
         },
         {
           "type": "paragraph",
+          "lojarc_item": "MERCADOR MÍSTICO",
           "text": "Mercador Místico. Um contato que negocia artefatos mágicos raros, amaldiçoados ou de funcionamento incomum."
         },
         {
           "type": "list",
+          "id": "lojarc_item",
           "style": "unordered",
           "items": [
             "Apanhador. Vara com um filtro de sonhos na ponta, enquanto o personagem a empunhar, permite enxergar os sonhos das pessoas dormindo e concede +3 em embates de D para capturar hesperias.",
@@ -446,10 +470,12 @@
       "content": [
         {
           "type": "paragraph",
+          "tec_item": "TÉCNICA MARCIAIS. Cada uma das opções abaixo pode ser adquirida ao custo de um Aspecto através de um contato Mestre.",
           "text": "Mestre. Um mestre pode ser uma pessoa ou uma instituição, como um templo ou escola. O importante é que ele ensine artes marciais. Em termos de regras, cada uma das opções abaixo pode ser adquirida ao custo de um Aspecto."
         },
         {
           "type": "list",
+          "id": "tec_item",
           "style": "unordered",
           "items": [
             "Estilo de Luta. Ataques desarmados causam 1d6 de dano. O usuário pode escolher entre dano de contusão, corte ou perfuração no momento de aplicá-lo.",
@@ -462,10 +488,12 @@
         },
         {
           "type": "paragraph",
+          "lojacomb_item": "ARMEIRO EXÓTICO",
           "text": "Armeiro Exótico. O jogador deve adquirir uma ou mais armas conforme a necessidade da modificação e, então, adquirir a modificação desejada. Armas com essas modificações são consideradas exóticas e não concedem as vantagens descritas abaixo caso o personagem não possua a característica Versátil. Cabe ao mestre decidir, com base na descrição do jogador, se uma arma pode receber mais de uma modificação. Duas armas unidas por uma secção são consideradas uma única arma."
         },
         {
           "type": "list",
+          "id":"lojacomb_item",
           "style": "unordered",
           "items": [
             "Secção Curta. Une duas armas de combate engajado com uma corrente ou corda curta. O personagem pode alternar entre as armas sem gastar gesto, e sempre que troca recebe +1 de dano no ataque seguinte com a arma atual. +1Dp.",
@@ -485,10 +513,12 @@
       "content": [
         {
           "type": "paragraph",
+          "id": "montarias_item",
           "text": "Um personagem em cima de uma montaria terá a velocidade de movimento dela e ocupará o mesmo Esp. O jogador pode substituir sua ação pela ação da montaria, mas montarias muito grandes podem impedir que o cavaleiro realize ações. Montar ou desmontar custa um gesto; em situações adversas, como estar flanqueado, o mestre pode pedir testes de A, e uma falha crítica pode fazer o personagem cair e ficar Caído."
         },
         {
           "type": "list",
+          "id": "montarias_item",
           "style": "unordered",
           "items": [
             "Montaria. Para carregar alguém confortavelmente, a criatura precisa ter no mínimo 3x o peso da pessoa, ou seja, sua F deve ser três vezes maior que a do cavaleiro. Montarias típicas possuem a característica Carregador, que multiplica sua F por dois ao definir limites de peso.",
@@ -500,10 +530,12 @@
         },
         {
           "type": "paragraph",
+          "montarias_item": "ESTRIBEIRO",
           "text": "Estribeiro. Vende montarias, geralmente equinos, e cuida das montarias dos personagens quando não estão em uso, evitando que consumam xpl. Todos os equinos possuem as características Carregador e Corredor."
         },
         {
           "type": "list",
+          "id": "montarias_item",
           "style": "unordered",
           "title": "Tipos de Equinos",
           "items": [

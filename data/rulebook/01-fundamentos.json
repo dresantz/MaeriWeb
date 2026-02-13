@@ -10,7 +10,7 @@
       "content": [
         {
           "type": "paragraph",
-          "text": "Se você é um jogador experiente e quiser ter uma visão geral desse sistema, [você pode se focar nas frases marcadas]. Se você é iniciante, a melhor forma de aprender é jogando com jogadores experientes. Agora, se você não tem acesso a um grupo, a leitura do livro irá ensinar tudo o que você precisa."
+          "text": "Se você é um jogador experiente e quiser ter uma visão geral desse sistema, você pode se focar nas [frases marcadas]. Se você é iniciante, a melhor forma de aprender é jogando com jogadores experientes. Agora, se você não tem acesso a um grupo, a leitura do livro irá ensinar tudo o que você precisa."
         },
         {
           "type": "paragraph",
@@ -37,7 +37,7 @@
         },
         {
           "type": "paragraph",
-          "text": "Maeri é jogado com 1d2, 1d3 e 1d6, abreviação para dados de 2, 3 e 6 lados. 1d6 significa 1 dado de 6 lados, 2d6 significa 2 dados de 6 lados e assim por diante. Observe que é possível usar apenas o dado de seis lados comum: 1d2 pode ser substituído por 1d6 se for considerado que resultado de 1 a 3 vale 1 e de 4 a 6 vale 2, enquanto para 1d3, 1 e 2 valem 1, 3 e 4 valem 3 e 5 e 6 valem 3."
+          "text": "[Maeri é jogado com 1d2, 1d3 e 1d6], abreviação para dados de 2, 3 e 6 lados. 1d6 significa 1 dado de 6 lados, 2d6 significa 2 dados de 6 lados e assim por diante. Observe que é possível usar apenas o dado de seis lados comum: 1d2 pode ser substituído por 1d6 se for considerado que resultado de 1 a 3 vale 1 e de 4 a 6 vale 2, enquanto para 1d3, 1 e 2 valem 1, 3 e 4 valem 3 e 5 e 6 valem 3."
         }
       ]
     },
@@ -51,15 +51,15 @@
             },
             {
               "type": "paragraph",
-              "text": "Seis características básicas definem o personagem do jogador: Físico (F), Vigor (V), Destreza (D), Assimilação (A), Influência (I) e Sabedoria (S). As três primeiras são Características Físicas (CF = F, V e D) e as três últimas são as Características Mentais (CM = A, I e S)."
+              "text": "[Seis características básicas definem o personagem do jogador: Físico (F), Vigor (V), Destreza (D), Assimilação (A), Influência (I) e Sabedoria (S)]. As três primeiras são Características Físicas (CF = F, V e D) e as três últimas são as Características Mentais (CM = A, I e S)."
             },
             {
               "type": "paragraph",
-              "text": "Cada uma das seis características já possui automaticamente 2 pontos, sendo 9 o limite máximo de pontos em uma característica. Quanto maior a quantidade de pontos em uma característica, maiores serão as chances do personagem sobrepujar desafios que exijam testes da referida característica."
+              "text": "[Cada uma das seis características já possui automaticamente 2 pontos, sendo 9 o limite máximo de pontos em uma característica]. Quanto maior a quantidade de pontos em uma característica, maiores serão as chances do personagem sobrepujar desafios que exijam testes da referida característica."
             },
             {
               "type": "paragraph",
-              "text": "Além desses 2 pontos iniciais em cada característica básica, os jogadores podem distribuir uma quantidade extra de pontos de acordo com a escolha de uma das três Mentalidades diferentes:"
+              "text": "Além desses 2 pontos iniciais em cada característica básica, [os jogadores podem distribuir uma quantidade extra de pontos de acordo com a escolha de uma das três Mentalidades diferentes]:"
             },
             {
               "type": "table",
@@ -226,7 +226,8 @@
             },
             {
               "type": "paragraph",
-              "text": "Para fazer um teste, o mestre estabelece um Valor de Dificuldade cuja média é 11, depois, o jogador rola 2d6 e soma o resultado à característica testada, valor maior ou igual à Dificuldade estabelecida pelo mestre significa sucesso, caso contrário, será uma falha."
+              "teste_item":"Para fazer um teste, o mestre estabelece um Valor de Dificuldade cuja média é 11, depois, o jogador rola 2d6 e soma o resultado à característica testada, valor maior ou igual à Dificuldade estabelecida pelo mestre significa sucesso, caso contrário, será uma falha",
+              "text": "[Para fazer um teste, o mestre estabelece um Valor de Dificuldade cuja média é 11, depois, o jogador rola 2d6 e soma o resultado à característica testada, valor maior ou igual à Dificuldade estabelecida pelo mestre significa sucesso, caso contrário, será uma falha]."
             },
             {
               "type": "paragraph",
@@ -234,6 +235,7 @@
             },
             {
               "type": "list",
+              "id":"teste_item",
               "style": "unordered",
               "items": [
                 "Fácil (5)",
@@ -259,7 +261,8 @@
             },
             {
               "type": "paragraph",
-              "text": "Sabendo disso, se o mestre ainda assim decidir que o jogador deve rolar os dados, resultado 1 e 1 nos dois dados, e 6 e 6, representam falha crítica e sucesso crítico respectivamente, portanto sempre representarão um sucesso ou falha. É importante ressaltar que se trata de resultado 1 e 1, e não 2, o importante é o valor de cada dado, e não a soma, pois em alguns casos um sucesso crítico pode ser alcançado com 5 e 6, por exemplo."
+              "teste_item": "Resultado 1 e 1 nos dois dados, e 6 e 6, representam falha crítica e sucesso crítico respectivamente.",
+              "text": "Sabendo disso, se o mestre ainda assim decidir que o jogador deve rolar os dados, [resultado 1 e 1 nos dois dados, e 6 e 6, representam falha crítica e sucesso crítico respectivamente, portanto sempre representarão um sucesso ou falha], e consequência melhores ou muito piores do que o esperado. É importante ressaltar que se trata de resultado 1 e 1, e não 2, o importante é o valor de cada dado, e não a soma, pois em alguns casos um sucesso crítico pode ser alcançado com 5 e 6, por exemplo."
             },
             {
               "type": "paragraph",
@@ -275,7 +278,8 @@
             },
             {
               "type": "paragraph",
-              "text": "É possível também realizar testes em grupo, como em uma situação em que todos os jogadores pretendem se ocultar de algo. Nesses casos, um sucesso compensa uma falha, sucesso crítico compensa duas falhas, e falha crítica anula um sucesso."
+              "teste_item": "Em testes em grupo, sucesso crítico compensa duas falhas, e falha crítica anula um sucesso.",
+              "text": "É possível também realizar [testes em grupo], como em uma situação em que todos os jogadores pretendem se ocultar de algo. Nesses casos, [um sucesso compensa uma falha, sucesso crítico compensa duas falhas, e falha crítica anula um sucesso]."
             }
           ]
         },
@@ -303,11 +307,12 @@
           "content": [
             {
               "type": "paragraph",
-              "text": "Em casos mais específicos é possível determinar testes com vantagem, rolando 3d6, ou desvantagem, rolando apenas 1d6. Trata-se de casos mais específicos pois geralmente acontece em condições como Cegueira, essas condições serão mais bem detalhadas em um tópico específico no capítulo sobre combate."
+              "teste_item": "Em casos mais específicos é possível determinar testes com vantagem, rolando 3d6, ou desvantagem, rolando apenas 1d6.",
+              "text": "[Em casos mais específicos é possível determinar testes com vantagem, rolando 3d6, ou desvantagem, rolando apenas 1d6]. Trata-se de casos mais específicos pois geralmente acontece em condições como Cegueira, essas condições serão mais bem detalhadas em um tópico específico no capítulo sobre combate."
             },
             {
               "type": "paragraph",
-              "text": "Vantagens e desvantagens são anuláveis entre si, então um personagem que tenha ganhado os dois acaba não recebendo nenhum. Vantagens e desvantagens não se acumulam, duas vantagens continuam dando apenas 3d6."
+              "text": "[Vantagens e desvantagens são anuláveis entre si], então um personagem que tenha ganhado os dois acaba não recebendo nenhum. [Vantagens e desvantagens não se acumulam], duas vantagens continuam dando apenas 3d6."
             },
             {
               "type": "paragraph",
@@ -325,15 +330,16 @@
           "content": [
             {
               "type": "paragraph",
-              "text": "O que acontece quando uma característica de um personagem precisa ser testada em oposição à característica de outro personagem se chama Embate. Quando um personagem pretende passar despercebido por outro, por exemplo."
+              "text": "[O que acontece quando uma característica de um personagem precisa ser testada em oposição à característica de outro personagem se chama Embate]. Quando um personagem pretende passar despercebido por outro, por exemplo."
             },
             {
               "type": "paragraph",
-              "text": "O que pretende passar precisa testar sua D (Destreza) para mover-se sorrateiramente, e a sentinela precisará testar sua A (Assimilação) para perceber o gatuno. Para realizar uma Embate, ambos devem rolar 2d6 e somar ao valor da característica que está pondo à prova, o maior resultado será o vencedor."
+              "teste_item": "Embate: ambos devem rolar 2d6 e somar ao valor da característica que está pondo à prova, o maior resultado será o vencedor",
+              "text": "O que pretende passar precisa testar sua D (Destreza) para mover-se sorrateiramente, e a sentinela precisará testar sua A (Assimilação) para perceber o gatuno. [Para realizar uma Embate, ambos devem rolar 2d6 e somar ao valor da característica que está pondo à prova, o maior resultado será o vencedor]."
             },
             {
               "type": "paragraph",
-              "text": "Por exemplo, se o gatuno tiver D6 e o vigilante tiver A4, o primeiro rolar um 3 e o segundo rolar um 4, eles somarão, respectivamente, 9 (6+3) e 8 (4+4), logo, o gatuno será bem-sucedido. Em casos de empate, o que tiver a característica maior vence, e caso as características sejam iguais, os dois falham, ou o teste é feito novamente."
+              "text": "Por exemplo, se o gatuno tiver D6 e o vigilante tiver A4, o primeiro rolar um 3 e o segundo rolar um 4, eles somarão, respectivamente, 9 (6+3) e 8 (4+4), logo, o gatuno será bem-sucedido. [Em casos de empate, o que tiver a característica maior vence, e caso as características sejam iguais, os dois falham, ou o teste é feito novamente]."
             },
             {
               "type": "paragraph",
@@ -355,7 +361,7 @@
           "content": [
             {
               "type": "paragraph",
-              "text": "Quanto mais um personagem se aventura, mais ele aprende e adquire conhecimento. Para expressar em regras esse tipo de situação, há três tipos de pontos de experiência que podem ser dados aos jogadores; a experiência prática (xpp), a experiência material(xpm) e a experiência logística (xpl)."
+              "text": "Quanto mais um personagem se aventura, mais ele aprende e adquire conhecimento. Para expressar em regras esse tipo de situação, [há três tipos de pontos de experiência que podem ser dados aos jogadores; a experiência prática (xpp), a experiência material(xpm) e a experiência logística (xpl)]."
             },
             {
               "type": "paragraph",

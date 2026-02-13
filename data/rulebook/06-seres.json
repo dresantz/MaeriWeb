@@ -32,6 +32,8 @@
       "title": "Humano",
       "content": [
         {
+          "seres_item": "HUMANO",
+          "id": "seres_item",
           "type": "paragraph",
           "text": "Balanceados. Ao terminar de distribuir os pontos da mentalidade, ganham +1 ponto para distribuir em uma característica em que não tenha sido colocado nenhum."
         },
@@ -46,6 +48,8 @@
       "title": "Oniro",
       "content": [
         {
+          "seres_item": "ONIRO",
+          "id": "seres_item",
           "type": "paragraph",
           "text": "Asas. São capazes de voos com sua D em velocidade por uma quantidade de turnos equivalente ao seu V antes de ficarem Exaustos por uma cena, são capazes de carregar sua F-2 em voo, sofrem Queda se sofrerem dano e ficam Caídos."
         },
@@ -60,14 +64,18 @@
       "title": "Dredlim",
       "content": [
         {
+          "seres_item": "DREDLIM",
+          "id": "seres_item",
           "type": "paragraph",
           "text": "Sangue Grosso. São imunes a ferimentos, mesmo que recebam dano maior que sua V."
         },
         {
+          "id": "seres_item",
           "type": "paragraph",
           "text": "Olho Negro. Teste de A permite que enxerguem a energia da morte, rastros de fantasmas, pessoas condenadas, rastros de portais para o mundo dos mortos e qualquer outra coisa relacionada à morte."
         },
         {
+          "id": "seres_item",
           "type": "paragraph",
           "text": "Carniçais. São imunes a doenças naturais, podem comer carne crua ou podre sem penalidades."
         },
@@ -82,14 +90,18 @@
       "title": "Karnakin",
       "content": [
         {
+          "seres_item": "KARNAKIN",
+          "id": "seres_item",
           "type": "paragraph",
           "text": "Visão Quadrimensional. Eles são capazes de projetar sua visão em qualquer lugar a 1 Esp de distância, mesmo através de paredes."
         },
         {
+          "id": "seres_item",
           "type": "paragraph",
           "text": "Órbita. Eles são capazes de levitar objetos que estejam a até 1 Esp de distância deles com F igual a 1, não permite atacar e não conta como um objeto empunhado para o caso de itens mágicos."
         },
         {
+          "id": "seres_item",
           "type": "paragraph",
           "text": "Premonição. Adquirem um ponto de Segredo não cumulativo por repouso total; não gastando, o ponto se perde. O ponto pode ser gasto apenas para adquirir +1 em qualquer característica por apenas um teste."
         },
@@ -104,6 +116,8 @@
       "title": "Mogu",
       "content": [
         {
+          "seres_item": "MOGU",
+          "id": "seres_item",
           "type": "paragraph",
           "text": "Camuflagem. Eles são capazes de cobrir corpo e roupas como uma camada de esporos da coloração variada, recebendo +2D para testes de ocultar. Esses esporos podem ser bioluminescentes."
         },
@@ -122,14 +136,17 @@
       "title": "Caribo",
       "content": [
         {
+          "seres_item": "CARIBO",
           "type": "paragraph",
           "text": "Calda. Um quinto membro com três vezes o alcance do braço, permite pegar itens, mas não atacar, +1F em teste de segurar (F)."
         },
         {
+          "id": "seres_item",
           "type": "paragraph",
           "text": "Ágeis. Possuem um gesto extra por turno para coisas que não envolvam ataques, magia e ações de combate no geral."
         },
         {
+          "id": "seres_item",
           "type": "paragraph",
           "text": "Resistência. Sofre -1 de dano de um tipo elemental quase sempre associado à sua origem."
         },
@@ -144,14 +161,18 @@
       "title": "Conchilu",
       "content": [
         {
+          "seres_item": "CONCHILU",
+          "id": "seres_item",
           "type": "paragraph",
           "text": "Casca. Só podem ser flanqueados por três em vez de quatro inimigos; como dormem dentro da casca, não ficam indefesos dormindo."
         },
         {
+          "id": "seres_item",
           "type": "paragraph",
           "text": "Pele Rígida. Recebem +1 Vit extra."
         },
         {
+          "id": "seres_item",
           "type": "paragraph",
           "text": "Casa. Eles recebem +2F para calcular limites de carga e peso do conchilu."
         },
@@ -166,10 +187,13 @@
       "title": "Kerbero",
       "content": [
         {
+          "seres_item": "KERBERO",
+          "id": "seres_item",
           "type": "paragraph",
           "text": "Latido. São capazes de projetar sua força através de poderosos gritos de guerra, podendo usar Empurrar com F, à distância de F em Esp."
         },
         {
+          "id": "seres_item",
           "type": "paragraph",
           "text": "Fúria. Com um gesto eles recebem +1 para testes de intimidação, +1 Esp de movimento e +1V para testes e embates durante combate ou cena."
         },

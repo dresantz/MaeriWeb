@@ -26,6 +26,7 @@
         },
         {
           "type": "list",
+          "id": "magia_item",
           "style": "unordered",
           "items": [
             "Algumas magias usam Con abrindo uma linha de Con mágico. Quando o Con mágico acaba, o mago não pode mais usar magias que consomem Con. O Con mágico é consumido mesmo que o conjurador falhe no embate. Quando o Con mágico zera, o mago tem uma chance de realizar um efeito mágico aleatório, positivo ou negativo, determinado pelo mestre.",
@@ -58,10 +59,12 @@
             },
             {
               "type": "paragraph",
+              "id": "magia_item",
               "text": "Considerações sobre Invocação de Criaturas:"
             },
             {
               "type": "list",
+              "id": "magia_item",
               "style": "unordered",
               "items": [
                 "Magias de invocação estarão com a palavra Invocar antes do nome, seguida dos valores da ficha, com as ações específicas entre parênteses ao lado de cada característica usada pela ação.",

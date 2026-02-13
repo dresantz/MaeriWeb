@@ -10,7 +10,8 @@
       "content": [
         {
           "type": "paragraph",
-          "text": "O quanto um personagem pode carregar é medido pela variável Peso (Pes). 1 Pes é o equivalente a carregar algo pequeno e não muito desconfortável; como uma adaga. O que o mestre precisa levar em conta, porém, é o tamanho do item e a distribuição do peso dele no corpo, pois Pes é uma relação peso-portabilidade."
+          "aventura_item": "O quanto um personagem pode carregar é medido pela variável Peso (Pes).",
+          "text": "[O quanto um personagem pode carregar é medido pela variável Peso (Pes)]. 1 Pes é o equivalente a carregar algo pequeno e não muito desconfortável; como uma adaga. O que o mestre precisa levar em conta, porém, é o tamanho do item e a distribuição do peso dele no corpo, pois Pes é uma relação peso-portabilidade."
         },
         {
           "type": "paragraph",
@@ -22,7 +23,8 @@
         },
         {
           "type": "paragraph",
-          "text": "Multiplique a F do personagem por 2 e 4, o primeiro resultado é o quanto o ele pode carregar (em Pes) sem sofrer desvantagem em teste de CF (Características Físicas), o segundo é o seu limite máximo, onde ele é incapaz de carregar mais nada a não ser objetos sem Pes. Um personagem com F3 pode carregar 6 Pes sem penalidade e tem 12 Pes como limite máximo, por exemplo."
+          "aventura_item": "Multiplique a F do personagem por 2 e 4, o primeiro resultado é o quanto o ele pode carregar (em Pes) sem sofrer desvantagem em teste de CF (Características Físicas), o segundo é o seu limite máximo, onde ele é incapaz de carregar mais nada a não ser objetos sem Pes",
+          "text": "[Multiplique a F do personagem por 2 e 4, o primeiro resultado é o quanto o ele pode carregar (em Pes) sem sofrer desvantagem em teste de CF (Características Físicas), o segundo é o seu limite máximo, onde ele é incapaz de carregar mais nada a não ser objetos sem Pes]. Um personagem com F3 pode carregar 6 Pes sem penalidade e tem 12 Pes como limite máximo, por exemplo."
         },
         {
           "type": "paragraph",
@@ -46,7 +48,8 @@
       "content": [
         {
           "type": "paragraph",
-          "text": "Cada ponto em D (Destreza) equivale a capacidade de se movimentar a 2 Espaços (Esp) por uma determinada medida de tempo, um personagem com D3 pode se deslocar a 6 Esp, e com D4 a 8 Esp, por exemplo. 1 Esp é um valor relativo médio entre personagens ou objetivos, estando ao redor de 1,5 metros em caso de combate. Isso significa que, em uma luta entre um guerreiro e um arqueiro, o arqueiro pode estar a 3 Esp do guerreiro, e o guerreiro, por sua vez, estar a 6 Esp do arqueiro. Nesse caso, talvez o arqueiro esteja espreitando de cima de uma árvore, de onde descer é muito mais fácil que subir, por exemplo. Observe que isso significa que o mestre tem a opção de usar a distância que achar apropriada entre dois alvos."
+          "aventura_item": "Cada ponto em D (Destreza) equivale a capacidade de se movimentar a 2 Espaços (Esp) por uma determinada medida de tempo.",
+          "text": "[Cada ponto em D (Destreza) equivale a capacidade de se movimentar a 2 Espaços (Esp) por uma determinada medida de tempo], um personagem com D3 pode se deslocar a 6 Esp, e com D4 a 8 Esp, por exemplo. 1 Esp é um valor relativo médio entre personagens ou objetivos, estando ao redor de 1,5 metros em caso de combate. Isso significa que, em uma luta entre um guerreiro e um arqueiro, o arqueiro pode estar a 3 Esp do guerreiro, e o guerreiro, por sua vez, estar a 6 Esp do arqueiro. Nesse caso, talvez o arqueiro esteja espreitando de cima de uma árvore, de onde descer é muito mais fácil que subir, por exemplo. Observe que isso significa que o mestre tem a opção de usar a distância que achar apropriada entre dois alvos."
         },
         {
           "type": "paragraph",
@@ -61,7 +64,7 @@
           "style": "unordered",
           "items": [
             "O mestre pode dar penalidades para essa movimentação se o personagem estiver se arrastando, abaixado, cruzando um terreno complicado, entre outros.",
-            "Um personagem é capaz de saltar sua D em Esp, distância e altura. Testes de saltar (acrobacia) só precisam ser feitos quando há alguma adversidade como ventania, plataformas em movimento, pular para se agarrar em algo, saltar pendurado, para evitar dano de queda, chão se desmanchando, e outros do tipo.",
+            "[Um personagem é capaz de saltar sua D em Esp], distância e altura. Testes de saltar (acrobacia) só precisam ser feitos quando há alguma adversidade como ventania, plataformas em movimento, pular para se agarrar em algo, saltar pendurado, para evitar dano de queda, chão se desmanchando, e outros do tipo.",
             "A velocidade que um personagem escala depende do mestre e da dificuldade que ele considera para o obstáculo a ser sobrepujado. O mestre pode exigir testes (agarrar, F) para obstáculos complexos ou instáveis.",
             "Velocidade em combate não é o mesmo que velocidade máxima. Em combate, se presume que o personagem está rolando, deslizando, saltitando de lado para não perder o alvo de vista enquanto se desloca, ou até se pendurando ou pulando."
           ]
@@ -78,7 +81,7 @@
         },
         {
           "type": "paragraph",
-          "text": "A pontuação em Vitalidade (Vit) é determinada pela Mentalidade, somado à pontuação em Vigor (V) e à pontuação em Físico (F) (Vit = F + V + 3 [belicoso], ou 4 [mediador], ou 1 [erudito])."
+          "text": "[A pontuação em Vitalidade (Vit) é determinada pela Mentalidade, somado à pontuação em Vigor (V) e à pontuação em Físico (F) (Vit = F + V + 3 [belicoso], ou 4 [mediador], ou 1 [erudito])]."
         },
         {
           "type": "paragraph",
@@ -112,6 +115,7 @@
         },
         {
           "type": "paragraph",
+          "id": "aventura_item",
           "text": "Se um personagem sofrer dano maior que sua pontuação em V, ele terá um ferimento. Um personagem não pode recuperar a Vit de um ferimento, mesmo com repouso, até que ele seja tratado por um especialista com Estudo Medicina."
         },
         {
@@ -164,6 +168,7 @@
       "content": [
         {
           "type": "paragraph",
+          "aventura_item": "Descanço. Critérios para repouso: livre, confortável, alimentado.",
           "text": "Os critérios que precisam ser atendidos para qualquer tipo de repouso são:"
         },
         {
@@ -177,14 +182,17 @@
         },
         {
           "type": "paragraph",
+          "id": "aventura_item",
           "text": "Repouso Total. Um descanso de pelo menos 4 temporadas. Com repouso total é possível recuperar totalmente a Vit e a Con, em linhas que o mestre aprovar, durante uma aventura."
         },
         {
           "type": "paragraph",
+          "id": "aventura_item",
           "text": "Repouso Parcial. Um descanso de pelo menos 1 temporada. Irá recuperar 1d6 Vit e Con em linhas que o mestre aprovar, para cada ponto em V dos personagens. Podem ser feitos no máximo dois entre cada Repouso Total."
         },
         {
           "type": "paragraph",
+          "id": "aventura_item",
           "text": "Repouso Rápido. Um descanso de pelo menos 4 horas. Recupera 1d6 Vit e Con, em linhas que o mestre aprovar. Podem ser feitos no máximo dois entre cada Repouso Total."
         },
         {
@@ -260,6 +268,7 @@
         },
         {
           "type": "list",
+          "id": "aventura_item",
           "style": "unordered",
           "items": [
             "I + 1d6 = florins de ouro.",
@@ -279,11 +288,11 @@
       "content": [
         {
           "type": "paragraph",
-          "text": "Estudos são aprendizados que o personagem praticou ao longo de sua vida inteira, adquirir um Estudo custa 1 Aspecto. Cada Estudo traz uma série de benefícios que o jogador pode fazer uso, além disso, todos eles permitem adquirir Conhecimentos. Conhecimentos são informações específicas dentro da área de Estudo do personagem."
+          "text": "Estudos são aprendizados que o personagem praticou ao longo de sua vida inteira, [adquirir um Estudo custa 1 Aspecto]. Cada Estudo traz uma série de benefícios que o jogador pode fazer uso, além disso, todos eles permitem adquirir Conhecimentos. [Conhecimentos são informações específicas dentro da área de Estudo do personagem]."
         },
         {
           "type": "paragraph",
-          "text": "A capacidade de memorização de conhecimentos de um personagem é chamada Campo de Conhecimento, a quantidade de campos de conhecimento que um personagem possui é equivalente a S do personagem."
+          "text": "A capacidade de memorização de conhecimentos de um personagem é chamada Campo de Conhecimento, [a quantidade de campos de conhecimento que um personagem possui é equivalente a S do personagem]."
         },
         {
           "type": "paragraph",
@@ -295,7 +304,8 @@
         },
         {
           "type": "paragraph",
-          "text": "Na construção do personagem, o jogador pode preencher todos os seus Campos livres ou não. Ao custo de 10 xpm (anotações e experimentos) e acesso a uma Fonte, o jogador tem direito a um teste de S durante seu repouso total para adquirir ou substituir um Conhecimento. Em caso de falha, o xpm ainda é consumido."
+          "estudos_item": "Ao custo de 10 xpm (anotações e experimentos) e acesso a uma Fonte, o jogador tem direito a um teste de S durante seu repouso total para adquirir ou substituir um Conhecimento. Em caso de falha, o xpm ainda é consumido.",
+          "text": "Na construção do personagem, o jogador pode preencher todos os seus Campos livres ou não. [Ao custo de 10 xpm (anotações e experimentos) e acesso a uma Fonte, o jogador tem direito a um teste de S durante seu repouso total para adquirir ou substituir um Conhecimento. Em caso de falha, o xpm ainda é consumido]."
         },
         {
           "type": "paragraph",
@@ -303,182 +313,227 @@
         },
         {
           "type": "paragraph",
+          "estudos_item": "ARTESANATO",
           "text": "Artesanato. Levando em conta que em Maeri quase tudo é artesanal, essa habilidade é uma mistura de engenheiro, marceneiro, ferreiro e até armeiro. Permite que o possuidor seja capaz de reconhecer e construir estruturas e armas. Conhecimentos: planta de castelos ou palácios específicos, construção de aparato específico, construir e reparar navios, construir e recuperar armas de um tipo (veja os tipos no tópico Contatos de Mercado), criar e desativar armadilhas, armas de cerco, fechaduras."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Reparador. O personagem começa com 10 xpm que representam seus utensílios de trabalho. A partir dessa pontuação, ele pode gastar 1 xpm para recuperar 1 Res em uma armadura, se ele tiver menos de 10 xpm, não terá os equipamentos para concertar nada. Ele pode gastar xpm equivalente ao preço da arma (1 xpm para cada 1 Dp) para restaurá-la se estiver destruída, e pode concertar armas mágicas por 3 xpm por Res, mas não é possível restaurar armas mágicas destruídas."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Reforçador. A partir de 10 xpm, o personagem pode gastar 1 xpm para reforçar uma arma ou armadura até o limite de +2 Res, o jogador não pode usar essa habilidade caso tenha menos de 10 xpm, ele só pode aplicar essa habilidade em armas mágicas se possuir um estudo mágico."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Destruidor. O personagem causa diminuição na Res da arma dos oponentes com valor 5 e 5, 6 e 5 no dado também, e 4 e 5 também no caso de armas de Contusão Pesada."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Runas. O artesão pode, ao custo de 3 xpm por Con, inserir em um objeto a capacidade usar uma magia que o artesão conheça cujo custo seja apenas em Con, a magia é consumida permanentemente após o uso, o artesão pode escolher como a magia será ativada e quantas cargas da magia irá colocar no objeto."
         },
         {
           "type": "paragraph",
+          "estudos_item": "COMÉRCIO",
           "text": "Comércio. Um personagem com esse estudo conhece pessoas envolvidas com o comércio mesmo que elas não estejam em seu círculo, o que significa que ele pode negociar itens que só pessoas com o Contato específico seria capaz, além de receber bônus em qualquer negociação com contatos que possua. Conhecimentos: locais de venda, locais de entrepostos comerciais, os tipos de matemática, o mercado negro das regiões, a psicologia de compra dos povos específicos, técnicas de negociação, negociações com bancos, documentos e moedas."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Fornecedor. O personagem recebe 2d6 xpl a cada 10 temporadas."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Herança. O personagem começa com +2d6 moedas de ouro (Fo)."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Carta de Comércio. O jogador escolhe um tipo de produto e terá uma carta de comércio, enquanto possuir mais de 20 xpl e sua carta de comércio (só pode ser adquirida em uma guilda), será bem recebido em qualquer guilda do mesmo produto."
         },
         {
           "type": "paragraph",
+          "estudos_item": "CRIME",
           "text": "Crime. O personagem pode ser um criminoso, ou pode ser um estudioso do crime que usa seu conhecimento para combatê-lo. Mesmo com as cidades de Maeri não sendo tão grandes, sempre haverá algo como uma guilda secreta de pessoas de interesse que se reúnem para combinar formas de satisfazer seus anseios escusos, e que então se veem cercados de um grupo especializado em atender esses desejos. Conhecimentos: análise de veneno, colarinho branco, sabotagem, análise de ferimentos, rastreamento, armadilhas, fechaduras, afanar, avaliar arte específica, avaliar gemas."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Submundo. O personagem pode adquirir 1 Contato extra além do seu limite de I."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Sugerir. O personagem é capaz de conversar usando sugestões, de forma indireta, quase uma linguagem do crime, fazendo isso ele é capaz de entrar em contato com pessoas do meio e disfarçar suas conversas com eles."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Esconderijo. Com 25 xpm o personagem pode criar um esconderijo, um espaço pequeno, mas perfeitamente oculto atrás de paredes falsas ou árvores ocas, ou em casas abandonadas, um lugar onde ele pode desaparecer durante fugas e se manter abastecido por até 10 temporadas mesmo com companheiros, sem precisar sair, ele pode até interligar um esconderijo ao outro através de rotas de fuga planejadas."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Falsificação. A partir de 8 xpm, o personagem pode gastar 1 xpm para criar uma falsificação de algo que tenha o Conhecimento específico sobre como fazer, como mapas, cartas náuticas, obras de arte, cartas, raspagem de moedas, sinetes, recibos, cartas de crédito."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Copiar. O personagem pode copiar um pergaminho pagando 1 xpm para cada 1 Con da magia escrita nele."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Kit. O personagem começa com 8 xpm que representam seus itens de arrombamento, enquanto se mantiver acima disso, pode pagar 1 xpm para permitir um teste de A para destrancar fechaduras, desarmar armadilhas ou lidar com outros mecanismos complexos para os quais tenha Conhecimento."
         },
         {
           "type": "paragraph",
+          "estudos_item":"ARTE",
           "text": "Arte. O personagem é um mestre do entretenimento, saber contar histórias abre portas em um mundo sem formas rápidas de comunicação, e saber cantar essas histórias abrem ainda mais. Atores, músicos, malabaristas, muitas coisas podem ser pagas com uma simples canção ou apresentação. O personagem pode obter lucro com apresentações, o retorno dependerá do tempo de preparo, se houve ensaio ou foi de improviso, se o local é adequado, se houve cartazes, se havia público. Conhecimentos: dominar uma arte específica (acrobacia, equilíbrio, malabarismo, pintura, atuação, prestidigitação, humor, dança, narrativa, culinária, música)."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Apresentação. O artista começa com 30 xpl que representam seus trajes característicos. Ele será bem recebido em castelos e salões enquanto se mantiver acima de 30 xpl."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Encenar. Ao custo de 8 xpm, o artista pode aprender qualquer Estudo como se fosse um conhecimento, mas os conhecimentos desse estudo também ocuparão campos."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Figurino. Para trocar de conhecimento, o artista pode substituir 10 xpm por 5 xpl."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Interpretar. O personagem pode usar pergaminhos com magias inscritas."
         },
         {
           "type": "paragraph",
+          "estudos_item": "LINGUAGEM",
           "text": "Linguagem. Personagens com S4 ou mais sabem ler e escrever muito mal, o Estudo Linguística permite que mesmo personagem com qualquer valor em S saiba escrever e ler de forma culta e formal, além de lhe dar conhecimento de línguas e suas origens. Conhecimentos: língua específica, língua perdida específica, língua inventada ou código secreto."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Escrita. O personagem pode escrever em volumes, códices e grimórios (vistos no tópico Contatos de Mercado) Conhecimentos que ele possua, ele precisa de 10 temporadas para cada Conhecimento."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Estudioso. Permite substituir um Conhecimento gastando 5 xpm em vez de 10 xpm."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Interpretar. O linguista pode usar pergaminhos com magias inscritas."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Transposição. Podem criar pergaminhos com magias que conheçam, ou copiando de volumes, códices ou grimórios."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Leitura. Não precisam de Fontes para troca de Conhecimento."
         },
         {
           "type": "paragraph",
+          "estudos_item": "MEDICINA",
           "text": "Medicina. Todas as magias de cura em Maeri são superficiais. Tratar feridas graves, doenças e outras condições exige um conhecimento profundo do corpo humano e do seu funcionamento. Ainda que lidar com cadáveres seja algo bastante censurado por parte dos membros das diversas fés, boa parte dos seus membros sabem a eficiência daqueles que se dedicam a esse estudo. Conhecimentos: tratar doença ou condição específica, preservar corpos ou outros materiais orgânicos."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Fármaco. A partir de 10 xpm para itens de laboratório, permite criar, ao custo de 1 xpm por Dp, qualquer poção ou veneno do contato Apotecário (tópico Contatos de Mercado)."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Ressurreição. Ao custo de 100 xpm, que representam larvas para devorar carne podre, sanguessugas para drenar o sangue, ataduras com cataplasmas, mosquitos gigantes que funcionam como bolsas de transfusão, essência de enguia para desfibrilação e cabeças de formigas para sutura, o médico tem direito a um teste para reviver alguém que acabou de ser morto cujo corpo ainda esteja em condições."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Tratamento. Fora de combate, o médico pode curar 1 Vit para cada 1 xpm gasto, menos de ferimentos."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Realinhamento. Ao custo de 5 xpm, o médico tem direito a um teste para transformar o dano de um ferimento em dano normal."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Relaxamento. Além dos dados normais por repouso, permite curar 1d6 a mais de si próprio e de aliados por 1 xpm para cada dado."
         },
         {
           "type": "paragraph",
+          "estudos_item": "EXPLORAÇÃO",
           "text": "Exploração. O personagem é especialista em sobrevivência em alguns tipos de território específicos como mar, floresta, prado, deserto, tundra ou montanhas, saberá rastrear animais, reconhecer plantas comestíveis, evitar territórios perigosos, analisar geografia. Esse tipo de conhecimento permite que o personagem sobreviva sozinho sem muitos problemas em qualquer tipo de região selvagem que conheça. Conhecimentos: animais, plantas, climas, geografia, locais de uma região específica."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Naturalista. Após um dia caminhando por um território novo, o personagem pode fazer um teste de S para mudar qualquer Conhecimento que envolva geografia para outro que envolva o território novo sem necessidade de uma Fonte."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Coletor. Consegue 1d6 xpl sempre que bem-sucedido em um teste de A autorizado pelo mestre dentro do território que tenha conhecimento."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Piloto. Com um Conhecimento de exploração em algum território de ar, terra ou água, o personagem saberá automaticamente como pilotar veículos comuns feitos para esses tipos de terreno."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Aparato. Ao custo de 1 xpm, o personagem com exploração não precisa de testes para improvisar cordas, fogueiras, cantis, bússolas e outros itens práticos."
         },
         {
           "type": "paragraph",
+          "estudos_item": "POLÍTICA",
           "text": "Política. Nesse caso, abrange conhecimento político, histórico e legislativo. Com isso, o personagem pode reconhecer brasões, selos, pessoas, nomes, bandeiras, obras de arte e pode até advogar em nome de alguém em julgamentos, já que possui conhecimento sobre leis das regiões. Conhecimentos: história de cidades, povos, famílias nobres, regiões, leis específicas, costumes, mitos."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Título. O personagem é um pequeno nobre ou possui algum título menor, ele começa com 40 xpl que representam seus trajes garbosos, sinete e documentos que comprovam seu título. Será bem recebido em castelos e salões enquanto se mantiver acima de 40 xpl."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Nome. O personagem possui um nome ou sobrenome importante e reconhecido, o que o permite a palavra em conselhos, julgamentos e outros locais de tomada de decisão."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Estudo Formal. O personagem teve estudo formal em um castelo, universidade ou mosteiro. Os estudos formais em Maeri são compostos por gramática, astronomia, religião, estratégia, retórica, matemática, filosofia e música."
         },
         {
           "type": "paragraph",
+          "estudos_item": "RELIGIÃO",
           "text": "Religião. Em Maeri, as religiões, representadas principalmente pelas Fés de Midra, Yaria e Oromandes, são parte muito importante do cotidiano das pessoas através de preces, livros sagrados e rituais. Um personagem com esse estudo terá muita facilidade com testes entre aldeões e camponeses, sendo capaz de reuni-los com facilidade ao redor de cultos e rituais, desde que o personagem conheça ou seja capaz de subverter os ritos locais já estabelecidos. Conhecimentos: entendimento de povos e cidades perdidas, rituais, orações, escrituras sagradas específicas, culturas antigas, seres mitológicos, lendas, arquitetura, símbolos e costumes religiosos ou populares."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Paramentos. O personagem começa com 30 xpl que representam seus materiais litúrgicos, como batina, amuletos, pulseiras, anéis. Enquanto mantiver esses 30 xpl, sempre terá comida e abrigo em templos da sua fé."
         },
         {
           "type": "paragraph",
+          "id": "estudos_item",
           "text": "Fé. O personagem pode gastar 1 xpm para consumir algo que lhe seja sagrado e lhe dê forças, impedindo que perca Con por questões associadas a medo."
         }
       ]
@@ -497,10 +552,12 @@
         },
         {
           "type": "paragraph",
+          "aventura_item": "SEGREDOS.",
           "text": "Em termos de regras, em acordo com o mestre e os demais jogadores, e sempre com revelações a respeito da história do personagem, gastar 1 ponto de Segredo permite:"
         },
         {
           "type": "list",
+          "id": "aventura_item",
           "items": [
             "Fazer uma alteração na história do mestre ou na própria história.",
             "Adquirir um item mágico na construção do personagem.",
