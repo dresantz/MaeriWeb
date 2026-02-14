@@ -163,28 +163,47 @@ export class GMCombat {
       
       return `
       <div class="gmnotes-combat-item ${selectedClass}" data-combat-id="${item.id}" data-combat-index="${index}">
-        <div class="gmnotes-combat-initiative">
-          <input type="number" class="gmnotes-combat-initiative-input" value="${item.initiative}" min="1" max="99" 
-                 onchange="gmNotes.updateCombatInitiative('${item.id}', this.value)">
+        <div class="gmnotes-combat-name">${this.parent.escapeHtml(item.name)}</div>
+        
+        <div class="gmnotes-combat-controls-row">
+          <div class="gmnotes-combat-initiative">
+            <input type="number" class="gmnotes-combat-initiative-input" value="${item.initiative}" min="1" max="99" 
+                  onchange="gmNotes.updateCombatInitiative('${item.id}', this.value)">
+          </div>
+          <div class="gmnotes-combat-status">
+            <select class="gmnotes-combat-condition" onchange="gmNotes.updateCombatCondition('${item.id}', this.value)">
+              <option value="normal" ${item.condition === 'normal' ? 'selected' : ''}>Normal</option>
+              <option value="inconsciente" ${item.condition === 'inconsciente' ? 'selected' : ''}>Inconsciente</option>
+              <option value="envenenado" ${item.condition === 'envenenado' ? 'selected' : ''}>Envenenado</option>
+              <option value="paralisado" ${item.condition === 'paralisado' ? 'selected' : ''}>Paralisado</option>
+            </select>
+          </div>
         </div>
-        <div class="gmnotes-combat-info">
-          <span class="gmnotes-combat-name">${this.parent.escapeHtml(item.name)}</span>
-        </div>
+        
         ${item.type === 'npc' ? `
-        <div class="gmnotes-combat-hp">
-          <button class="gmnotes-combat-hp-btn" onclick="gmNotes.adjustCombatVit('${item.id}', -1)">-</button>
-          <span class="gmnotes-hp-current">${item.vit}</span>/<span class="gmnotes-hp-max">${item.vitMax}</span>
-          <button class="gmnotes-combat-hp-btn" onclick="gmNotes.adjustCombatVit('${item.id}', 1)">+</button>
+        <div class="gmnotes-combat-stats-row">
+          <div class="gmnotes-combat-stat">
+            <span class="gmnotes-combat-stat-label">Vit:</span>
+            <div class="gmnotes-combat-stat-control">
+              <button class="gmnotes-combat-stat-btn" onclick="gmNotes.adjustCombatVit('${item.id}', -1)">-</button>
+              <span class="gmnotes-combat-stat-value">
+                <span class="gmnotes-combat-stat-current">${item.vit}</span>/<span class="gmnotes-combat-stat-max">${item.vitMax}</span>
+              </span>
+              <button class="gmnotes-combat-stat-btn" onclick="gmNotes.adjustCombatVit('${item.id}', 1)">+</button>
+            </div>
+          </div>
+          <div class="gmnotes-combat-stat">
+            <span class="gmnotes-combat-stat-label">Con:</span>
+            <div class="gmnotes-combat-stat-control">
+              <button class="gmnotes-combat-stat-btn" onclick="gmNotes.adjustCombatCon('${item.id}', -1)">-</button>
+              <span class="gmnotes-combat-stat-value">
+                <span class="gmnotes-combat-stat-current">${item.con || 0}</span>/<span class="gmnotes-combat-stat-max">${item.conMax || 0}</span>
+              </span>
+              <button class="gmnotes-combat-stat-btn" onclick="gmNotes.adjustCombatCon('${item.id}', 1)">+</button>
+            </div>
+          </div>
         </div>
         ` : ''}
-        <div class="gmnotes-combat-status">
-          <select class="gmnotes-combat-condition" onchange="gmNotes.updateCombatCondition('${item.id}', this.value)">
-            <option value="normal" ${item.condition === 'normal' ? 'selected' : ''}>Normal</option>
-            <option value="inconsciente" ${item.condition === 'inconsciente' ? 'selected' : ''}>Inconsciente</option>
-            <option value="envenenado" ${item.condition === 'envenenado' ? 'selected' : ''}>Envenenado</option>
-            <option value="paralisado" ${item.condition === 'paralisado' ? 'selected' : ''}>Paralisado</option>
-          </select>
-        </div>
       </div>
     `}).join('');
   }
@@ -198,6 +217,22 @@ export class GMCombat {
       const npc = this.parent.npcs.npcs.find(n => n.id === combatId);
       if (npc) {
         npc.vitCurrent = item.vit;
+        this.parent.npcs.renderNPCs();
+      }
+      
+      this.parent.saveToStorage();
+    }
+  }
+
+  adjustCombatCon(combatId, change) {
+    const item = this.combatOrder.find(i => i.id === combatId);
+    if (item && item.type === 'npc') {
+      item.con = Math.max(0, Math.min(item.conMax, (item.con || 0) + change));
+      this.renderCombatOrder();
+      
+      const npc = this.parent.npcs.npcs.find(n => n.id === combatId);
+      if (npc) {
+        npc.conCurrent = item.con;
         this.parent.npcs.renderNPCs();
       }
       
