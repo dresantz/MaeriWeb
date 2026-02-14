@@ -1,0 +1,188 @@
+/* =========================
+   GM Notes - Modal (Main)
+   Importa todos os módulos de estilo
+========================= */
+
+/* Base e estrutura */
+@import url('gmnotes-base.css');
+
+/* Componentes compartilhados */
+@import url('gmnotes-forms.css');
+
+/* Módulos específicos */
+@import url('gmnotes-npcs.css');
+@import url('gmnotes-players.css');
+@import url('gmnotes-combat.css');
+@import url('gmnotes-notes.css');
+
+/* ===== MEDIA QUERIES GLOBAIS ===== */
+@media (max-width: 768px) {
+  .gmnotes-modal-content {
+    max-width: 95%;
+    margin: 1rem auto;
+  }
+
+  .gmnotes-modal-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gmnotes-header-tabs {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .gmnotes-tab-btn {
+    flex: 1;
+    text-align: center;
+  }
+
+  .gmnotes-form-row {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .gmnotes-input-number,
+  .gmnotes-input-small {
+    max-width: 100%;
+  }
+
+  .gmnotes-combat-item {
+    flex-wrap: wrap;
+  }
+
+  .gmnotes-combat-drag {
+    width: 100%;
+    text-align: center;
+  }
+
+  .gmnotes-footer-status {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .gmnotes-footer-actions {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .gmnotes-modal-content {
+    max-width: 95%;
+    margin: 0.5rem auto;
+    border-radius: 20px;
+  }
+
+  .gmnotes-modal-header {
+    padding: 1.25rem 1.25rem 0.5rem 1.25rem;
+  }
+
+  .gmnotes-modal-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .gmnotes-modal-body {
+    padding: 0.75rem 1.25rem 1.25rem 1.25rem;
+    font-size: 1rem;
+  }
+
+  .gmnotes-section {
+    padding: 1rem;
+  }
+
+  .gmnotes-npc-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gmnotes-npc-actions {
+    margin-left: 0;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .gmnotes-npc-stats {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gmnotes-stat-group {
+    width: 100%;
+  }
+
+  .gmnotes-combat-toolbar {
+    flex-direction: column;
+  }
+
+  .gmnotes-combat-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .gmnotes-combat-initiative {
+    width: 100%;
+  }
+
+  .gmnotes-combat-status {
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .gmnotes-modal-content {
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .gmnotes-modal-header {
+    padding: 1rem 1rem 0.5rem 1rem;
+  }
+
+  .gmnotes-modal-body {
+    padding: 0.5rem 1rem 1rem 1rem;
+  }
+
+  .gmnotes-tab-btn {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .gmnotes-section {
+    padding: 0.75rem;
+  }
+
+  .gmnotes-form-actions {
+    flex-direction: column;
+  }
+
+  .gmnotes-btn {
+    width: 100%;
+  }
+
+  .gmnotes-toolbar {
+    justify-content: center;
+  }
+}
+
+/* Modo paisagem em celulares */
+@media (orientation: landscape) and (max-height: 600px) {
+  .gmnotes-modal-content {
+    margin: 0.5rem auto;
+  }
+
+  .gmnotes-modal-body {
+    max-height: 60vh;
+  }
+
+  .gmnotes-textarea {
+    min-height: 120px;
+  }
+
+  .gmnotes-combat-list {
+    max-height: 200px;
+  }
+}

@@ -1,0 +1,68 @@
+/* =========================
+   GM Notes - Jogadores
+========================= */
+
+.gmnotes-players-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.gmnotes-player-item {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.gmnotes-player-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.gmnotes-player-name {
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.gmnotes-player-actions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.gmnotes-player-info {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed rgba(212, 175, 55, 0.2);
+  word-break: break-word;
+}
+
+/* Reutiliza .gmnotes-npc-btn de gmnotes-npcs.css */
+.gmnotes-player-actions .gmnotes-npc-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.gmnotes-player-actions .gmnotes-npc-btn:hover {
+  color: var(--gold);
+  transform: scale(1.1);
+}
+
+@media (max-width: 400px) {
+  .gmnotes-player-item {
+    padding: 0.75rem;
+  }
+}

@@ -1,0 +1,261 @@
+/* =========================
+   GM Notes - Formulários
+   Estilos compartilhados para formulários
+========================= */
+
+/* Seções */
+.gmnotes-section {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  border-radius: 16px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.gmnotes-section:last-child {
+  margin-bottom: 0;
+}
+
+.gmnotes-section-title {
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(212,175,55,0.2);
+}
+
+/* Layout de formulário */
+.gmnotes-form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.gmnotes-form-group {
+  flex: 1;
+  min-width: 120px;
+}
+
+.gmnotes-form-group-full {
+  flex: 100%;
+}
+
+.gmnotes-form-group label {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Campos de entrada */
+.gmnotes-input,
+.gmnotes-select,
+.gmnotes-textarea {
+  width: 100%;
+  background: var(--surface-light);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  color: var(--text);
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.gmnotes-input:focus,
+.gmnotes-select:focus,
+.gmnotes-textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+.gmnotes-select {
+  cursor: pointer;
+}
+
+/* Variações de input */
+.gmnotes-input-number {
+  max-width: 100px;
+}
+
+.gmnotes-input-attr {
+  width: 100%;
+  max-width: 80px;
+  text-align: center;
+}
+
+/* Linha para Vit/Con */
+.gmnotes-stats-row {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.gmnotes-stat-field {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Grid de atributos 3x2 */
+.gmnotes-attributes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.gmnotes-attr-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.gmnotes-attr-cell label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Botões */
+.gmnotes-form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.gmnotes-btn {
+  background: var(--surface-light);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 20px;
+  padding: 0.6rem 1.5rem;
+  color: var(--text);
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gmnotes-btn:hover {
+  background: var(--gold);
+  color: #1a1a1a;
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.gmnotes-btn:active {
+  transform: translateY(0);
+}
+
+.gmnotes-btn-primary {
+  background: var(--gold);
+  color: #1a1a1a;
+  border-color: var(--gold);
+}
+
+.gmnotes-btn-primary:hover {
+  background: #e5c25c;
+}
+
+/* Barra de busca */
+.gmnotes-search-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.gmnotes-search-input {
+  flex: 1;
+  background: var(--surface-light);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 20px;
+  padding: 0.6rem 1rem;
+  color: var(--text);
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+}
+
+.gmnotes-search-input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.gmnotes-search-btn {
+  background: var(--surface-light);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gmnotes-search-btn:hover {
+  background: var(--gold);
+  color: #1a1a1a;
+  border-color: var(--gold);
+}
+
+/* =========================
+   Media Queries
+========================= */
+
+@media (max-width: 600px) {
+  .gmnotes-stats-row {
+    gap: 0.75rem;
+  }
+  
+  .gmnotes-attributes-grid {
+    gap: 0.5rem;
+  }
+  
+  .gmnotes-attr-cell label {
+    font-size: 0.75rem;
+  }
+  
+  .gmnotes-input-attr {
+    max-width: 100%;
+    padding: 0.4rem;
+  }
+  
+  .gmnotes-form-actions {
+    flex-direction: column;
+  }
+  
+  .gmnotes-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .gmnotes-section {
+    padding: 1rem;
+  }
+  
+  .gmnotes-attributes-grid {
+    gap: 0.25rem;
+  }
+  
+  .gmnotes-attr-cell label {
+    font-size: 0.7rem;
+  }
+  
+  .gmnotes-search-bar {
+    flex-direction: column;
+  }
+  
+  .gmnotes-search-btn {
+    width: 100%;
+    border-radius: 20px;
+  }
+}

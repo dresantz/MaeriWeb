@@ -49,6 +49,40 @@
   transform: translateY(0);
 }
 
+/* ===== BOTÃO GMNOTES - ESTILOS BASE ===== */
+.gmnotes-button {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  background: var(--gold);
+  color: #1a1a1a;
+  border: 2px solid var(--gold);
+  cursor: pointer;
+  z-index: 1001;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  transition: all 0.2s ease;
+}
+
+.gmnotes-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+
+.gmnotes-button:active {
+  transform: scale(0.95);
+}
+
+/* ===== MEDIA QUERIES PARA AJUSTES ===== */
+
 /* Ajustes para telas pequenas */
 @media (max-width: 600px) {
   .shield {
@@ -69,7 +103,7 @@
   }
 }
 
-/* Ajustes para telas muito pequenas */
+/* Ajustes para telas muito pequenas (em pé) */
 @media (max-width: 400px) {
   .shield-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -81,22 +115,44 @@
     font-size: 0.95rem;
     border-radius: 8px;
   }
-
+  
+  /* Ajustes para o botão GMNotes em telas muito pequenas */
   .gmnotes-button {
-  position: fixed;
-  top: 0.5rem;
-  left: 0.5rem;
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
-  font-size: 1.2rem;
-  background: var(--gold);
-  color: #1a1a1a;
-  border: 2px solid var(--gold);
-  cursor: pointer;
-  z-index: 1001;
-  -webkit-tap-highlight-color: transparent;
-  outline: none;
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+    top: 0.3rem;
+    left: 0.3rem;
   }
+}
 
+/* Ajustes para modo paisagem (celular deitado) */
+@media (orientation: landscape) and (max-height: 600px) {
+  .gmnotes-button {
+    width: 50px;
+    height: 50px;
+    font-size: 1rem;
+    top: 0.3rem;
+    left: 0.3rem;
+  }
+  
+  .shield {
+    padding-bottom: 4rem;
+  }
+}
+
+/* Ajustes para telas maiores (tablets, desktop) */
+@media (min-width: 1024px) {
+  .gmnotes-button {
+    width: 60px;
+    height: 60px;
+    font-size: 1.4rem;
+    top: 1rem;
+    left: 1rem;
+  }
+  
+  .shield {
+    padding: 2rem;
+    padding-bottom: 7rem;
+  }
 }

@@ -1,0 +1,93 @@
+/* =========================
+   GM Notes - Notas
+   Estilos para editor de notas e sessões
+========================= */
+
+.gmnotes-editor {
+  margin-bottom: 1rem;
+}
+
+.gmnotes-textarea {
+  width: 100%;
+  min-height: 200px;
+  background: var(--surface-light);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  color: var(--text);
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.gmnotes-textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.gmnotes-toolbar {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  flex-wrap: wrap;
+}
+
+.gmnotes-toolbar-btn {
+  background: transparent;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  color: var(--text);
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.gmnotes-toolbar-btn:hover {
+  background: var(--gold);
+  color: #1a1a1a;
+  border-color: var(--gold);
+}
+
+/* Lista de sessões */
+.gmnotes-sessions-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.gmnotes-session-item {
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  color: var(--text);
+  font-family: 'Crimson Text', serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gmnotes-session-item:hover {
+  background: var(--gold);
+  color: #1a1a1a;
+  border-color: var(--gold);
+}
+
+.gmnotes-session-item.active {
+  background: var(--gold);
+  color: #1a1a1a;
+}
+
+.gmnotes-session-new {
+  background: transparent;
+  border: 1px dashed var(--gold);
+}
