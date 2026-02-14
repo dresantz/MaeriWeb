@@ -39,32 +39,33 @@ export class GMPlayers {
     document.getElementById('player-info').value = '';
   }
 
-  renderPlayers() {
-    const container = document.getElementById('players-list');
-    if (!container) return;
+renderPlayers() {
+  const container = document.getElementById('players-list');
+  if (!container) return;
 
-    if (this.players.length === 0) {
-      container.innerHTML = '<div class="gmnotes-empty-state">Nenhum jogador cadastrado</div>';
-      return;
-    }
-
-    container.innerHTML = this.players.map(player => `
-      <div class="gmnotes-player-item" data-player-id="${player.id}">
-        <div class="gmnotes-player-header">
-          <span class="gmnotes-player-name">${this.parent.escapeHtml(player.name)}</span>
-          <div class="gmnotes-player-actions">
-            <button class="gmnotes-npc-btn" onclick="gmNotes.editPlayer('${player.id}')" title="Editar">✏️</button>
-            <button class="gmnotes-npc-btn" onclick="gmNotes.deletePlayer('${player.id}')" title="Remover">🗑️</button>
-          </div>
-        </div>
-        ${player.info ? `
-        <div class="gmnotes-player-info">
-          ${this.parent.escapeHtml(player.info)}
-        </div>
-        ` : ''}
-      </div>
-    `).join('');
+  if (this.players.length === 0) {
+    container.innerHTML = '<div class="gmnotes-empty-state">Nenhum jogador cadastrado</div>';
+    return;
   }
+
+  container.innerHTML = this.players.map(player => `
+    <div class="gmnotes-player-item" data-player-id="${player.id}">
+      <div class="gmnotes-player-header">
+        <span class="gmnotes-player-name">${this.parent.escapeHtml(player.name)}</span>
+        <div class="gmnotes-player-actions">
+          <button class="gmnotes-npc-btn" onclick="gmNotes.addPlayerToCombat('${player.id}')" title="Adicionar ao Combate">⚔️</button>
+          <button class="gmnotes-npc-btn" onclick="gmNotes.editPlayer('${player.id}')" title="Editar">✏️</button>
+          <button class="gmnotes-npc-btn" onclick="gmNotes.deletePlayer('${player.id}')" title="Remover">🗑️</button>
+        </div>
+      </div>
+      ${player.info ? `
+      <div class="gmnotes-player-info">
+        ${this.parent.escapeHtml(player.info)}
+      </div>
+      ` : ''}
+    </div>
+  `).join('');
+}
 
   editPlayer(playerId) {
     const player = this.players.find(p => p.id === playerId);

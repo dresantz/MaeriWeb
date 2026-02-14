@@ -184,22 +184,24 @@ class GMNotesModal {
     this.currentTab = tabId;
   }
 
-  // ========== MÉTODOS DELEGADOS PARA ACESSO GLOBAL ==========
-  // NPCs
-  adjustVit(npcId, change) { this.npcs.adjustVit(npcId, change); }
-  adjustCon(npcId, change) { this.npcs.adjustCon(npcId, change); }
-  editNPC(npcId) { this.npcs.editNPC(npcId); }
-  duplicateNPC(npcId) { this.npcs.duplicateNPC(npcId); }
-  deleteNPC(npcId) { this.npcs.deleteNPC(npcId); }
+// ========== MÉTODOS DELEGADOS ==========
+// NPCs
+adjustVit(npcId, change) { this.npcs.adjustVit(npcId, change); }
+adjustCon(npcId, change) { this.npcs.adjustCon(npcId, change); }
+editNPC(npcId) { this.npcs.editNPC(npcId); }
+duplicateNPC(npcId) { this.npcs.duplicateNPC(npcId); }
+deleteNPC(npcId) { this.npcs.deleteNPC(npcId); }
+addNPCToCombat(npcId) { this.combat.addNPCToCombat(npcId); }
 
-  // Players
-  editPlayer(playerId) { this.players.editPlayer(playerId); }
-  deletePlayer(playerId) { this.players.deletePlayer(playerId); }
+// Players
+editPlayer(playerId) { this.players.editPlayer(playerId); }
+deletePlayer(playerId) { this.players.deletePlayer(playerId); }
+addPlayerToCombat(playerId) { this.combat.addPlayerToCombat(playerId); }
 
-  // Combat
-  adjustCombatVit(combatId, change) { this.combat.adjustCombatVit(combatId, change); }
-  updateCombatInitiative(combatId, value) { this.combat.updateCombatInitiative(combatId, value); }
-  updateCombatCondition(combatId, condition) { this.combat.updateCombatCondition(combatId, condition); }
+// Combat
+adjustCombatVit(combatId, change) { this.combat.adjustCombatVit(combatId, change); }
+updateCombatInitiative(combatId, value) { this.combat.updateCombatInitiative(combatId, value); }
+updateCombatCondition(combatId, condition) { this.combat.updateCombatCondition(combatId, condition); }
 
   // ========== EXPORTAÇÃO/IMPORTAÇÃO ==========
   exportData() {

@@ -21,6 +21,7 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.75rem;
+  gap: 0.5rem;
 }
 
 .gmnotes-npc-name {
@@ -28,11 +29,14 @@
   font-family: 'Cinzel', serif;
   font-size: 1.1rem;
   font-weight: 600;
+  word-break: break-word;
+  flex: 1;
 }
 
 .gmnotes-npc-actions {
   display: flex;
   gap: 0.25rem;
+  flex-shrink: 0;
 }
 
 .gmnotes-npc-btn {
@@ -44,6 +48,7 @@
   padding: 0.25rem;
   border-radius: 4px;
   transition: all 0.2s ease;
+  line-height: 1;
 }
 
 .gmnotes-npc-btn:hover {
@@ -51,11 +56,22 @@
   transform: scale(1.1);
 }
 
+/* Destaque para o botão de combate */
+.gmnotes-npc-btn[title="Adicionar ao Combate"] {
+  color: #d4af37;
+}
+
+.gmnotes-npc-btn[title="Adicionar ao Combate"]:hover {
+  color: #ffd700;
+  transform: scale(1.15);
+}
+
 /* Status (Vit/Con) */
 .gmnotes-npc-stats {
   display: flex;
   gap: 1rem;
   margin-bottom: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .gmnotes-stat-group {
@@ -148,21 +164,24 @@
 
 /* =========================
    Formulário de NPCs
-   (Estes estilos devem estar em gmnotes-forms.css, não aqui)
 ========================= */
 
-/* Removidos: 
-   - .gmnotes-attributes-row (não usado)
-   - .gmnotes-attr-group (não usado)
-   - .gmnotes-input-attr (já em forms.css)
-   - .gmnotes-input-number (já em forms.css)
-   - .gmnotes-attributes-grid (já em forms.css)
-   - .gmnotes-attr-cell (já em forms.css)
-   - Media queries duplicadas
-*/
-
-/* Apenas ajustes específicos para NPCs que não estão em forms.css */
+/* Ajustes específicos */
 @media (max-width: 600px) {
+  .gmnotes-npc-header {
+    flex-wrap: wrap;
+  }
+  
+  .gmnotes-npc-name {
+    width: 100%;
+    margin-bottom: 0.25rem;
+  }
+  
+  .gmnotes-npc-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
   .gmnotes-npc-stats {
     flex-direction: column;
     gap: 0.5rem;
@@ -170,12 +189,22 @@
   
   .gmnotes-stat-group {
     width: 100%;
+    justify-content: space-between;
   }
 }
 
 @media (max-width: 400px) {
   .gmnotes-npc-item {
     padding: 0.75rem;
+  }
+  
+  .gmnotes-npc-actions {
+    gap: 0.15rem;
+  }
+  
+  .gmnotes-npc-btn {
+    font-size: 1.1rem;
+    padding: 0.2rem;
   }
   
   .gmnotes-npc-extra {

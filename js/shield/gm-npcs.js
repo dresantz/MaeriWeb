@@ -58,62 +58,64 @@ export class GMNPCs {
     document.getElementById('npc-extra').value = '';
   }
 
-  renderNPCs() {
-    const container = document.getElementById('npc-list');
-    if (!container) return;
+renderNPCs() {
+  const container = document.getElementById('npc-list');
+  if (!container) return;
 
-    if (this.npcs.length === 0) {
-      container.innerHTML = '<div class="gmnotes-empty-state">Nenhum NPC criado</div>';
-      return;
-    }
-
-    container.innerHTML = this.npcs.map(npc => `
-      <div class="gmnotes-npc-item" data-npc-id="${npc.id}">
-        <div class="gmnotes-npc-header">
-          <span class="gmnotes-npc-name">${this.parent.escapeHtml(npc.name)}</span>
-          <div class="gmnotes-npc-actions">
-            <button class="gmnotes-npc-btn" onclick="gmNotes.editNPC('${npc.id}')" title="Editar">✏️</button>
-            <button class="gmnotes-npc-btn" onclick="gmNotes.duplicateNPC('${npc.id}')" title="Duplicar">📋</button>
-            <button class="gmnotes-npc-btn" onclick="gmNotes.deleteNPC('${npc.id}')" title="Remover">🗑️</button>
-          </div>
-        </div>
-        
-        <div class="gmnotes-npc-stats">
-          <div class="gmnotes-stat-group">
-            <span class="gmnotes-stat-label">Vit:</span>
-            <div class="gmnotes-stat-control">
-              <button class="gmnotes-stat-btn" onclick="gmNotes.adjustVit('${npc.id}', -1)">-</button>
-              <span class="gmnotes-stat-value">${npc.vitCurrent}/${npc.vitMax}</span>
-              <button class="gmnotes-stat-btn" onclick="gmNotes.adjustVit('${npc.id}', 1)">+</button>
-            </div>
-          </div>
-          <div class="gmnotes-stat-group">
-            <span class="gmnotes-stat-label">Con:</span>
-            <div class="gmnotes-stat-control">
-              <button class="gmnotes-stat-btn" onclick="gmNotes.adjustCon('${npc.id}', -1)">-</button>
-              <span class="gmnotes-stat-value">${npc.conCurrent}/${npc.conMax}</span>
-              <button class="gmnotes-stat-btn" onclick="gmNotes.adjustCon('${npc.id}', 1)">+</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="gmnotes-npc-attributes">
-          <span class="gmnotes-attr">F ${npc.attributes.f}</span>
-          <span class="gmnotes-attr">V ${npc.attributes.v}</span>
-          <span class="gmnotes-attr">D ${npc.attributes.d}</span>
-          <span class="gmnotes-attr">A ${npc.attributes.a}</span>
-          <span class="gmnotes-attr">S ${npc.attributes.s}</span>
-        </div>
-
-        ${npc.extra ? `
-        <div class="gmnotes-npc-extra">
-          <span class="gmnotes-extra-label">Extra:</span>
-          <span class="gmnotes-extra-text">${this.parent.escapeHtml(npc.extra)}</span>
-        </div>
-        ` : ''}
-      </div>
-    `).join('');
+  if (this.npcs.length === 0) {
+    container.innerHTML = '<div class="gmnotes-empty-state">Nenhum NPC criado</div>';
+    return;
   }
+
+  container.innerHTML = this.npcs.map(npc => `
+    <div class="gmnotes-npc-item" data-npc-id="${npc.id}">
+      <div class="gmnotes-npc-header">
+        <span class="gmnotes-npc-name">${this.parent.escapeHtml(npc.name)}</span>
+        <div class="gmnotes-npc-actions">
+          <button class="gmnotes-npc-btn" onclick="gmNotes.addNPCToCombat('${npc.id}')" title="Adicionar ao Combate">⚔️</button>
+          <button class="gmnotes-npc-btn" onclick="gmNotes.editNPC('${npc.id}')" title="Editar">✏️</button>
+          <button class="gmnotes-npc-btn" onclick="gmNotes.duplicateNPC('${npc.id}')" title="Duplicar">📋</button>
+          <button class="gmnotes-npc-btn" onclick="gmNotes.deleteNPC('${npc.id}')" title="Remover">🗑️</button>
+        </div>
+      </div>
+      
+      <div class="gmnotes-npc-stats">
+        <div class="gmnotes-stat-group">
+          <span class="gmnotes-stat-label">Vit:</span>
+          <div class="gmnotes-stat-control">
+            <button class="gmnotes-stat-btn" onclick="gmNotes.adjustVit('${npc.id}', -1)">-</button>
+            <span class="gmnotes-stat-value">${npc.vitCurrent}/${npc.vitMax}</span>
+            <button class="gmnotes-stat-btn" onclick="gmNotes.adjustVit('${npc.id}', 1)">+</button>
+          </div>
+        </div>
+        <div class="gmnotes-stat-group">
+          <span class="gmnotes-stat-label">Con:</span>
+          <div class="gmnotes-stat-control">
+            <button class="gmnotes-stat-btn" onclick="gmNotes.adjustCon('${npc.id}', -1)">-</button>
+            <span class="gmnotes-stat-value">${npc.conCurrent}/${npc.conMax}</span>
+            <button class="gmnotes-stat-btn" onclick="gmNotes.adjustCon('${npc.id}', 1)">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="gmnotes-npc-attributes">
+        <span class="gmnotes-attr">F ${npc.attributes.f}</span>
+        <span class="gmnotes-attr">V ${npc.attributes.v}</span>
+        <span class="gmnotes-attr">D ${npc.attributes.d}</span>
+        <span class="gmnotes-attr">A ${npc.attributes.a}</span>
+        <span class="gmnotes-attr">I ${npc.attributes.i}</span>
+        <span class="gmnotes-attr">S ${npc.attributes.s}</span>
+      </div>
+
+      ${npc.extra ? `
+      <div class="gmnotes-npc-extra">
+        <span class="gmnotes-extra-label">Extra:</span>
+        <span class="gmnotes-extra-text">${this.parent.escapeHtml(npc.extra)}</span>
+      </div>
+      ` : ''}
+    </div>
+  `).join('');
+}
 
   adjustVit(npcId, change) {
     const npc = this.npcs.find(n => n.id === npcId);

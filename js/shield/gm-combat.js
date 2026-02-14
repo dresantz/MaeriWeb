@@ -12,67 +12,64 @@ export class GMCombat {
     const startBtn = document.getElementById('combat-start');
     const nextBtn = document.getElementById('combat-next');
     const resetBtn = document.getElementById('combat-reset');
-    const addBtn = document.querySelector('.gmnotes-combat-add');
     const removeBtn = document.querySelector('.gmnotes-combat-remove');
 
     if (startBtn) startBtn.addEventListener('click', () => this.startCombat());
     if (nextBtn) nextBtn.addEventListener('click', () => this.nextTurn());
     if (resetBtn) resetBtn.addEventListener('click', () => this.resetCombat());
-    if (addBtn) addBtn.addEventListener('click', () => this.addToCombat());
     if (removeBtn) removeBtn.addEventListener('click', () => this.removeFromCombat());
   }
 
-  addToCombat() {
-    const options = [
-      ...this.parent.npcs.npcs.map(n => ({ 
-        id: n.id, 
-        name: n.name, 
-        type: 'npc', 
-        vit: n.vitCurrent, 
-        vitMax: n.vitMax 
-      })),
-      ...this.parent.players.players.map(p => ({ 
-        id: p.id, 
-        name: p.name, 
-        type: 'player'
-      }))
-    ];
+  // Adicionar NPC específico à ordem de combate
+  addNPCToCombat(npcId) {
+    const npc = this.parent.npcs.npcs.find(n => n.id === npcId);
+    if (!npc) return;
 
-    if (options.length === 0) {
-      alert('Não há NPCs ou jogadores para adicionar');
+    const exists = this.combatOrder.some(item => item.id === npcId);
+    if (exists) {
+      alert(`${npc.name} já está na ordem de combate`);
       return;
     }
 
-    let optionsText = 'Selecione um personagem:\n';
-    options.forEach((opt, index) => {
-      optionsText += `${index + 1}. ${opt.name}\n`;
+    this.combatOrder.push({
+      id: npc.id,
+      name: npc.name,
+      type: 'npc',
+      initiative: 10,
+      vit: npc.vitCurrent,
+      vitMax: npc.vitMax,
+      condition: 'normal'
     });
-    
-    const selected = prompt(optionsText);
-    
-    if (selected) {
-      const index = parseInt(selected) - 1;
-      if (index >= 0 && index < options.length) {
-        const option = options[index];
-        const combatItem = {
-          id: option.id,
-          name: option.name,
-          type: option.type,
-          initiative: 10,
-          condition: 'normal'
-        };
-        
-        if (option.type === 'npc') {
-          combatItem.vit = option.vit;
-          combatItem.vitMax = option.vitMax;
-        }
-        
-        this.combatOrder.push(combatItem);
-        this.renderCombatOrder();
-        this.parent.saveToStorage();
-        this.parent.updateStatus('Adicionado à ordem');
-      }
+
+    this.renderCombatOrder();
+    this.parent.saveToStorage();
+    this.parent.updateStatus(`${npc.name} adicionado ao combate`);
+    this.parent.switchTab('combat');
+  }
+
+  // Adicionar jogador específico à ordem de combate
+  addPlayerToCombat(playerId) {
+    const player = this.parent.players.players.find(p => p.id === playerId);
+    if (!player) return;
+
+    const exists = this.combatOrder.some(item => item.id === playerId);
+    if (exists) {
+      alert(`${player.name} já está na ordem de combate`);
+      return;
     }
+
+    this.combatOrder.push({
+      id: player.id,
+      name: player.name,
+      type: 'player',
+      initiative: 10,
+      condition: 'normal'
+    });
+
+    this.renderCombatOrder();
+    this.parent.saveToStorage();
+    this.parent.updateStatus(`${player.name} adicionado ao combate`);
+    this.parent.switchTab('combat');
   }
 
   removeFromCombat() {
@@ -97,7 +94,6 @@ export class GMCombat {
       return;
     }
 
-    // Ordena por iniciativa (maior primeiro) a cada renderização
     const sorted = [...this.combatOrder].sort((a, b) => b.initiative - a.initiative);
 
     container.innerHTML = sorted.map((item, index) => `
@@ -148,7 +144,7 @@ export class GMCombat {
     const item = this.combatOrder.find(i => i.id === combatId);
     if (item) {
       item.initiative = Math.min(99, parseInt(value) || 1);
-      this.renderCombatOrder(); // Re-renderiza para aplicar a nova ordenação
+      this.renderCombatOrder();
       this.parent.saveToStorage();
     }
   }
