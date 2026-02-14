@@ -22,17 +22,17 @@ export class GMNPCs {
     const npc = {
       id: 'npc_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
       name: document.getElementById('npc-name')?.value || 'NPC sem nome',
-      vitMax: parseInt(document.getElementById('npc-vit')?.value) || 8,
-      vitCurrent: parseInt(document.getElementById('npc-vit')?.value) || 8,
-      conMax: parseInt(document.getElementById('npc-con')?.value) || 8,
-      conCurrent: parseInt(document.getElementById('npc-con')?.value) || 8,
+      vitMax: parseInt(document.getElementById('npc-vit')?.value) || 0,
+      vitCurrent: parseInt(document.getElementById('npc-vit')?.value) || 0,
+      conMax: parseInt(document.getElementById('npc-con')?.value) || 0,
+      conCurrent: parseInt(document.getElementById('npc-con')?.value) || 0,
       attributes: {
-        f: Math.min(99, parseInt(document.getElementById('npc-f')?.value) || 2),
-        v: Math.min(99, parseInt(document.getElementById('npc-v')?.value) || 2),
-        d: Math.min(99, parseInt(document.getElementById('npc-d')?.value) || 2),
-        a: Math.min(99, parseInt(document.getElementById('npc-a')?.value) || 2),
-        i: Math.min(99, parseInt(document.getElementById('npc-i')?.value) || 2),
-        s: Math.min(99, parseInt(document.getElementById('npc-s')?.value) || 2)
+        f: Math.min(99, parseInt(document.getElementById('npc-f')?.value) || 0),
+        v: Math.min(99, parseInt(document.getElementById('npc-v')?.value) || 0),
+        d: Math.min(99, parseInt(document.getElementById('npc-d')?.value) || 0),
+        a: Math.min(99, parseInt(document.getElementById('npc-a')?.value) || 0),
+        i: Math.min(99, parseInt(document.getElementById('npc-i')?.value) || 0),
+        s: Math.min(99, parseInt(document.getElementById('npc-s')?.value) || 0)
       },
       extra: document.getElementById('npc-extra')?.value || '',
       createdAt: new Date().toISOString()
@@ -58,64 +58,81 @@ export class GMNPCs {
     document.getElementById('npc-extra').value = '';
   }
 
-renderNPCs() {
-  const container = document.getElementById('npc-list');
-  if (!container) return;
-
-  if (this.npcs.length === 0) {
-    container.innerHTML = '<div class="gmnotes-empty-state">Nenhum NPC criado</div>';
-    return;
+  // Verifica se NPC está na ordem de combate
+  isInCombat(npcId) {
+    return this.parent.combat.combatOrder.some(item => item.id === npcId);
   }
 
-  container.innerHTML = this.npcs.map(npc => `
-    <div class="gmnotes-npc-item" data-npc-id="${npc.id}">
-      <div class="gmnotes-npc-header">
-        <span class="gmnotes-npc-name">${this.parent.escapeHtml(npc.name)}</span>
-        <div class="gmnotes-npc-actions">
-          <button class="gmnotes-npc-btn" onclick="gmNotes.addNPCToCombat('${npc.id}')" title="Adicionar ao Combate">⚔️</button>
-          <button class="gmnotes-npc-btn" onclick="gmNotes.editNPC('${npc.id}')" title="Editar">✏️</button>
-          <button class="gmnotes-npc-btn" onclick="gmNotes.duplicateNPC('${npc.id}')" title="Duplicar">📋</button>
-          <button class="gmnotes-npc-btn" onclick="gmNotes.deleteNPC('${npc.id}')" title="Remover">🗑️</button>
-        </div>
-      </div>
+  // Feedback visual temporário
+  showTemporaryFeedback(btn, type) {
+    btn.classList.add(type);
+    setTimeout(() => {
+      btn.classList.remove(type);
+    }, 800); // Reduzido para 800ms
+  }
+
+  renderNPCs() {
+    const container = document.getElementById('npc-list');
+    if (!container) return;
+
+    if (this.npcs.length === 0) {
+      container.innerHTML = '<div class="gmnotes-empty-state">Nenhum NPC criado</div>';
+      return;
+    }
+
+    container.innerHTML = this.npcs.map(npc => {
+      const inCombat = this.isInCombat(npc.id);
+      const combatButtonClass = inCombat ? 'gmnotes-npc-btn combat-added' : 'gmnotes-npc-btn';
       
-      <div class="gmnotes-npc-stats">
-        <div class="gmnotes-stat-group">
-          <span class="gmnotes-stat-label">Vit:</span>
-          <div class="gmnotes-stat-control">
-            <button class="gmnotes-stat-btn" onclick="gmNotes.adjustVit('${npc.id}', -1)">-</button>
-            <span class="gmnotes-stat-value">${npc.vitCurrent}/${npc.vitMax}</span>
-            <button class="gmnotes-stat-btn" onclick="gmNotes.adjustVit('${npc.id}', 1)">+</button>
+      return `
+      <div class="gmnotes-npc-item" data-npc-id="${npc.id}">
+        <div class="gmnotes-npc-header">
+          <span class="gmnotes-npc-name">${this.parent.escapeHtml(npc.name)}</span>
+          <div class="gmnotes-npc-actions">
+          <button class="${combatButtonClass}" onclick="gmNotes.toggleNPCInCombat('${npc.id}', this)" title="${inCombat ? 'Já está no combate' : 'Adicionar ao Combate'}">⚔️</button>
+            <button class="gmnotes-npc-btn" onclick="gmNotes.editNPC('${npc.id}')" title="Editar">✏️</button>
+            <button class="gmnotes-npc-btn" onclick="gmNotes.duplicateNPC('${npc.id}')" title="Duplicar">📋</button>
+            <button class="gmnotes-npc-btn" onclick="gmNotes.deleteNPC('${npc.id}')" title="Remover">🗑️</button>
           </div>
         </div>
-        <div class="gmnotes-stat-group">
-          <span class="gmnotes-stat-label">Con:</span>
-          <div class="gmnotes-stat-control">
-            <button class="gmnotes-stat-btn" onclick="gmNotes.adjustCon('${npc.id}', -1)">-</button>
-            <span class="gmnotes-stat-value">${npc.conCurrent}/${npc.conMax}</span>
-            <button class="gmnotes-stat-btn" onclick="gmNotes.adjustCon('${npc.id}', 1)">+</button>
+        
+        <div class="gmnotes-npc-stats">
+          <div class="gmnotes-stat-group">
+            <span class="gmnotes-stat-label">Vit:</span>
+            <div class="gmnotes-stat-control">
+              <button class="gmnotes-stat-btn" onclick="gmNotes.adjustVit('${npc.id}', -1)">-</button>
+              <span class="gmnotes-stat-value">${npc.vitCurrent}/${npc.vitMax}</span>
+              <button class="gmnotes-stat-btn" onclick="gmNotes.adjustVit('${npc.id}', 1)">+</button>
+            </div>
+          </div>
+          <div class="gmnotes-stat-group">
+            <span class="gmnotes-stat-label">Con:</span>
+            <div class="gmnotes-stat-control">
+              <button class="gmnotes-stat-btn" onclick="gmNotes.adjustCon('${npc.id}', -1)">-</button>
+              <span class="gmnotes-stat-value">${npc.conCurrent}/${npc.conMax}</span>
+              <button class="gmnotes-stat-btn" onclick="gmNotes.adjustCon('${npc.id}', 1)">+</button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="gmnotes-npc-attributes">
-        <span class="gmnotes-attr">F ${npc.attributes.f}</span>
-        <span class="gmnotes-attr">V ${npc.attributes.v}</span>
-        <span class="gmnotes-attr">D ${npc.attributes.d}</span>
-        <span class="gmnotes-attr">A ${npc.attributes.a}</span>
-        <span class="gmnotes-attr">I ${npc.attributes.i}</span>
-        <span class="gmnotes-attr">S ${npc.attributes.s}</span>
-      </div>
+        <div class="gmnotes-npc-attributes">
+          <span class="gmnotes-attr">F ${npc.attributes.f}</span>
+          <span class="gmnotes-attr">V ${npc.attributes.v}</span>
+          <span class="gmnotes-attr">D ${npc.attributes.d}</span>
+          <span class="gmnotes-attr">A ${npc.attributes.a}</span>
+          <span class="gmnotes-attr">I ${npc.attributes.i}</span>
+          <span class="gmnotes-attr">S ${npc.attributes.s}</span>
+        </div>
 
-      ${npc.extra ? `
-      <div class="gmnotes-npc-extra">
-        <span class="gmnotes-extra-label">Extra:</span>
-        <span class="gmnotes-extra-text">${this.parent.escapeHtml(npc.extra)}</span>
+        ${npc.extra ? `
+        <div class="gmnotes-npc-extra">
+          <span class="gmnotes-extra-label">Extra:</span>
+          <span class="gmnotes-extra-text">${this.parent.escapeHtml(npc.extra)}</span>
+        </div>
+        ` : ''}
       </div>
-      ` : ''}
-    </div>
-  `).join('');
-}
+    `}).join('');
+  }
 
   adjustVit(npcId, change) {
     const npc = this.npcs.find(n => n.id === npcId);

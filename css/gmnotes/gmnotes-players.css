@@ -66,3 +66,60 @@
     padding: 0.75rem;
   }
 }
+
+/* Feedback visual para botão de combate */
+.gmnotes-npc-btn.combat-added {
+  position: relative;
+  color: #4CAF50 !important;
+}
+
+.gmnotes-npc-btn.combat-added::after {
+  content: "✓";
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  font-size: 0.8rem;
+  background: #4CAF50;
+  color: white;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.gmnotes-npc-btn.combat-removing {
+  position: relative;
+  color: #f44336 !important;
+  animation: shake 0.3s ease-in-out;
+}
+
+.gmnotes-npc-btn.combat-removing::after {
+  content: "✕";
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  font-size: 0.8rem;
+  background: #f44336;
+  color: white;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+/* Remove a classe após a animação */
+.gmnotes-npc-btn.combat-removing {
+  animation: shake 0.3s ease-in-out;
+}

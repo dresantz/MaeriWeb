@@ -2,80 +2,84 @@ export class GMCombat {
   constructor(parent) {
     this.parent = parent;
     this.combatOrder = [];
+    this.selectedItemId = null;
   }
 
   init() {
     this.setupCombat();
+    this.setupSelectionHandler();
   }
 
   setupCombat() {
     const startBtn = document.getElementById('combat-start');
     const nextBtn = document.getElementById('combat-next');
     const resetBtn = document.getElementById('combat-reset');
-    const removeBtn = document.querySelector('.gmnotes-combat-remove');
+    const removeSelectedBtn = document.getElementById('combat-remove-selected');
+    const removeAllBtn = document.getElementById('combat-remove-all');
 
     if (startBtn) startBtn.addEventListener('click', () => this.startCombat());
     if (nextBtn) nextBtn.addEventListener('click', () => this.nextTurn());
     if (resetBtn) resetBtn.addEventListener('click', () => this.resetCombat());
-    if (removeBtn) removeBtn.addEventListener('click', () => this.removeFromCombat());
+    if (removeSelectedBtn) removeSelectedBtn.addEventListener('click', () => this.removeSelected());
+    if (removeAllBtn) removeAllBtn.addEventListener('click', () => this.removeFromCombat());
   }
 
-  // Adicionar NPC específico à ordem de combate
-  addNPCToCombat(npcId) {
-    const npc = this.parent.npcs.npcs.find(n => n.id === npcId);
-    if (!npc) return;
+  setupSelectionHandler() {
+    const container = document.getElementById('combat-order');
+    if (!container) return;
 
-    const exists = this.combatOrder.some(item => item.id === npcId);
-    if (exists) {
-      alert(`${npc.name} já está na ordem de combate`);
+    container.addEventListener('click', (e) => {
+      const item = e.target.closest('.gmnotes-combat-item');
+      if (!item) return;
+
+      if (this.selectedItemId) {
+        const prevSelected = document.querySelector(`.gmnotes-combat-item[data-combat-id="${this.selectedItemId}"]`);
+        if (prevSelected) prevSelected.classList.remove('selected');
+      }
+
+      this.selectedItemId = item.dataset.combatId;
+      item.classList.add('selected');
+    });
+  }
+
+  // Atualiza os botões de combate em NPCs e Jogadores
+  updateCombatButtons() {
+    if (this.parent.npcs) {
+      this.parent.npcs.renderNPCs();
+    }
+    if (this.parent.players) {
+      this.parent.players.renderPlayers();
+    }
+  }
+
+  removeSelected() {
+    if (!this.selectedItemId) {
+      this.parent.updateStatus('Nenhum personagem selecionado');
       return;
     }
 
-    this.combatOrder.push({
-      id: npc.id,
-      name: npc.name,
-      type: 'npc',
-      initiative: 10,
-      vit: npc.vitCurrent,
-      vitMax: npc.vitMax,
-      condition: 'normal'
-    });
+    const item = this.combatOrder.find(i => i.id === this.selectedItemId);
+    if (!item) return;
 
-    this.renderCombatOrder();
-    this.parent.saveToStorage();
-    this.parent.updateStatus(`${npc.name} adicionado ao combate`);
-    this.parent.switchTab('combat');
-  }
-
-  // Adicionar jogador específico à ordem de combate
-  addPlayerToCombat(playerId) {
-    const player = this.parent.players.players.find(p => p.id === playerId);
-    if (!player) return;
-
-    const exists = this.combatOrder.some(item => item.id === playerId);
-    if (exists) {
-      alert(`${player.name} já está na ordem de combate`);
-      return;
+    if (confirm(`Remover ${item.name} da ordem de combate?`)) {
+      this.combatOrder = this.combatOrder.filter(i => i.id !== this.selectedItemId);
+      
+      // Remove a seleção
+      this.selectedItemId = null;
+      
+      this.renderCombatOrder();
+      this.updateCombatButtons(); // Atualiza os botões ⚔️
+      this.parent.saveToStorage();
+      this.parent.updateStatus(`${item.name} removido do combate`);
     }
-
-    this.combatOrder.push({
-      id: player.id,
-      name: player.name,
-      type: 'player',
-      initiative: 10,
-      condition: 'normal'
-    });
-
-    this.renderCombatOrder();
-    this.parent.saveToStorage();
-    this.parent.updateStatus(`${player.name} adicionado ao combate`);
-    this.parent.switchTab('combat');
   }
 
   removeFromCombat() {
     if (confirm('Remover todos da ordem?')) {
       this.combatOrder = [];
+      this.selectedItemId = null;
       this.renderCombatOrder();
+      this.updateCombatButtons(); // Atualiza os botões ⚔️
       this.parent.saveToStorage();
       this.parent.updateStatus('Ordem limpa');
     }
@@ -83,6 +87,64 @@ export class GMCombat {
 
   removeFromCombatById(id) {
     this.combatOrder = this.combatOrder.filter(item => item.id !== id);
+    if (this.selectedItemId === id) {
+      this.selectedItemId = null;
+    }
+    this.updateCombatButtons(); // Atualiza os botões ⚔️
+  }
+
+  // Toggle NPC no combate
+  toggleNPCInCombat(npcId, btnElement) {
+    const npc = this.parent.npcs.npcs.find(n => n.id === npcId);
+    if (!npc) return;
+
+    const exists = this.combatOrder.some(item => item.id === npcId);
+
+    if (exists) {
+      this.parent.npcs.showTemporaryFeedback(btnElement, 'combat-removing');
+      this.parent.updateStatus(`${npc.name} já está no combate`);
+    } else {
+      this.combatOrder.push({
+        id: npc.id,
+        name: npc.name,
+        type: 'npc',
+        initiative: 10,
+        vit: npc.vitCurrent,
+        vitMax: npc.vitMax,
+        condition: 'normal'
+      });
+
+      this.renderCombatOrder();
+      this.parent.npcs.renderNPCs(); // Atualiza o botão específico
+      this.parent.saveToStorage();
+      this.parent.updateStatus(`${npc.name} adicionado ao combate`);
+    }
+  }
+
+  // Toggle Jogador no combate
+  togglePlayerInCombat(playerId, btnElement) {
+    const player = this.parent.players.players.find(p => p.id === playerId);
+    if (!player) return;
+
+    const exists = this.combatOrder.some(item => item.id === playerId);
+
+    if (exists) {
+      this.parent.players.showTemporaryFeedback(btnElement, 'combat-removing');
+      this.parent.updateStatus(`${player.name} já está no combate`);
+    } else {
+      this.combatOrder.push({
+        id: player.id,
+        name: player.name,
+        type: 'player',
+        initiative: 10,
+        condition: 'normal'
+      });
+
+      this.renderCombatOrder();
+      this.parent.players.renderPlayers(); // Atualiza o botão específico
+      this.parent.saveToStorage();
+      this.parent.updateStatus(`${player.name} adicionado ao combate`);
+    }
   }
 
   renderCombatOrder() {
@@ -96,8 +158,11 @@ export class GMCombat {
 
     const sorted = [...this.combatOrder].sort((a, b) => b.initiative - a.initiative);
 
-    container.innerHTML = sorted.map((item, index) => `
-      <div class="gmnotes-combat-item" data-combat-id="${item.id}" data-combat-index="${index}">
+    container.innerHTML = sorted.map((item, index) => {
+      const selectedClass = item.id === this.selectedItemId ? 'selected' : '';
+      
+      return `
+      <div class="gmnotes-combat-item ${selectedClass}" data-combat-id="${item.id}" data-combat-index="${index}">
         <div class="gmnotes-combat-initiative">
           <input type="number" class="gmnotes-combat-initiative-input" value="${item.initiative}" min="1" max="99" 
                  onchange="gmNotes.updateCombatInitiative('${item.id}', this.value)">
@@ -121,7 +186,7 @@ export class GMCombat {
           </select>
         </div>
       </div>
-    `).join('');
+    `}).join('');
   }
 
   adjustCombatVit(combatId, change) {
@@ -190,13 +255,18 @@ export class GMCombat {
   resetCombat() {
     if (confirm('Resetar ordem de combate?')) {
       this.combatOrder = [];
+      this.selectedItemId = null;
       this.renderCombatOrder();
+      this.updateCombatButtons(); // Atualiza os botões ⚔️
       this.parent.saveToStorage();
     }
   }
 
   loadFromStorage(data) {
     this.combatOrder = data.combatOrder || [];
+    this.selectedItemId = null;
+    // Ao carregar, atualiza os botões para refletir o estado atual
+    setTimeout(() => this.updateCombatButtons(), 100);
   }
 
   getData() {

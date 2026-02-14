@@ -10,9 +10,7 @@ export class GMPlayers {
 
   setupPlayerForm() {
     const addBtn = document.getElementById('player-add');
-    if (addBtn) {
-      addBtn.addEventListener('click', () => this.addPlayer());
-    }
+    if (addBtn) addBtn.addEventListener('click', () => this.addPlayer());
   }
 
   addPlayer() {
@@ -39,33 +37,50 @@ export class GMPlayers {
     document.getElementById('player-info').value = '';
   }
 
-renderPlayers() {
-  const container = document.getElementById('players-list');
-  if (!container) return;
-
-  if (this.players.length === 0) {
-    container.innerHTML = '<div class="gmnotes-empty-state">Nenhum jogador cadastrado</div>';
-    return;
+  // Verifica se jogador está na ordem de combate
+  isInCombat(playerId) {
+    return this.parent.combat.combatOrder.some(item => item.id === playerId);
   }
 
-  container.innerHTML = this.players.map(player => `
-    <div class="gmnotes-player-item" data-player-id="${player.id}">
-      <div class="gmnotes-player-header">
-        <span class="gmnotes-player-name">${this.parent.escapeHtml(player.name)}</span>
-        <div class="gmnotes-player-actions">
-          <button class="gmnotes-npc-btn" onclick="gmNotes.addPlayerToCombat('${player.id}')" title="Adicionar ao Combate">⚔️</button>
-          <button class="gmnotes-npc-btn" onclick="gmNotes.editPlayer('${player.id}')" title="Editar">✏️</button>
-          <button class="gmnotes-npc-btn" onclick="gmNotes.deletePlayer('${player.id}')" title="Remover">🗑️</button>
+  // Feedback visual temporário
+  showTemporaryFeedback(btn, type) {
+    btn.classList.add(type);
+    setTimeout(() => {
+      btn.classList.remove(type);
+    }, 800);
+  }
+
+  renderPlayers() {
+    const container = document.getElementById('players-list');
+    if (!container) return;
+
+    if (this.players.length === 0) {
+      container.innerHTML = '<div class="gmnotes-empty-state">Nenhum jogador cadastrado</div>';
+      return;
+    }
+
+    container.innerHTML = this.players.map(player => {
+      const inCombat = this.isInCombat(player.id);
+      const combatButtonClass = inCombat ? 'gmnotes-npc-btn combat-added' : 'gmnotes-npc-btn';
+      
+      return `
+      <div class="gmnotes-player-item" data-player-id="${player.id}">
+        <div class="gmnotes-player-header">
+          <span class="gmnotes-player-name">${this.parent.escapeHtml(player.name)}</span>
+          <div class="gmnotes-player-actions">
+          <button class="${combatButtonClass}" onclick="gmNotes.togglePlayerInCombat('${player.id}', this)" title="${inCombat ? 'Já está no combate' : 'Adicionar ao Combate'}">⚔️</button>
+            <button class="gmnotes-npc-btn" onclick="gmNotes.editPlayer('${player.id}')" title="Editar">✏️</button>
+            <button class="gmnotes-npc-btn" onclick="gmNotes.deletePlayer('${player.id}')" title="Remover">🗑️</button>
+          </div>
         </div>
+        ${player.info ? `
+        <div class="gmnotes-player-info">
+          ${this.parent.escapeHtml(player.info)}
+        </div>
+        ` : ''}
       </div>
-      ${player.info ? `
-      <div class="gmnotes-player-info">
-        ${this.parent.escapeHtml(player.info)}
-      </div>
-      ` : ''}
-    </div>
-  `).join('');
-}
+    `}).join('');
+  }
 
   editPlayer(playerId) {
     const player = this.players.find(p => p.id === playerId);

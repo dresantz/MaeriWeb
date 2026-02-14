@@ -2,6 +2,7 @@
    GM Notes - Combate
 ========================= */
 
+/* Toolbar com botões de ação */
 .gmnotes-combat-toolbar {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -34,6 +35,7 @@
   border-color: var(--gold);
 }
 
+/* Lista de combate */
 .gmnotes-combat-list {
   display: flex;
   flex-direction: column;
@@ -44,6 +46,7 @@
   padding: 0.25rem;
 }
 
+/* Item da ordem de combate */
 .gmnotes-combat-item {
   display: flex;
   align-items: center;
@@ -53,6 +56,7 @@
   border-radius: 12px;
   padding: 0.6rem 0.75rem;
   transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .gmnotes-combat-item:hover {
@@ -60,12 +64,20 @@
   background: rgba(212, 175, 55, 0.1);
 }
 
+/* Item selecionado (para remoção individual) */
+.gmnotes-combat-item.selected {
+  border: 2px solid #ff9800;
+  background: rgba(255, 152, 0, 0.1);
+}
+
+/* Turno ativo */
 .gmnotes-combat-item.active-turn {
   border: 2px solid var(--gold);
   background: rgba(212, 175, 55, 0.15);
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
+/* Iniciativa */
 .gmnotes-combat-initiative {
   width: 45px;
   flex-shrink: 0;
@@ -88,6 +100,7 @@
   border-color: var(--gold);
 }
 
+/* Informações do personagem */
 .gmnotes-combat-info {
   flex: 1;
   min-width: 0;
@@ -101,6 +114,7 @@
   text-overflow: ellipsis;
 }
 
+/* HP em combate */
 .gmnotes-combat-hp {
   display: flex;
   align-items: center;
@@ -144,6 +158,7 @@
   color: var(--text-muted);
 }
 
+/* Condição do personagem */
 .gmnotes-combat-status {
   min-width: 95px;
   flex-shrink: 0;
@@ -161,6 +176,7 @@
   cursor: pointer;
 }
 
+/* Controles da aba combate */
 .gmnotes-combat-controls {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -169,8 +185,8 @@
   width: 100%;
 }
 
-.gmnotes-combat-add,
-.gmnotes-combat-remove {
+.gmnotes-combat-remove-selected,
+.gmnotes-combat-remove-all {
   background: var(--surface-light);
   border: 1px solid rgba(212, 175, 55, 0.3);
   border-radius: 20px;
@@ -187,12 +203,13 @@
   overflow: hidden;
 }
 
-.gmnotes-combat-add:hover {
-  background: var(--gold);
-  color: #1a1a1a;
+.gmnotes-combat-remove-selected:hover {
+  background: #ff9800;
+  color: white;
+  border-color: #ff9800;
 }
 
-.gmnotes-combat-remove:hover {
+.gmnotes-combat-remove-all:hover {
   background: #dc3545;
   color: white;
   border-color: #dc3545;
@@ -220,12 +237,10 @@
 /* Tablet */
 @media (max-width: 768px) {
   .gmnotes-combat-toolbar {
-    grid-template-columns: repeat(3, 1fr);
     gap: 0.4rem;
   }
   
   .gmnotes-combat-controls {
-    grid-template-columns: repeat(2, 1fr);
     gap: 0.4rem;
   }
 }
@@ -233,12 +248,10 @@
 /* Mobile - modo retrato (celular em pé) */
 @media (max-width: 600px) and (orientation: portrait) {
   .gmnotes-combat-toolbar {
-    grid-template-columns: repeat(3, 1fr);
     gap: 0.35rem;
   }
   
   .gmnotes-combat-controls {
-    grid-template-columns: repeat(2, 1fr);
     gap: 0.35rem;
   }
   
@@ -247,8 +260,8 @@
     padding: 0.4rem 0.2rem;
   }
   
-  .gmnotes-combat-add,
-  .gmnotes-combat-remove {
+  .gmnotes-combat-remove-selected,
+  .gmnotes-combat-remove-all {
     font-size: 0.9rem;
     padding: 0.5rem 0.5rem;
   }
@@ -267,17 +280,14 @@
   
   .gmnotes-combat-initiative {
     grid-area: initiative;
-    width: 45px;
   }
   
   .gmnotes-combat-info {
     grid-area: name;
-    min-width: 0;
   }
   
   .gmnotes-combat-status {
     grid-area: status;
-    min-width: 95px;
   }
   
   .gmnotes-combat-hp {
@@ -298,12 +308,10 @@
 /* Mobile - muito pequeno */
 @media (max-width: 400px) and (orientation: portrait) {
   .gmnotes-combat-toolbar {
-    grid-template-columns: repeat(3, 1fr);
     gap: 0.25rem;
   }
   
   .gmnotes-combat-controls {
-    grid-template-columns: repeat(2, 1fr);
     gap: 0.25rem;
   }
   
@@ -312,8 +320,8 @@
     padding: 0.35rem 0.1rem;
   }
   
-  .gmnotes-combat-add,
-  .gmnotes-combat-remove {
+  .gmnotes-combat-remove-selected,
+  .gmnotes-combat-remove-all {
     font-size: 0.85rem;
     padding: 0.4rem 0.25rem;
   }
