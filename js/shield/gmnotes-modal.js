@@ -200,6 +200,7 @@ togglePlayerInCombat(playerId, btnElement) { this.combat.togglePlayerInCombat(pl
 
 // Combat
 adjustCombatVit(combatId, change) { this.combat.adjustCombatVit(combatId, change); }
+adjustCombatCon(combatId, change) { this.combat.adjustCombatCon(combatId, change); } // NOVO
 updateCombatInitiative(combatId, value) { this.combat.updateCombatInitiative(combatId, value); }
 updateCombatCondition(combatId, condition) { this.combat.updateCombatCondition(combatId, condition); }
 
@@ -284,6 +285,7 @@ updateCombatCondition(combatId, condition) { this.combat.updateCombatCondition(c
 
   loadFromStorage() {
     const saved = localStorage.getItem('gmnotes_data');
+
     if (saved) {
       try {
         const data = JSON.parse(saved);
@@ -291,6 +293,11 @@ updateCombatCondition(combatId, condition) { this.combat.updateCombatCondition(c
         this.players.loadFromStorage(data);
         this.combat.loadFromStorage(data);
         this.notes.loadFromStorage(data);
+        
+        // Garante que a ordem de combate seja renderizada após carregar
+        setTimeout(() => {
+          this.combat.renderCombatOrder();
+        }, 50);
       } catch (error) {
         console.error('Erro ao carregar dados salvos:', error);
       }

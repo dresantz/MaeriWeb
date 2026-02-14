@@ -8,6 +8,7 @@ export class GMCombat {
   init() {
     this.setupCombat();
     this.setupSelectionHandler();
+    this.setupClickOutsideHandler();
   }
 
   setupCombat() {
@@ -39,15 +40,36 @@ export class GMCombat {
 
       this.selectedItemId = item.dataset.combatId;
       item.classList.add('selected');
+      e.stopPropagation();
     });
   }
 
-  // Atualiza os botões de combate em NPCs e Jogadores
+  setupClickOutsideHandler() {
+    document.addEventListener('click', (e) => {
+      const combatList = document.getElementById('combat-order');
+      
+      if (!this.selectedItemId) return;
+      
+      if (combatList && !combatList.contains(e.target)) {
+        this.clearSelection();
+      }
+    });
+  }
+
+  clearSelection() {
+    if (this.selectedItemId) {
+      const prevSelected = document.querySelector(`.gmnotes-combat-item[data-combat-id="${this.selectedItemId}"]`);
+      if (prevSelected) prevSelected.classList.remove('selected');
+      this.selectedItemId = null;
+    }
+  }
+
+  // NOVO: Atualiza os botões de combate em NPCs e Jogadores
   updateCombatButtons() {
-    if (this.parent.npcs) {
+    if (this.parent.npcs && typeof this.parent.npcs.renderNPCs === 'function') {
       this.parent.npcs.renderNPCs();
     }
-    if (this.parent.players) {
+    if (this.parent.players && typeof this.parent.players.renderPlayers === 'function') {
       this.parent.players.renderPlayers();
     }
   }
@@ -64,11 +86,10 @@ export class GMCombat {
     if (confirm(`Remover ${item.name} da ordem de combate?`)) {
       this.combatOrder = this.combatOrder.filter(i => i.id !== this.selectedItemId);
       
-      // Remove a seleção
-      this.selectedItemId = null;
+      this.clearSelection();
       
       this.renderCombatOrder();
-      this.updateCombatButtons(); // Atualiza os botões ⚔️
+      this.updateCombatButtons(); // Agora funciona!
       this.parent.saveToStorage();
       this.parent.updateStatus(`${item.name} removido do combate`);
     }
@@ -77,9 +98,9 @@ export class GMCombat {
   removeFromCombat() {
     if (confirm('Remover todos da ordem?')) {
       this.combatOrder = [];
-      this.selectedItemId = null;
+      this.clearSelection();
       this.renderCombatOrder();
-      this.updateCombatButtons(); // Atualiza os botões ⚔️
+      this.updateCombatButtons(); // Adicionado também aqui
       this.parent.saveToStorage();
       this.parent.updateStatus('Ordem limpa');
     }
@@ -88,9 +109,9 @@ export class GMCombat {
   removeFromCombatById(id) {
     this.combatOrder = this.combatOrder.filter(item => item.id !== id);
     if (this.selectedItemId === id) {
-      this.selectedItemId = null;
+      this.clearSelection();
     }
-    this.updateCombatButtons(); // Atualiza os botões ⚔️
+    this.updateCombatButtons(); // Adicionado também aqui
   }
 
   // Toggle NPC no combate
@@ -111,11 +132,13 @@ export class GMCombat {
         initiative: 10,
         vit: npc.vitCurrent,
         vitMax: npc.vitMax,
+        con: npc.conCurrent || 0,
+        conMax: npc.conMax || 0,
         condition: 'normal'
       });
 
       this.renderCombatOrder();
-      this.parent.npcs.renderNPCs(); // Atualiza o botão específico
+      this.parent.npcs.renderNPCs();
       this.parent.saveToStorage();
       this.parent.updateStatus(`${npc.name} adicionado ao combate`);
     }
@@ -141,7 +164,7 @@ export class GMCombat {
       });
 
       this.renderCombatOrder();
-      this.parent.players.renderPlayers(); // Atualiza o botão específico
+      this.parent.players.renderPlayers();
       this.parent.saveToStorage();
       this.parent.updateStatus(`${player.name} adicionado ao combate`);
     }
@@ -168,7 +191,7 @@ export class GMCombat {
         <div class="gmnotes-combat-controls-row">
           <div class="gmnotes-combat-initiative">
             <input type="number" class="gmnotes-combat-initiative-input" value="${item.initiative}" min="1" max="99" 
-                  onchange="gmNotes.updateCombatInitiative('${item.id}', this.value)">
+                   onchange="gmNotes.updateCombatInitiative('${item.id}', this.value)">
           </div>
           <div class="gmnotes-combat-status">
             <select class="gmnotes-combat-condition" onchange="gmNotes.updateCombatCondition('${item.id}', this.value)">
@@ -290,18 +313,38 @@ export class GMCombat {
   resetCombat() {
     if (confirm('Resetar ordem de combate?')) {
       this.combatOrder = [];
-      this.selectedItemId = null;
+      this.clearSelection();
       this.renderCombatOrder();
-      this.updateCombatButtons(); // Atualiza os botões ⚔️
+      this.updateCombatButtons(); // Adicionado também aqui
       this.parent.saveToStorage();
     }
   }
 
   loadFromStorage(data) {
     this.combatOrder = data.combatOrder || [];
-    this.selectedItemId = null;
-    // Ao carregar, atualiza os botões para refletir o estado atual
-    setTimeout(() => this.updateCombatButtons(), 100);
+    this.clearSelection();
+    
+    if (this.combatOrder.length > 0) {
+      this.combatOrder = this.combatOrder.map(combatItem => {
+        if (combatItem.type === 'npc') {
+          const npc = this.parent.npcs?.npcs.find(n => n.id === combatItem.id);
+          if (npc) {
+            return {
+              ...combatItem,
+              vit: npc.vitCurrent,
+              vitMax: npc.vitMax,
+              con: npc.conCurrent || 0,
+              conMax: npc.conMax || 0
+            };
+          }
+        }
+        return combatItem;
+      });
+    }
+    
+    setTimeout(() => {
+      this.renderCombatOrder();
+    }, 50);
   }
 
   getData() {

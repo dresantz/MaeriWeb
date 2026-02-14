@@ -20,19 +20,19 @@ export class GMNPCs {
 
   addNPC() {
     const npc = {
-      id: 'npc_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+      id: 'npc_' + Date.now() + '_' + Math.random().toString(36).substring(2, 11),
       name: document.getElementById('npc-name')?.value || 'NPC sem nome',
-      vitMax: parseInt(document.getElementById('npc-vit')?.value) || 0,
-      vitCurrent: parseInt(document.getElementById('npc-vit')?.value) || 0,
+      vitMax: parseInt(document.getElementById('npc-vit')?.value) || 10,
+      vitCurrent: parseInt(document.getElementById('npc-vit')?.value) || 10,
       conMax: parseInt(document.getElementById('npc-con')?.value) || 0,
       conCurrent: parseInt(document.getElementById('npc-con')?.value) || 0,
       attributes: {
-        f: Math.min(99, parseInt(document.getElementById('npc-f')?.value) || 0),
-        v: Math.min(99, parseInt(document.getElementById('npc-v')?.value) || 0),
-        d: Math.min(99, parseInt(document.getElementById('npc-d')?.value) || 0),
-        a: Math.min(99, parseInt(document.getElementById('npc-a')?.value) || 0),
-        i: Math.min(99, parseInt(document.getElementById('npc-i')?.value) || 0),
-        s: Math.min(99, parseInt(document.getElementById('npc-s')?.value) || 0)
+        f: Math.min(99, parseInt(document.getElementById('npc-f')?.value) || 10),
+        v: Math.min(99, parseInt(document.getElementById('npc-v')?.value) || 10),
+        d: Math.min(99, parseInt(document.getElementById('npc-d')?.value) || 10),
+        a: Math.min(99, parseInt(document.getElementById('npc-a')?.value) || 10),
+        i: Math.min(99, parseInt(document.getElementById('npc-i')?.value) || 10),
+        s: Math.min(99, parseInt(document.getElementById('npc-s')?.value) || 10)
       },
       extra: document.getElementById('npc-extra')?.value || '',
       createdAt: new Date().toISOString()
@@ -175,7 +175,7 @@ export class GMNPCs {
     const npc = this.npcs.find(n => n.id === npcId);
     if (npc) {
       const duplicate = JSON.parse(JSON.stringify(npc));
-      duplicate.id = 'npc_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+      duplicate.id = 'npc_' + Date.now() + '_' + Math.random().toString(36).substring(2, 11);
       duplicate.name = npc.name + ' (Cópia)';
       this.npcs.push(duplicate);
       this.renderNPCs();
@@ -183,7 +183,7 @@ export class GMNPCs {
       this.parent.updateStatus('NPC duplicado!');
     }
   }
-
+  
   deleteNPC(npcId, render = true) {
     this.npcs = this.npcs.filter(n => n.id !== npcId);
     if (this.parent.combat) this.parent.combat.removeFromCombatById(npcId);

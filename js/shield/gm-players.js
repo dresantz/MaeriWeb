@@ -13,24 +13,24 @@ export class GMPlayers {
     if (addBtn) addBtn.addEventListener('click', () => this.addPlayer());
   }
 
-  addPlayer() {
-    const player = {
-      id: 'player_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
-      name: document.getElementById('player-name')?.value || 'Jogador sem nome',
-      info: document.getElementById('player-info')?.value || '',
-      createdAt: new Date().toISOString()
-    };
+addPlayer() {
+  const player = {
+    id: 'player_' + Date.now() + '_' + Math.random().toString(36).substring(2, 11),
+    name: document.getElementById('player-name')?.value || 'Jogador sem nome',
+    info: document.getElementById('player-info')?.value || '',
+    createdAt: new Date().toISOString()
+  };
 
-    if (player.name) {
-      this.players.push(player);
-      this.renderPlayers();
-      this.parent.saveToStorage();
-      this.clearPlayerForm();
-      this.parent.updateStatus('Jogador adicionado!');
-    } else {
-      alert('Preencha o nome do jogador');
-    }
+  if (player.name) {
+    this.players.push(player);
+    this.renderPlayers();
+    this.parent.saveToStorage();
+    this.clearPlayerForm();
+    this.parent.updateStatus('Jogador adicionado!');
+  } else {
+    alert('Preencha o nome do jogador');
   }
+}
 
   clearPlayerForm() {
     document.getElementById('player-name').value = '';
