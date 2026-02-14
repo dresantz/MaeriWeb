@@ -225,7 +225,7 @@ export class GMCombat {
       return;
     }
 
-    const sorted = [...this.combatOrder].sort((a, b) => b.initiative - a.initiative);
+    const sorted = [...this.combatOrder].sort((a, b) => a.initiative - b.initiative);
 
     container.innerHTML = sorted.map(item => `
       <div class="gmnotes-combat-item ${item.id === this.selectedItemId ? 'selected' : ''}" 

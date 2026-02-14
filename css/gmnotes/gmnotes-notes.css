@@ -91,3 +91,67 @@
   background: transparent;
   border: 1px dashed var(--gold);
 }
+
+/* Input para nova sessão */
+.gmnotes-session-input-container {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.gmnotes-session-input {
+  flex: 1;
+  background: var(--surface-light);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  color: var(--text);
+  font-family: 'Crimson Text', serif;
+  font-size: 0.9rem;
+}
+
+.gmnotes-session-input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.gmnotes-session-input-actions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.gmnotes-session-confirm,
+.gmnotes-session-cancel {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.gmnotes-session-confirm {
+  background: #4CAF50;
+  color: white;
+}
+
+.gmnotes-session-confirm:hover {
+  background: #45a049;
+  transform: scale(1.1);
+}
+
+.gmnotes-session-cancel {
+  background: #f44336;
+  color: white;
+}
+
+.gmnotes-session-cancel:hover {
+  background: #da190b;
+  transform: scale(1.1);
+}

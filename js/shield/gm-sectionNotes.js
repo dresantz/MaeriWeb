@@ -1,11 +1,10 @@
-// js/shield/gm-sectionnotes.js
-
 export class GMSectionNotes {
   constructor(parent) {
     this.parent = parent;
     this.sessions = [];
     this.currentSession = null;
     this.autoSaveTimer = null;
+    this.sessionInputActive = false;
   }
 
   init() {
@@ -17,25 +16,16 @@ export class GMSectionNotes {
     const saveBtn = document.getElementById('gmnotes-save');
     const clearBtn = document.getElementById('gmnotes-clear');
     const toolbarBtns = document.querySelectorAll('.gmnotes-toolbar-btn[data-format]');
-    const sessionBtns = document.querySelectorAll('.gmnotes-session-item:not(.gmnotes-session-new)');
     const newSessionBtn = document.querySelector('.gmnotes-session-new');
 
     if (textarea) {
-      textarea.addEventListener('input', () => {
-        this.triggerAutoSave();
-      });
-
+      textarea.addEventListener('input', () => this.triggerAutoSave());
       this.loadCurrentSession();
     }
 
-    if (saveBtn) {
-      saveBtn.addEventListener('click', () => this.saveNotes());
-    }
-
-    if (clearBtn) {
-      clearBtn.addEventListener('click', () => this.clearNotes());
-    }
-
+    if (saveBtn) saveBtn.addEventListener('click', () => this.saveNotes());
+    if (clearBtn) clearBtn.addEventListener('click', () => this.clearNotes());
+    
     toolbarBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -43,60 +33,133 @@ export class GMSectionNotes {
       });
     });
 
-    sessionBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        this.loadSession(btn.textContent);
-      });
-    });
-
     if (newSessionBtn) {
-      newSessionBtn.addEventListener('click', () => {
-        this.createNewSession();
-      });
+      newSessionBtn.addEventListener('click', () => this.showNewSessionInput());
     }
   }
 
+  showNewSessionInput() {
+    if (this.sessionInputActive) return;
+
+    const container = document.querySelector('.gmnotes-sessions-list');
+    if (!container) return;
+
+    this.sessionInputActive = true;
+
+    // Esconde o botão "Nova Sessão" temporariamente
+    const newBtn = container.querySelector('.gmnotes-session-new');
+    if (newBtn) newBtn.style.display = 'none';
+
+    // Cria input para nome da sessão
+    const inputHtml = `
+      <div class="gmnotes-session-input-container">
+        <input type="text" class="gmnotes-session-input" placeholder="Nome da sessão..." maxlength="50">
+        <div class="gmnotes-session-input-actions">
+          <button class="gmnotes-session-confirm">✓</button>
+          <button class="gmnotes-session-cancel">✕</button>
+        </div>
+      </div>
+    `;
+
+    container.insertAdjacentHTML('beforeend', inputHtml);
+
+    const input = container.querySelector('.gmnotes-session-input');
+    const confirmBtn = container.querySelector('.gmnotes-session-confirm');
+    const cancelBtn = container.querySelector('.gmnotes-session-cancel');
+
+    input.focus();
+
+    const cleanup = () => {
+      container.querySelector('.gmnotes-session-input-container')?.remove();
+      if (newBtn) newBtn.style.display = '';
+      this.sessionInputActive = false;
+    };
+
+    confirmBtn.addEventListener('click', () => {
+      const name = input.value.trim();
+      if (name) {
+        this.createNewSession(name);
+        cleanup();
+      }
+    });
+
+    cancelBtn.addEventListener('click', cleanup);
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const name = input.value.trim();
+        if (name) {
+          this.createNewSession(name);
+          cleanup();
+        }
+      } else if (e.key === 'Escape') {
+        cleanup();
+      }
+    });
+  }
+
   triggerAutoSave() {
-    if (this.autoSaveTimer) {
-      clearTimeout(this.autoSaveTimer);
-    }
-    
-    this.autoSaveTimer = setTimeout(() => {
-      this.saveNotes(true);
-    }, 2000);
+    if (this.autoSaveTimer) clearTimeout(this.autoSaveTimer);
+    this.autoSaveTimer = setTimeout(() => this.saveNotes(true), 2000);
   }
 
   saveNotes(auto = false) {
     const textarea = document.getElementById('gmnotes-textarea');
-    if (textarea) {
-      const content = textarea.value;
-      
-      if (this.currentSession) {
-        const session = this.sessions.find(s => s.name === this.currentSession);
-        if (session) {
-          session.content = content;
-        }
-      } else {
-        localStorage.setItem('gmnotes_draft', content);
-      }
-      
-      this.parent.saveToStorage();
-      
-      const status = document.getElementById('gmnotes-status');
-      if (status) {
-        status.textContent = auto ? 'Salvo automaticamente' : 'Notas salvas!';
-        setTimeout(() => {
-          status.textContent = 'Pronto';
-        }, 2000);
-      }
+    if (!textarea) return;
+
+    const content = textarea.value;
+    
+    if (this.currentSession) {
+      const session = this.sessions.find(s => s.name === this.currentSession);
+      if (session) session.content = content;
+    } else {
+      localStorage.setItem('gmnotes_draft', content);
+    }
+    
+    this.parent.saveToStorage();
+    
+    const status = document.getElementById('gmnotes-status');
+    if (status) {
+      status.textContent = auto ? 'Salvo' : 'Notas salvas!';
+      setTimeout(() => { status.textContent = 'Pronto'; }, 2000);
     }
   }
 
   clearNotes() {
-    if (confirm('Limpar todas as notas?')) {
+    const container = document.querySelector('.gmnotes-sessions-list');
+    if (!container) return;
+
+    // Cria confirmação inline
+    const confirmHtml = `
+      <div class="gmnotes-confirmation-box" style="margin-top: 0.5rem;">
+        <div class="gmnotes-confirmation-message">Limpar todas as notas?</div>
+        <div class="gmnotes-confirmation-actions">
+          <button class="gmnotes-confirm-btn" id="clear-yes">Sim</button>
+          <button class="gmnotes-cancel-btn" id="clear-no">Cancelar</button>
+        </div>
+      </div>
+    `;
+
+    const existingConfirm = container.querySelector('.gmnotes-confirmation-box');
+    if (existingConfirm) existingConfirm.remove();
+
+    container.insertAdjacentHTML('beforeend', confirmHtml);
+
+    const confirmYes = document.getElementById('clear-yes');
+    const confirmNo = document.getElementById('clear-no');
+
+    const cleanup = () => {
+      container.querySelector('.gmnotes-confirmation-box')?.remove();
+    };
+
+    confirmYes.addEventListener('click', () => {
       document.getElementById('gmnotes-textarea').value = '';
       this.saveNotes();
-    }
+      cleanup();
+    });
+
+    confirmNo.addEventListener('click', cleanup);
   }
 
   formatText(format) {
@@ -109,18 +172,10 @@ export class GMSectionNotes {
     let formatted = '';
 
     switch(format) {
-      case 'bold':
-        formatted = `**${selected}**`;
-        break;
-      case 'italic':
-        formatted = `*${selected}*`;
-        break;
-      case 'underline':
-        formatted = `_${selected}_`;
-        break;
-      case 'list':
-        formatted = selected.split('\n').map(line => `- ${line}`).join('\n');
-        break;
+      case 'bold': formatted = `**${selected}**`; break;
+      case 'italic': formatted = `*${selected}*`; break;
+      case 'underline': formatted = `_${selected}_`; break;
+      case 'list': formatted = selected.split('\n').map(line => `- ${line}`).join('\n'); break;
     }
 
     textarea.value = textarea.value.substring(0, start) + formatted + textarea.value.substring(end);
@@ -132,25 +187,20 @@ export class GMSectionNotes {
     const textarea = document.getElementById('gmnotes-textarea');
     if (textarea) {
       const draft = localStorage.getItem('gmnotes_draft');
-      if (draft) {
-        textarea.value = draft;
-      }
+      if (draft) textarea.value = draft;
     }
   }
 
-  createNewSession() {
-    const name = prompt('Nome da nova sessão:');
-    if (name) {
-      this.sessions.push({
-        name: name,
-        content: '',
-        date: new Date().toISOString()
-      });
-      this.currentSession = name;
-      document.getElementById('gmnotes-textarea').value = '';
-      this.renderSessions();
-      this.parent.saveToStorage();
-    }
+  createNewSession(name) {
+    this.sessions.push({
+      name: name,
+      content: '',
+      date: new Date().toISOString()
+    });
+    this.currentSession = name;
+    document.getElementById('gmnotes-textarea').value = '';
+    this.renderSessions();
+    this.parent.saveToStorage();
   }
 
   loadSession(sessionName) {
@@ -172,17 +222,11 @@ export class GMSectionNotes {
     container.innerHTML = sessionButtons + '<button class="gmnotes-session-item gmnotes-session-new">+ Nova Sessão</button>';
     
     document.querySelectorAll('.gmnotes-session-item:not(.gmnotes-session-new)').forEach(btn => {
-      btn.addEventListener('click', () => {
-        this.loadSession(btn.textContent);
-      });
+      btn.addEventListener('click', () => this.loadSession(btn.textContent));
     });
 
     const newBtn = document.querySelector('.gmnotes-session-new');
-    if (newBtn) {
-      newBtn.addEventListener('click', () => {
-        this.createNewSession();
-      });
-    }
+    if (newBtn) newBtn.addEventListener('click', () => this.showNewSessionInput());
   }
 
   loadFromStorage(data) {
