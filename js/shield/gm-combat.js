@@ -3,6 +3,7 @@ export class GMCombat {
     this.parent = parent;
     this.combatOrder = [];
     this.selectedItemId = null;
+    this.confirmationActive = false;
   }
 
   init() {
@@ -21,8 +22,76 @@ export class GMCombat {
     if (startBtn) startBtn.addEventListener('click', () => this.startCombat());
     if (nextBtn) nextBtn.addEventListener('click', () => this.nextTurn());
     if (resetBtn) resetBtn.addEventListener('click', () => this.resetCombat());
-    if (removeSelectedBtn) removeSelectedBtn.addEventListener('click', () => this.removeSelected());
-    if (removeAllBtn) removeAllBtn.addEventListener('click', () => this.removeFromCombat());
+    if (removeSelectedBtn) removeSelectedBtn.addEventListener('click', () => this.showRemoveConfirmation('selected'));
+    if (removeAllBtn) removeAllBtn.addEventListener('click', () => this.showRemoveConfirmation('all'));
+  }
+
+  showRemoveConfirmation(type) {
+    if (this.confirmationActive) return;
+
+    const item = type === 'selected' 
+      ? this.combatOrder.find(i => i.id === this.selectedItemId)
+      : null;
+
+    if (type === 'selected' && !this.selectedItemId) {
+      this.parent.updateStatus('Nenhum personagem selecionado');
+      return;
+    }
+
+    if (type === 'all' && this.combatOrder.length === 0) {
+      this.parent.updateStatus('Ordem já está vazia');
+      return;
+    }
+
+    const message = type === 'selected' 
+      ? `Remover ${item.name} da ordem?` 
+      : 'Remover todos os personagens?';
+
+    const container = document.getElementById('combat-confirmation');
+    if (!container) return;
+
+    this.setButtonsDisabled(true);
+    this.confirmationActive = true;
+
+    container.innerHTML = `
+      <div class="gmnotes-confirmation-box">
+        <div class="gmnotes-confirmation-message">${message}</div>
+        <div class="gmnotes-confirmation-actions">
+          <button class="gmnotes-confirm-btn" data-confirm="yes">Sim</button>
+          <button class="gmnotes-cancel-btn" data-confirm="no">Cancelar</button>
+        </div>
+      </div>
+    `;
+
+    const handleConfirm = (e) => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+
+      if (btn.dataset.confirm === 'yes') {
+        if (type === 'selected') this.removeSelected();
+        else this.removeFromCombat();
+      }
+      this.hideConfirmation();
+      document.removeEventListener('click', handleConfirm);
+    };
+
+    setTimeout(() => {
+      container.addEventListener('click', handleConfirm);
+    }, 0);
+  }
+
+  hideConfirmation() {
+    const container = document.getElementById('combat-confirmation');
+    if (container) container.innerHTML = '';
+    this.setButtonsDisabled(false);
+    this.confirmationActive = false;
+  }
+
+  setButtonsDisabled(disabled) {
+    ['remove-selected', 'remove-all'].forEach(id => {
+      const btn = document.getElementById(`combat-${id}`);
+      if (btn) btn.classList.toggle('disabled', disabled);
+    });
   }
 
   setupSelectionHandler() {
@@ -30,12 +99,14 @@ export class GMCombat {
     if (!container) return;
 
     container.addEventListener('click', (e) => {
+      if (this.confirmationActive) return;
+
       const item = e.target.closest('.gmnotes-combat-item');
       if (!item) return;
 
       if (this.selectedItemId) {
-        const prevSelected = document.querySelector(`.gmnotes-combat-item[data-combat-id="${this.selectedItemId}"]`);
-        if (prevSelected) prevSelected.classList.remove('selected');
+        const prev = document.querySelector(`.gmnotes-combat-item[data-combat-id="${this.selectedItemId}"]`);
+        if (prev) prev.classList.remove('selected');
       }
 
       this.selectedItemId = item.dataset.combatId;
@@ -47,10 +118,7 @@ export class GMCombat {
   setupClickOutsideHandler() {
     document.addEventListener('click', (e) => {
       const combatList = document.getElementById('combat-order');
-      
-      if (!this.selectedItemId) return;
-      
-      if (combatList && !combatList.contains(e.target)) {
+      if (this.selectedItemId && combatList && !combatList.contains(e.target)) {
         this.clearSelection();
       }
     });
@@ -58,70 +126,51 @@ export class GMCombat {
 
   clearSelection() {
     if (this.selectedItemId) {
-      const prevSelected = document.querySelector(`.gmnotes-combat-item[data-combat-id="${this.selectedItemId}"]`);
-      if (prevSelected) prevSelected.classList.remove('selected');
+      const prev = document.querySelector(`.gmnotes-combat-item[data-combat-id="${this.selectedItemId}"]`);
+      if (prev) prev.classList.remove('selected');
       this.selectedItemId = null;
     }
   }
 
-  // NOVO: Atualiza os botões de combate em NPCs e Jogadores
   updateCombatButtons() {
-    if (this.parent.npcs && typeof this.parent.npcs.renderNPCs === 'function') {
-      this.parent.npcs.renderNPCs();
-    }
-    if (this.parent.players && typeof this.parent.players.renderPlayers === 'function') {
-      this.parent.players.renderPlayers();
-    }
+    if (this.parent.npcs) this.parent.npcs.renderNPCs();
+    if (this.parent.players) this.parent.players.renderPlayers();
   }
 
   removeSelected() {
-    if (!this.selectedItemId) {
-      this.parent.updateStatus('Nenhum personagem selecionado');
-      return;
-    }
+    if (!this.selectedItemId) return;
 
     const item = this.combatOrder.find(i => i.id === this.selectedItemId);
     if (!item) return;
 
-    if (confirm(`Remover ${item.name} da ordem de combate?`)) {
-      this.combatOrder = this.combatOrder.filter(i => i.id !== this.selectedItemId);
-      
-      this.clearSelection();
-      
-      this.renderCombatOrder();
-      this.updateCombatButtons(); // Agora funciona!
-      this.parent.saveToStorage();
-      this.parent.updateStatus(`${item.name} removido do combate`);
-    }
+    this.combatOrder = this.combatOrder.filter(i => i.id !== this.selectedItemId);
+    this.clearSelection();
+    this.renderCombatOrder();
+    this.updateCombatButtons();
+    this.parent.saveToStorage();
+    this.parent.updateStatus(`${item.name} removido`);
   }
 
   removeFromCombat() {
-    if (confirm('Remover todos da ordem?')) {
-      this.combatOrder = [];
-      this.clearSelection();
-      this.renderCombatOrder();
-      this.updateCombatButtons(); // Adicionado também aqui
-      this.parent.saveToStorage();
-      this.parent.updateStatus('Ordem limpa');
-    }
+    this.combatOrder = [];
+    this.clearSelection();
+    this.renderCombatOrder();
+    this.updateCombatButtons();
+    this.parent.saveToStorage();
+    this.parent.updateStatus('Ordem limpa');
   }
 
   removeFromCombatById(id) {
     this.combatOrder = this.combatOrder.filter(item => item.id !== id);
-    if (this.selectedItemId === id) {
-      this.clearSelection();
-    }
-    this.updateCombatButtons(); // Adicionado também aqui
+    if (this.selectedItemId === id) this.clearSelection();
+    this.updateCombatButtons();
   }
 
-  // Toggle NPC no combate
   toggleNPCInCombat(npcId, btnElement) {
     const npc = this.parent.npcs.npcs.find(n => n.id === npcId);
     if (!npc) return;
 
-    const exists = this.combatOrder.some(item => item.id === npcId);
-
-    if (exists) {
+    if (this.combatOrder.some(item => item.id === npcId)) {
       this.parent.npcs.showTemporaryFeedback(btnElement, 'combat-removing');
       this.parent.updateStatus(`${npc.name} já está no combate`);
     } else {
@@ -129,7 +178,7 @@ export class GMCombat {
         id: npc.id,
         name: npc.name,
         type: 'npc',
-        initiative: 10,
+        initiative: 1,
         vit: npc.vitCurrent,
         vitMax: npc.vitMax,
         con: npc.conCurrent || 0,
@@ -140,18 +189,15 @@ export class GMCombat {
       this.renderCombatOrder();
       this.parent.npcs.renderNPCs();
       this.parent.saveToStorage();
-      this.parent.updateStatus(`${npc.name} adicionado ao combate`);
+      this.parent.updateStatus(`${npc.name} adicionado`);
     }
   }
 
-  // Toggle Jogador no combate
   togglePlayerInCombat(playerId, btnElement) {
     const player = this.parent.players.players.find(p => p.id === playerId);
     if (!player) return;
 
-    const exists = this.combatOrder.some(item => item.id === playerId);
-
-    if (exists) {
+    if (this.combatOrder.some(item => item.id === playerId)) {
       this.parent.players.showTemporaryFeedback(btnElement, 'combat-removing');
       this.parent.updateStatus(`${player.name} já está no combate`);
     } else {
@@ -159,14 +205,14 @@ export class GMCombat {
         id: player.id,
         name: player.name,
         type: 'player',
-        initiative: 10,
+        initiative: 1,
         condition: 'normal'
       });
 
       this.renderCombatOrder();
       this.parent.players.renderPlayers();
       this.parent.saveToStorage();
-      this.parent.updateStatus(`${player.name} adicionado ao combate`);
+      this.parent.updateStatus(`${player.name} adicionado`);
     }
   }
 
@@ -175,17 +221,15 @@ export class GMCombat {
     if (!container) return;
 
     if (this.combatOrder.length === 0) {
-      container.innerHTML = '<div class="gmnotes-empty-state">Ordem vazia. Adicione NPCs ou jogadores.</div>';
+      container.innerHTML = '<div class="gmnotes-empty-state">Ordem vazia</div>';
       return;
     }
 
     const sorted = [...this.combatOrder].sort((a, b) => b.initiative - a.initiative);
 
-    container.innerHTML = sorted.map((item, index) => {
-      const selectedClass = item.id === this.selectedItemId ? 'selected' : '';
-      
-      return `
-      <div class="gmnotes-combat-item ${selectedClass}" data-combat-id="${item.id}" data-combat-index="${index}">
+    container.innerHTML = sorted.map(item => `
+      <div class="gmnotes-combat-item ${item.id === this.selectedItemId ? 'selected' : ''}" 
+           data-combat-id="${item.id}">
         <div class="gmnotes-combat-name">${this.parent.escapeHtml(item.name)}</div>
         
         <div class="gmnotes-combat-controls-row">
@@ -228,12 +272,12 @@ export class GMCombat {
         </div>
         ` : ''}
       </div>
-    `}).join('');
+    `).join('');
   }
 
   adjustCombatVit(combatId, change) {
     const item = this.combatOrder.find(i => i.id === combatId);
-    if (item && item.type === 'npc') {
+    if (item?.type === 'npc') {
       item.vit = Math.max(0, Math.min(item.vitMax, item.vit + change));
       this.renderCombatOrder();
       
@@ -242,14 +286,13 @@ export class GMCombat {
         npc.vitCurrent = item.vit;
         this.parent.npcs.renderNPCs();
       }
-      
       this.parent.saveToStorage();
     }
   }
 
   adjustCombatCon(combatId, change) {
     const item = this.combatOrder.find(i => i.id === combatId);
-    if (item && item.type === 'npc') {
+    if (item?.type === 'npc') {
       item.con = Math.max(0, Math.min(item.conMax, (item.con || 0) + change));
       this.renderCombatOrder();
       
@@ -258,7 +301,6 @@ export class GMCombat {
         npc.conCurrent = item.con;
         this.parent.npcs.renderNPCs();
       }
-      
       this.parent.saveToStorage();
     }
   }
@@ -280,21 +322,13 @@ export class GMCombat {
     }
   }
 
-  updateCombatHP(npcId, vit) {
-    const combatItem = this.combatOrder.find(i => i.id === npcId);
-    if (combatItem) {
-      combatItem.vit = vit;
-      this.renderCombatOrder();
-    }
-  }
-
   startCombat() {
-    if (this.combatOrder.length > 0) {
-      document.querySelectorAll('.gmnotes-combat-item').forEach((item, index) => {
-        item.classList.toggle('active-turn', index === 0);
-      });
-      this.parent.updateStatus('Combate iniciado!');
-    }
+    if (this.combatOrder.length === 0) return;
+    
+    document.querySelectorAll('.gmnotes-combat-item').forEach((item, index) => {
+      item.classList.toggle('active-turn', index === 0);
+    });
+    this.parent.updateStatus('Combate iniciado!');
   }
 
   nextTurn() {
@@ -311,40 +345,33 @@ export class GMCombat {
   }
 
   resetCombat() {
-    if (confirm('Resetar ordem de combate?')) {
-      this.combatOrder = [];
-      this.clearSelection();
-      this.renderCombatOrder();
-      this.updateCombatButtons(); // Adicionado também aqui
-      this.parent.saveToStorage();
-    }
+    this.combatOrder = [];
+    this.clearSelection();
+    this.renderCombatOrder();
+    this.updateCombatButtons();
+    this.parent.saveToStorage();
+    this.parent.updateStatus('Ordem resetada');
   }
 
   loadFromStorage(data) {
-    this.combatOrder = data.combatOrder || [];
-    this.clearSelection();
-    
-    if (this.combatOrder.length > 0) {
-      this.combatOrder = this.combatOrder.map(combatItem => {
-        if (combatItem.type === 'npc') {
-          const npc = this.parent.npcs?.npcs.find(n => n.id === combatItem.id);
-          if (npc) {
-            return {
-              ...combatItem,
-              vit: npc.vitCurrent,
-              vitMax: npc.vitMax,
-              con: npc.conCurrent || 0,
-              conMax: npc.conMax || 0
-            };
-          }
+    this.combatOrder = (data.combatOrder || []).map(item => {
+      if (item.type === 'npc') {
+        const npc = this.parent.npcs?.npcs.find(n => n.id === item.id);
+        if (npc) {
+          return {
+            ...item,
+            vit: npc.vitCurrent,
+            vitMax: npc.vitMax,
+            con: npc.conCurrent || 0,
+            conMax: npc.conMax || 0
+          };
         }
-        return combatItem;
-      });
-    }
+      }
+      return item;
+    });
     
-    setTimeout(() => {
-      this.renderCombatOrder();
-    }, 50);
+    this.clearSelection();
+    setTimeout(() => this.renderCombatOrder(), 50);
   }
 
   getData() {
