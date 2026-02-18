@@ -38,7 +38,6 @@ export class GMSectionNotes {
       const session = this.sessions.find(s => s.name === this.currentSession);
       if (session) {
         session.content = textarea.value;
-        console.log(`Notas salvas na sessão: "${this.currentSession}"`, session.content);
       }
     } else {
       localStorage.setItem('gmnotes_draft', textarea.value);
@@ -56,10 +55,11 @@ export class GMSectionNotes {
       const session = this.sessions.find(s => s.name === this.currentSession);
       if (session) {
         session.content = textarea.value;
-        console.log(`Sessão atual salva: "${this.currentSession}"`, session.content);
       }
     }
   }
+
+// Modificação no método showNewSessionModal - apenas a parte do createSession
 
   showNewSessionModal() {
     const container = document.querySelector('.gmnotes-sessions-list');
@@ -92,20 +92,49 @@ export class GMSectionNotes {
     const createSession = () => {
       const name = input.value.trim();
       if (name) {
+        const textarea = document.getElementById('gmnotes-textarea');
+        const currentContent = textarea ? textarea.value : '';
+        
+        // Salva a sessão atual (se existir)
         this.saveCurrentSession();
         
-        this.sessions.push({
-          name: name,
-          content: '',
-          date: new Date().toISOString()
-        });
+        // Verifica se existem notas no rascunho E é a primeira sessão
+        const hasDraftContent = currentContent && currentContent.trim() !== '';
+        const isFirstSession = this.sessions.length === 0;
         
+        // Cria a nova sessão
+        const newSession = {
+          name: name,
+          content: '', // Começa vazia por padrão
+          date: new Date().toISOString()
+        };
+        
+        // Se for a primeira sessão e tem conteúdo no rascunho, migra o conteúdo
+        if (isFirstSession && hasDraftContent) {
+          newSession.content = currentContent;
+          console.log(`Migrando conteúdo do rascunho para a primeira sessão:`, currentContent);
+          
+          // Limpa o rascunho do localStorage já que foi migrado
+          localStorage.removeItem('gmnotes_draft');
+          
+          this.parent.updateStatus(`Notas migradas para a sessão "${name}"!`);
+        }
+        
+        this.sessions.push(newSession);
         this.currentSession = name;
-        document.getElementById('gmnotes-textarea').value = '';
+        
+        // Se NÃO foi a primeira sessão com conteúdo, limpa o editor para a nova sessão
+        // Se FOI a primeira sessão com conteúdo, o texto já está no editor (pois foi migrado)
+        if (!(isFirstSession && hasDraftContent)) {
+          textarea.value = '';
+        }
         
         this.renderSessions();
         this.parent.saveToStorage();
-        this.parent.updateStatus(`Sessão "${name}" criada!`);
+        
+        if (!(isFirstSession && hasDraftContent)) {
+          this.parent.updateStatus(`Sessão "${name}" criada!`);
+        }
       }
       modal.remove();
     };
@@ -126,11 +155,9 @@ export class GMSectionNotes {
   loadSession(sessionName) {
     // CORREÇÃO: Remove espaços extras e quebras de linha
     const cleanName = sessionName.trim();
-    console.log(`Tentando carregar sessão: "${cleanName}"`);
     
     const session = this.sessions.find(s => s.name === cleanName);
     if (session) {
-      console.log(`Sessão encontrada:`, session);
       
       this.saveCurrentSession();
       
@@ -139,7 +166,6 @@ export class GMSectionNotes {
       const textarea = document.getElementById('gmnotes-textarea');
       if (textarea) {
         textarea.value = session.content || '';
-        console.log(`Conteúdo carregado:`, textarea.value);
       }
       
       this.renderSessions();
@@ -151,7 +177,6 @@ export class GMSectionNotes {
       this.parent.updateStatus(`Sessão "${cleanName}" carregada`);
     } else {
       console.error(`Sessão "${cleanName}" não encontrada!`);
-      console.log(`Sessões disponíveis:`, this.sessions.map(s => `"${s.name}"`));
     }
   }
 
@@ -282,7 +307,6 @@ export class GMSectionNotes {
   }
 
   loadFromStorage(data) {
-    console.log('Carregando dados do storage:', data);
     
     this.sessions = data.sessions || [];
     this.currentSession = data.currentSession || null;
@@ -294,7 +318,6 @@ export class GMSectionNotes {
           const session = this.sessions.find(s => s.name === this.currentSession);
           if (session) {
             textarea.value = session.content || '';
-            console.log(`Sessão atual carregada: "${this.currentSession}"`, session.content);
           } else {
             console.warn(`Sessão atual "${this.currentSession}" não encontrada`);
             this.currentSession = null;
@@ -302,7 +325,6 @@ export class GMSectionNotes {
           }
         } else {
           textarea.value = localStorage.getItem('gmnotes_draft') || '';
-          console.log('Rascunho carregado');
         }
       }
       this.renderSessions();
