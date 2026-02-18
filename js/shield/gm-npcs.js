@@ -1,11 +1,14 @@
+// js/shield/gm-npcs.js
 export class GMNPCs {
   constructor(parent) {
     this.parent = parent;
     this.npcs = [];
+    this.filteredNpcs = null; // Para armazenar resultados da busca
   }
 
   init() {
     this.setupNPCForm();
+    // Não renderiza aqui, pois o pai vai chamar renderNPCs depois
   }
 
   setupNPCForm() {
@@ -39,6 +42,7 @@ export class GMNPCs {
     };
 
     this.npcs.push(npc);
+    this.filteredNpcs = null; // Limpa qualquer filtro ativo
     this.renderNPCs();
     this.parent.saveToStorage();
     this.clearNPCForm();
@@ -60,7 +64,7 @@ export class GMNPCs {
 
   // Verifica se NPC está na ordem de combate
   isInCombat(npcId) {
-    return this.parent.combat.combatOrder.some(item => item.id === npcId);
+    return this.parent.combat?.combatOrder?.some(item => item.id === npcId) || false;
   }
 
   // Feedback visual temporário
@@ -68,19 +72,25 @@ export class GMNPCs {
     btn.classList.add(type);
     setTimeout(() => {
       btn.classList.remove(type);
-    }, 800); // Reduzido para 800ms
+    }, 800);
   }
 
   renderNPCs() {
     const container = document.getElementById('npc-list');
-    if (!container) return;
+    if (!container) {
+      console.log('Container NPC não encontrado');
+      return;
+    }
 
-    if (this.npcs.length === 0) {
+    // Decide qual array renderizar (filtrado ou completo)
+    const npcsToRender = this.filteredNpcs || this.npcs;
+
+    if (npcsToRender.length === 0) {
       container.innerHTML = '<div class="gmnotes-empty-state">Nenhum NPC criado</div>';
       return;
     }
 
-    container.innerHTML = this.npcs.map(npc => {
+    container.innerHTML = npcsToRender.map(npc => {
       const inCombat = this.isInCombat(npc.id);
       const combatButtonClass = inCombat ? 'gmnotes-npc-btn combat-added' : 'gmnotes-npc-btn';
       
@@ -89,7 +99,7 @@ export class GMNPCs {
         <div class="gmnotes-npc-header">
           <span class="gmnotes-npc-name">${this.parent.escapeHtml(npc.name)}</span>
           <div class="gmnotes-npc-actions">
-          <button class="${combatButtonClass}" onclick="gmNotes.toggleNPCInCombat('${npc.id}', this)" title="${inCombat ? 'Já está no combate' : 'Adicionar ao Combate'}">⚔️</button>
+            <button class="${combatButtonClass}" onclick="gmNotes.toggleNPCInCombat('${npc.id}', this)" title="${inCombat ? 'Já está no combate' : 'Adicionar ao Combate'}">⚔️</button>
             <button class="gmnotes-npc-btn" onclick="gmNotes.editNPC('${npc.id}')" title="Editar">✏️</button>
             <button class="gmnotes-npc-btn" onclick="gmNotes.duplicateNPC('${npc.id}')" title="Duplicar">📋</button>
             <button class="gmnotes-npc-btn" onclick="gmNotes.deleteNPC('${npc.id}')" title="Remover">🗑️</button>
@@ -139,7 +149,10 @@ export class GMNPCs {
     if (npc) {
       npc.vitCurrent = Math.max(0, Math.min(npc.vitMax, npc.vitCurrent + change));
       this.renderNPCs();
-      if (this.parent.combat) this.parent.combat.updateCombatHP(npcId, npc.vitCurrent);
+      if (this.parent.combat) {
+        this.parent.combat.updateCombatHP(npcId, npc.vitCurrent);
+        this.parent.combat.renderCombatOrder();
+      }
       this.parent.saveToStorage();
     }
   }
@@ -149,6 +162,9 @@ export class GMNPCs {
     if (npc) {
       npc.conCurrent = Math.max(0, Math.min(npc.conMax, npc.conCurrent + change));
       this.renderNPCs();
+      if (this.parent.combat) {
+        this.parent.combat.renderCombatOrder();
+      }
       this.parent.saveToStorage();
     }
   }
@@ -164,6 +180,7 @@ export class GMNPCs {
     document.getElementById('npc-v').value = npc.attributes.v;
     document.getElementById('npc-d').value = npc.attributes.d;
     document.getElementById('npc-a').value = npc.attributes.a;
+    document.getElementById('npc-i').value = npc.attributes.i;
     document.getElementById('npc-s').value = npc.attributes.s;
     document.getElementById('npc-extra').value = npc.extra || '';
 
@@ -185,42 +202,52 @@ export class GMNPCs {
   }
   
   deleteNPC(npcId, render = true) {
+    const wasInCombat = this.isInCombat(npcId);
     this.npcs = this.npcs.filter(n => n.id !== npcId);
-    if (this.parent.combat) this.parent.combat.removeFromCombatById(npcId);
+    
+    if (this.parent.combat && wasInCombat) {
+      this.parent.combat.removeFromCombatById(npcId);
+    }
+    
     if (render) {
       this.renderNPCs();
-      if (this.parent.combat) this.parent.combat.renderCombatOrder();
+      if (this.parent.combat) {
+        this.parent.combat.renderCombatOrder();
+      }
       this.parent.saveToStorage();
       this.parent.updateStatus('NPC removido');
     }
   }
 
   searchNPCs(query) {
-    if (!query) {
+    if (!query || query.trim() === '') {
+      this.filteredNpcs = null; // Limpa o filtro
       this.renderNPCs();
       return;
     }
 
-    const filtered = this.npcs.filter(npc => 
-      npc.name.toLowerCase().includes(query.toLowerCase()) ||
-      npc.extra?.toLowerCase().includes(query.toLowerCase())
+    const searchTerm = query.toLowerCase().trim();
+    this.filteredNpcs = this.npcs.filter(npc => 
+      npc.name.toLowerCase().includes(searchTerm) ||
+      (npc.extra && npc.extra.toLowerCase().includes(searchTerm))
     );
 
-    const container = document.getElementById('npc-list');
-    if (container) {
-      if (filtered.length === 0) {
-        container.innerHTML = '<div class="gmnotes-empty-state">Nenhum NPC encontrado</div>';
-      } else {
-        const original = this.npcs;
-        this.npcs = filtered;
-        this.renderNPCs();
-        this.npcs = original;
-      }
-    }
+    this.renderNPCs();
   }
 
   loadFromStorage(data) {
-    this.npcs = data.npcs || [];
+    // Garante que os NPCs sejam carregados corretamente
+    if (data && data.npcs) {
+      this.npcs = data.npcs;
+    } else {
+      this.npcs = [];
+    }
+    this.filteredNpcs = null; // Limpa qualquer filtro ao carregar
+    
+    // Só renderiza se o container existir
+    if (document.getElementById('npc-list')) {
+      this.renderNPCs();
+    }
   }
 
   getData() {
