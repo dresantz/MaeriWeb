@@ -21,8 +21,13 @@ export class GMSectionNotes {
       textarea.addEventListener('input', () => this.triggerAutoSave());
     }
 
-    if (saveBtn) saveBtn.addEventListener('click', () => this.saveNotes());
-    if (clearBtn) clearBtn.addEventListener('click', () => this.showClearConfirm());
+    if (saveBtn) {
+      saveBtn.addEventListener('click', () => this.saveNotes());
+    }
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => this.showClearConfirm());
+    }
   }
 
   triggerAutoSave() {
@@ -36,9 +41,7 @@ export class GMSectionNotes {
 
     if (this.currentSession) {
       const session = this.sessions.find(s => s.name === this.currentSession);
-      if (session) {
-        session.content = textarea.value;
-      }
+      if (session) session.content = textarea.value;
     } else {
       localStorage.setItem('gmnotes_draft', textarea.value);
     }
@@ -49,17 +52,11 @@ export class GMSectionNotes {
 
   saveCurrentSession() {
     const textarea = document.getElementById('gmnotes-textarea');
-    if (!textarea) return;
+    if (!textarea || !this.currentSession) return;
 
-    if (this.currentSession) {
-      const session = this.sessions.find(s => s.name === this.currentSession);
-      if (session) {
-        session.content = textarea.value;
-      }
-    }
+    const session = this.sessions.find(s => s.name === this.currentSession);
+    if (session) session.content = textarea.value;
   }
-
-// Modificação no método showNewSessionModal - apenas a parte do createSession
 
   showNewSessionModal() {
     const container = document.querySelector('.gmnotes-sessions-list');
@@ -91,93 +88,72 @@ export class GMSectionNotes {
 
     const createSession = () => {
       const name = input.value.trim();
-      if (name) {
-        const textarea = document.getElementById('gmnotes-textarea');
-        const currentContent = textarea ? textarea.value : '';
-        
-        // Salva a sessão atual (se existir)
-        this.saveCurrentSession();
-        
-        // Verifica se existem notas no rascunho E é a primeira sessão
-        const hasDraftContent = currentContent && currentContent.trim() !== '';
-        const isFirstSession = this.sessions.length === 0;
-        
-        // Cria a nova sessão
-        const newSession = {
-          name: name,
-          content: '', // Começa vazia por padrão
-          date: new Date().toISOString()
-        };
-        
-        // Se for a primeira sessão e tem conteúdo no rascunho, migra o conteúdo
-        if (isFirstSession && hasDraftContent) {
-          newSession.content = currentContent;
-          console.log(`Migrando conteúdo do rascunho para a primeira sessão:`, currentContent);
-          
-          // Limpa o rascunho do localStorage já que foi migrado
-          localStorage.removeItem('gmnotes_draft');
-          
-          this.parent.updateStatus(`Notas migradas para a sessão "${name}"!`);
-        }
-        
-        this.sessions.push(newSession);
-        this.currentSession = name;
-        
-        // Se NÃO foi a primeira sessão com conteúdo, limpa o editor para a nova sessão
-        // Se FOI a primeira sessão com conteúdo, o texto já está no editor (pois foi migrado)
-        if (!(isFirstSession && hasDraftContent)) {
-          textarea.value = '';
-        }
-        
-        this.renderSessions();
-        this.parent.saveToStorage();
-        
-        if (!(isFirstSession && hasDraftContent)) {
-          this.parent.updateStatus(`Sessão "${name}" criada!`);
-        }
+      if (!name) {
+        modal.remove();
+        return;
       }
+
+      const textarea = document.getElementById('gmnotes-textarea');
+      const currentContent = textarea?.value || '';
+      
+      this.saveCurrentSession();
+      
+      const hasDraftContent = currentContent.trim() !== '';
+      const isFirstSession = this.sessions.length === 0;
+      
+      const newSession = {
+        name: name,
+        content: (isFirstSession && hasDraftContent) ? currentContent : '',
+        date: new Date().toISOString()
+      };
+      
+      if (isFirstSession && hasDraftContent) {
+        localStorage.removeItem('gmnotes_draft');
+        this.parent.updateStatus(`Notas migradas para "${name}"!`);
+      }
+      
+      this.sessions.push(newSession);
+      this.currentSession = name;
+      
+      if (!(isFirstSession && hasDraftContent)) {
+        textarea.value = '';
+      }
+      
+      this.renderSessions();
+      this.parent.saveToStorage();
+      
+      if (!(isFirstSession && hasDraftContent)) {
+        this.parent.updateStatus(`Sessão "${name}" criada!`);
+      }
+      
       modal.remove();
     };
 
     createBtn.addEventListener('click', createSession);
     cancelBtn.addEventListener('click', () => modal.remove());
-
     input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        createSession();
-      } else if (e.key === 'Escape') {
-        modal.remove();
-      }
+      if (e.key === 'Enter') createSession();
+      if (e.key === 'Escape') modal.remove();
     });
   }
 
   loadSession(sessionName) {
-    // CORREÇÃO: Remove espaços extras e quebras de linha
     const cleanName = sessionName.trim();
-    
     const session = this.sessions.find(s => s.name === cleanName);
-    if (session) {
-      
-      this.saveCurrentSession();
-      
-      this.currentSession = cleanName;
-      
-      const textarea = document.getElementById('gmnotes-textarea');
-      if (textarea) {
-        textarea.value = session.content || '';
-      }
-      
-      this.renderSessions();
-      
-      if (textarea) {
-        textarea.dispatchEvent(new Event('input', { bubbles: true }));
-      }
-      
-      this.parent.updateStatus(`Sessão "${cleanName}" carregada`);
-    } else {
-      console.error(`Sessão "${cleanName}" não encontrada!`);
+    
+    if (!session) return;
+
+    this.saveCurrentSession();
+    
+    this.currentSession = cleanName;
+    const textarea = document.getElementById('gmnotes-textarea');
+    if (textarea) {
+      textarea.value = session.content || '';
+      textarea.dispatchEvent(new Event('input', { bubbles: true }));
     }
+    
+    this.renderSessions();
+    this.parent.updateStatus(`Sessão "${cleanName}" carregada`);
   }
 
   showDeleteConfirm(sessionName) {
@@ -281,12 +257,9 @@ export class GMSectionNotes {
       `).join('') + '<button class="gmnotes-session-item gmnotes-session-new">+ Nova Sessão</button>';
     }
 
-    // Eventos das sessões - CORREÇÃO: usa textContent.trim()
+    // Eventos das sessões
     container.querySelectorAll('.gmnotes-session-item:not(.gmnotes-session-new)').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const sessionName = btn.textContent.trim();
-        this.loadSession(sessionName);
-      });
+      btn.addEventListener('click', () => this.loadSession(btn.textContent.trim()));
     });
 
     // Eventos dos botões de excluir
@@ -307,26 +280,20 @@ export class GMSectionNotes {
   }
 
   loadFromStorage(data) {
-    
     this.sessions = data.sessions || [];
     this.currentSession = data.currentSession || null;
     
     setTimeout(() => {
       const textarea = document.getElementById('gmnotes-textarea');
-      if (textarea) {
-        if (this.currentSession) {
-          const session = this.sessions.find(s => s.name === this.currentSession);
-          if (session) {
-            textarea.value = session.content || '';
-          } else {
-            console.warn(`Sessão atual "${this.currentSession}" não encontrada`);
-            this.currentSession = null;
-            textarea.value = localStorage.getItem('gmnotes_draft') || '';
-          }
-        } else {
-          textarea.value = localStorage.getItem('gmnotes_draft') || '';
-        }
+      if (!textarea) return;
+
+      if (this.currentSession) {
+        const session = this.sessions.find(s => s.name === this.currentSession);
+        textarea.value = session?.content || '';
+      } else {
+        textarea.value = localStorage.getItem('gmnotes_draft') || '';
       }
+      
       this.renderSessions();
     }, 50);
   }
