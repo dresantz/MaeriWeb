@@ -15,13 +15,11 @@ export class GMCombat {
   setupCombat() {
     const startBtn = document.getElementById('combat-start');
     const nextBtn = document.getElementById('combat-next');
-    const resetBtn = document.getElementById('combat-reset');
     const removeSelectedBtn = document.getElementById('combat-remove-selected');
     const removeAllBtn = document.getElementById('combat-remove-all');
 
     if (startBtn) startBtn.addEventListener('click', () => this.startCombat());
     if (nextBtn) nextBtn.addEventListener('click', () => this.nextTurn());
-    if (resetBtn) resetBtn.addEventListener('click', () => this.resetCombat());
     if (removeSelectedBtn) removeSelectedBtn.addEventListener('click', () => this.showRemoveConfirmation('selected'));
     if (removeAllBtn) removeAllBtn.addEventListener('click', () => this.showRemoveConfirmation('all'));
   }
@@ -29,11 +27,10 @@ export class GMCombat {
   showRemoveConfirmation(type) {
     if (this.confirmationActive) return;
 
-    const item = type === 'selected' 
-      ? this.combatOrder.find(i => i.id === this.selectedItemId)
-      : null;
-
-    if (type === 'selected' && !this.selectedItemId) {
+    // Salva o ID selecionado antes de qualquer coisa
+    const selectedId = this.selectedItemId;
+    
+    if (type === 'selected' && !selectedId) {
       this.parent.updateStatus('Nenhum personagem selecionado');
       return;
     }
@@ -43,8 +40,12 @@ export class GMCombat {
       return;
     }
 
+    const item = type === 'selected' 
+      ? this.combatOrder.find(i => i.id === selectedId)
+      : null;
+
     const message = type === 'selected' 
-      ? `Remover ${item.name} da ordem?` 
+      ? `Remover ${item?.name || 'selecionado'} da ordem?` 
       : 'Remover todos os personagens?';
 
     const container = document.getElementById('combat-confirmation');
@@ -57,40 +58,95 @@ export class GMCombat {
       <div class="gmnotes-confirmation-box">
         <div class="gmnotes-confirmation-message">${message}</div>
         <div class="gmnotes-confirmation-actions">
-          <button class="gmnotes-confirm-btn" data-confirm="yes">Sim</button>
-          <button class="gmnotes-cancel-btn" data-confirm="no">Cancelar</button>
+          <button class="gmnotes-confirm-btn" id="confirm-yes">Sim</button>
+          <button class="gmnotes-cancel-btn" id="confirm-no">Cancelar</button>
         </div>
       </div>
     `;
 
-    const handleConfirm = (e) => {
-      const btn = e.target.closest('button');
-      if (!btn) return;
+    const confirmYes = document.getElementById('confirm-yes');
+    const confirmNo = document.getElementById('confirm-no');
 
-      if (btn.dataset.confirm === 'yes') {
-        if (type === 'selected') this.removeSelected();
-        else this.removeFromCombat();
-      }
-      this.hideConfirmation();
-      document.removeEventListener('click', handleConfirm);
+    const cleanup = () => {
+      container.innerHTML = '';
+      this.setButtonsDisabled(false);
+      this.confirmationActive = false;
     };
 
-    setTimeout(() => {
-      container.addEventListener('click', handleConfirm);
-    }, 0);
+    const handleYes = () => {
+      if (type === 'selected') {
+        // Usa o selectedId salvo, não this.selectedItemId
+        this.removeSelectedById(selectedId);
+      } else {
+        this.removeAll();
+      }
+      cleanup();
+    };
+
+    const handleNo = () => {
+      cleanup();
+    };
+
+    // IMPORTANTE: Impede que o clique se propague para não acionar o clickoutside
+    confirmYes.addEventListener('click', (e) => {
+      e.stopPropagation();
+      handleYes();
+    });
+    
+    confirmNo.addEventListener('click', (e) => {
+      e.stopPropagation();
+      handleNo();
+    });
   }
 
-  hideConfirmation() {
-    const container = document.getElementById('combat-confirmation');
-    if (container) container.innerHTML = '';
-    this.setButtonsDisabled(false);
-    this.confirmationActive = false;
+  // Novo método que recebe o ID diretamente
+  removeSelectedById(id) {
+    if (!id) return;
+
+    const item = this.combatOrder.find(i => i.id === id);
+    if (!item) return;
+
+    this.combatOrder = this.combatOrder.filter(i => i.id !== id);
+    
+    // Limpa a seleção apenas se o ID removido era o selecionado
+    if (this.selectedItemId === id) {
+      this.clearSelection();
+    }
+    
+    this.renderCombatOrder();
+    this.updateCombatButtons();
+    this.parent.saveToStorage();
+    this.parent.updateStatus(`${item.name} removido`);
+  }
+
+  // Mantém o método antigo para compatibilidade
+  removeSelected() {
+    this.removeSelectedById(this.selectedItemId);
+  }
+
+  removeAll() {
+    if (this.combatOrder.length === 0) return;
+    
+    this.combatOrder = [];
+    this.clearSelection();
+    this.renderCombatOrder();
+    this.updateCombatButtons();
+    this.parent.saveToStorage();
+    this.parent.updateStatus('Ordem limpa');
   }
 
   setButtonsDisabled(disabled) {
     ['remove-selected', 'remove-all'].forEach(id => {
       const btn = document.getElementById(`combat-${id}`);
-      if (btn) btn.classList.toggle('disabled', disabled);
+      if (btn) {
+        if (disabled) {
+          btn.setAttribute('disabled', 'disabled');
+          btn.classList.add('disabled');
+        } else {
+          btn.removeAttribute('disabled');
+          btn.classList.remove('disabled');
+        }
+      }
     });
   }
 
@@ -99,26 +155,43 @@ export class GMCombat {
     if (!container) return;
 
     container.addEventListener('click', (e) => {
+      // Não processa clique se confirmação estiver ativa
       if (this.confirmationActive) return;
 
       const item = e.target.closest('.gmnotes-combat-item');
       if (!item) return;
 
-      if (this.selectedItemId) {
-        const prev = document.querySelector(`.gmnotes-combat-item[data-combat-id="${this.selectedItemId}"]`);
-        if (prev) prev.classList.remove('selected');
+      const clickedId = item.dataset.combatId;
+      
+      // Se clicou no mesmo item, remove seleção
+      if (this.selectedItemId === clickedId) {
+        this.clearSelection();
+      } else {
+        // Remove seleção anterior
+        if (this.selectedItemId) {
+          const prev = document.querySelector(`.gmnotes-combat-item[data-combat-id="${this.selectedItemId}"]`);
+          if (prev) prev.classList.remove('selected');
+        }
+        
+        // Seleciona novo item
+        this.selectedItemId = clickedId;
+        item.classList.add('selected');
       }
-
-      this.selectedItemId = item.dataset.combatId;
-      item.classList.add('selected');
+      
       e.stopPropagation();
     });
   }
 
   setupClickOutsideHandler() {
     document.addEventListener('click', (e) => {
+      // Não limpa seleção se confirmação estiver ativa
+      if (this.confirmationActive) return;
+      
       const combatList = document.getElementById('combat-order');
-      if (this.selectedItemId && combatList && !combatList.contains(e.target)) {
+      const confirmationBox = document.querySelector('.gmnotes-confirmation-box');
+      
+      // Se clicou fora da lista e fora da confirmação
+      if (this.selectedItemId && combatList && !combatList.contains(e.target) && !confirmationBox) {
         this.clearSelection();
       }
     });
@@ -137,32 +210,10 @@ export class GMCombat {
     if (this.parent.players) this.parent.players.renderPlayers();
   }
 
-  removeSelected() {
-    if (!this.selectedItemId) return;
-
-    const item = this.combatOrder.find(i => i.id === this.selectedItemId);
-    if (!item) return;
-
-    this.combatOrder = this.combatOrder.filter(i => i.id !== this.selectedItemId);
-    this.clearSelection();
-    this.renderCombatOrder();
-    this.updateCombatButtons();
-    this.parent.saveToStorage();
-    this.parent.updateStatus(`${item.name} removido`);
-  }
-
-  removeFromCombat() {
-    this.combatOrder = [];
-    this.clearSelection();
-    this.renderCombatOrder();
-    this.updateCombatButtons();
-    this.parent.saveToStorage();
-    this.parent.updateStatus('Ordem limpa');
-  }
-
   removeFromCombatById(id) {
     this.combatOrder = this.combatOrder.filter(item => item.id !== id);
     if (this.selectedItemId === id) this.clearSelection();
+    this.renderCombatOrder();
     this.updateCombatButtons();
   }
 
@@ -275,7 +326,6 @@ export class GMCombat {
     `).join('');
   }
 
-
   adjustCombatVit(combatId, change) {
     const item = this.combatOrder.find(i => i.id === combatId);
     if (item?.type === 'npc') {
@@ -297,10 +347,10 @@ export class GMCombat {
       item.con = Math.max(0, Math.min(item.conMax, (item.con || 0) + change));
       this.renderCombatOrder();
       
-      const npc = this.parent.npcs.npcs.find(n => n.id === combatId);
+      const npc = this.parent.npcs?.npcs.find(n => n.id === combatId);
       if (npc) {
         npc.conCurrent = item.con;
-        this.parent.npcs.renderNPCs();
+        this.parent.npcs?.renderNPCs();
       }
       this.parent.saveToStorage();
     }
@@ -345,15 +395,6 @@ export class GMCombat {
     }
   }
 
-  resetCombat() {
-    this.combatOrder = [];
-    this.clearSelection();
-    this.renderCombatOrder();
-    this.updateCombatButtons();
-    this.parent.saveToStorage();
-    this.parent.updateStatus('Ordem resetada');
-  }
-
   loadFromStorage(data) {
     this.combatOrder = (data.combatOrder || []).map(item => {
       if (item.type === 'npc') {
@@ -374,7 +415,6 @@ export class GMCombat {
     this.clearSelection();
     setTimeout(() => {
       this.renderCombatOrder();
-      // Garante que os NPCs sejam re-renderizados para atualizar os botões
       if (this.parent.npcs) this.parent.npcs.renderNPCs();
       if (this.parent.players) this.parent.players.renderPlayers();
     }, 50);
