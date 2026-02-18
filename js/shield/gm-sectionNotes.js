@@ -1,102 +1,28 @@
+// js/shield/gm-sectionNotes.js
 export class GMSectionNotes {
   constructor(parent) {
     this.parent = parent;
     this.sessions = [];
     this.currentSession = null;
     this.autoSaveTimer = null;
-    this.sessionInputActive = false;
   }
 
   init() {
     this.setupNotes();
+    this.renderSessions();
   }
 
   setupNotes() {
     const textarea = document.getElementById('gmnotes-textarea');
     const saveBtn = document.getElementById('gmnotes-save');
     const clearBtn = document.getElementById('gmnotes-clear');
-    const toolbarBtns = document.querySelectorAll('.gmnotes-toolbar-btn[data-format]');
-    const newSessionBtn = document.querySelector('.gmnotes-session-new');
 
     if (textarea) {
       textarea.addEventListener('input', () => this.triggerAutoSave());
-      this.loadCurrentSession();
     }
 
     if (saveBtn) saveBtn.addEventListener('click', () => this.saveNotes());
-    if (clearBtn) clearBtn.addEventListener('click', () => this.clearNotes());
-    
-    toolbarBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.formatText(btn.dataset.format);
-      });
-    });
-
-    if (newSessionBtn) {
-      newSessionBtn.addEventListener('click', () => this.showNewSessionInput());
-    }
-  }
-
-  showNewSessionInput() {
-    if (this.sessionInputActive) return;
-
-    const container = document.querySelector('.gmnotes-sessions-list');
-    if (!container) return;
-
-    this.sessionInputActive = true;
-
-    // Esconde o botão "Nova Sessão" temporariamente
-    const newBtn = container.querySelector('.gmnotes-session-new');
-    if (newBtn) newBtn.style.display = 'none';
-
-    // Cria input para nome da sessão
-    const inputHtml = `
-      <div class="gmnotes-session-input-container">
-        <input type="text" class="gmnotes-session-input" placeholder="Nome da sessão..." maxlength="50">
-        <div class="gmnotes-session-input-actions">
-          <button class="gmnotes-session-confirm">✓</button>
-          <button class="gmnotes-session-cancel">✕</button>
-        </div>
-      </div>
-    `;
-
-    container.insertAdjacentHTML('beforeend', inputHtml);
-
-    const input = container.querySelector('.gmnotes-session-input');
-    const confirmBtn = container.querySelector('.gmnotes-session-confirm');
-    const cancelBtn = container.querySelector('.gmnotes-session-cancel');
-
-    input.focus();
-
-    const cleanup = () => {
-      container.querySelector('.gmnotes-session-input-container')?.remove();
-      if (newBtn) newBtn.style.display = '';
-      this.sessionInputActive = false;
-    };
-
-    confirmBtn.addEventListener('click', () => {
-      const name = input.value.trim();
-      if (name) {
-        this.createNewSession(name);
-        cleanup();
-      }
-    });
-
-    cancelBtn.addEventListener('click', cleanup);
-
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const name = input.value.trim();
-        if (name) {
-          this.createNewSession(name);
-          cleanup();
-        }
-      } else if (e.key === 'Escape') {
-        cleanup();
-      }
-    });
+    if (clearBtn) clearBtn.addEventListener('click', () => this.showClearConfirm());
   }
 
   triggerAutoSave() {
@@ -108,99 +34,155 @@ export class GMSectionNotes {
     const textarea = document.getElementById('gmnotes-textarea');
     if (!textarea) return;
 
-    const content = textarea.value;
-    
     if (this.currentSession) {
       const session = this.sessions.find(s => s.name === this.currentSession);
-      if (session) session.content = content;
+      if (session) session.content = textarea.value;
     } else {
-      localStorage.setItem('gmnotes_draft', content);
+      localStorage.setItem('gmnotes_draft', textarea.value);
     }
     
     this.parent.saveToStorage();
-    
-    const status = document.getElementById('gmnotes-status');
-    if (status) {
-      status.textContent = auto ? 'Salvo' : 'Notas salvas!';
-      setTimeout(() => { status.textContent = 'Pronto'; }, 2000);
-    }
+    this.parent.updateStatus(auto ? 'Salvo' : 'Notas salvas!');
   }
 
-  clearNotes() {
+  // Modal de confirmação para limpar notas
+  showClearConfirm() {
     const container = document.querySelector('.gmnotes-sessions-list');
     if (!container) return;
 
-    // Cria confirmação inline
-    const confirmHtml = `
-      <div class="gmnotes-confirmation-box" style="margin-top: 0.5rem;">
-        <div class="gmnotes-confirmation-message">Limpar todas as notas?</div>
-        <div class="gmnotes-confirmation-actions">
-          <button class="gmnotes-confirm-btn" id="clear-yes">Sim</button>
-          <button class="gmnotes-cancel-btn" id="clear-no">Cancelar</button>
+    this.removeExistingModals();
+
+    const modalHtml = `
+      <div class="gmnotes-confirm-modal">
+        <div class="gmnotes-confirm-content">
+          <p>Limpar todas as notas?</p>
+          <div class="gmnotes-confirm-actions">
+            <button class="gmnotes-confirm-yes">Sim</button>
+            <button class="gmnotes-confirm-no">Cancelar</button>
+          </div>
         </div>
       </div>
     `;
 
-    const existingConfirm = container.querySelector('.gmnotes-confirmation-box');
-    if (existingConfirm) existingConfirm.remove();
+    container.insertAdjacentHTML('beforeend', modalHtml);
 
-    container.insertAdjacentHTML('beforeend', confirmHtml);
+    const modal = container.querySelector('.gmnotes-confirm-modal');
+    const yesBtn = modal.querySelector('.gmnotes-confirm-yes');
+    const noBtn = modal.querySelector('.gmnotes-confirm-no');
 
-    const confirmYes = document.getElementById('clear-yes');
-    const confirmNo = document.getElementById('clear-no');
-
-    const cleanup = () => {
-      container.querySelector('.gmnotes-confirmation-box')?.remove();
-    };
-
-    confirmYes.addEventListener('click', () => {
+    yesBtn.addEventListener('click', () => {
       document.getElementById('gmnotes-textarea').value = '';
       this.saveNotes();
-      cleanup();
+      modal.remove();
     });
 
-    confirmNo.addEventListener('click', cleanup);
+    noBtn.addEventListener('click', () => modal.remove());
   }
 
-  formatText(format) {
-    const textarea = document.getElementById('gmnotes-textarea');
-    if (!textarea) return;
+  // Modal para criar nova sessão
+  showNewSessionModal() {
+    const container = document.querySelector('.gmnotes-sessions-list');
+    if (!container) return;
 
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const selected = textarea.value.substring(start, end);
-    let formatted = '';
+    this.removeExistingModals();
 
-    switch(format) {
-      case 'bold': formatted = `**${selected}**`; break;
-      case 'italic': formatted = `*${selected}*`; break;
-      case 'underline': formatted = `_${selected}_`; break;
-      case 'list': formatted = selected.split('\n').map(line => `- ${line}`).join('\n'); break;
-    }
+    const modalHtml = `
+      <div class="gmnotes-session-modal">
+        <div class="gmnotes-session-modal-content">
+          <h4>Nova Sessão</h4>
+          <input type="text" class="gmnotes-session-modal-input" placeholder="Nome da sessão..." maxlength="50" autofocus>
+          <div class="gmnotes-session-modal-actions">
+            <button class="gmnotes-session-modal-create">Criar</button>
+            <button class="gmnotes-session-modal-cancel">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    `;
 
-    textarea.value = textarea.value.substring(0, start) + formatted + textarea.value.substring(end);
-    textarea.focus();
-    textarea.setSelectionRange(start + formatted.length, start + formatted.length);
-  }
+    container.insertAdjacentHTML('beforeend', modalHtml);
 
-  loadCurrentSession() {
-    const textarea = document.getElementById('gmnotes-textarea');
-    if (textarea) {
-      const draft = localStorage.getItem('gmnotes_draft');
-      if (draft) textarea.value = draft;
-    }
-  }
+    const modal = container.querySelector('.gmnotes-session-modal');
+    const input = modal.querySelector('.gmnotes-session-modal-input');
+    const createBtn = modal.querySelector('.gmnotes-session-modal-create');
+    const cancelBtn = modal.querySelector('.gmnotes-session-modal-cancel');
 
-  createNewSession(name) {
-    this.sessions.push({
-      name: name,
-      content: '',
-      date: new Date().toISOString()
+    input.focus();
+
+    const createSession = () => {
+      const name = input.value.trim();
+      if (name) {
+        this.sessions.push({
+          name: name,
+          content: '',
+          date: new Date().toISOString()
+        });
+        
+        this.currentSession = name;
+        document.getElementById('gmnotes-textarea').value = '';
+        this.renderSessions();
+        this.parent.saveToStorage();
+        this.parent.updateStatus('Nova sessão criada!');
+      }
+      modal.remove();
+    };
+
+    createBtn.addEventListener('click', createSession);
+    cancelBtn.addEventListener('click', () => modal.remove());
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        createSession();
+      } else if (e.key === 'Escape') {
+        modal.remove();
+      }
     });
-    this.currentSession = name;
-    document.getElementById('gmnotes-textarea').value = '';
-    this.renderSessions();
-    this.parent.saveToStorage();
+  }
+
+  // Modal para confirmar exclusão de sessão
+  showDeleteConfirm(sessionName) {
+    const container = document.querySelector('.gmnotes-sessions-list');
+    if (!container) return;
+
+    this.removeExistingModals();
+
+    const modalHtml = `
+      <div class="gmnotes-confirm-modal">
+        <div class="gmnotes-confirm-content">
+          <p>Excluir a sessão "${sessionName}"?</p>
+          <div class="gmnotes-confirm-actions">
+            <button class="gmnotes-confirm-yes">Sim</button>
+            <button class="gmnotes-confirm-no">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    container.insertAdjacentHTML('beforeend', modalHtml);
+
+    const modal = container.querySelector('.gmnotes-confirm-modal');
+    const yesBtn = modal.querySelector('.gmnotes-confirm-yes');
+    const noBtn = modal.querySelector('.gmnotes-confirm-no');
+
+    yesBtn.addEventListener('click', () => {
+      this.sessions = this.sessions.filter(s => s.name !== sessionName);
+      
+      if (this.currentSession === sessionName) {
+        this.currentSession = null;
+        document.getElementById('gmnotes-textarea').value = localStorage.getItem('gmnotes_draft') || '';
+      }
+      
+      this.renderSessions();
+      this.parent.saveToStorage();
+      this.parent.updateStatus('Sessão excluída!');
+      modal.remove();
+    });
+
+    noBtn.addEventListener('click', () => modal.remove());
+  }
+
+  removeExistingModals() {
+    document.querySelectorAll('.gmnotes-confirm-modal, .gmnotes-session-modal').forEach(m => m.remove());
   }
 
   loadSession(sessionName) {
@@ -208,6 +190,7 @@ export class GMSectionNotes {
     if (session) {
       this.currentSession = sessionName;
       document.getElementById('gmnotes-textarea').value = session.content || '';
+      this.renderSessions();
     }
   }
 
@@ -215,23 +198,57 @@ export class GMSectionNotes {
     const container = document.querySelector('.gmnotes-sessions-list');
     if (!container) return;
 
-    const sessionButtons = this.sessions.map(s => 
-      `<button class="gmnotes-session-item ${s.name === this.currentSession ? 'active' : ''}">${this.parent.escapeHtml(s.name)}</button>`
-    ).join('');
-    
-    container.innerHTML = sessionButtons + '<button class="gmnotes-session-item gmnotes-session-new">+ Nova Sessão</button>';
-    
-    document.querySelectorAll('.gmnotes-session-item:not(.gmnotes-session-new)').forEach(btn => {
+    if (this.sessions.length === 0) {
+      container.innerHTML = '<button class="gmnotes-session-item gmnotes-session-new">+ Nova Sessão</button>';
+    } else {
+      container.innerHTML = this.sessions.map(s => `
+        <div class="gmnotes-session-wrapper">
+          <button class="gmnotes-session-item ${s.name === this.currentSession ? 'active' : ''}">
+            ${this.parent.escapeHtml(s.name)}
+          </button>
+          <button class="gmnotes-session-delete" title="Excluir sessão">🗑️</button>
+        </div>
+      `).join('') + '<button class="gmnotes-session-item gmnotes-session-new">+ Nova Sessão</button>';
+    }
+
+    // Eventos das sessões
+    container.querySelectorAll('.gmnotes-session-item:not(.gmnotes-session-new)').forEach(btn => {
       btn.addEventListener('click', () => this.loadSession(btn.textContent));
     });
 
-    const newBtn = document.querySelector('.gmnotes-session-new');
-    if (newBtn) newBtn.addEventListener('click', () => this.showNewSessionInput());
+    // Eventos dos botões de excluir
+    container.querySelectorAll('.gmnotes-session-delete').forEach((btn, index) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.showDeleteConfirm(this.sessions[index].name);
+      });
+    });
+
+    // Evento do botão Nova Sessão
+    const newBtn = container.querySelector('.gmnotes-session-new');
+    if (newBtn) {
+      const newBtnClone = newBtn.cloneNode(true);
+      newBtn.parentNode.replaceChild(newBtnClone, newBtn);
+      newBtnClone.addEventListener('click', () => this.showNewSessionModal());
+    }
   }
 
   loadFromStorage(data) {
     this.sessions = data.sessions || [];
     this.currentSession = data.currentSession || null;
+    
+    setTimeout(() => {
+      const textarea = document.getElementById('gmnotes-textarea');
+      if (textarea) {
+        if (this.currentSession) {
+          const session = this.sessions.find(s => s.name === this.currentSession);
+          textarea.value = session?.content || '';
+        } else {
+          textarea.value = localStorage.getItem('gmnotes_draft') || '';
+        }
+      }
+      this.renderSessions();
+    }, 50);
   }
 
   getData() {
