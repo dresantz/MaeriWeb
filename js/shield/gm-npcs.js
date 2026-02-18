@@ -149,10 +149,11 @@ export class GMNPCs {
     if (npc) {
       npc.vitCurrent = Math.max(0, Math.min(npc.vitMax, npc.vitCurrent + change));
       this.renderNPCs();
+      
       if (this.parent.combat) {
-        this.parent.combat.updateCombatHP(npcId, npc.vitCurrent);
-        this.parent.combat.renderCombatOrder();
+        this.parent.combat.adjustCombatVit(npcId, change);
       }
+      
       this.parent.saveToStorage();
     }
   }
@@ -162,9 +163,12 @@ export class GMNPCs {
     if (npc) {
       npc.conCurrent = Math.max(0, Math.min(npc.conMax, npc.conCurrent + change));
       this.renderNPCs();
+      
+      // CORREÇÃO: Usa o método EXISTENTE adjustCombatCon
       if (this.parent.combat) {
-        this.parent.combat.renderCombatOrder();
+        this.parent.combat.adjustCombatCon(npcId, change);
       }
+      
       this.parent.saveToStorage();
     }
   }

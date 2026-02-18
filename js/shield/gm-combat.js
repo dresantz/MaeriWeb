@@ -275,16 +275,17 @@ export class GMCombat {
     `).join('');
   }
 
+
   adjustCombatVit(combatId, change) {
     const item = this.combatOrder.find(i => i.id === combatId);
     if (item?.type === 'npc') {
       item.vit = Math.max(0, Math.min(item.vitMax, item.vit + change));
       this.renderCombatOrder();
       
-      const npc = this.parent.npcs.npcs.find(n => n.id === combatId);
+      const npc = this.parent.npcs?.npcs.find(n => n.id === combatId);
       if (npc) {
         npc.vitCurrent = item.vit;
-        this.parent.npcs.renderNPCs();
+        this.parent.npcs?.renderNPCs();
       }
       this.parent.saveToStorage();
     }
@@ -371,7 +372,12 @@ export class GMCombat {
     });
     
     this.clearSelection();
-    setTimeout(() => this.renderCombatOrder(), 50);
+    setTimeout(() => {
+      this.renderCombatOrder();
+      // Garante que os NPCs sejam re-renderizados para atualizar os botões
+      if (this.parent.npcs) this.parent.npcs.renderNPCs();
+      if (this.parent.players) this.parent.players.renderPlayers();
+    }, 50);
   }
 
   getData() {
