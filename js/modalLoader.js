@@ -12,7 +12,8 @@ const MODAL_SCRIPTS = [
   'js/sheet.js',
   'js/spells.js',
   'js/dice.js',
-  'js/spell-detail.js'
+  'js/spell-detail.js',
+  'js/dice-pool.js'
 ];
 
 export async function loadGlobalModals() {

@@ -258,6 +258,150 @@
   border-radius: 10px;
 }
 
+
+/* Estilos para o pool de dados */
+.dice-pool-container {
+  margin-bottom: 2rem;
+}
+
+.dice-pool-container h3 {
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  padding-bottom: 0.5rem;
+}
+
+.dice-pool {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  min-height: 100px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  padding: 1rem;
+}
+
+.pool-dice {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-light);
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  border-radius: 12px;
+  padding: 0.5rem;
+}
+
+.mini-dice-wrap {
+  width: 40px;
+  height: 40px;
+  perspective: 100px;
+}
+
+.mini-dice {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotate3d(0.5, 0.5, 0.5, 45deg);
+}
+
+.mini-face {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: #f6f3f0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.mini-face.front { transform: translateZ(20px); }
+.mini-face.back { transform: rotateY(180deg) translateZ(20px); }
+.mini-face.right { transform: rotateY(90deg) translateZ(20px); }
+.mini-face.left { transform: rotateY(-90deg) translateZ(20px); }
+.mini-face.up { transform: rotateX(90deg) translateZ(20px); }
+.mini-face.bottom { transform: rotateX(-90deg) translateZ(20px); }
+
+.simple-dice {
+  width: 40px;
+  height: 40px;
+  background: var(--surface);
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--gold);
+}
+
+.dice-sides {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.dice-value {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 24px;
+  height: 24px;
+  background: var(--gold);
+  color: #1a1a1a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  border: 2px solid var(--surface);
+}
+
+.remove-dice {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 20px;
+  height: 20px;
+  background: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.remove-dice:hover {
+  background: #ff6666;
+}
+
+.empty-pool {
+  color: var(--text-muted);
+  font-style: italic;
+  text-align: center;
+  width: 100%;
+  padding: 2rem;
+}
+
+/* Container do dado 3D */
+.dice-3d-container {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+}
+
+
 /* Responsivo - altura reduzida para evitar scroll */
 @media (max-height: 700px) {
   .dice-panel {

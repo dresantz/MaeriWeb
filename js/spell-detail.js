@@ -5,14 +5,11 @@ let currentSpell = null;
 
 // Torna a função global
 window.openSpellDetail = function(spell) {
-  console.log('Abrindo detalhe da magia:', spell.name);
   
-  // 🔹 CORREÇÃO: Busca os elementos diretamente no documento, não dentro do spells-modal
   const modal = document.getElementById('spell-detail-modal');
   const overlay = document.getElementById('spell-detail-overlay');
   
   if (!modal || !overlay) {
-    console.log('Modal de detalhe não encontrado');
     return;
   }
   
@@ -83,8 +80,6 @@ window.closeSpellDetail = function() {
 
 // Inicialização
 function initSpellDetail() {
-  console.log('Inicializando spell-detail.js');
-  
   const closeBtn = document.getElementById('spell-detail-close');
   const overlay = document.getElementById('spell-detail-overlay');
   
