@@ -13,10 +13,27 @@
 
   <div class="spells-toolbar">
     <input type="search" id="spells-search" placeholder="Buscar magia...">
-    <div class="spells-sort">
-      <button data-sort="name" class="active">A–Z</button>
-      <button data-sort="school">Escola</button>
-      <button data-sort="level">Nível</button>
+    
+    <!-- 🔹 NOVOS FILTROS -->
+    <div class="spells-filters">
+      <div class="filter-group">
+        <button class="filter-toggle" data-filter="school">Escola ▼</button>
+        <div class="filter-options school-options" style="display: none;">
+          <label><input type="checkbox" data-school="neofita"> Neófita</label>
+          <label><input type="checkbox" data-school="bruxaria"> Bruxaria</label>
+          <label><input type="checkbox" data-school="divinacao"> Divinação</label>
+          <label><input type="checkbox" data-school="feiticaria"> Feitiçaria</label>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <button class="filter-toggle" data-filter="level">Nível ▼</button>
+        <div class="filter-options level-options" style="display: none;">
+          <label><input type="checkbox" data-level="1"> Nível 1</label>
+          <label><input type="checkbox" data-level="3"> Nível 3</label>
+          <label><input type="checkbox" data-level="5"> Nível 5</label>
+        </div>
+      </div>
     </div>
   </div>
 

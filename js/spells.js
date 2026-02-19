@@ -1,4 +1,4 @@
-// spells.js - Controle de magias
+// spells.js - Controle de magias com filtros combinados
 
 let isSpellsOpen = false;
 
@@ -30,8 +30,37 @@ function closeSpells() {
 // Estado
 let spells = [];
 let filteredSpells = [];
-let sortState = { key: 'name', direction: 'asc' };
+
+// Estado dos filtros
+let filters = {
+  schools: {
+    neofita: false,
+    bruxaria: false,
+    divinacao: false,
+    feiticaria: false
+  },
+  levels: {
+    1: false,
+    3: false,
+    5: false
+  }
+};
+
 let searchTimeout = null;
+
+// Helper para normalizar nomes das escolas
+function normalizeSchool(school) {
+  const schoolMap = {
+    'neófita': 'neofita',
+    'neofita': 'neofita',
+    'bruxaria': 'bruxaria',
+    'divinação': 'divinacao',
+    'divinacao': 'divinacao',
+    'feitiçaria': 'feiticaria',
+    'feiticaria': 'feiticaria'
+  };
+  return schoolMap[school.toLowerCase()] || school.toLowerCase();
+}
 
 // Extração
 function extractSpellsFromChapter(chapter) {
@@ -58,46 +87,162 @@ async function loadSpells() {
     const data = await response.json();
     spells = extractSpellsFromChapter(data);
     applyFilters();
-  } catch (e) {}
+  } catch (e) {
+    console.error('Erro ao carregar magias:', e);
+  }
 }
 
-// Filtro e ordenação
+// Aplica todos os filtros combinados
 function applyFilters() {
   const searchTerm = document.getElementById('spells-search')?.value.toLowerCase() || '';
   
-  filteredSpells = spells.filter(spell => 
-    spell.name.toLowerCase().includes(searchTerm)
-  );
+  // Verifica se há algum filtro ativo
+  const hasActiveSchool = Object.values(filters.schools).some(v => v);
+  const hasActiveLevel = Object.values(filters.levels).some(v => v);
   
-  filteredSpells.sort((a, b) => {
-    let result = 0;
-    if (sortState.key === 'name' || sortState.key === 'school') {
-      result = a[sortState.key].localeCompare(b[sortState.key]);
-    } else if (sortState.key === 'level') {
-      result = a.level - b.level;
+  filteredSpells = spells.filter(spell => {
+    // Filtro de busca por nome
+    const matchesSearch = spell.name.toLowerCase().includes(searchTerm);
+    if (!matchesSearch) return false;
+    
+    // Filtro de escola (se houver filtros ativos)
+    if (hasActiveSchool) {
+      const spellSchool = normalizeSchool(spell.school);
+      if (!filters.schools[spellSchool]) return false;
     }
-    return sortState.direction === 'asc' ? result : -result;
+    
+    // Filtro de nível (se houver filtros ativos)
+    if (hasActiveLevel) {
+      if (!filters.levels[spell.level]) return false;
+    }
+    
+    return true;
   });
   
   renderSpells();
 }
 
-// Renderização
+// Configura listeners dos filtros
+function setupFilterListeners() {
+  // Toggle dos dropdowns
+  document.querySelectorAll('.filter-toggle').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const options = e.target.nextElementSibling;
+      const isVisible = options.style.display === 'block';
+      
+      // Fecha todos os outros dropdowns
+      document.querySelectorAll('.filter-options').forEach(opt => {
+        opt.style.display = 'none';
+      });
+      
+      // Abre/fecha o atual
+      options.style.display = isVisible ? 'none' : 'block';
+      
+      // Atualiza seta
+      if (isVisible) {
+        e.target.innerHTML = e.target.innerHTML.replace('▲', '▼');
+      } else {
+        e.target.innerHTML = e.target.innerHTML.replace('▼', '▲');
+      }
+    });
+  });
+  
+  // Fecha dropdowns ao clicar fora
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.filter-group')) {
+      document.querySelectorAll('.filter-options').forEach(opt => {
+        opt.style.display = 'none';
+      });
+      document.querySelectorAll('.filter-toggle').forEach(btn => {
+        btn.innerHTML = btn.innerHTML.replace('▲', '▼');
+      });
+    }
+  });
+  
+  // Checkboxes de escola
+  document.querySelectorAll('[data-school]').forEach(checkbox => {
+    checkbox.addEventListener('change', (e) => {
+      const school = e.target.dataset.school;
+      filters.schools[school] = e.target.checked;
+      applyFilters();
+    });
+  });
+  
+  // Checkboxes de nível
+  document.querySelectorAll('[data-level]').forEach(checkbox => {
+    checkbox.addEventListener('change', (e) => {
+      const level = parseInt(e.target.dataset.level);
+      filters.levels[level] = e.target.checked;
+      applyFilters();
+    });
+  });
+}
+
+// Sincroniza UI dos filtros com o estado
+function syncFilterUI() {
+  // Sincroniza escolas
+  Object.keys(filters.schools).forEach(school => {
+    const checkbox = document.querySelector(`[data-school="${school}"]`);
+    if (checkbox) checkbox.checked = filters.schools[school];
+  });
+  
+  // Sincroniza níveis
+  Object.keys(filters.levels).forEach(level => {
+    const checkbox = document.querySelector(`[data-level="${level}"]`);
+    if (checkbox) checkbox.checked = filters.levels[level];
+  });
+}
+
+// Renderização da lista de magias
 function renderSpells() {
   const list = document.getElementById('spells-list');
   if (!list) return;
   
   list.innerHTML = '';
   
+  if (filteredSpells.length === 0) {
+    const li = document.createElement('li');
+    li.className = 'spell-item empty-state';
+    li.innerHTML = '<div class="spell-name">Nenhuma magia encontrada</div>';
+    list.appendChild(li);
+    return;
+  }
+  
   filteredSpells.forEach(spell => {
     const li = document.createElement('li');
     li.className = 'spell-item';
     li.innerHTML = `
       <div class="spell-name">${spell.name}</div>
-      <div class="spell-meta">${spell.school} · Nível ${spell.level}</div>
+      <div class="spell-meta">
+        <span>${spell.school}</span>
+        <span>Nível ${spell.level}</span>
+      </div>
     `;
     list.appendChild(li);
   });
+}
+
+// Limpa todos os filtros
+function clearFilters() {
+  filters = {
+    schools: {
+      neofita: false,
+      bruxaria: false,
+      divinacao: false,
+      feiticaria: false
+    },
+    levels: {
+      1: false,
+      3: false,
+      5: false
+    }
+  };
+  
+  // Atualiza UI dos checkboxes
+  syncFilterUI();
+  
+  applyFilters();
 }
 
 // Inicialização
@@ -129,23 +274,13 @@ function initSpells() {
     });
   }
   
-  // Sort buttons
-  document.querySelectorAll('.spells-sort button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const key = btn.dataset.sort;
-      if (sortState.key === key) {
-        sortState.direction = sortState.direction === 'asc' ? 'desc' : 'asc';
-      } else {
-        sortState.key = key;
-        sortState.direction = 'asc';
-      }
-      
-      document.querySelectorAll('.spells-sort button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      applyFilters();
-    });
-  });
+  // Configura listeners dos filtros
+  setupFilterListeners();
   
+  // Sincroniza UI com estado inicial
+  syncFilterUI();
+  
+  // Carrega magias
   loadSpells();
 }
 
@@ -155,4 +290,5 @@ if (document.readyState === 'loading') {
 } else {
   initSpells();
 }
+
 document.addEventListener('modals:loaded', () => initSpells());
