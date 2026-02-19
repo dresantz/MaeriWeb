@@ -267,6 +267,73 @@ export class GMCombat {
     }
   }
 
+// Método melhorado com categorias
+getConditionOptions(currentCondition) {
+  const conditionGroups = [
+    {
+      label: '─── Estado Básico ───',
+      options: [
+        { value: 'normal', label: 'Normal' }
+      ]
+    },
+    {
+      label: '─── Condições Graves ───',
+      options: [
+        { value: 'inconsciente', label: 'Inconsciente' },
+        { value: 'paralisado', label: 'Paralisado' }
+      ]
+    },
+    {
+      label: '─── Estado Físico ───',
+      options: [
+        { value: 'envenenado', label: 'Envenenado' },
+        { value: 'cansado', label: 'Cansado' },
+        { value: 'exausto', label: 'Exausto' }
+      ]
+    },
+    {
+      label: '─── Sentidos ───',
+      options: [
+        { value: 'cego', label: 'Cego' },
+        { value: 'silenciado', label: 'Silenciado' }
+      ]
+    },
+    {
+      label: '─── Movimento ───',
+      options: [
+        { value: 'caido', label: 'Caído' },
+        { value: 'restringido', label: 'Restringido' },
+        { value: 'escorregadio', label: 'Escorregadio' },
+        { value: 'submerso', label: 'Submerso' }
+      ]
+    },
+    {
+      label: '─── Estado Mental ───',
+      options: [
+        { value: 'atordoado', label: 'Atordoado' },
+        { value: 'amedrontado', label: 'Amedrontado' },
+        { value: 'aterrorizado', label: 'Aterrorizado' },
+        { value: 'confuso', label: 'Confuso' },
+        { value: 'encantado', label: 'Encantado' }
+      ]
+    }
+  ];
+
+  let html = '';
+  
+  conditionGroups.forEach(group => {
+    // Adiciona o cabeçalho do grupo (disabled e estilizado)
+    html += `<option disabled style="font-weight: bold; color: var(--gold); background: var(--surface-light);">${group.label}</option>`;
+    
+    // Adiciona as opções do grupo
+    group.options.forEach(opt => {
+      html += `<option value="${opt.value}" ${currentCondition === opt.value ? 'selected' : ''}>${opt.label}</option>`;
+    });
+  });
+  
+  return html;
+}
+
   renderCombatOrder() {
     const container = document.getElementById('combat-order');
     if (!container) return;
@@ -290,10 +357,7 @@ export class GMCombat {
           </div>
           <div class="gmnotes-combat-status">
             <select class="gmnotes-combat-condition" onchange="gmNotes.updateCombatCondition('${item.id}', this.value)">
-              <option value="normal" ${item.condition === 'normal' ? 'selected' : ''}>Normal</option>
-              <option value="inconsciente" ${item.condition === 'inconsciente' ? 'selected' : ''}>Inconsciente</option>
-              <option value="envenenado" ${item.condition === 'envenenado' ? 'selected' : ''}>Envenenado</option>
-              <option value="paralisado" ${item.condition === 'paralisado' ? 'selected' : ''}>Paralisado</option>
+              ${this.getConditionOptions(item.condition)}
             </select>
           </div>
         </div>
