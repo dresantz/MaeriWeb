@@ -5,13 +5,14 @@
 const MODAL_PATHS = [
   'pages/sheet-modal.html',
   'pages/spells-modal.html',
-  'pages/dice-modal.html'
+  'pages/dice-modal.html',
 ];
 
 const MODAL_SCRIPTS = [
   'js/sheet.js',
   'js/spells.js',
-  'js/dice.js'
+  'js/dice.js',
+  'js/spell-detail.js'
 ];
 
 export async function loadGlobalModals() {

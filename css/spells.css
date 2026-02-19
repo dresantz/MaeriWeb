@@ -283,6 +283,144 @@
   border-radius: 10px;
 }
 
+/* =========================
+   Spell Detail Modal
+========================= */
+
+.spell-detail-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 2100; /* Acima do modal de magias */
+}
+
+.spell-detail-overlay.active { display: block; }
+
+.spell-detail-modal {
+  display: none;
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  background: var(--surface);
+  border: 2px solid var(--gold);
+  border-radius: 24px;
+  z-index: 2101;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  overflow: hidden;
+}
+
+.spell-detail-modal.active { display: flex; }
+
+.spell-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 1.5rem 0.75rem;
+  border-bottom: 1px solid rgba(212,175,55,0.3);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+
+.spell-detail-header h2 {
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 1.3rem;
+  margin: 0;
+  padding-right: 1rem;
+}
+
+.spell-detail-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.spell-detail-close:hover { color: var(--gold); }
+
+.spell-detail-content {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.spell-detail-section {
+  display: flex;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.2);
+  border-radius: 8px;
+}
+
+.spell-detail-label {
+  flex: 0 0 80px;
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.spell-detail-value {
+  flex: 1;
+  color: var(--text);
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+}
+
+.spell-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  padding: 0.5rem 0;
+  border-top: 1px solid rgba(212,175,55,0.2);
+  border-bottom: 1px solid rgba(212,175,55,0.2);
+}
+
+.spell-detail-tag {
+  background: rgba(212,175,55,0.1);
+  border: 1px solid rgba(212,175,55,0.3);
+  border-radius: 16px;
+  padding: 0.3rem 0.8rem;
+  color: var(--text-muted);
+  font-family: 'Crimson Text', serif;
+  font-size: 0.85rem;
+  text-transform: capitalize;
+}
+
+.spell-detail-tag.combat {
+  background: rgba(192,57,43,0.1);
+  border-color: #c0392b;
+  color: #c0392b;
+}
+
+.spell-detail-description {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(0,0,0,0.2);
+  border-radius: 12px;
+  border-left: 3px solid var(--gold);
+}
+
+.spell-detail-description p {
+  color: var(--text);
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
 /* Responsivo - apenas ajustes finos */
 @media (max-width: 480px) {
   .spells-header h2 { font-size: 1.2rem; }

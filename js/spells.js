@@ -219,6 +219,17 @@ function renderSpells() {
         <span>Nível ${spell.level}</span>
       </div>
     `;
+    
+    // 🔹 Adiciona evento de clique
+    li.addEventListener('click', (e) => {
+      e.stopPropagation(); // Evita propagação
+      if (typeof window.openSpellDetail === 'function') {
+        window.openSpellDetail(spell);
+      } else {
+        console.log('Função openSpellDetail não disponível');
+      }
+    });
+    
     list.appendChild(li);
   });
 }
