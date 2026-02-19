@@ -1,60 +1,82 @@
 /* =========================
-   Spells Modal - Estilo Pergaminho
+   Spells Modal
 ========================= */
 
 .spells-overlay {
   display: none;
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.8);
-  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
 }
-.spells-overlay.active { display: block; }
+
+.spells-overlay.active {
+  display: block;
+}
 
 .spells-modal {
   display: none;
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: var(--parchment);
-  z-index: 1002;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95%;
+  max-width: 600px;
+  max-height: 90vh;
+  background: var(--surface);
+  border: 2px solid var(--gold);
+  border-radius: 24px;
+  z-index: 2001;
   flex-direction: column;
-  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  overflow: hidden;
 }
-.spells-modal.active { display: flex; }
+
+.spells-modal.active {
+  display: flex;
+}
 
 .spells-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 1.5rem;
-  background: var(--bronze);
-  border-bottom: 2px solid var(--gold);
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  padding: 1.5rem 1.5rem 0.75rem 1.5rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  background: var(--surface);
 }
+
 .spells-header h2 {
-  color: white;
+  color: var(--gold);
   font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
   margin: 0;
-  font-size: 1.4rem;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
+
 .spells-close {
   background: none;
   border: none;
-  color: white;
+  color: var(--text-muted);
   font-size: 2rem;
   cursor: pointer;
   padding: 0 0.5rem;
+  line-height: 1;
+  transition: color 0.2s ease;
   -webkit-tap-highlight-color: transparent;
   outline: none;
 }
 
+.spells-close:hover {
+  color: var(--gold);
+}
+
+/* Toolbar - área de busca e filtros */
 .spells-toolbar {
-  padding: 1.5rem 1.5rem 0.5rem;
+  padding: 1rem 1.5rem 0.5rem;
+  background: var(--surface);
 }
 
 #spells-search {
@@ -62,38 +84,68 @@
   padding: 0.8rem 1rem;
   font-size: 1rem;
   font-family: 'Crimson Text', serif;
-  background: white;
-  border: 2px solid var(--bronze);
-  border-radius: 8px;
-  margin-bottom: 0.8rem;
+  background: var(--surface-light);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 12px;
+  color: var(--text);
+  margin-bottom: 1rem;
+  transition: all 0.2s ease;
+}
+
+#spells-search:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+#spells-search::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
 }
 
 .spells-sort {
   display: flex;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
+  background: rgba(212, 175, 55, 0.1);
+  padding: 0.25rem;
+  border-radius: 12px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
 }
+
 .spells-sort button {
   flex: 1;
   padding: 0.7rem;
-  background: white;
-  border: 2px solid var(--bronze);
-  border-radius: 6px;
-  color: var(--bronze);
-  font-weight: bold;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
   cursor: pointer;
-}
-.spells-sort button.active {
-  background: var(--bronze);
-  color: white;
-  border-color: var(--gold);
+  transition: all 0.2s ease;
 }
 
+.spells-sort button:hover {
+  color: var(--gold);
+  background: rgba(212, 175, 55, 0.1);
+}
+
+.spells-sort button.active {
+  background: var(--gold);
+  color: #1a1a1a;
+}
+
+/* Conteúdo - área de rolagem das magias */
 .spells-content {
-  padding: 0.5rem 1.5rem 2rem;
+  padding: 0.5rem 1.5rem 1.5rem;
+  overflow-y: auto;
+  max-height: calc(90vh - 180px);
   flex: 1;
 }
 
+/* Lista de magias */
 .spells-list {
   list-style: none;
   padding: 0;
@@ -102,28 +154,173 @@
   grid-template-columns: 1fr;
   gap: 0.8rem;
 }
+
 @media (min-width: 600px) {
-  .spells-list { grid-template-columns: repeat(2, 1fr); }
+  .spells-list { 
+    grid-template-columns: repeat(2, 1fr); 
+  }
 }
 
+/* Item de magia */
 .spell-item {
-  background: white;
-  border: 2px solid var(--bronze);
-  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  border-radius: 12px;
   padding: 1rem;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
+
 .spell-item:hover {
   border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
 }
+
+.spell-item:active {
+  transform: translateY(0);
+}
+
 .spell-name {
   font-weight: bold;
-  color: var(--bg-dark);
-  font-size: 1rem;
+  color: var(--gold);
+  font-size: 1.1rem;
   margin-bottom: 0.3rem;
+  font-family: 'Cinzel', serif;
 }
+
 .spell-meta {
-  color: var(--bronze);
-  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
   font-family: 'Crimson Text', serif;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.spell-meta span {
+  background: rgba(212, 175, 55, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* Scroll customizado - igual ao gmnotes-modal */
+.spells-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.spells-content::-webkit-scrollbar-track {
+  background: rgba(212, 175, 55, 0.1);
+  border-radius: 10px;
+}
+
+.spells-content::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 10px;
+}
+
+/* Responsivo - altura reduzida para evitar scroll */
+@media (max-height: 700px) {
+  .spells-modal {
+    max-height: 95vh;
+  }
+  
+  .spells-content {
+    padding: 0.5rem 1rem 1rem;
+  }
+  
+  .spells-toolbar {
+    padding: 0.8rem 1rem 0.3rem;
+  }
+  
+  #spells-search {
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .spells-sort button {
+    padding: 0.5rem;
+  }
+  
+  .spell-item {
+    padding: 0.8rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .spells-header h2 {
+    font-size: 1.2rem;
+  }
+  
+  .spells-sort {
+    flex-wrap: wrap;
+  }
+  
+  .spells-sort button {
+    flex: 1 1 calc(33.33% - 0.5rem);
+  }
+  
+  .spell-meta {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  
+  .spell-meta span {
+    display: inline-block;
+    width: fit-content;
+  }
+}
+
+/* Estado vazio para quando não há magias */
+.spells-empty-state {
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 2rem;
+  border: 1px dashed rgba(212, 175, 55, 0.3);
+  border-radius: 12px;
+  grid-column: 1 / -1;
+}
+
+/* Loading state */
+.spells-loading {
+  text-align: center;
+  color: var(--gold);
+  padding: 2rem;
+  grid-column: 1 / -1;
+}
+
+.spells-loading::after {
+  content: "...";
+  animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+  0%, 20% { content: "."; }
+  40% { content: ".."; }
+  60%, 100% { content: "..."; }
+}
+
+/* Garantia de visibilidade sem scroll excessivo */
+@media (max-height: 600px) {
+  .spells-content {
+    max-height: calc(90vh - 150px);
+  }
+  
+  .spells-list {
+    gap: 0.5rem;
+  }
+  
+  .spell-item {
+    padding: 0.6rem;
+  }
+  
+  .spell-name {
+    font-size: 1rem;
+  }
+  
+  .spell-meta {
+    font-size: 0.8rem;
+  }
 }

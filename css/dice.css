@@ -1,65 +1,83 @@
 /* =========================
-   Dice Modal - Estilo Pergaminho
+   Dice Modal
 ========================= */
 
 .dice-overlay {
   display: none;
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.8);
-  z-index: 1002;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
 }
-.dice-overlay.active { display: block; }
+
+.dice-overlay.active {
+  display: block;
+}
 
 .dice-panel {
   display: none;
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: var(--parchment);
-  z-index: 1003;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95%;
+  max-width: 500px;
+  max-height: 90vh;
+  background: var(--surface);
+  border: 2px solid var(--gold);
+  border-radius: 24px;
+  z-index: 2001;
   flex-direction: column;
-  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  overflow: hidden;
 }
-.dice-panel.active { display: flex; }
+
+.dice-panel.active {
+  display: flex;
+}
 
 .dice-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 1.5rem;
-  background: var(--bronze);
-  border-bottom: 2px solid var(--gold);
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  padding: 1.5rem 1.5rem 0.75rem 1.5rem;
+  border-bottom: 1px solid rgba(212,175,55,0.3);
 }
+
 .dice-header h2 {
-  color: white;
+  color: var(--gold);
   font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
   margin: 0;
-  font-size: 1.4rem;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
+
 .dice-close {
   background: none;
   border: none;
-  color: white;
+  color: var(--text-muted);
   font-size: 2rem;
   cursor: pointer;
   padding: 0 0.5rem;
+  line-height: 1;
+  transition: color 0.2s ease;
   -webkit-tap-highlight-color: transparent;
   outline: none;
 }
 
-.dice-body {
-  padding: 1.5rem;
-  flex: 1;
+.dice-close:hover {
+  color: var(--gold);
 }
 
-.dice-content {
+.dice-body {
+  color: var(--text);
+  font-family: 'Crimson Text', serif;
   padding: 1.5rem;
+  overflow-y: auto;
+  max-height: calc(90vh - 80px);
   flex: 1;
 }
 
@@ -68,99 +86,227 @@
   justify-content: space-around;
   gap: 1rem;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
+
 .dice-btn {
   text-align: center;
+  flex: 1;
+  min-width: 80px;
 }
+
 .dice-btn button {
-  width: 80px;
-  height: 80px;
-  background: white;
-  border: 3px solid var(--bronze);
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--surface-light);
+  border: 2px solid rgba(212, 175, 55, 0.3);
   border-radius: 50%;
   font-size: 1.5rem;
   font-weight: bold;
-  color: var(--bg-dark);
+  color: var(--gold);
   cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Cinzel', serif;
 }
+
+.dice-btn button:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+}
+
 .dice-btn .counter {
   display: block;
   margin-top: 0.5rem;
   font-size: 1.1rem;
   font-weight: bold;
-  color: var(--bronze);
-}
-.dice-btn.locked button {
-  opacity: 0.5;
-  border-color: #999;
+  color: var(--text-muted);
+  font-family: 'Cinzel', serif;
 }
 
+.dice-btn.locked button {
+  opacity: 0.5;
+  border-color: var(--text-muted);
+  transform: none;
+}
+
+/* Área de ações */
 .dice-actions {
   display: flex;
   gap: 1rem;
   margin-bottom: 2rem;
 }
+
 .dice-actions button {
   flex: 1;
   padding: 1rem;
-  background: white;
-  border: 2px solid var(--bronze);
-  border-radius: 8px;
+  background: transparent;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 20px;
   font-weight: bold;
   font-size: 1rem;
-  color: var(--bronze);
+  color: var(--text);
   cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Crimson Text', serif;
 }
+
+.dice-actions button:hover {
+  background: var(--surface-light);
+  border-color: var(--gold);
+}
+
 #roll-button {
   background: var(--gold);
   color: #1a1a1a;
   border-color: var(--gold);
 }
 
+#roll-button:hover {
+  background: #e5c25c;
+}
+
 .dice-result {
-  background: white;
-  border: 2px solid var(--bronze);
-  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  border-radius: 12px;
   padding: 1.2rem;
   margin-bottom: 2rem;
 }
+
 .dice-result div {
   margin: 0.5rem 0;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  color: var(--text);
 }
+
 #result-output, #total-output {
   font-weight: bold;
-  color: var(--bg-dark);
+  color: var(--gold);
   margin-left: 0.5rem;
+  font-family: 'Cinzel', serif;
 }
 
 .dice-history {
-  background: white;
-  border: 2px solid var(--bronze);
-  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  border-radius: 12px;
   padding: 1.2rem;
 }
+
 .dice-history h3 {
-  color: var(--bronze);
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
   margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  padding-bottom: 0.5rem;
 }
+
 .dice-history ul {
   list-style: none;
   padding: 0;
   margin: 0 0 1rem 0;
+  max-height: 200px;
+  overflow-y: auto;
 }
+
 .dice-history li {
   padding: 0.5rem 0;
-  border-bottom: 1px dashed var(--bronze);
+  border-bottom: 1px dashed rgba(212, 175, 55, 0.2);
   font-family: 'Crimson Text', serif;
+  color: var(--text);
+  font-size: 1rem;
 }
+
+.dice-history li:last-child {
+  border-bottom: none;
+}
+
 #clear-history {
   width: 100%;
   padding: 0.8rem;
-  background: white;
-  border: 2px solid var(--bronze);
-  border-radius: 8px;
-  color: var(--bronze);
+  background: transparent;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 20px;
+  color: var(--text);
   font-weight: bold;
   cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Crimson Text', serif;
+}
+
+#clear-history:hover {
+  background: var(--surface-light);
+  border-color: var(--gold);
+}
+
+.dice-body::-webkit-scrollbar,
+.dice-history ul::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dice-body::-webkit-scrollbar-track,
+.dice-history ul::-webkit-scrollbar-track {
+  background: rgba(212, 175, 55, 0.1);
+  border-radius: 10px;
+}
+
+.dice-body::-webkit-scrollbar-thumb,
+.dice-history ul::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 10px;
+}
+
+/* Responsivo - altura reduzida para evitar scroll */
+@media (max-height: 700px) {
+  .dice-panel {
+    max-height: 95vh;
+  }
+  
+  .dice-body {
+    padding: 1rem;
+  }
+  
+  .dice-buttons {
+    margin-bottom: 1rem;
+  }
+  
+  .dice-btn button {
+    font-size: 1.2rem;
+  }
+  
+  .dice-history ul {
+    max-height: 150px;
+  }
+}
+
+@media (max-width: 400px) {
+  .dice-header h2 {
+    font-size: 1.2rem;
+  }
+  
+  .dice-buttons {
+    gap: 0.5rem;
+  }
+  
+  .dice-btn {
+    min-width: 70px;
+  }
+  
+  .dice-btn button {
+    font-size: 1.2rem;
+  }
+}
+
+/* Garantia de visibilidade sem scroll excessivo */
+@media (max-height: 600px) {
+  .dice-history ul {
+    max-height: 100px;
+  }
+  
+  .dice-actions button,
+  #clear-history {
+    padding: 0.6rem;
+  }
 }
