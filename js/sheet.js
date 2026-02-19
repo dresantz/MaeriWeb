@@ -21,42 +21,65 @@ function closeSheet() {
   
   if (!isSheetOpen || !modal || !overlay) return;
   
+  saveSheetData();
+  
   isSheetOpen = false;
   modal.classList.remove('active');
   overlay.classList.remove('active');
   document.body.classList.remove('no-scroll');
-  saveSheetData();
 }
 
 function saveSheetData() {
+  // 🔹 IMPORTANTE: Pegar APENAS os inputs dentro do modal ativo
+  const modal = document.getElementById('sheet-modal');
+  if (!modal) return;
+  
+  const nameInput = modal.querySelector('#character-name');
+  const infoInput = modal.querySelector('#character-info');
+  const itemsInput = modal.querySelector('#character-items');
+  
   const data = {
-    name: document.getElementById('character-name')?.value || '',
-    info: document.getElementById('character-info')?.value || '',
-    items: document.getElementById('character-items')?.value || '',
+    name: nameInput?.value || '',
+    info: infoInput?.value || '',
+    items: itemsInput?.value || '',
     attributes: {}
   };
   
-  document.querySelectorAll('.rune-input').forEach(input => {
+  // 🔹 Pegar APENAS os rune-inputs dentro deste modal
+  modal.querySelectorAll('.rune-input').forEach(input => {
     const key = input.dataset.key;
-    if (key) data.attributes[key] = input.value || '0';
+    if (key) {
+      data.attributes[key] = input.value || '0';
+    }
   });
   
   localStorage.setItem('maeri-sheet', JSON.stringify(data));
 }
 
 function loadSheetData() {
+  const modal = document.getElementById('sheet-modal');
+  if (!modal) return;
+  
   const saved = localStorage.getItem('maeri-sheet');
   if (!saved) return;
   
   try {
     const data = JSON.parse(saved);
-    document.getElementById('character-name').value = data.name || '';
-    document.getElementById('character-info').value = data.info || '';
-    document.getElementById('character-items').value = data.items || '';
     
-    document.querySelectorAll('.rune-input').forEach(input => {
+    const nameInput = modal.querySelector('#character-name');
+    const infoInput = modal.querySelector('#character-info');
+    const itemsInput = modal.querySelector('#character-items');
+    
+    if (nameInput) nameInput.value = data.name || '';
+    if (infoInput) infoInput.value = data.info || '';
+    if (itemsInput) itemsInput.value = data.items || '';
+    
+    // 🔹 Pegar APENAS os rune-inputs dentro deste modal
+    modal.querySelectorAll('.rune-input').forEach(input => {
       const key = input.dataset.key;
-      if (key && data.attributes[key]) input.value = data.attributes[key];
+      if (key && data.attributes && data.attributes.hasOwnProperty(key)) {
+        input.value = data.attributes[key];
+      }
     });
   } catch (e) {}
 }
@@ -70,13 +93,17 @@ function initSheet() {
   if (sheetClose) sheetClose.addEventListener('click', closeSheet);
   if (sheetOverlay) sheetOverlay.addEventListener('click', closeSheet);
   
+  // 🔹 IMPORTANTE: Salvar apenas quando input em elementos do modal ativo
   document.addEventListener('input', (e) => {
     const target = e.target;
-    if (target.id === 'character-name' || 
-        target.id === 'character-info' || 
-        target.id === 'character-items' ||
-        target.classList.contains('rune-input')) {
-      saveSheetData();
+    // Verifica se o input está dentro do modal ativo
+    if (target.closest('#sheet-modal.active')) {
+      if (target.id === 'character-name' || 
+          target.id === 'character-info' || 
+          target.id === 'character-items' ||
+          target.classList.contains('rune-input')) {
+        saveSheetData();
+      }
     }
   });
   
@@ -94,10 +121,14 @@ function initSheet() {
     cancelBtn.addEventListener('click', () => confirmBox.hidden = true);
     
     confirmBtn.addEventListener('click', () => {
-      document.getElementById('character-name').value = '';
-      document.getElementById('character-info').value = '';
-      document.getElementById('character-items').value = '';
-      document.querySelectorAll('.rune-input').forEach(input => input.value = '0');
+      const modal = document.getElementById('sheet-modal');
+      if (!modal) return;
+      
+      modal.querySelector('#character-name').value = '';
+      modal.querySelector('#character-info').value = '';
+      modal.querySelector('#character-items').value = '';
+      modal.querySelectorAll('.rune-input').forEach(input => input.value = '0');
+      
       localStorage.removeItem('maeri-sheet');
       confirmBox.hidden = true;
     });
