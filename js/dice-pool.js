@@ -14,7 +14,6 @@ class DicePool {
     this.isRolling = false;
     
     // Configurações de rotação para cada face do D6
-    // Estes valores foram extraídos do código original da internet
     this.faceRotations = {
       1: [-0.1, 0.3, -1],     // Face 1 - front
       2: [-0.1, 0.6, -0.4],   // Face 2 - up
@@ -24,8 +23,7 @@ class DicePool {
       6: [-0.16, 0.6, 0.18]   // Face 6 - back
     };
     
-    // Rotação padrão - vou usar a face 1 como padrão
-    // para não dar a impressão de que já está com um resultado
+    // Rotação padrão - face 1
     this.defaultRotation = { 
       x: this.faceRotations[1][0], 
       y: this.faceRotations[1][1], 
@@ -36,14 +34,12 @@ class DicePool {
   }
   
   init() {
-    // Aguarda o DOM estar pronto
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => this.setupEventListeners());
     } else {
       this.setupEventListeners();
     }
     
-    // Escuta evento de modais carregados
     document.addEventListener('modals:loaded', () => {
       console.log('modals:loaded - reinicializando dice-pool');
       this.setupEventListeners();
@@ -51,15 +47,12 @@ class DicePool {
   }
   
   setupEventListeners() {
-    // Verifica se os elementos existem
     if (!this.checkElements()) return;
     
-    console.log('Configurando dice-pool.js com dados 3D individuais');
+    console.log('Configurando dice-pool.js com animação contínua');
     
-    // Botões de dados
     document.querySelectorAll('.dice-btn[data-sides]').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        // Impede que o clique no contador ou área ao redor dispare múltiplas vezes
         if (e.target.tagName === 'BUTTON') {
           const sides = parseInt(btn.dataset.sides);
           this.addDiceToPool(sides);
@@ -67,19 +60,16 @@ class DicePool {
       });
     });
     
-    // Botão de rolar
     const rollBtn = document.getElementById('roll-button');
     if (rollBtn) {
       rollBtn.addEventListener('click', () => this.rollDice());
     }
     
-    // Botão limpar pool
     const clearAllBtn = document.getElementById('clear-all');
     if (clearAllBtn) {
       clearAllBtn.addEventListener('click', () => this.clearPool());
     }
     
-    // Botão limpar histórico
     const clearHistoryBtn = document.getElementById('clear-history');
     if (clearHistoryBtn) {
       clearHistoryBtn.addEventListener('click', () => this.clearHistory());
@@ -108,7 +98,6 @@ class DicePool {
   }
   
   addDiceToPool(sides) {
-    // Incrementa o contador apropriado
     switch(sides) {
       case 2:
         this.diceCounts.d2++;
@@ -123,12 +112,10 @@ class DicePool {
         return;
     }
     
-    // Cria um novo dado com ID único
     const newDice = {
       sides: sides,
       value: null,
       id: 'dice-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
-      // Usa a rotação padrão (face 1) para todos os dados novos
       rotation: { ...this.defaultRotation }
     };
     
@@ -142,7 +129,6 @@ class DicePool {
     if (index !== -1) {
       const dice = this.dicePool[index];
       
-      // Decrementa o contador apropriado
       switch(dice.sides) {
         case 2:
           this.diceCounts.d2--;
@@ -167,7 +153,6 @@ class DicePool {
     this.updateCounters();
     this.renderPool();
     
-    // Limpa resultados
     document.getElementById('result-output').textContent = '—';
     document.getElementById('total-output').textContent = '—';
   }
@@ -178,85 +163,84 @@ class DicePool {
     document.getElementById('count-d6').textContent = this.diceCounts.d6;
   }
   
-  renderPool() {
+    renderPool() {
     const poolContainer = document.getElementById('dice-pool');
     if (!poolContainer) return;
     
-    // Limpa o container
     poolContainer.innerHTML = '';
     
-    // Se não houver dados, mostra mensagem
     if (this.dicePool.length === 0) {
-      poolContainer.innerHTML = '<p class="empty-pool">Nenhum dado no pool</p>';
-      return;
+        poolContainer.innerHTML = '<p class="empty-pool">Nenhum dado no pool</p>';
+        return;
     }
     
-    // Renderiza cada dado no pool como um dado 3D
     this.dicePool.forEach(dice => {
-      const diceElement = document.createElement('div');
-      diceElement.className = 'pool-dice-3d';
-      diceElement.dataset.id = dice.id;
-      
-      if (dice.sides === 6) {
-        // Para D6, cria o dado 3D completo com rotação baseada no valor (se existir)
+        const diceElement = document.createElement('div');
+        diceElement.className = 'pool-dice-3d';
+        diceElement.dataset.id = dice.id;
+        
+        if (dice.sides === 6) {
         let transformStyle;
         
         if (dice.value) {
-          // Se já tem valor (após rolagem), usa a rotação da face correspondente
-          const rot = this.faceRotations[dice.value];
-          transformStyle = `rotate3d(${rot[0]}, ${rot[1]}, ${rot[2]}, 180deg)`;
+            const rot = this.faceRotations[dice.value];
+            transformStyle = `rotate3d(${rot[0]}, ${rot[1]}, ${rot[2]}, 180deg)`;
         } else {
-          // Se não tem valor (dado novo), usa rotação padrão
-          transformStyle = `rotate3d(${dice.rotation.x}, ${dice.rotation.y}, ${dice.rotation.z}, 180deg)`;
+            transformStyle = `rotate3d(${dice.rotation.x}, ${dice.rotation.y}, ${dice.rotation.z}, 180deg)`;
         }
         
         diceElement.innerHTML = `
-          <div class="dice-3d-wrapper">
-            <div class="dice-3d" id="${dice.id}" data-value="${dice.value || ''}" style="transform: ${transformStyle};">
-              <div class="dice-face-3d front"></div>
-              <div class="dice-face-3d up"></div>
-              <div class="dice-face-3d left"></div>
-              <div class="dice-face-3d right"></div>
-              <div class="dice-face-3d bottom"></div>
-              <div class="dice-face-3d back"></div>
-            </div>
-          </div>
-          <div class="dice-info">
+        <div class="dice-3d" id="${dice.id}" data-value="${dice.value || ''}" style="transform: ${transformStyle};">
+            <div class="dice-face-3d front"></div>
+            <div class="dice-face-3d up"></div>
+            <div class="dice-face-3d left"></div>
+            <div class="dice-face-3d right"></div>
+            <div class="dice-face-3d bottom"></div>
+            <div class="dice-face-3d back"></div>
+        </div>
+        <div class="dice-info" style="position: relative; z-index: 10;">
             <span class="dice-sides">D${dice.sides}</span>
             ${dice.value ? `<span class="dice-value-badge">${dice.value}</span>` : ''}
-          </div>
-          <button class="remove-dice-3d" aria-label="Remover dado">✕</button>
+        </div>
+        <button class="remove-dice-3d" aria-label="Remover dado">✕</button>
         `;
         
-        // Aplica a classe de cor vermelha (como no exemplo)
-        setTimeout(() => {
-          const dice3d = document.getElementById(dice.id);
-          if (dice3d) dice3d.classList.add('red');
-        }, 0);
-        
-      } else {
-        // Para D2 e D3 (futuramente), representação simples por enquanto
+        } else {
         diceElement.innerHTML = `
-          <div class="simple-dice-3d">
+            <div class="simple-dice-3d">
             <span class="dice-symbol">D${dice.sides}</span>
-          </div>
-          <div class="dice-info">
+            </div>
+            <div class="dice-info">
             <span class="dice-sides">D${dice.sides}</span>
             ${dice.value ? `<span class="dice-value-badge">${dice.value}</span>` : ''}
-          </div>
-          <button class="remove-dice-3d" aria-label="Remover dado">✕</button>
+            </div>
+            <button class="remove-dice-3d" aria-label="Remover dado">✕</button>
         `;
-      }
-      
-      poolContainer.appendChild(diceElement);
-      
-      // Adiciona evento para remover
-      diceElement.querySelector('.remove-dice-3d').addEventListener('click', (e) => {
-        e.stopPropagation();
+        }
+        
+        poolContainer.appendChild(diceElement);
+        
+        // NOVO: Lógica de seleção ao clicar no dado
+        diceElement.addEventListener('click', (e) => {
+        // Se clicou no botão remover, não seleciona/deseleciona
+        if (e.target.classList.contains('remove-dice-3d')) return;
+        
+        // Remove a classe selected de todos os dados
+        document.querySelectorAll('.pool-dice-3d').forEach(el => {
+            el.classList.remove('selected');
+        });
+        
+        // Adiciona a classe selected ao dado clicado
+        diceElement.classList.add('selected');
+        });
+        
+        // Evento para remover (modificado para não propagar)
+        diceElement.querySelector('.remove-dice-3d').addEventListener('click', (e) => {
+        e.stopPropagation(); // Impede que o clique no botão selecione o dado
         this.removeDiceFromPool(dice.id);
-      });
+        });
     });
-  }
+    }
   
   rollDice() {
     if (this.dicePool.length === 0) {
@@ -267,10 +251,9 @@ class DicePool {
     if (this.isRolling) return;
     this.isRolling = true;
     
-    // Desabilita botões durante a rolagem
     this.setButtonsDisabled(true);
     
-    // Primeiro, rola todos os dados (define os valores)
+    // Gera os valores aleatórios para cada dado
     const results = this.dicePool.map(dice => {
       const value = Math.floor(Math.random() * dice.sides) + 1;
       dice.value = value;
@@ -279,20 +262,21 @@ class DicePool {
     
     const total = results.reduce((sum, val) => sum + val, 0);
     
+    // Atualiza o resultado imediatamente
+    document.getElementById('result-output').textContent = results.join(' + ');
+    document.getElementById('total-output').textContent = total;
+    
     // Anima cada dado D6 individualmente
     const d6Dice = this.dicePool.filter(d => d.sides === 6);
     let animatedCount = 0;
     
     if (d6Dice.length === 0) {
-      // Se não tem D6, resolve direto
       this.finishRoll(results, total);
     } else {
-      // Anima cada D6
       d6Dice.forEach(dice => {
         this.animateSingleDice(dice.id, dice.value, () => {
           animatedCount++;
           if (animatedCount === d6Dice.length) {
-            // Todos os dados terminaram a animação
             this.finishRoll(results, total);
           }
         });
@@ -300,58 +284,96 @@ class DicePool {
     }
   }
   
-  animateSingleDice(diceId, finalValue, callback) {
+    animateSingleDice(diceId, finalValue, callback) {
     const diceElement = document.getElementById(diceId);
     if (!diceElement) {
-      callback();
-      return;
+        callback();
+        return;
     }
+
+    // Pega o elemento pai .pool-dice-3d
+    const poolDice = diceElement.closest('.pool-dice-3d');
     
-    // Remove classes anteriores
-    diceElement.classList.remove('throw', 'rolling');
+    // Encontra os elementos de informação e esconde
+    const diceInfo = poolDice.querySelector('.dice-info');
     
-    // Força reflow para reiniciar animação
+    if (diceInfo) diceInfo.style.opacity = '0';
+    
+    // Pega a rotação inicial atual
+    const finalRotation = this.faceRotations[finalValue];
+    
+    // Cria uma animação personalizada com easing mais natural
+    const animationName = `rollFluidTo${finalValue}_${Date.now()}`;
+    const styleSheet = document.createElement('style');
+    
+    styleSheet.textContent = `
+        @keyframes ${animationName} {
+        0% {
+            transform: rotate3d(${this.defaultRotation.x}, ${this.defaultRotation.y}, ${this.defaultRotation.z}, 180deg);
+        }
+        25% {
+            transform: rotate3d(0.8, 0.8, 0.8, 360deg) translateY(-15px);
+        }
+        50% {
+            transform: rotate3d(0.6, 1.2, 0.4, 540deg) translateY(-5px);
+        }
+        75% {
+            transform: rotate3d(1.1, 0.7, 0.9, 720deg) translateY(-2px);
+        }
+        85% {
+            transform: rotate3d(0.9, 1.1, 0.5, 900deg) translateY(-1px);
+        }
+        95% {
+            transform: rotate3d(${finalRotation[0] * 1.1}, ${finalRotation[1] * 1.1}, ${finalRotation[2] * 1.1}, 1000deg) translateY(0);
+        }
+        100% {
+            transform: rotate3d(${finalRotation[0]}, ${finalRotation[1]}, ${finalRotation[2]}, 180deg);
+        }
+        }
+    `;
+    
+    document.head.appendChild(styleSheet);
+    
+    // Remove classes anteriores e animações
+    diceElement.style.animation = 'none';
+    diceElement.classList.remove('throw-dice');
+    
+    // Força reflow
     void diceElement.offsetWidth;
     
-    // Adiciona classe de rolagem
-    diceElement.classList.add('throw');
+    // Aplica a animação personalizada com easing suave
+    diceElement.style.animation = `${animationName} 1.2s cubic-bezier(0.25, 0.1, 0.15, 1) forwards`;
     
     // Aguarda a animação terminar
     setTimeout(() => {
-      diceElement.classList.remove('throw');
-      
-      // Aplica a rotação correspondente à face final
-      const rotation = this.faceRotations[finalValue];
-      if (rotation) {
-        diceElement.style.transform = `rotate3d(${rotation[0]}, ${rotation[1]}, ${rotation[2]}, 180deg)`;
+        // Remove a animação e aplica a transformação final permanentemente
+        diceElement.style.animation = '';
+        diceElement.style.transform = `rotate3d(${finalRotation[0]}, ${finalRotation[1]}, ${finalRotation[2]}, 180deg)`;
         
-        // Log para debug
-        console.log(`Dado ${diceId} - Valor ${finalValue} - Rotação:`, rotation);
-      }
-      
-      callback();
-    }, 1000); // 1 segundo para animação completa
-  }
+        // Remove o style sheet criado
+        document.head.removeChild(styleSheet);
+        
+        // NOVO: Mostra os badges novamente com maior z-index
+        if (diceInfo) {
+        diceInfo.style.opacity = '1';
+        diceInfo.style.position = 'relative';
+        diceInfo.style.zIndex = '20';
+        }
+        
+        callback();
+    }, 1200);
+    }
   
   finishRoll(results, total) {
-    // Atualiza o resultado
-    document.getElementById('result-output').textContent = results.join(' + ');
-    document.getElementById('total-output').textContent = total;
-    
-    // Adiciona ao histórico
     const timestamp = new Date().toLocaleTimeString();
     const historyItem = `[${timestamp}] ${results.join(' + ')} = ${total}`;
     this.history.unshift(historyItem);
     
-    // Mantém apenas os últimos 10 itens
     if (this.history.length > 10) {
       this.history.pop();
     }
     
     this.updateHistory();
-    
-    // Re-renderiza o pool para mostrar os badges de valor
-    // e garantir que as rotações estão corretas
     this.renderPool();
     
     this.isRolling = false;
