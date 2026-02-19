@@ -69,6 +69,7 @@ export class GMSectionNotes {
         <div class="gmnotes-session-modal-content">
           <h4>Nova Sessão</h4>
           <input type="text" class="gmnotes-session-modal-input" placeholder="Nome da sessão..." maxlength="50" autofocus>
+          <div class="gmnotes-session-modal-error" style="color: #ff4444; font-size: 0.9rem; margin-bottom: 1rem; display: none;"></div>
           <div class="gmnotes-session-modal-actions">
             <button class="gmnotes-session-modal-create">Criar</button>
             <button class="gmnotes-session-modal-cancel">Cancelar</button>
@@ -81,6 +82,7 @@ export class GMSectionNotes {
 
     const modal = container.querySelector('.gmnotes-session-modal');
     const input = modal.querySelector('.gmnotes-session-modal-input');
+    const errorDiv = modal.querySelector('.gmnotes-session-modal-error');
     const createBtn = modal.querySelector('.gmnotes-session-modal-create');
     const cancelBtn = modal.querySelector('.gmnotes-session-modal-cancel');
 
@@ -90,6 +92,17 @@ export class GMSectionNotes {
       const name = input.value.trim();
       if (!name) {
         modal.remove();
+        return;
+      }
+
+      // VERIFICA SE JÁ EXISTE SESSÃO COM O MESMO NOME
+      const sessionExists = this.sessions.some(s => s.name.toLowerCase() === name.toLowerCase());
+      
+      if (sessionExists) {
+        errorDiv.textContent = `Já existe uma sessão com o nome "${name}"`;
+        errorDiv.style.display = 'block';
+        input.classList.add('error');
+        input.focus();
         return;
       }
 
@@ -128,6 +141,12 @@ export class GMSectionNotes {
       
       modal.remove();
     };
+
+    // Remove erro quando usuário digita
+    input.addEventListener('input', () => {
+      errorDiv.style.display = 'none';
+      input.classList.remove('error');
+    });
 
     createBtn.addEventListener('click', createSession);
     cancelBtn.addEventListener('click', () => modal.remove());

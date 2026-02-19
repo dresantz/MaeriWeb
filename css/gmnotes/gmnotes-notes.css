@@ -257,3 +257,17 @@
   border-radius: 12px;
   width: 100%;
 }
+
+.gmnotes-session-modal-input.error {
+  border-color: #ff4444;
+}
+
+.gmnotes-session-modal-error {
+  color: #ff4444;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: rgba(255, 68, 68, 0.1);
+  border-radius: 6px;
+  text-align: center;
+}
