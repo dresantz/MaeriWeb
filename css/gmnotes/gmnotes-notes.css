@@ -139,6 +139,8 @@
   align-items: center;
   justify-content: center;
   z-index: 2100;
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
 }
 
 .gmnotes-confirm-content,
@@ -151,6 +153,8 @@
   width: 90%;
   text-align: center;
   animation: modalFadeIn 0.3s ease;
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
 }
 
 @keyframes modalFadeIn {

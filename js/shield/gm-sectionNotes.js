@@ -59,9 +59,6 @@ export class GMSectionNotes {
   }
 
   showNewSessionModal() {
-    const container = document.querySelector('.gmnotes-sessions-list');
-    if (!container) return;
-
     this.removeExistingModals();
 
     const modalHtml = `
@@ -78,9 +75,9 @@ export class GMSectionNotes {
       </div>
     `;
 
-    container.insertAdjacentHTML('beforeend', modalHtml);
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
 
-    const modal = container.querySelector('.gmnotes-session-modal');
+    const modal = document.querySelector('.gmnotes-session-modal:last-child');
     const input = modal.querySelector('.gmnotes-session-modal-input');
     const errorDiv = modal.querySelector('.gmnotes-session-modal-error');
     const createBtn = modal.querySelector('.gmnotes-session-modal-create');
@@ -95,7 +92,6 @@ export class GMSectionNotes {
         return;
       }
 
-      // VERIFICA SE JÁ EXISTE SESSÃO COM O MESMO NOME
       const sessionExists = this.sessions.some(s => s.name.toLowerCase() === name.toLowerCase());
       
       if (sessionExists) {
@@ -142,7 +138,6 @@ export class GMSectionNotes {
       modal.remove();
     };
 
-    // Remove erro quando usuário digita
     input.addEventListener('input', () => {
       errorDiv.style.display = 'none';
       input.classList.remove('error');
@@ -150,9 +145,15 @@ export class GMSectionNotes {
 
     createBtn.addEventListener('click', createSession);
     cancelBtn.addEventListener('click', () => modal.remove());
+    
     input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') createSession();
-      if (e.key === 'Escape') modal.remove();
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        createSession();
+      }
+      if (e.key === 'Escape') {
+        modal.remove();
+      }
     });
   }
 
@@ -177,9 +178,6 @@ export class GMSectionNotes {
 
   showDeleteConfirm(sessionName) {
     const cleanName = sessionName.trim();
-    const container = document.querySelector('.gmnotes-sessions-list');
-    if (!container) return;
-
     this.removeExistingModals();
 
     const modalHtml = `
@@ -194,9 +192,9 @@ export class GMSectionNotes {
       </div>
     `;
 
-    container.insertAdjacentHTML('beforeend', modalHtml);
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
 
-    const modal = container.querySelector('.gmnotes-confirm-modal');
+    const modal = document.querySelector('.gmnotes-confirm-modal:last-child');
     const yesBtn = modal.querySelector('.gmnotes-confirm-yes');
     const noBtn = modal.querySelector('.gmnotes-confirm-no');
 
@@ -223,9 +221,6 @@ export class GMSectionNotes {
   }
 
   showClearConfirm() {
-    const container = document.querySelector('.gmnotes-sessions-list');
-    if (!container) return;
-
     this.removeExistingModals();
 
     const modalHtml = `
@@ -240,9 +235,9 @@ export class GMSectionNotes {
       </div>
     `;
 
-    container.insertAdjacentHTML('beforeend', modalHtml);
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
 
-    const modal = container.querySelector('.gmnotes-confirm-modal');
+    const modal = document.querySelector('.gmnotes-confirm-modal:last-child');
     const yesBtn = modal.querySelector('.gmnotes-confirm-yes');
     const noBtn = modal.querySelector('.gmnotes-confirm-no');
 
@@ -276,12 +271,10 @@ export class GMSectionNotes {
       `).join('') + '<button class="gmnotes-session-item gmnotes-session-new">+ Nova Sessão</button>';
     }
 
-    // Eventos das sessões
     container.querySelectorAll('.gmnotes-session-item:not(.gmnotes-session-new)').forEach(btn => {
       btn.addEventListener('click', () => this.loadSession(btn.textContent.trim()));
     });
 
-    // Eventos dos botões de excluir
     container.querySelectorAll('.gmnotes-session-delete').forEach((btn, index) => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -289,7 +282,6 @@ export class GMSectionNotes {
       });
     });
 
-    // Evento do botão Nova Sessão
     const newBtn = container.querySelector('.gmnotes-session-new');
     if (newBtn) {
       const newBtnClone = newBtn.cloneNode(true);
