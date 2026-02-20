@@ -14,7 +14,7 @@
   border-radius: 16px;
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
   transition: all 0.2s ease;
-  cursor: pointer; /* Indica que é clicável */
+  cursor: pointer;
 }
 
 .pool-dice-3d:hover {
@@ -137,8 +137,10 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-top: 0.25rem;
+  margin-top: 0.75rem; /* Aumentado para dar espaço */
   transition: opacity 0.2s ease;
+  position: relative;
+  z-index: 10;
 }
 
 .dice-sides {
@@ -162,7 +164,7 @@
   border: 2px solid var(--surface);
 }
 
-/* Botão remover - VOLTOU para canto superior esquerdo */
+/* Botão remover */
 .remove-dice-3d {
   position: absolute;
   top: -5px;
@@ -196,81 +198,6 @@
 .remove-dice-3d:hover {
   background: #2e3788;
   transform: scale(1.1);
-}
-
-/* Animação de quique separada */
-.dice-3d.throw-dice {
-  animation: throwDiceSmall 1s linear forwards;
-}
-
-/* Keyframes */
-@keyframes rotateDiceSmall {
-  0% {
-    transform: rotate3d(0, 0.9, 0.9, 90deg);
-  }
-  30% {
-    transform: rotate3d(1, 1, 1, 180deg);
-  }
-  60% {
-    transform: rotate3d(1, 1, 1, 360deg);
-  }
-  80% {
-    transform: rotate3d(1, 1, 1, 540deg);
-  }
-  100% {
-    transform: rotate3d(1, 1, 1, 720deg);
-  }
-}
-
-@keyframes throwDiceSmall {
-  0% {
-    margin-top: 0;
-  }
-  20% {
-    margin-top: -20px;
-  }
-  40% {
-    margin-top: 0px;
-  }
-  60% {
-    margin-top: -8px;
-  }
-  80% {
-    margin-top: 0px;
-  }
-  85% {
-    margin-top: -3px;
-  }
-  90% {
-    margin-top: 0px;
-  }
-  95% {
-    margin-top: -1px;
-  }
-  100% {
-    margin-top: 0px;
-  }
-}
-
-@keyframes rotatePerFaceSmall {
-  16% {
-    transform: rotate3d(-0.1, 0.6, -0.4, 180deg);
-  }
-  32% {
-    transform: rotate3d(-0.85, -0.42, 0.73, 180deg);
-  }
-  48% {
-    transform: rotate3d(-0.8, 0.3, -0.75, 180deg);
-  }
-  64% {
-    transform: rotate3d(0.3, 0.45, 0.9, 180deg);
-  }
-  80% {
-    transform: rotate3d(-0.16, 0.6, 0.18, 180deg);
-  }
-  100% {
-    transform: rotate3d(-0.1, 0.3, -1, 180deg);
-  }
 }
 
 /* Responsivo */

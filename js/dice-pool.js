@@ -41,15 +41,12 @@ class DicePool {
     }
     
     document.addEventListener('modals:loaded', () => {
-      console.log('modals:loaded - reinicializando dice-pool');
       this.setupEventListeners();
     });
   }
   
   setupEventListeners() {
     if (!this.checkElements()) return;
-    
-    console.log('Configurando dice-pool.js com animação contínua');
     
     document.querySelectorAll('.dice-btn[data-sides]').forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -89,7 +86,6 @@ class DicePool {
     
     for (const id of elements) {
       if (!document.getElementById(id)) {
-        console.log(`Elemento #${id} não encontrado`);
         return false;
       }
     }
@@ -163,84 +159,82 @@ class DicePool {
     document.getElementById('count-d6').textContent = this.diceCounts.d6;
   }
   
-    renderPool() {
+  renderPool() {
     const poolContainer = document.getElementById('dice-pool');
     if (!poolContainer) return;
     
     poolContainer.innerHTML = '';
     
     if (this.dicePool.length === 0) {
-        poolContainer.innerHTML = '<p class="empty-pool">Nenhum dado no pool</p>';
-        return;
+      poolContainer.innerHTML = '<p class="empty-pool">Nenhum dado no pool</p>';
+      return;
     }
     
     this.dicePool.forEach(dice => {
-        const diceElement = document.createElement('div');
-        diceElement.className = 'pool-dice-3d';
-        diceElement.dataset.id = dice.id;
-        
-        if (dice.sides === 6) {
+      const diceElement = document.createElement('div');
+      diceElement.className = 'pool-dice-3d';
+      diceElement.dataset.id = dice.id;
+      
+      if (dice.sides === 6) {
         let transformStyle;
         
         if (dice.value) {
-            const rot = this.faceRotations[dice.value];
-            transformStyle = `rotate3d(${rot[0]}, ${rot[1]}, ${rot[2]}, 180deg)`;
+          const rot = this.faceRotations[dice.value];
+          transformStyle = `rotate3d(${rot[0]}, ${rot[1]}, ${rot[2]}, 180deg)`;
         } else {
-            transformStyle = `rotate3d(${dice.rotation.x}, ${dice.rotation.y}, ${dice.rotation.z}, 180deg)`;
+          transformStyle = `rotate3d(${dice.rotation.x}, ${dice.rotation.y}, ${dice.rotation.z}, 180deg)`;
         }
         
         diceElement.innerHTML = `
-        <div class="dice-3d" id="${dice.id}" data-value="${dice.value || ''}" style="transform: ${transformStyle};">
+          <div class="dice-3d" id="${dice.id}" data-value="${dice.value || ''}" style="transform: ${transformStyle};">
             <div class="dice-face-3d front"></div>
             <div class="dice-face-3d up"></div>
             <div class="dice-face-3d left"></div>
             <div class="dice-face-3d right"></div>
             <div class="dice-face-3d bottom"></div>
             <div class="dice-face-3d back"></div>
-        </div>
-        <div class="dice-info" style="position: relative; z-index: 10;">
+          </div>
+          <div class="dice-info" style="position: relative; z-index: 10;">
             <span class="dice-sides">D${dice.sides}</span>
             ${dice.value ? `<span class="dice-value-badge">${dice.value}</span>` : ''}
-        </div>
-        <button class="remove-dice-3d" aria-label="Remover dado">✕</button>
+          </div>
+          <button class="remove-dice-3d" aria-label="Remover dado">✕</button>
         `;
         
-        } else {
+      } else {
+        // Placeholder para D2 e D3 (será implementado depois)
         diceElement.innerHTML = `
-            <div class="simple-dice-3d">
-            <span class="dice-symbol">D${dice.sides}</span>
-            </div>
-            <div class="dice-info">
+          <div class="dice-placeholder">
+            <span>D${dice.sides}</span>
+          </div>
+          <div class="dice-info">
             <span class="dice-sides">D${dice.sides}</span>
             ${dice.value ? `<span class="dice-value-badge">${dice.value}</span>` : ''}
-            </div>
-            <button class="remove-dice-3d" aria-label="Remover dado">✕</button>
+          </div>
+          <button class="remove-dice-3d" aria-label="Remover dado">✕</button>
         `;
-        }
-        
-        poolContainer.appendChild(diceElement);
-        
-        // NOVO: Lógica de seleção ao clicar no dado
-        diceElement.addEventListener('click', (e) => {
-        // Se clicou no botão remover, não seleciona/deseleciona
+      }
+      
+      poolContainer.appendChild(diceElement);
+      
+      // Lógica de seleção
+      diceElement.addEventListener('click', (e) => {
         if (e.target.classList.contains('remove-dice-3d')) return;
         
-        // Remove a classe selected de todos os dados
         document.querySelectorAll('.pool-dice-3d').forEach(el => {
-            el.classList.remove('selected');
+          el.classList.remove('selected');
         });
         
-        // Adiciona a classe selected ao dado clicado
         diceElement.classList.add('selected');
-        });
-        
-        // Evento para remover (modificado para não propagar)
-        diceElement.querySelector('.remove-dice-3d').addEventListener('click', (e) => {
-        e.stopPropagation(); // Impede que o clique no botão selecione o dado
+      });
+      
+      // Evento para remover
+      diceElement.querySelector('.remove-dice-3d').addEventListener('click', (e) => {
+        e.stopPropagation();
         this.removeDiceFromPool(dice.id);
-        });
+      });
     });
-    }
+  }
   
   rollDice() {
     if (this.dicePool.length === 0) {
@@ -253,7 +247,6 @@ class DicePool {
     
     this.setButtonsDisabled(true);
     
-    // Gera os valores aleatórios para cada dado
     const results = this.dicePool.map(dice => {
       const value = Math.floor(Math.random() * dice.sides) + 1;
       dice.value = value;
@@ -262,11 +255,9 @@ class DicePool {
     
     const total = results.reduce((sum, val) => sum + val, 0);
     
-    // Atualiza o resultado imediatamente
     document.getElementById('result-output').textContent = results.join(' + ');
     document.getElementById('total-output').textContent = total;
     
-    // Anima cada dado D6 individualmente
     const d6Dice = this.dicePool.filter(d => d.sides === 6);
     let animatedCount = 0;
     
@@ -284,85 +275,58 @@ class DicePool {
     }
   }
   
-    animateSingleDice(diceId, finalValue, callback) {
+  animateSingleDice(diceId, finalValue, callback) {
     const diceElement = document.getElementById(diceId);
     if (!diceElement) {
-        callback();
-        return;
+      callback();
+      return;
     }
 
-    // Pega o elemento pai .pool-dice-3d
     const poolDice = diceElement.closest('.pool-dice-3d');
-    
-    // Encontra os elementos de informação e esconde
     const diceInfo = poolDice.querySelector('.dice-info');
     
     if (diceInfo) diceInfo.style.opacity = '0';
     
-    // Pega a rotação inicial atual
     const finalRotation = this.faceRotations[finalValue];
-    
-    // Cria uma animação personalizada com easing mais natural
-    const animationName = `rollFluidTo${finalValue}_${Date.now()}`;
+    const animationName = `rollTo${finalValue}_${Date.now()}`;
     const styleSheet = document.createElement('style');
     
     styleSheet.textContent = `
-        @keyframes ${animationName} {
-        0% {
-            transform: rotate3d(${this.defaultRotation.x}, ${this.defaultRotation.y}, ${this.defaultRotation.z}, 180deg);
-        }
-        25% {
-            transform: rotate3d(0.8, 0.8, 0.8, 360deg) translateY(-15px);
-        }
-        50% {
-            transform: rotate3d(0.6, 1.2, 0.4, 540deg) translateY(-5px);
-        }
-        75% {
-            transform: rotate3d(1.1, 0.7, 0.9, 720deg) translateY(-2px);
-        }
-        85% {
-            transform: rotate3d(0.9, 1.1, 0.5, 900deg) translateY(-1px);
-        }
-        95% {
-            transform: rotate3d(${finalRotation[0] * 1.1}, ${finalRotation[1] * 1.1}, ${finalRotation[2] * 1.1}, 1000deg) translateY(0);
-        }
-        100% {
-            transform: rotate3d(${finalRotation[0]}, ${finalRotation[1]}, ${finalRotation[2]}, 180deg);
-        }
-        }
+    @keyframes ${animationName} {
+        0% { transform: rotate3d(${this.defaultRotation.x}, ${this.defaultRotation.y}, ${this.defaultRotation.z}, 180deg); }
+        10% { transform: rotate3d(0.5, 0.8, 0.7, 270deg); }
+        20% { transform: rotate3d(0.9, 0.7, 0.8, 360deg); }
+        30% { transform: rotate3d(0.6, 1.0, 0.5, 450deg); }
+        40% { transform: rotate3d(0.7, 1.1, 0.5, 540deg); }
+        50% { transform: rotate3d(0.9, 0.9, 0.7, 630deg); }
+        60% { transform: rotate3d(1.0, 0.8, 0.9, 720deg); }
+        70% { transform: rotate3d(0.7, 1.2, 0.6, 810deg); }
+        80% { transform: rotate3d(0.8, 1.0, 0.6, 900deg); }
+        90% { transform: rotate3d(0.9, 1.1, 0.7, 990deg); }
+        100% { transform: rotate3d(${finalRotation[0]}, ${finalRotation[1]}, ${finalRotation[2]}, 180deg); }
+    }
     `;
     
     document.head.appendChild(styleSheet);
     
-    // Remove classes anteriores e animações
     diceElement.style.animation = 'none';
-    diceElement.classList.remove('throw-dice');
-    
-    // Força reflow
     void diceElement.offsetWidth;
-    
-    // Aplica a animação personalizada com easing suave
     diceElement.style.animation = `${animationName} 1.2s cubic-bezier(0.25, 0.1, 0.15, 1) forwards`;
     
-    // Aguarda a animação terminar
     setTimeout(() => {
-        // Remove a animação e aplica a transformação final permanentemente
-        diceElement.style.animation = '';
-        diceElement.style.transform = `rotate3d(${finalRotation[0]}, ${finalRotation[1]}, ${finalRotation[2]}, 180deg)`;
-        
-        // Remove o style sheet criado
-        document.head.removeChild(styleSheet);
-        
-        // NOVO: Mostra os badges novamente com maior z-index
-        if (diceInfo) {
+      diceElement.style.animation = '';
+      diceElement.style.transform = `rotate3d(${finalRotation[0]}, ${finalRotation[1]}, ${finalRotation[2]}, 180deg)`;
+      
+      document.head.removeChild(styleSheet);
+      
+      if (diceInfo) {
         diceInfo.style.opacity = '1';
-        diceInfo.style.position = 'relative';
         diceInfo.style.zIndex = '20';
-        }
-        
-        callback();
+      }
+      
+      callback();
     }, 1200);
-    }
+  }
   
   finishRoll(results, total) {
     const timestamp = new Date().toLocaleTimeString();
@@ -408,6 +372,4 @@ class DicePool {
 
 // Inicializa o DicePool
 const dicePool = new DicePool();
-
-// Exporta para uso em outros módulos (se necessário)
 export default dicePool;
