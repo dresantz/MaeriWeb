@@ -95,9 +95,6 @@ class DicePool {
   checkElements() {
     const elements = [
       'dice-pool',
-      'count-d2',
-      'count-d3', 
-      'count-d6',
       'result-output',
       'total-output',
       'history-output'
@@ -112,32 +109,68 @@ class DicePool {
     return true;
   }
   
-  addDiceToPool(sides) {
-    switch(sides) {
-      case 2:
-        this.diceCounts.d2++;
-        break;
-      case 3:
-        this.diceCounts.d3++;
-        break;
-      case 6:
-        this.diceCounts.d6++;
-        break;
-      default:
-        return;
+addDiceToPool(sides) {
+  // Verifica se já atingiu o limite de 6 dados
+  const totalDice = this.dicePool.length;
+  if (totalDice >= 6) {
+    // Feedback visual - piscar o pool em vermelho
+    const poolContainer = document.getElementById('dice-pool');
+    if (poolContainer) {
+      poolContainer.style.transition = 'background-color 0.3s ease';
+      poolContainer.style.backgroundColor = 'rgba(255, 68, 68, 0.3)';
+      poolContainer.style.outline = '2px solid #ff4444';
+      
+      // Volta ao normal após 0.5 segundos
+      setTimeout(() => {
+        poolContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+        poolContainer.style.outline = 'none';
+      }, 500);
     }
     
-    const newDice = {
-      sides: sides,
-      value: null,
-      id: 'dice-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
-      rotation: { ...this.defaultRotation }
-    };
+    // Feedback visual no botão clicado
+    const btn = document.querySelector(`.dice-btn[data-sides="${sides}"] button`);
+    if (btn) {
+      btn.style.transition = 'all 0.3s ease';
+      btn.style.backgroundColor = '#ff4444';
+      btn.style.color = 'white';
+      btn.style.borderColor = '#ff4444';
+      
+      setTimeout(() => {
+        btn.style.backgroundColor = '';
+        btn.style.color = '';
+        btn.style.borderColor = '';
+      }, 500);
+    }
     
-    this.dicePool.push(newDice);
-    this.updateCounters();
-    this.renderPool();
+    return; // Não adiciona o dado
   }
+  
+  // Se não atingiu o limite, prossegue com a adição normal
+  switch(sides) {
+    case 2:
+      this.diceCounts.d2++;
+      break;
+    case 3:
+      this.diceCounts.d3++;
+      break;
+    case 6:
+      this.diceCounts.d6++;
+      break;
+    default:
+      return;
+  }
+  
+  const newDice = {
+    sides: sides,
+    value: null,
+    id: 'dice-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
+    rotation: { ...this.defaultRotation }
+  };
+  
+  this.dicePool.push(newDice);
+  this.updateCounters();
+  this.renderPool();
+}
   
   removeDiceFromPool(id) {
     const index = this.dicePool.findIndex(dice => dice.id === id);
@@ -173,9 +206,14 @@ class DicePool {
   }
   
   updateCounters() {
-    document.getElementById('count-d2').textContent = this.diceCounts.d2;
-    document.getElementById('count-d3').textContent = this.diceCounts.d3;
-    document.getElementById('count-d6').textContent = this.diceCounts.d6;
+    // Verifica se os elementos existem antes de atualizar
+    const countD2 = document.getElementById('count-d2');
+    const countD3 = document.getElementById('count-d3');
+    const countD6 = document.getElementById('count-d6');
+    
+    if (countD2) countD2.textContent = this.diceCounts.d2;
+    if (countD3) countD3.textContent = this.diceCounts.d3;
+    if (countD6) countD6.textContent = this.diceCounts.d6;
   }
   
   renderPool() {
@@ -318,8 +356,8 @@ class DicePool {
             e.stopPropagation();
             this.removeDiceFromPool(dice.id);
           });
-        });
-      }
+    });
+  }
   
   rollDice() {
     if (this.dicePool.length === 0) {

@@ -115,15 +115,6 @@
   box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
 }
 
-.dice-btn .counter {
-  display: block;
-  margin-top: 0.3rem;
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: var(--text-muted);
-  font-family: 'Cinzel', serif;
-}
-
 /* Área de ações */
 .dice-actions {
   display: flex;
@@ -254,6 +245,7 @@
   border-radius: 10px;
 }
 
+/* Alerta sem dados */
 .empty-pool.warning {
   color: var(--gold);
   font-weight: bold;
@@ -261,6 +253,12 @@
   border: 1px solid var(--gold);
   border-radius: 12px;
   padding: 1rem;
+}
+
+/* Indicador de limite */
+.dice-pool.full {
+  border-color: #ff4444 !important;
+  box-shadow: 0 0 10px rgba(255, 68, 68, 0.3);
 }
 
 /* Estilos para o pool de dados */
@@ -280,7 +278,7 @@
 .dice-pool {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.8rem;
+  gap: 0.5rem;
   min-height: 100px;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 16px;
