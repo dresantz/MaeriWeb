@@ -32,6 +32,15 @@ class DicePool {
       5: 3,  // Face 5 → valor 3
       6: 3   // Face 6 → valor 3
     };
+
+      this.d2FaceMappings = {
+    1: 1,  // Face 1 → valor 1
+    2: 1,  // Face 2 → valor 1
+    3: 1,  // Face 3 → valor 1
+    4: 2,  // Face 4 → valor 2
+    5: 2,  // Face 5 → valor 2
+    6: 2   // Face 6 → valor 2
+  };
     
     // Rotação padrão - face 1
     this.defaultRotation = { 
@@ -185,8 +194,8 @@ class DicePool {
       diceElement.className = 'pool-dice-3d';
       diceElement.dataset.id = dice.id;
       
+      // DADO DE 6
       if (dice.sides === 6) {
-        // Código existente do D6 (não mexer)
         let transformStyle;
         
         if (dice.value) {
@@ -211,7 +220,8 @@ class DicePool {
           </div>
           <button class="remove-dice-3d" aria-label="Remover dado">✕</button>
         `;
-        
+      
+      // DADO DE 3.
       } else if (dice.sides === 3) {
         let transformStyle;
 
@@ -243,40 +253,73 @@ class DicePool {
         </div>
         <button class="remove-dice-3d" aria-label="Remover dado">✕</button>
       `;
-        
-      } else {
-        // Placeholder para D2 (futuro)
-        diceElement.innerHTML = `
-          <div class="dice-placeholder">
-            <span>D${dice.sides}</span>
-          </div>
-          <div class="dice-info">
-            <span class="dice-sides">D${dice.sides}</span>
-            ${dice.value ? `<span class="dice-value-badge">${dice.value}</span>` : ''}
-          </div>
-          <button class="remove-dice-3d" aria-label="Remover dado">✕</button>
-        `;
-      }
       
-      poolContainer.appendChild(diceElement);
-      
-      // Eventos (iguais para todos)
-      diceElement.addEventListener('click', (e) => {
-        if (e.target.classList.contains('remove-dice-3d')) return;
-        
-        document.querySelectorAll('.pool-dice-3d').forEach(el => {
-          el.classList.remove('selected');
+      // DADO DE 2.
+      } else if (dice.sides === 2) {
+            let transformStyle;
+
+            // Determina qual face mostrar baseado no valor (se existir)
+            if (dice.value) {
+              // Para D2, escolhe uma das três faces possíveis para aquele valor
+              const possibleFaces = Object.keys(this.d2FaceMappings)
+                .filter(face => this.d2FaceMappings[face] === dice.value);
+              const randomIndex = Math.floor(Math.random() * possibleFaces.length);
+              const faceToShow = parseInt(possibleFaces[randomIndex]);
+              const rot = this.faceRotations[faceToShow];
+              transformStyle = `rotate3d(${rot[0]}, ${rot[1]}, ${rot[2]}, 180deg)`;
+            } else {
+              transformStyle = `rotate3d(${dice.rotation.x}, ${dice.rotation.y}, ${dice.rotation.z}, 180deg)`;
+            }        
+
+            diceElement.innerHTML = `
+              <div class="dice-3d d2" id="${dice.id}" data-value="${dice.value || ''}" style="transform: ${transformStyle};">
+                <div class="dice-face-3d front"></div>
+                <div class="dice-face-3d up"></div>
+                <div class="dice-face-3d left"></div>
+                <div class="dice-face-3d right"></div>
+                <div class="dice-face-3d bottom"></div>
+                <div class="dice-face-3d back"></div>
+              </div>
+              <div class="dice-info" style="position: relative; z-index: 10;">
+                <span class="dice-sides">D${dice.sides}</span>
+                ${dice.value ? `<span class="dice-value-badge">${dice.value}</span>` : ''}
+              </div>
+              <button class="remove-dice-3d" aria-label="Remover dado">✕</button>
+            `;
+            
+          } else {
+            // Placeholder para outros dados (mantém como está)
+            diceElement.innerHTML = `
+              <div class="dice-placeholder">
+                <span>D${dice.sides}</span>
+              </div>
+              <div class="dice-info">
+                <span class="dice-sides">D${dice.sides}</span>
+                ${dice.value ? `<span class="dice-value-badge">${dice.value}</span>` : ''}
+              </div>
+              <button class="remove-dice-3d" aria-label="Remover dado">✕</button>
+            `;
+          }
+          
+          poolContainer.appendChild(diceElement);
+          
+          // Eventos (iguais para todos - não mexer)
+          diceElement.addEventListener('click', (e) => {
+            if (e.target.classList.contains('remove-dice-3d')) return;
+            
+            document.querySelectorAll('.pool-dice-3d').forEach(el => {
+              el.classList.remove('selected');
+            });
+            
+            diceElement.classList.add('selected');
+          });
+          
+          diceElement.querySelector('.remove-dice-3d').addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.removeDiceFromPool(dice.id);
+          });
         });
-        
-        diceElement.classList.add('selected');
-      });
-      
-      diceElement.querySelector('.remove-dice-3d').addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.removeDiceFromPool(dice.id);
-      });
-    });
-  }
+      }
   
   rollDice() {
     if (this.dicePool.length === 0) {
@@ -293,11 +336,12 @@ class DicePool {
     const results = this.dicePool.map(dice => {
       let value;
       if (dice.sides === 6) {
-        // D6: valor aleatório de 1 a 6
         value = Math.floor(Math.random() * 6) + 1;
       } else if (dice.sides === 3) {
-        // D3: valor aleatório de 1 a 3
         value = Math.floor(Math.random() * 3) + 1;
+      // NOVO: Condição para D2
+      } else if (dice.sides === 2) {
+        value = Math.floor(Math.random() * 2) + 1; // 1 ou 2
       } else {
         value = Math.floor(Math.random() * dice.sides) + 1;
       }
@@ -310,8 +354,8 @@ class DicePool {
     document.getElementById('result-output').textContent = results.join(' + ');
     document.getElementById('total-output').textContent = total;
     
-    // Anima cada dado individualmente
-    const diceToAnimate = this.dicePool.filter(d => d.sides === 6 || d.sides === 3);
+    // Anima cada dado individualmente (já inclui D2)
+    const diceToAnimate = this.dicePool.filter(d => d.sides === 6 || d.sides === 3 || d.sides === 2);
     let animatedCount = 0;
     
     if (diceToAnimate.length === 0) {
@@ -344,10 +388,16 @@ class DicePool {
     let faceToShow;
     if (sides === 6) {
       faceToShow = finalValue; // D6: valor direto = face física
+
     } else if (sides === 3) {
-      // D3: mapeia o valor para uma face física aleatória entre as duas opções
       const possibleFaces = Object.keys(this.d3FaceMappings)
         .filter(face => this.d3FaceMappings[face] === finalValue);
+      const randomIndex = Math.floor(Math.random() * possibleFaces.length);
+      faceToShow = parseInt(possibleFaces[randomIndex]);
+
+    } else if (sides === 2) {
+      const possibleFaces = Object.keys(this.d2FaceMappings)
+        .filter(face => this.d2FaceMappings[face] === finalValue);
       const randomIndex = Math.floor(Math.random() * possibleFaces.length);
       faceToShow = parseInt(possibleFaces[randomIndex]);
     }
