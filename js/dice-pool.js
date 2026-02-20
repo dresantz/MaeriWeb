@@ -323,7 +323,20 @@ class DicePool {
   
   rollDice() {
     if (this.dicePool.length === 0) {
-      alert('Adicione dados ao pool primeiro!');
+      // Mostra mensagem temporária no pool
+      const poolContainer = document.getElementById('dice-pool');
+      if (poolContainer) {
+        const originalContent = poolContainer.innerHTML;
+        poolContainer.innerHTML = '<p class="empty-pool warning">Adicione dados ao pool primeiro!</p>';
+        
+        // Restaura o conteúdo original após 1.5 segundos
+        setTimeout(() => {
+          this.renderPool();
+        }, 1500);
+      }
+      
+      this.isRolling = false;
+      this.setButtonsDisabled(false);
       return;
     }
     
@@ -332,16 +345,19 @@ class DicePool {
     
     this.setButtonsDisabled(true);
     
-    // Gera os valores aleatórios para cada dado
+    // Esconde os resultados imediatamente
+    document.getElementById('result-output').textContent = '—';
+    document.getElementById('total-output').textContent = '—';
+    
+    // Gera os valores aleatórios para cada dado (mas não exibe ainda)
     const results = this.dicePool.map(dice => {
       let value;
       if (dice.sides === 6) {
         value = Math.floor(Math.random() * 6) + 1;
       } else if (dice.sides === 3) {
         value = Math.floor(Math.random() * 3) + 1;
-      // NOVO: Condição para D2
       } else if (dice.sides === 2) {
-        value = Math.floor(Math.random() * 2) + 1; // 1 ou 2
+        value = Math.floor(Math.random() * 2) + 1;
       } else {
         value = Math.floor(Math.random() * dice.sides) + 1;
       }
@@ -351,21 +367,22 @@ class DicePool {
     
     const total = results.reduce((sum, val) => sum + val, 0);
     
-    document.getElementById('result-output').textContent = results.join(' + ');
-    document.getElementById('total-output').textContent = total;
+    // Armazena os resultados para usar no finishRoll
+    this.pendingResults = results;
+    this.pendingTotal = total;
     
-    // Anima cada dado individualmente (já inclui D2)
+    // Anima cada dado individualmente
     const diceToAnimate = this.dicePool.filter(d => d.sides === 6 || d.sides === 3 || d.sides === 2);
     let animatedCount = 0;
     
     if (diceToAnimate.length === 0) {
-      this.finishRoll(results, total);
+      this.finishRoll();
     } else {
       diceToAnimate.forEach(dice => {
         this.animateSingleDice(dice.id, dice.value, dice.sides, () => {
           animatedCount++;
           if (animatedCount === diceToAnimate.length) {
-            this.finishRoll(results, total);
+            this.finishRoll();
           }
         });
       });
@@ -443,9 +460,13 @@ class DicePool {
     }, 1200);
   }
   
-  finishRoll(results, total) {
+  finishRoll() {
+    // Agora sim, mostra os resultados
+    document.getElementById('result-output').textContent = this.pendingResults.join(' + ');
+    document.getElementById('total-output').textContent = this.pendingTotal;
+    
     const timestamp = new Date().toLocaleTimeString();
-    const historyItem = `[${timestamp}] ${results.join(' + ')} = ${total}`;
+    const historyItem = `[${timestamp}] ${this.pendingResults.join(' + ')} = ${this.pendingTotal}`;
     this.history.unshift(historyItem);
     
     if (this.history.length > 10) {
@@ -457,6 +478,10 @@ class DicePool {
     
     this.isRolling = false;
     this.setButtonsDisabled(false);
+    
+    // Limpa os resultados pendentes
+    this.pendingResults = null;
+    this.pendingTotal = null;
   }
   
   setButtonsDisabled(disabled) {

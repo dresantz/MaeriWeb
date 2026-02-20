@@ -128,7 +128,7 @@
 .dice-actions {
   display: flex;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
   margin-top: 0.5rem;
 }
 
@@ -166,7 +166,8 @@
   border: 1px solid rgba(212, 175, 55, 0.15);
   border-radius: 12px;
   padding: 1.2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .dice-result div {
@@ -251,6 +252,15 @@
 .dice-history ul::-webkit-scrollbar-thumb {
   background: var(--gold);
   border-radius: 10px;
+}
+
+.empty-pool.warning {
+  color: var(--gold);
+  font-weight: bold;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  padding: 1rem;
 }
 
 /* Estilos para o pool de dados */
