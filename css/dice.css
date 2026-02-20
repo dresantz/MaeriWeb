@@ -84,8 +84,8 @@
 .dice-buttons {
   display: flex;
   justify-content: space-around;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 0.7rem;
+  margin-bottom: 1rem;
   flex-wrap: wrap;
 }
 
@@ -101,7 +101,7 @@
   background: var(--surface-light);
   border: 2px solid rgba(212, 175, 55, 0.3);
   border-radius: 50%;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
   color: var(--gold);
   cursor: pointer;
@@ -117,8 +117,8 @@
 
 .dice-btn .counter {
   display: block;
-  margin-top: 0.5rem;
-  font-size: 1.1rem;
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
   font-weight: bold;
   color: var(--text-muted);
   font-family: 'Cinzel', serif;
@@ -128,7 +128,8 @@
 .dice-actions {
   display: flex;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  margin-top: 0.5rem;
 }
 
 .dice-actions button {
@@ -254,7 +255,7 @@
 
 /* Estilos para o pool de dados */
 .dice-pool-container {
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 .dice-pool-container h3 {
@@ -269,11 +270,11 @@
 .dice-pool {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.8rem;
   min-height: 100px;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 16px;
-  padding: 1rem;
+  padding: 0.8rem;
 }
 
 .empty-pool {
@@ -284,55 +285,51 @@
   padding: 2rem;
 }
 
-/* Responsivo - altura reduzida para evitar scroll */
+/* Responsivo*/
 @media (max-height: 700px) {
-  .dice-panel {
-    max-height: 95vh;
+  .dice-panel { max-height: 95vh; }
+  .dice-body { padding: 1rem; }
+  .dice-buttons { margin-bottom: 0.8rem; gap: 0.5rem; }
+  .dice-btn { 
+    min-width: 0; 
+    width: 50px; 
+    flex: 0 0 auto; 
   }
-  
-  .dice-body {
-    padding: 1rem;
+  .dice-btn button { 
+    font-size: 1.2rem; 
+    width: 50px; 
+    height: 50px; 
   }
-  
-  .dice-buttons {
-    margin-bottom: 1rem;
-  }
-  
-  .dice-btn button {
-    font-size: 1.2rem;
-  }
-  
-  .dice-history ul {
-    max-height: 150px;
-  }
+  .dice-history ul { max-height: 150px; }
 }
 
 @media (max-width: 400px) {
-  .dice-header h2 {
-    font-size: 1.2rem;
+  .dice-header h2 { font-size: 1.2rem; }
+  .dice-buttons { gap: 0.5rem; }
+  .dice-btn { 
+    min-width: 0; 
+    width: 60px; 
+    flex: 0 0 auto; 
   }
-  
-  .dice-buttons {
-    gap: 0.5rem;
-  }
-  
-  .dice-btn {
-    min-width: 70px;
-  }
-  
-  .dice-btn button {
-    font-size: 1.2rem;
+  .dice-btn button { 
+    font-size: 1.2rem; 
+    width: 60px; 
+    height: 60px; 
   }
 }
 
 /* Garantia de visibilidade sem scroll excessivo */
 @media (max-height: 600px) {
-  .dice-history ul {
-    max-height: 100px;
-  }
-  
+  .dice-history ul { max-height: 100px; }
   .dice-actions button,
-  #clear-history {
-    padding: 0.6rem;
+  #clear-history { padding: 0.6rem; }
+  .dice-btn { 
+    min-width: 0; 
+    width: 80px; 
+    flex: 0 0 auto; 
+  }
+  .dice-btn button { 
+    width: 80px; 
+    height: 80px; 
   }
 }
