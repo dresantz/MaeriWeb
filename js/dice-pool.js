@@ -13,7 +13,7 @@ class DicePool {
     this.history = [];
     this.isRolling = false;
     
-    // Configurações de rotação para cada face do D6
+    // Configurações de rotação para cada face do dado
     this.faceRotations = {
       1: [-0.1, 0.3, -1],     // Face 1 - front
       2: [-0.1, 0.6, -0.4],   // Face 2 - up
@@ -21,6 +21,16 @@ class DicePool {
       4: [-0.8, 0.3, -0.75],  // Face 4 - right
       5: [0.3, 0.45, 0.9],    // Face 5 - bottom
       6: [-0.16, 0.6, 0.18]   // Face 6 - back
+    };
+
+    // Configurações de rotação para D3
+    this.d3FaceMappings = {
+      1: 1,  // Face 1 → valor 1
+      2: 1,  // Face 2 → valor 1
+      3: 2,  // Face 3 → valor 2
+      4: 2,  // Face 4 → valor 2
+      5: 3,  // Face 5 → valor 3
+      6: 3   // Face 6 → valor 3
     };
     
     // Rotação padrão - face 1
@@ -176,6 +186,7 @@ class DicePool {
       diceElement.dataset.id = dice.id;
       
       if (dice.sides === 6) {
+        // Código existente do D6 (não mexer)
         let transformStyle;
         
         if (dice.value) {
@@ -201,8 +212,40 @@ class DicePool {
           <button class="remove-dice-3d" aria-label="Remover dado">✕</button>
         `;
         
+      } else if (dice.sides === 3) {
+        let transformStyle;
+
+      // Determina qual face mostrar baseado no valor (se existir)
+      if (dice.value) {
+        // Para D3, precisamos escolher uma das duas faces possíveis para aquele valor
+        const possibleFaces = Object.keys(this.d3FaceMappings)
+          .filter(face => this.d3FaceMappings[face] === dice.value);
+        const randomIndex = Math.floor(Math.random() * possibleFaces.length);
+        const faceToShow = parseInt(possibleFaces[randomIndex]);
+        const rot = this.faceRotations[faceToShow];
+        transformStyle = `rotate3d(${rot[0]}, ${rot[1]}, ${rot[2]}, 180deg)`;
       } else {
-        // Placeholder para D2 e D3 (será implementado depois)
+        transformStyle = `rotate3d(${dice.rotation.x}, ${dice.rotation.y}, ${dice.rotation.z}, 180deg)`;
+      }        
+
+      diceElement.innerHTML = `
+        <div class="dice-3d d3" id="${dice.id}" data-value="${dice.value || ''}" style="transform: ${transformStyle};">
+          <div class="dice-face-3d front"></div>
+          <div class="dice-face-3d up"></div>
+          <div class="dice-face-3d left"></div>
+          <div class="dice-face-3d right"></div>
+          <div class="dice-face-3d bottom"></div>
+          <div class="dice-face-3d back"></div>
+        </div>
+        <div class="dice-info" style="position: relative; z-index: 10;">
+          <span class="dice-sides">D${dice.sides}</span>
+          ${dice.value ? `<span class="dice-value-badge">${dice.value}</span>` : ''}
+        </div>
+        <button class="remove-dice-3d" aria-label="Remover dado">✕</button>
+      `;
+        
+      } else {
+        // Placeholder para D2 (futuro)
         diceElement.innerHTML = `
           <div class="dice-placeholder">
             <span>D${dice.sides}</span>
@@ -217,7 +260,7 @@ class DicePool {
       
       poolContainer.appendChild(diceElement);
       
-      // Lógica de seleção
+      // Eventos (iguais para todos)
       diceElement.addEventListener('click', (e) => {
         if (e.target.classList.contains('remove-dice-3d')) return;
         
@@ -228,7 +271,6 @@ class DicePool {
         diceElement.classList.add('selected');
       });
       
-      // Evento para remover
       diceElement.querySelector('.remove-dice-3d').addEventListener('click', (e) => {
         e.stopPropagation();
         this.removeDiceFromPool(dice.id);
@@ -247,8 +289,18 @@ class DicePool {
     
     this.setButtonsDisabled(true);
     
+    // Gera os valores aleatórios para cada dado
     const results = this.dicePool.map(dice => {
-      const value = Math.floor(Math.random() * dice.sides) + 1;
+      let value;
+      if (dice.sides === 6) {
+        // D6: valor aleatório de 1 a 6
+        value = Math.floor(Math.random() * 6) + 1;
+      } else if (dice.sides === 3) {
+        // D3: valor aleatório de 1 a 3
+        value = Math.floor(Math.random() * 3) + 1;
+      } else {
+        value = Math.floor(Math.random() * dice.sides) + 1;
+      }
       dice.value = value;
       return value;
     });
@@ -258,16 +310,17 @@ class DicePool {
     document.getElementById('result-output').textContent = results.join(' + ');
     document.getElementById('total-output').textContent = total;
     
-    const d6Dice = this.dicePool.filter(d => d.sides === 6);
+    // Anima cada dado individualmente
+    const diceToAnimate = this.dicePool.filter(d => d.sides === 6 || d.sides === 3);
     let animatedCount = 0;
     
-    if (d6Dice.length === 0) {
+    if (diceToAnimate.length === 0) {
       this.finishRoll(results, total);
     } else {
-      d6Dice.forEach(dice => {
-        this.animateSingleDice(dice.id, dice.value, () => {
+      diceToAnimate.forEach(dice => {
+        this.animateSingleDice(dice.id, dice.value, dice.sides, () => {
           animatedCount++;
-          if (animatedCount === d6Dice.length) {
+          if (animatedCount === diceToAnimate.length) {
             this.finishRoll(results, total);
           }
         });
@@ -275,7 +328,7 @@ class DicePool {
     }
   }
   
-  animateSingleDice(diceId, finalValue, callback) {
+  animateSingleDice(diceId, finalValue, sides, callback) {
     const diceElement = document.getElementById(diceId);
     if (!diceElement) {
       callback();
@@ -287,7 +340,19 @@ class DicePool {
     
     if (diceInfo) diceInfo.style.opacity = '0';
     
-    const finalRotation = this.faceRotations[finalValue];
+    // Determina qual face física mostrar baseado no valor e tipo de dado
+    let faceToShow;
+    if (sides === 6) {
+      faceToShow = finalValue; // D6: valor direto = face física
+    } else if (sides === 3) {
+      // D3: mapeia o valor para uma face física aleatória entre as duas opções
+      const possibleFaces = Object.keys(this.d3FaceMappings)
+        .filter(face => this.d3FaceMappings[face] === finalValue);
+      const randomIndex = Math.floor(Math.random() * possibleFaces.length);
+      faceToShow = parseInt(possibleFaces[randomIndex]);
+    }
+    
+    const finalRotation = this.faceRotations[faceToShow];
     const animationName = `rollTo${finalValue}_${Date.now()}`;
     const styleSheet = document.createElement('style');
     
@@ -295,14 +360,14 @@ class DicePool {
     @keyframes ${animationName} {
         0% { transform: rotate3d(${this.defaultRotation.x}, ${this.defaultRotation.y}, ${this.defaultRotation.z}, 180deg); }
         10% { transform: rotate3d(0.5, 0.8, 0.7, 270deg); }
-        20% { transform: rotate3d(0.9, 0.7, 0.8, 360deg); }
+        20% { transform: rotate3d(0.9, 0.7, 0.1, 360deg); }
         30% { transform: rotate3d(0.6, 1.0, 0.5, 450deg); }
         40% { transform: rotate3d(0.7, 1.1, 0.5, 540deg); }
-        50% { transform: rotate3d(0.9, 0.9, 0.7, 630deg); }
-        60% { transform: rotate3d(1.0, 0.8, 0.9, 720deg); }
-        70% { transform: rotate3d(0.7, 1.2, 0.6, 810deg); }
-        80% { transform: rotate3d(0.8, 1.0, 0.6, 900deg); }
-        90% { transform: rotate3d(0.9, 1.1, 0.7, 990deg); }
+        50% { transform: rotate3d(0.1, 0.9, 0.7, 630deg); }
+        60% { transform: rotate3d(1.0, 0.1, 0.9, 720deg); }
+        70% { transform: rotate3d(0.7, 1.0, 0.1, 810deg); }
+        80% { transform: rotate3d(0.8, 0.2, 0.6, 900deg); }
+        90% { transform: rotate3d(0.9, 0.1, 0.7, 990deg); }
         100% { transform: rotate3d(${finalRotation[0]}, ${finalRotation[1]}, ${finalRotation[2]}, 180deg); }
     }
     `;
