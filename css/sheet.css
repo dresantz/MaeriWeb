@@ -1,7 +1,15 @@
 /* =========================
-   Sheet Modal
+   Sheet Modal - Completo
+   Seguindo o padrão que funciona
+   COM CORREÇÕES DE LARGURA
 ========================= */
 
+/* Garantir que tudo respeite as bordas */
+* {
+  box-sizing: border-box;
+}
+
+/* Overlay */
 .sheet-overlay {
   display: none;
   position: fixed;
@@ -18,7 +26,7 @@
   display: block;
 }
 
-
+/* Modal Principal */
 .sheet-modal {
   display: none;
   position: fixed;
@@ -26,10 +34,10 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 95%;
-  max-width: 500px;
+  max-width: 520px;
   max-height: 90vh;
-  background: var(--surface);
-  border: 2px solid var(--gold);
+  background: var(--surface, #1a1a2e);
+  border: 2px solid var(--gold, #d4af37);
   border-radius: 24px;
   z-index: 2001;
   flex-direction: column;
@@ -41,205 +49,468 @@
   display: flex;
 }
 
-
+/* Cabeçalho do Modal */
 .sheet-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 1.5rem 0.75rem 1.5rem;
+  padding: 1rem 1.2rem;
   border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-  background: var(--surface);
+  background: var(--surface, #1a1a2e);
 }
 
 .sheet-header h2 {
-  color: var(--gold);
+  color: var(--gold, #d4af37);
   font-family: 'Cinzel', serif;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin: 0;
 }
 
 .sheet-close {
   background: none;
   border: none;
-  color: var(--text-muted);
-  font-size: 2rem;
+  color: var(--text-muted, #b0b0c0);
+  font-size: 1.8rem;
   cursor: pointer;
   padding: 0 0.5rem;
   line-height: 1;
   transition: color 0.2s ease;
-  -webkit-tap-highlight-color: transparent;
-  outline: none;
 }
 
 .sheet-close:hover {
-  color: var(--gold);
+  color: var(--gold, #d4af37);
 }
 
+/* Conteúdo Scrollável */
 .sheet-content {
-  color: var(--text);
-  font-family: 'Crimson Text', serif;
-  padding: 1.5rem;
+  padding: 0.8rem;
   overflow-y: auto;
-  max-height: calc(90vh - 80px);
+  overflow-x: hidden;
+  max-height: calc(90vh - 70px);
+  flex: 1;
+  color: var(--text, #f0f0f0);
+  font-family: 'Crimson Text', serif;
+  width: 100%;
+}
+
+/* =========================
+   HEADER FIXO DA FICHA
+========================= */
+.sheet-header-fixed {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  padding: 0.6rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  width: 100%;
+}
+
+.sheet-row {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+  width: 100%;
+}
+
+.sheet-row:last-child {
+  margin-bottom: 0;
+}
+
+/* Campo Nome e Nível */
+.sheet-field--name {
+  flex: 3;
+}
+
+.sheet-field--level {
   flex: 1;
 }
 
-#character-name {
-  width: 100%;
-  padding: 1rem;
-  font-size: 1.1rem;
-  font-family: 'Crimson Text', serif;
-  background: var(--surface-light);
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  border-radius: 12px;
-  color: var(--text);
-  margin-bottom: 1.5rem;
-  transition: all 0.2s ease;
-}
-
-#character-name:focus {
-  outline: none;
-  border-color: var(--gold);
-  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
-}
-
-#character-name::placeholder {
-  color: var(--text-muted);
-  font-style: italic;
-}
-
-.attributes-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.8rem;
-  margin-bottom: 1.5rem;
-}
-
-.attributes-grid div {
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(212, 175, 55, 0.15);
-  border-radius: 12px;
-  padding: 0.8rem;
-  text-align: center;
-  transition: all 0.2s ease;
-}
-
-.attributes-grid div:hover {
-  border-color: rgba(212, 175, 55, 0.3);
-}
-
-.attributes-grid label {
+.sheet-label {
   display: block;
-  color: var(--gold);
-  font-weight: bold;
-  font-size: 1rem;
-  margin-bottom: 0.3rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--gold, #d4af37);
+  margin-bottom: 0.2rem;
   font-family: 'Cinzel', serif;
 }
 
-.rune-input {
+.sheet-input {
   width: 100%;
-  padding: 0.5rem;
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: bold;
-  background: var(--surface-light);
+  padding: 0.5rem 0.7rem;
+  background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(212, 175, 55, 0.3);
-  border-radius: 8px;
-  color: var(--text);
+  border-radius: 10px;
+  color: var(--text, #f0f0f0);
+  font-family: 'Crimson Text', serif;
+  font-size: 0.95rem;
   transition: all 0.2s ease;
 }
 
-.rune-input:focus {
+.sheet-input:focus {
   outline: none;
-  border-color: var(--gold);
+  border-color: var(--gold, #d4af37);
   box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+.sheet-input::placeholder {
+  color: var(--text-muted, #b0b0c0);
+  font-style: italic;
+}
+
+/* Grid de Atributos */
+.attributes-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.3rem;
+  width: 100%;
+}
+
+.attribute-item {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  border-radius: 8px;
+  padding: 0.4rem;
+  text-align: center;
+}
+
+.attribute-label {
+  display: block;
+  color: var(--gold, #d4af37);
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+  font-family: 'Cinzel', serif;
+}
+
+.attribute-input {
+  width: 100%;
+  padding: 0.3rem;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 6px;
+  color: var(--text, #f0f0f0);
+  font-size: 0.95rem;
+  font-weight: bold;
+}
+
+/* =========================
+   Status Vitais
+========================= */
+.sheet-row--vitals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 0.8rem;
+}
+
+.vitals-group {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 0.4rem 0.5rem;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.vitals-label {
+  color: var(--gold, #d4af37);
+  font-weight: bold;
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  width: 2.5rem;
+}
+
+.vitals-fields {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  flex: 1;
+  min-width: 0;
+  justify-content: flex-end;
+}
+
+.vitals-input {
+  flex: 1;
+  min-width: 0;
+  width: 3.2rem;
+  padding: 0.3rem 0.2rem;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 5px;
+  color: var(--text, #f0f0f0);
+  font-size: 0.9rem;
+}
+
+.vitals-separator {
+  color: var(--gold, #d4af37);
+  font-weight: bold;
+  font-size: 1rem;
+  flex-shrink: 0;
+  width: 0.8rem;
+  padding: 0 0.1rem;
+}
+
+/* Notas */
+.sheet-field--notas {
+  width: 100%;
+}
+
+.sheet-textarea--notas {
+  min-height: 80px;
+  width: 100%;
+  resize: vertical;
+}
+
+/* =========================
+   ABAS
+========================= */
+.sheet-tabs {
+  display: flex;
+  gap: 0.4rem;
+  position: sticky;
+  top: 0;
+  background: var(--surface, #1a1a2e);
+  padding: 0.2rem 0;
+  z-index: 5;
+}
+
+.sheet-tab {
+  flex: 1;
+  padding: 0.6rem 0.3rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 20px;
+  color: var(--text-muted, #b0b0c0);
+  font-weight: bold;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Cinzel', serif;
+  white-space: nowrap;
+}
+
+.sheet-tab:hover {
+  background: rgba(212, 175, 55, 0.1);
+  color: var(--gold, #d4af37);
+}
+
+.sheet-tab[aria-expanded="true"] {
+  background: var(--gold, #d4af37);
+  color: #1a1a1a;
+  border-color: var(--gold, #d4af37);
+}
+
+/* =========================
+   PAINÉIS
+========================= */
+.sheet-panel {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  padding: 1rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  width: 100%;
+}
+
+.sheet-panel[hidden] {
+  display: none;
+}
+
+.panel-title {
+  color: var(--gold, #d4af37);
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  margin: 0 0 0.8rem 0;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.panel-row {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+  width: 100%;
+}
+
+.panel-row:last-child {
+  margin-bottom: 0;
+}
+
+.sheet-field--half {
+  flex: 1;
+}
+
+.sheet-field--third {
+  flex: 1;
+}
+
+.sheet-field--full {
+  width: 100%;
 }
 
 /* Textareas */
 .sheet-textarea {
   width: 100%;
-  padding: 0.8rem;
-  background: var(--surface-light);
+  padding: 0.6rem;
+  background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(212, 175, 55, 0.3);
-  border-radius: 12px;
+  border-radius: 10px;
+  color: var(--text, #f0f0f0);
   font-family: 'Crimson Text', serif;
-  font-size: 1rem;
-  color: var(--text);
-  margin-bottom: 1rem;
+  font-size: 0.9rem;
   resize: vertical;
-  min-height: 100px;
+  min-height: 70px;
   transition: all 0.2s ease;
 }
 
 .sheet-textarea:focus {
   outline: none;
-  border-color: var(--gold);
+  border-color: var(--gold, #d4af37);
   box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
 }
 
 .sheet-textarea::placeholder {
-  color: var(--text-muted);
+  color: var(--text-muted, #b0b0c0);
   font-style: italic;
 }
 
+/* Campos de XP */
+.panel-row--xp {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 0.6rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.xp-field {
+  text-align: center;
+  flex: 1;
+}
+
+.xp-label {
+  display: block;
+  color: var(--gold, #d4af37);
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+  font-family: 'Cinzel', serif;
+}
+
+.xp-input {
+  width: 80%;
+  padding: 0.3rem;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 6px;
+  color: var(--text, #f0f0f0);
+  font-size: 0.9rem;
+}
+
+/* Limites de Peso */
+.panel-row--limits {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 0.6rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.limit-field {
+  text-align: center;
+  flex: 1;
+}
+
+.limit-label {
+  display: block;
+  color: var(--gold, #d4af37);
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+  font-family: 'Cinzel', serif;
+}
+
+.limit-input {
+  width: 80%;
+  padding: 0.3rem;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 6px;
+  color: var(--text, #f0f0f0);
+  font-size: 0.9rem;
+}
+
+/* =========================
+   BOTÃO LIMPAR (opcional)
+========================= */
 .sheet-clear-button {
   width: 100%;
-  padding: 1rem;
+  padding: 0.7rem;
   background: transparent;
   border: 1px solid rgba(212, 175, 55, 0.3);
   border-radius: 20px;
-  color: var(--text);
+  color: var(--text, #f0f0f0);
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: 'Crimson Text', serif;
+  font-family: 'Cinzel', serif;
   margin-top: 0.5rem;
 }
 
 .sheet-clear-button:hover {
-  background: var(--surface-light);
-  border-color: var(--gold);
+  background: rgba(212, 175, 55, 0.1);
+  border-color: var(--gold, #d4af37);
 }
 
 .clear-confirmation {
   margin-top: 1rem;
-  padding: 1rem;
+  padding: 0.8rem;
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(212, 175, 55, 0.15);
   border-radius: 12px;
 }
 
 .clear-confirmation p {
-  color: var(--gold);
+  color: var(--gold, #d4af37);
   font-family: 'Cinzel', serif;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
 }
 
 .clear-actions {
   display: flex;
-  gap: 0.8rem;
-  margin-top: 0.8rem;
+  gap: 0.6rem;
 }
 
 .clear-actions button {
   flex: 1;
-  padding: 0.8rem;
+  padding: 0.5rem;
   background: transparent;
   border: 1px solid rgba(212, 175, 55, 0.3);
   border-radius: 20px;
-  color: var(--text);
+  color: var(--text, #f0f0f0);
   font-weight: bold;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: 'Crimson Text', serif;
+  font-size: 0.85rem;
 }
 
 .clear-actions button:hover {
-  background: var(--surface-light);
-  border-color: var(--gold);
+  background: rgba(212, 175, 55, 0.1);
 }
 
 .clear-actions .danger {
@@ -252,8 +523,11 @@
   background: rgba(192, 57, 43, 0.3);
 }
 
+/* =========================
+   SCROLLBAR
+========================= */
 .sheet-content::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 .sheet-content::-webkit-scrollbar-track {
@@ -262,63 +536,90 @@
 }
 
 .sheet-content::-webkit-scrollbar-thumb {
-  background: var(--gold);
+  background: var(--gold, #d4af37);
   border-radius: 10px;
 }
 
-@media (max-height: 700px) {
-  .sheet-modal {
-    max-height: 95vh;
-  }
-  
-  .sheet-content {
-    padding: 1rem;
+/* =========================
+   RESPONSIVIDADE
+========================= */
+@media (max-width: 500px) {
+  .sheet-header h2 {
+    font-size: 1.1rem;
   }
   
   .attributes-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.2rem;
+  }
+  
+  .sheet-row--vitals {
+    grid-template-columns: 1fr;
     gap: 0.5rem;
   }
-  
-  .attributes-grid div {
-    padding: 0.5rem;
-  }
-  
-  .sheet-textarea {
-    min-height: 80px;
-  }
-}
 
-@media (max-width: 400px) {
-  .sheet-header h2 {
-    font-size: 1.2rem;
+  .sheet-textarea--notas {
+    min-height: 70px;
   }
   
-  .attributes-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .panel-row {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  
+  .panel-row--xp, .panel-row--limits {
+    flex-direction: row;
+    flex-wrap: wrap;
   }
   
   .clear-actions {
     flex-direction: column;
   }
+  
+  .sheet-tabs {
+    gap: 0.2rem;
+  }
+  
+  .sheet-tab {
+    font-size: 0.6rem;
+    padding: 0.5rem 0.2rem;
+  }
+
+  .vitals-input {
+    width: 2.8rem;
+    min-width: 2.8rem;
+    font-size: 0.85rem;
+  }
+  
+  .vitals-label {
+    width: 2.2rem;
+    font-size: 0.9rem;
+  }
 }
 
-/* Garantia de visibilidade sem scroll excessivo */
-@media (max-height: 600px) {
+@media (max-height: 700px) {
   .sheet-content {
-    padding: 0.8rem;
+    padding: 1rem;
   }
   
-  #character-name {
+  .sheet-header-fixed {
     padding: 0.6rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
   }
   
-  .attributes-grid {
-    margin-bottom: 1rem;
+  .sheet-tabs {
+    margin: 1rem 0 0.6rem;
   }
   
   .sheet-textarea {
     min-height: 60px;
-    margin-bottom: 0.8rem;
+  }
+
+  .sheet-textarea--notas {
+    min-height: 60px;
+  }
+  
+  .panel-row {
+    margin-bottom: 0.6rem;
   }
 }

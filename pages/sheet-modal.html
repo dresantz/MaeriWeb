@@ -1,7 +1,4 @@
-<!-- =========================
-     Character Sheet Modal
-========================= -->
-
+<!-- pages/sheet-modal.html -->
 <div id="sheet-overlay" class="sheet-overlay"></div>
 
 <div id="sheet-modal" class="sheet-modal">
@@ -13,20 +10,221 @@
 
   <div class="sheet-content">
     
-    <input type="text" id="character-name" class="sheet-input" placeholder="Nome do personagem">
-
-    <div class="attributes-grid">
-      <div><label>F</label><input type="number" data-key="F" class="rune-input" value="2"></div>
-      <div><label>V</label><input type="number" data-key="V" class="rune-input" value="2"></div>
-      <div><label>D</label><input type="number" data-key="D" class="rune-input" value="2"></div>
-      <div><label>S</label><input type="number" data-key="S" class="rune-input" value="2"></div>
-      <div><label>I</label><input type="number" data-key="I" class="rune-input" value="2"></div>
-      <div><label>A</label><input type="number" data-key="A" class="rune-input" value="2"></div>
+    <!-- CABEÇALHO FIXO -->
+    <div class="sheet-header-fixed">
+      
+      <!-- Linha 1: Nome e Nível -->
+      <div class="sheet-row sheet-row--top">
+        <div class="sheet-field sheet-field--name">
+          <label for="char-name" class="sheet-label">Nome</label>
+          <input type="text" id="char-name" class="sheet-input" placeholder="Nome do personagem">
+        </div>
+        
+        <div class="sheet-field sheet-field--level">
+          <label for="char-level" class="sheet-label">Nível</label>
+          <input type="number" id="char-level" class="sheet-input" min="1" value="1">
+        </div>
+      </div>
+      
+      <!-- Linha 2: Atributos F, V, D, S, I, A -->
+      <div class="sheet-row sheet-row--attributes">
+        <div class="attributes-grid">
+          <div class="attribute-item">
+            <label for="attr-f" class="attribute-label">F</label>
+            <input type="number" id="attr-f" class="attribute-input" min="0" value="0">
+          </div>
+          <div class="attribute-item">
+            <label for="attr-v" class="attribute-label">V</label>
+            <input type="number" id="attr-v" class="attribute-input" min="0" value="0">
+          </div>
+          <div class="attribute-item">
+            <label for="attr-d" class="attribute-label">D</label>
+            <input type="number" id="attr-d" class="attribute-input" min="0" value="0">
+          </div>
+          <div class="attribute-item">
+            <label for="attr-s" class="attribute-label">S</label>
+            <input type="number" id="attr-s" class="attribute-input" min="0" value="0">
+          </div>
+          <div class="attribute-item">
+            <label for="attr-i" class="attribute-label">I</label>
+            <input type="number" id="attr-i" class="attribute-input" min="0" value="0">
+          </div>
+          <div class="attribute-item">
+            <label for="attr-a" class="attribute-label">A</label>
+            <input type="number" id="attr-a" class="attribute-input" min="0" value="0">
+          </div>
+        </div>
+      </div>
+      
+      <!-- Linha 3: Status Vitais -->
+      <div class="sheet-row sheet-row--vitals">
+              <!--VIT-->
+        <div class="vitals-group">
+          <span class="vitals-label">Vit:</span>
+          <div class="vitals-fields">
+            <input type="number" id="vit-current" class="vitals-input" min="0" value="0">
+            <span class="vitals-separator">/</span>
+            <input type="number" id="vit-total" class="vitals-input" min="1" value="10">
+          </div>
+        </div>
+              <!--CON-->
+        <div class="vitals-group">
+          <span class="vitals-label">Con:</span>
+          <div class="vitals-fields">
+            <input type="number" id="con-current" class="vitals-input" min="0" value="0">
+            <span class="vitals-separator">/</span>
+            <input type="number" id="con-total" class="vitals-input" min="1" value="10">
+          </div>
+        </div>
+      </div>
+      
+      <!-- Linha 4: Notas (substitui Ferimentos e Linhas) -->
+      <div class="sheet-row sheet-row--bottom">
+        <div class="sheet-field sheet-field--notas">
+          <label for="notas" class="sheet-label">Notas</label>
+          <textarea id="notas" class="sheet-textarea sheet-textarea--notas" rows="3" placeholder="Ferimentos, linhas de Con, condições..."></textarea>
+        </div>
+      </div>
+    </div>
+    
+    <!-- BOTÕES DAS ABAS -->
+    <div class="sheet-tabs">
+      <button id="tab-complemento" class="sheet-tab" aria-expanded="false">COMPLEMENTO</button>
+      <button id="tab-narrativa" class="sheet-tab" aria-expanded="false">NARRATIVA</button>
+      <button id="tab-itens" class="sheet-tab" aria-expanded="false">INVENTÁRIO</button>
+    </div>
+    
+    <!-- PAINEL COMPLEMENTO -->
+    <div id="panel-complemento" class="sheet-panel" hidden>
+      <h3 class="panel-title">Complementos</h3>
+      
+      <!-- Linha 1: Ser e Estudos -->
+      <div class="panel-row">
+        <div class="sheet-field sheet-field--half">
+          <label for="ser" class="sheet-label">Ser</label>
+          <input type="text" id="ser" class="sheet-input" placeholder="Ser...">
+        </div>
+        
+        <div class="sheet-field sheet-field--half">
+          <label for="estudos" class="sheet-label">Estudos</label>
+          <input type="text" id="estudos" class="sheet-input" placeholder="Estudos...">
+        </div>
+      </div>
+      
+      <!-- Linha 2: Técnicas e Magias -->
+      <div class="panel-row">
+        <div class="sheet-field sheet-field--half">
+          <label for="tecnicas" class="sheet-label">Técnicas</label>
+          <textarea id="tecnicas" class="sheet-textarea" rows="3" placeholder="Lista de técnicas..."></textarea>
+        </div>
+        
+        <div class="sheet-field sheet-field--half">
+          <label for="magias" class="sheet-label">Magias</label>
+          <textarea id="magias" class="sheet-textarea" rows="3" placeholder="Lista de magias..."></textarea>
+        </div>
+      </div>
+      
+      <!-- Linha 3: XP -->
+      <div class="panel-row panel-row--xp">
+        <div class="xp-field">
+          <label for="xpm" class="xp-label">XPM</label>
+          <input type="number" id="xpm" class="xp-input" min="0" value="0">
+        </div>
+        <div class="xp-field">
+          <label for="xpl" class="xp-label">XPL</label>
+          <input type="number" id="xpl" class="xp-input" min="0" value="0">
+        </div>
+        <div class="xp-field">
+          <label for="xpp" class="xp-label">XPP</label>
+          <input type="number" id="xpp" class="xp-input" min="0" value="0">
+        </div>
+      </div>
+    </div>
+    
+    <!-- PAINEL NARRATIVA -->
+    <div id="panel-narrativa" class="sheet-panel" hidden>
+      <h3 class="panel-title">Narrativa</h3>
+      
+      <!-- Linha 1: Arquétipo, Motivação, Disposição -->
+      <div class="panel-row panel-row--triple">
+        <div class="sheet-field sheet-field--third">
+          <label for="arquetipo" class="sheet-label">Arquétipo</label>
+          <input type="text" id="arquetipo" class="sheet-input" placeholder="Arquétipo...">
+        </div>
+        
+        <div class="sheet-field sheet-field--third">
+          <label for="motivacao" class="sheet-label">Motivação</label>
+          <input type="text" id="motivacao" class="sheet-input" placeholder="Motivação...">
+        </div>
+        
+        <div class="sheet-field sheet-field--third">
+          <label for="disposicao" class="sheet-label">Disposição</label>
+          <input type="text" id="disposicao" class="sheet-input" placeholder="Disposição...">
+        </div>
+      </div>
+      
+      <!-- Linha 2: História e Contatos -->
+      <div class="panel-row">
+        <div class="sheet-field sheet-field--half">
+          <label for="historia" class="sheet-label">História</label>
+          <textarea id="historia" class="sheet-textarea" rows="4" placeholder="História do personagem..."></textarea>
+        </div>
+        
+        <div class="sheet-field sheet-field--half">
+          <label for="contatos" class="sheet-label">Contatos</label>
+          <textarea id="contatos" class="sheet-textarea" rows="4" placeholder="Contatos e aliados..."></textarea>
+        </div>
+      </div>
+    </div>
+    
+    <!-- PAINEL ITENS -->
+    <div id="panel-itens" class="sheet-panel" hidden>
+      <h3 class="panel-title">Itens e Equipamentos</h3>
+      
+      <!-- Linha 1: Fo, Dp, Tc -->
+      <div class="panel-row panel-row--triple">
+        <div class="sheet-field sheet-field--third">
+          <label for="fo" class="sheet-label">Fo</label>
+          <input type="number" id="fo" class="sheet-input" min="0" value="0">
+        </div>
+        
+        <div class="sheet-field sheet-field--third">
+          <label for="dp" class="sheet-label">Dp</label>
+          <input type="number" id="dp" class="sheet-input" min="0" value="0">
+        </div>
+        
+        <div class="sheet-field sheet-field--third">
+          <label for="tc" class="sheet-label">Tc</label>
+          <input type="number" id="tc" class="sheet-input" min="0" value="0">
+        </div>
+      </div>
+      
+      <!-- Linha 2: Limites de Peso -->
+      <div class="panel-row panel-row--limits">
+        <div class="limit-field">
+          <label for="peso-fx2" class="limit-label">Fx2</label>
+          <input type="number" id="peso-fx2" class="limit-input" min="0" value="0">
+        </div>
+        <div class="limit-field">
+          <label for="peso-fx4" class="limit-label">Fx4</label>
+          <input type="number" id="peso-fx4" class="limit-input" min="0" value="0">
+        </div>
+        <div class="limit-field">
+          <label for="peso-total" class="limit-label">Total</label>
+          <input type="number" id="peso-total" class="limit-input" min="0" value="0">
+        </div>
+      </div>
+      
+      <!-- Linha 3: Lista de Itens -->
+      <div class="panel-row">
+        <div class="sheet-field sheet-field--full">
+          <label for="itens-lista" class="sheet-label">Itens</label>
+          <textarea id="itens-lista" class="sheet-textarea" rows="5" placeholder="Lista de itens carregados..."></textarea>
+        </div>
+      </div>
     </div>
 
-    <textarea id="character-info" class="sheet-textarea" placeholder="Habilidades, magias..."></textarea>
-    <textarea id="character-items" class="sheet-textarea" placeholder="Itens, equipamentos..."></textarea>
-
+    <!-- BOTÃO LIMPAR (opcional, pode manter ou remover) -->
     <button id="clear-sheet-button" class="sheet-clear-button">Limpar Ficha</button>
 
     <div id="clear-confirmation" class="clear-confirmation" hidden>
@@ -37,5 +235,5 @@
       </div>
     </div>
 
-  </div>
-</div>
+  </div> <!-- sheet-content -->
+</div> <!-- sheet-modal -->
