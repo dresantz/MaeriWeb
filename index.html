@@ -82,22 +82,13 @@
 <script type="module">
   import { loadGlobalModals } from './js/modalLoader.js';
   loadGlobalModals();
-</script>
 
-<!-- Scripts dos modais - DEPOIS que os modais existirem -->
-<script type="module">
   function initModals() {
-    if (document.getElementById('sheet-modal')) {
-      import('./js/sheet.js');
-      import('./js/spells.js');
-      import('./js/dice.js');
-    } else {
-      setTimeout(initModals, 50);
-    }
+    import('./js/sheet.js');
+    import('./js/spells.js');
+    import('./js/dice.js');
   }
-  
-  // Tenta carregar os scripts quando os modais estiverem prontos
-  initModals();
+
   document.addEventListener('modals:loaded', initModals);
 </script>
 

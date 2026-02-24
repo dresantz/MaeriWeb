@@ -1,7 +1,5 @@
 /* =========================
-   Sheet Modal - Completo
-   Seguindo o padrão que funciona
-   COM CORREÇÕES DE LARGURA
+   Sheet Modal
 ========================= */
 
 /* Garantir que tudo respeite as bordas */
@@ -570,6 +568,15 @@
   .panel-row--xp, .panel-row--limits {
     flex-direction: row;
     flex-wrap: wrap;
+  }
+
+  .panel-row--triple {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  }
+  
+  .panel-row--triple .sheet-field--third {
+  min-width: 0;
   }
   
   .clear-actions {
