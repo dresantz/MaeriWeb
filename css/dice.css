@@ -87,6 +87,7 @@
   gap: 0.7rem;
   margin-bottom: 1rem;
   flex-wrap: wrap;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .dice-btn {
@@ -137,6 +138,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: 'Crimson Text', serif;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .dice-actions button:hover {
@@ -148,6 +150,7 @@
   background: var(--gold);
   color: #1a1a1a;
   border-color: var(--gold);
+  -webkit-tap-highlight-color: transparent;
 }
 
 #roll-button:hover {
@@ -223,6 +226,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: 'Crimson Text', serif;
+  -webkit-tap-highlight-color: transparent;
 }
 
 #clear-history:hover {

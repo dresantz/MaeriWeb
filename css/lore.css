@@ -1,0 +1,266 @@
+/* ====================================
+   LORE.CSS - Estilos específicos para a página de Crônicas
+   Baseado no design system de Maeri RPG
+   ==================================== */
+
+/* ===== VARIÁVEIS ESPECÍFICAS DA PÁGINA ===== */
+:root {
+  --lore-accent: #c9a87c;  /* Dourado suave para lore */
+  --lore-secondary: #5d4e3c; /* Marrom medieval */
+  --lore-bg-parchment: #faf3e0; /* Fundo pergaminho */
+  --lore-border: #b89b7b;
+  --lore-text-dark: #2c241a;
+  --lore-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== LAYOUT PRINCIPAL ===== */
+.lore-page {
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-bottom: 5rem; /* Espaço para botões flutuantes */
+}
+
+/* ===== BARRA DE ABAS ===== */
+.tab-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 1rem 0 1.5rem;
+  background: rgba(10, 10, 18, 0.6);
+  padding: 0.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.tab-button {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1 1 auto;
+  min-width: 70px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tab-button:hover {
+  background: rgba(201, 168, 124, 0.15);
+  color: var(--lore-accent);
+  border-color: var(--lore-accent);
+  transform: translateY(-2px);
+}
+
+.tab-button.active {
+  background: var(--lore-accent);
+  color: var(--background-dark);
+  border-color: var(--lore-accent);
+  box-shadow: 0 2px 8px rgba(201, 168, 124, 0.3);
+  font-weight: 700;
+}
+
+/* ===== CONTEÚDO DAS ABAS ===== */
+.tab-content {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== CARDS TEMÁTICOS ===== */
+.lore-page .card {
+  background: rgba(250, 243, 224, 0.08);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid var(--lore-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--lore-shadow);
+  transition: transform 0.2s;
+}
+
+.lore-page .card:hover {
+  transform: translateY(-2px);
+  border-color: var(--lore-accent);
+}
+
+.lore-page .card h2 {
+  color: var(--lore-accent);
+  font-family: 'Cinzel', serif;
+  font-size: 1.6rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--lore-border);
+  padding-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.lore-page .card h3 {
+  color: var(--lore-accent);
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
+  margin: 1.2rem 0 0.8rem;
+}
+
+/* ===== LISTA DE REDES SOCIAIS ===== */
+.social-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.social-list li {
+  margin-bottom: 0.8rem;
+  border-bottom: 1px dashed var(--lore-border);
+  padding-bottom: 0.8rem;
+}
+
+.social-list li:last-child {
+  border-bottom: none;
+}
+
+.social-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-family: 'Crimson Text', serif;
+  font-size: 1.1rem;
+  display: block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.social-link:hover {
+  background: rgba(201, 168, 124, 0.1);
+  color: var(--lore-accent);
+  padding-left: 1.2rem;
+}
+
+/* ===== FAQ ===== */
+.faq-item {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  border-left: 4px solid var(--lore-accent);
+}
+
+.faq-item h3 {
+  margin-top: 0;
+  color: var(--lore-accent);
+  font-size: 1.1rem;
+}
+
+.faq-item p {
+  margin-bottom: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ===== SEÇÃO DE LORE ===== */
+#lore .card p {
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+  text-align: justify;
+  font-family: 'Crimson Text', serif;
+  font-size: 1.05rem;
+}
+
+#lore .card h3::before {
+  content: "📜 ";
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+/* ===== BOTÃO VOLTAR ===== */
+.back-button-container {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.back-button {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--lore-secondary), #3a2e22);
+  border: 1px solid var(--lore-accent);
+  color: var(--text-primary) !important;
+  text-decoration: none;
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.back-button:hover {
+  background: linear-gradient(135deg, var(--lore-accent), var(--lore-secondary));
+  color: var(--background-dark) !important;
+  transform: scale(1.05);
+}
+
+/* ===== CONTATO ===== */
+#contato .card p {
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+#contato .card strong {
+  color: var(--lore-accent);
+  min-width: 100px;
+  display: inline-block;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 480px) {
+  .tab-bar {
+    padding: 0.3rem;
+  }
+  
+  .tab-button {
+    font-size: 0.7rem;
+    padding: 0.5rem 0.3rem;
+  }
+  
+  .lore-page .card {
+    padding: 1rem;
+  }
+  
+  .lore-page .card h2 {
+    font-size: 1.3rem;
+  }
+  
+  #contato .card strong {
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .lore-page {
+    padding: 2rem;
+  }
+  
+  .tab-button {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a12">
+  
+  <title>Construtor - Maeri RPG</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../icons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../icons/android-chrome-192x192.png">
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/floatingButtons.css" />
+  <link rel="stylesheet" href="../css/dice.css" />
+  <link rel="stylesheet" href="../css/toc.css" />
+  <link rel="stylesheet" href="../css/notpat.css" />
+  <link rel="stylesheet" href="../css/sheet.css" />
+  <link rel="stylesheet" href="../css/spells.css" />
+  <link rel="stylesheet" href="../css/3d-dice.css" />
+  <link rel="stylesheet" href="../css/builder.css" />
+</head>
+
+<body>
+  <header class="app-header">
+    <h1>Construtor de Personagem</h1>
+    <p>Forje seu Herói</p>
+  </header>
+
+  <main class="builder-page">
+    <!-- Abas de Navegação -->
+    <nav class="tab-bar" aria-label="Seções do Construtor">
+      <button class="tab-button active" data-tab="construcao">Construção</button>
+      <button class="tab-button" data-tab="personagens">Personagens</button>
+    </nav>
+
+    <!-- Conteúdo das Abas -->
+    <section class="tab-content active" id="construcao">
+      <h2>Construção de Personagem</h2>
+      
+      <div class="card">
+        <h3>Passo a Passo</h3>
+        <ol class="step-list">
+          <li><strong>Escolha sua Raça:</strong> Humano, Elfo, Anão, Halfling...</li>
+          <li><strong>Escolha sua Classe:</strong> Guerreiro, Mago, Clérigo, Ladino...</li>
+          <li><strong>Distribua Atributos:</strong> Força, Destreza, Constituição, Inteligência, Sabedoria, Carisma.</li>
+          <li><strong>Selecione Perícias:</strong> Atletismo, Percepção, Furtividade...</li>
+          <li><strong>Equipamento Inicial:</strong> Armas, armaduras e itens.</li>
+          <li><strong>Background:</strong> História e motivações do personagem.</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h3>Ferramentas de Criação</h3>
+        <p>Em breve você poderá criar e salvar personagens diretamente aqui!</p>
+        <div class="builder-placeholder">
+          <span class="placeholder-icon">⚙️</span>
+          <span>Construtor interativo em desenvolvimento</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="tab-content" id="personagens">
+      <h2>Meus Personagens</h2>
+      
+      <div class="card">
+        <h3>Personagens Salvos</h3>
+        
+        <div class="character-list">
+          <!-- Exemplo de personagem 1 -->
+          <div class="character-item">
+            <div class="character-info">
+              <strong>Thorgrim Rocha</strong> - Anão Guerreiro Nv.3
+              <span class="character-meta">Força 18 • Constituição 16</span>
+            </div>
+            <button class="character-action" aria-label="Carregar personagem">📂</button>
+          </div>
+
+          <!-- Exemplo de personagem 2 -->
+          <div class="character-item">
+            <div class="character-info">
+              <strong>Lyra Brisa-Leve</strong> - Elfa Maga Nv.2
+              <span class="character-meta">Inteligência 17 • Sabedoria 14</span>
+            </div>
+            <button class="character-action" aria-label="Carregar personagem">📂</button>
+          </div>
+
+          <!-- Exemplo de personagem 3 -->
+          <div class="character-item">
+            <div class="character-info">
+              <strong>Finn Bolseiro</strong> - Halfling Ladino Nv.1
+              <span class="character-meta">Destreza 16 • Carisma 14</span>
+            </div>
+            <button class="character-action" aria-label="Carregar personagem">📂</button>
+          </div>
+        </div>
+
+        <div class="character-actions">
+          <button class="menu-button" style="width: 100%;">+ Criar Novo Personagem</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Personagens de Exemplo</h3>
+        <p>Personagens prontos para testes e one-shots:</p>
+        <ul class="example-list">
+          <li><a href="#">⚔️ Brunhilda, Bárbara Nv.5</a></li>
+          <li><a href="#">🔮 Eldrin, Mago Nv.5</a></li>
+          <li><a href="#">🛡️ Marcus, Paladino Nv.5</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Botão Voltar -->
+    <div class="back-button-container">
+      <a href="../index.html" class="menu-button back-button">← Voltar ao Início</a>
+    </div>
+  </main>
+
+  <aside class="floating-actions" aria-label="Quick actions">
+    <button id="sheet-button" class="floating-button floating-button--pill floating-button--primary" aria-label="Open Character Sheet">
+      <span class="floating-label">Ficha</span>
+    </button>
+    <button id="spells-button" class="floating-button floating-button--pill floating-button--secondary" aria-label="Open Spells">
+      <span class="floating-label">Magias</span>
+    </button>
+    <button id="dice-toggle" class="floating-button floating-button--pill" aria-label="Open Dice Roller" aria-expanded="false">
+      <span class="floating-label">Dados</span>
+    </button>
+  </aside>
+
+  <div id="modal-root"></div>
+
+  <script type="module">
+    import { loadGlobalModals } from '../js/modalLoader.js';
+    loadGlobalModals();
+
+    function initModals() {
+      import('../js/sheet.js');
+      import('../js/spells.js');
+      import('../js/dice.js');
+    }
+
+    document.addEventListener('modals:loaded', initModals);
+
+    // Lógica das abas
+    document.querySelectorAll('.tab-button').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+        button.classList.add('active');
+
+        const tabId = button.getAttribute('data-tab');
+        document.getElementById(tabId).classList.add('active');
+      });
+    });
+  </script>
+  <script src="../js/notpad.js" defer></script>
+</body>
+</html>
