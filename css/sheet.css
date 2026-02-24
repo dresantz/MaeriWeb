@@ -278,6 +278,7 @@
   background: var(--surface, #1a1a2e);
   padding: 0.2rem 0;
   z-index: 5;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .sheet-tab {
@@ -451,7 +452,7 @@
 }
 
 /* =========================
-   BOTÃO LIMPAR (opcional)
+   BOTÃO LIMPAR
 ========================= */
 .sheet-clear-button {
   width: 100%;
@@ -466,6 +467,7 @@
   transition: all 0.2s ease;
   font-family: 'Cinzel', serif;
   margin-top: 0.5rem;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .sheet-clear-button:hover {
@@ -505,6 +507,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   font-size: 0.85rem;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .clear-actions button:hover {

@@ -114,6 +114,7 @@
     padding: 0.8rem 0.2rem;
     font-size: 0.95rem;
     border-radius: 8px;
+    -webkit-tap-highlight-color: transparent;
   }
   
   /* Ajustes para o botão GMNotes em telas muito pequenas */

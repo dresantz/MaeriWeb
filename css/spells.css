@@ -201,6 +201,7 @@
   padding: 1rem;
   cursor: pointer;
   transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .spell-item:hover {

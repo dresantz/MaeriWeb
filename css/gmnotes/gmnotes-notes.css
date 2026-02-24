@@ -51,6 +51,7 @@
   font-size: 1rem;
   transition: all 0.2s ease;
   padding: 0 0.5rem;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .gmnotes-toolbar-btn:hover {

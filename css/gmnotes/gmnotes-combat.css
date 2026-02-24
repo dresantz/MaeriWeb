@@ -283,6 +283,7 @@
   .gmnotes-combat-btn {
     font-size: 0.9rem;
     padding: 0.6rem 3rem;
+    -webkit-tap-highlight-color: transparent;
   }
   
   .gmnotes-combat-remove-selected,
@@ -340,6 +341,7 @@
     width: 16px;
     height: 16px;
     font-size: 0.75rem;
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
@@ -356,6 +358,7 @@
   .gmnotes-combat-btn {
     font-size: 0.9rem;
     padding: 0.5rem 2.3rem;
+    -webkit-tap-highlight-color: transparent;
   }
   
   .gmnotes-combat-remove-selected,
@@ -486,11 +489,13 @@
   cursor: pointer;
   transition: all 0.2s ease;
   border: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .gmnotes-confirm-btn {
   background: #dc3545;
   color: white;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .gmnotes-confirm-btn:hover {
@@ -502,6 +507,7 @@
   background: var(--surface-light);
   color: var(--text);
   border: 1px solid rgba(212, 175, 55, 0.3);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .gmnotes-cancel-btn:hover {

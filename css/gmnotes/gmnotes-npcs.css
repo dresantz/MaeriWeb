@@ -109,6 +109,7 @@
   cursor: pointer;
   font-size: 1rem;
   transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .gmnotes-stat-btn:hover {
@@ -205,6 +206,7 @@
   .gmnotes-npc-btn {
     font-size: 1.1rem;
     padding: 0.2rem;
+    -webkit-tap-highlight-color: transparent;
   }
   
   .gmnotes-npc-extra {

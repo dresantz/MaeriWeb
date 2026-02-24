@@ -93,6 +93,7 @@
   text-align: center;
   flex: 1;
   min-width: 80px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .dice-btn button {
@@ -107,6 +108,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: 'Cinzel', serif;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .dice-btn button:hover {
@@ -302,11 +304,13 @@
     min-width: 0; 
     width: 50px; 
     flex: 0 0 auto; 
+    -webkit-tap-highlight-color: transparent;
   }
   .dice-btn button { 
     font-size: 1.2rem; 
     width: 50px; 
     height: 50px; 
+    -webkit-tap-highlight-color: transparent;
   }
   .dice-history ul { max-height: 150px; }
 }
@@ -318,11 +322,13 @@
     min-width: 0; 
     width: 60px; 
     flex: 0 0 auto; 
+    -webkit-tap-highlight-color: transparent;
   }
   .dice-btn button { 
     font-size: 1.2rem; 
     width: 60px; 
     height: 60px; 
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
@@ -335,9 +341,11 @@
     min-width: 0; 
     width: 80px; 
     flex: 0 0 auto; 
+    -webkit-tap-highlight-color: transparent;
   }
   .dice-btn button { 
     width: 80px; 
     height: 80px; 
+    -webkit-tap-highlight-color: transparent;
   }
 }
