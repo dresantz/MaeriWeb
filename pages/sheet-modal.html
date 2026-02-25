@@ -31,27 +31,27 @@
         <div class="attributes-grid">
           <div class="attribute-item">
             <label for="attr-f" class="attribute-label">F</label>
-            <input type="number" id="attr-f" class="attribute-input" min="0" value="0">
+            <input type="number" id="attr-f" class="attribute-input" min="0" value="2">
           </div>
           <div class="attribute-item">
             <label for="attr-v" class="attribute-label">V</label>
-            <input type="number" id="attr-v" class="attribute-input" min="0" value="0">
+            <input type="number" id="attr-v" class="attribute-input" min="0" value="2">
           </div>
           <div class="attribute-item">
             <label for="attr-d" class="attribute-label">D</label>
-            <input type="number" id="attr-d" class="attribute-input" min="0" value="0">
+            <input type="number" id="attr-d" class="attribute-input" min="0" value="2">
           </div>
           <div class="attribute-item">
             <label for="attr-s" class="attribute-label">S</label>
-            <input type="number" id="attr-s" class="attribute-input" min="0" value="0">
+            <input type="number" id="attr-s" class="attribute-input" min="0" value="2">
           </div>
           <div class="attribute-item">
             <label for="attr-i" class="attribute-label">I</label>
-            <input type="number" id="attr-i" class="attribute-input" min="0" value="0">
+            <input type="number" id="attr-i" class="attribute-input" min="0" value="2">
           </div>
           <div class="attribute-item">
             <label for="attr-a" class="attribute-label">A</label>
-            <input type="number" id="attr-a" class="attribute-input" min="0" value="0">
+            <input type="number" id="attr-a" class="attribute-input" min="0" value="2">
           </div>
         </div>
       </div>
@@ -62,18 +62,18 @@
         <div class="vitals-group">
           <span class="vitals-label">Vit:</span>
           <div class="vitals-fields">
-            <input type="number" id="vit-current" class="vitals-input" min="0" value="0">
+            <input type="number" id="vit-current" class="vitals-input" min="0" value="8">
             <span class="vitals-separator">/</span>
-            <input type="number" id="vit-total" class="vitals-input" min="1" value="10">
+            <input type="number" id="vit-total" class="vitals-input" min="1" value="8">
           </div>
         </div>
               <!--CON-->
         <div class="vitals-group">
           <span class="vitals-label">Con:</span>
           <div class="vitals-fields">
-            <input type="number" id="con-current" class="vitals-input" min="0" value="0">
+            <input type="number" id="con-current" class="vitals-input" min="0" value="8">
             <span class="vitals-separator">/</span>
-            <input type="number" id="con-total" class="vitals-input" min="1" value="10">
+            <input type="number" id="con-total" class="vitals-input" min="1" value="8">
           </div>
         </div>
       </div>
@@ -101,26 +101,34 @@
       <!-- Ser e Estudos -->
       <div class="panel-row">
         <div class="sheet-field sheet-field--half">
-          <label for="ser" class="sheet-label">Ser / Características Anatômicas</label>
-          <textarea id="ser" class="sheet-textarea" rows="3" placeholder="Descrição do Ser..."></textarea>
+          <label for="ser" class="sheet-label">Ser</label>
+          <textarea id="ser" class="sheet-textarea" rows="3" placeholder="Características anatômicas..."></textarea>
         </div>
         
         <div class="sheet-field sheet-field--half">
-          <label for="estudos" class="sheet-label">Estudos / Conhecimentos</label>
-          <textarea id="estudos" class="sheet-textarea" rows="3" placeholder="Descrição dos Estudos..."></textarea>
+          <label for="estudos" class="sheet-label">Estudos</label>
+          <textarea id="estudos" class="sheet-textarea" rows="3" placeholder="Lista de conhecimentos..."></textarea>
         </div>
       </div>
       
       <!-- Técnicas e Magias -->
       <div class="panel-row">
         <div class="sheet-field sheet-field--half">
-          <label for="tecnicas" class="sheet-label">Técnicas</label>
+          <label for="tecnicas" class="sheet-label">Técnicas Marciais</label>
           <textarea id="tecnicas" class="sheet-textarea" rows="3" placeholder="Lista de técnicas..."></textarea>
         </div>
         
         <div class="sheet-field sheet-field--half">
-          <label for="magias" class="sheet-label">Magias</label>
+          <label for="magias" class="sheet-label">Estudos Mágicos</label>
           <textarea id="magias" class="sheet-textarea" rows="3" placeholder="Lista de magias..."></textarea>
+        </div>
+      </div>
+
+      <!-- Classes e Características de Classes -->
+      <div class="panel-row">
+        <div class="sheet-field sheet-field--half">
+          <label for="classes" class="sheet-label">Classes</label>
+          <textarea id="classes" class="sheet-textarea" rows="3" placeholder="Características de classe..."></textarea>
         </div>
       </div>
       

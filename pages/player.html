@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a12">
+  
+  <title>Construtor - Maeri RPG</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../icons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../icons/android-chrome-192x192.png">
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/floatingButtons.css" />
+  <link rel="stylesheet" href="../css/dice.css" />
+  <link rel="stylesheet" href="../css/sheet.css" />
+  <link rel="stylesheet" href="../css/spells.css" />
+  <link rel="stylesheet" href="../css/3d-dice.css" />
+  
+  <!-- Estilos da Área do Jogador -->
+  <link rel="stylesheet" href="../css/builder/player-tabs.css" />
+  <link rel="stylesheet" href="../css/builder/builder-base.css" />
+  <link rel="stylesheet" href="../css/builder/char-list.css" />
+</head>
+
+<body>
+  <header class="app-header">
+    <h1>Maeri</h1>
+    <p>Área do Jogador</p>
+  </header>
+
+  <main class="player-main">
+    <!-- Abas de navegação -->
+    <div class="player-tabs" role="tablist">
+      <button class="tab-button active" id="tab-builder" role="tab" aria-selected="true" aria-controls="builder-panel">
+        Construtor
+      </button>
+      <button class="tab-button" id="tab-chars" role="tab" aria-selected="false" aria-controls="chars-panel">
+        Personagens
+      </button>
+    </div>
+
+    <!-- Painel Construtor -->
+    <section id="builder-panel" class="tab-panel active" role="tabpanel" aria-labelledby="tab-builder">
+      <div class="builder-grid">
+        <h2 class="builder-title">Construção de Personagem</h2>
+        <p class="builder-subtitle">Siga as etapas para criar seu herói</p>
+        
+        <div class="builder-steps">
+          <button class="builder-step" data-step="1">
+            <span class="step-number">1</span>
+            <span class="step-title">Mentalidade</span>
+            <span class="step-desc">Escolha sua essência</span>
+          </button>
+          
+          <button class="builder-step" data-step="2">
+            <span class="step-number">2</span>
+            <span class="step-title">Complementos</span>
+            <span class="step-desc">Aprimore suas habilidades</span>
+          </button>
+          
+          <button class="builder-step" data-step="3">
+            <span class="step-number">3</span>
+            <span class="step-title">Narrativa</span>
+            <span class="step-desc">Forje sua história</span>
+          </button>
+          
+          <button class="builder-step" data-step="4">
+            <span class="step-number">4</span>
+            <span class="step-title">Inventário</span>
+            <span class="step-desc">Equipe seu herói</span>
+          </button>
+        </div>
+
+        <!-- Área de preview do construtor -->
+        <div class="builder-preview">
+          <p class="preview-placeholder">Selecione uma etapa para começar</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Painel Personagens -->
+    <section id="chars-panel" class="tab-panel" role="tabpanel" aria-labelledby="tab-chars">
+      <div class="chars-container">
+        <!-- Personagens Salvos (máx 3) -->
+        <div class="chars-saved-section">
+          <h3 class="chars-section-title">
+            <span class="title-icon">⚔️</span>
+            Seus Personagens
+            <span class="chars-counter">0/3</span>
+          </h3>
+          
+          <div class="chars-grid saved-chars">
+            <!-- Cards de personagens salvos (vazios inicialmente) -->
+            <div class="char-card char-card--empty">
+              <div class="char-card-content">
+                <span class="char-plus">+</span>
+                <span class="char-label">Novo Personagem</span>
+              </div>
+            </div>
+            
+            <div class="char-card char-card--empty">
+              <div class="char-card-content">
+                <span class="char-plus">+</span>
+                <span class="char-label">Novo Personagem</span>
+              </div>
+            </div>
+            
+            <div class="char-card char-card--empty">
+              <div class="char-card-content">
+                <span class="char-plus">+</span>
+                <span class="char-label">Novo Personagem</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Personagens Prontos (6) -->
+        <div class="chars-ready-section">
+          <h3 class="chars-section-title">
+            <span class="title-icon">📜</span>
+            Personagens Prontos
+          </h3>
+          
+          <div class="chars-grid ready-chars">
+            <!-- Card 1 - Guerreiro -->
+            <div class="char-card char-card--ready" data-char="warrior">
+              <div class="char-card-image warrior-bg">
+                <span class="char-class">Guerreiro</span>
+              </div>
+              <div class="char-card-info">
+                <h4 class="char-name">Thorn, o Brutal</h4>
+                <p class="char-desc">Guerreiro bárbaro das terras gélidas</p>
+                <span class="char-level">Nível 3</span>
+              </div>
+            </div>
+
+            <!-- Card 2 - Mago -->
+            <div class="char-card char-card--ready" data-char="mage">
+              <div class="char-card-image mage-bg">
+                <span class="char-class">Mago</span>
+              </div>
+              <div class="char-card-info">
+                <h4 class="char-name">Eldrin, o Sábio</h4>
+                <p class="char-desc">Mestre das artes arcanas</p>
+                <span class="char-level">Nível 3</span>
+              </div>
+            </div>
+
+            <!-- Card 3 - Clérigo -->
+            <div class="char-card char-card--ready" data-char="cleric">
+              <div class="char-card-image cleric-bg">
+                <span class="char-class">Clérigo</span>
+              </div>
+              <div class="char-card-info">
+                <h4 class="char-name">Lyra, a Zeladora</h4>
+                <p class="char-desc">Sacerdotisa da luz divina</p>
+                <span class="char-level">Nível 3</span>
+              </div>
+            </div>
+
+            <!-- Card 4 - Ladino -->
+            <div class="char-card char-card--ready" data-char="rogue">
+              <div class="char-card-image rogue-bg">
+                <span class="char-class">Ladino</span>
+              </div>
+              <div class="char-card-info">
+                <h4 class="char-name">Sombra Noturna</h4>
+                <p class="char-desc">Mestre das sombras e subterfúgios</p>
+                <span class="char-level">Nível 3</span>
+              </div>
+            </div>
+
+            <!-- Card 5 - Druida -->
+            <div class="char-card char-card--ready" data-char="druid">
+              <div class="char-card-image druid-bg">
+                <span class="char-class">Druida</span>
+              </div>
+              <div class="char-card-info">
+                <h4 class="char-name">Faeris, o Selvagem</h4>
+                <p class="char-desc">Guardião da natureza</p>
+                <span class="char-level">Nível 3</span>
+              </div>
+            </div>
+
+            <!-- Card 6 - Paladino -->
+            <div class="char-card char-card--ready" data-char="paladin">
+              <div class="char-card-image paladin-bg">
+                <span class="char-class">Paladino</span>
+              </div>
+              <div class="char-card-info">
+                <h4 class="char-name">Marcus, o Justo</h4>
+                <p class="char-desc">Cavaleiro da ordem sagrada</p>
+                <span class="char-level">Nível 3</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Botões flutuantes -->
+  <aside class="floating-actions" aria-label="Quick actions">
+    <button id="sheet-button" class="floating-button floating-button--pill floating-button--primary" aria-label="Open Character Sheet">
+      <span class="floating-label">Ficha</span>
+    </button>
+    <button id="spells-button" class="floating-button floating-button--pill floating-button--secondary" aria-label="Open Spells">
+      <span class="floating-label">Magias</span>
+    </button>
+    <button id="dice-toggle" class="floating-button floating-button--pill" aria-label="Open Dice Roller" aria-expanded="false">
+      <span class="floating-label">Dados</span>
+    </button>
+    <a href="../index.html" class="floating-button" id="back-to-home">
+      <span class="floating-icon">⌂</span>
+    </a>
+  </aside>
+
+  <div id="modal-root"></div>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { loadGlobalModals } from '../js/modalLoader.js';
+    loadGlobalModals();
+
+    function initModals() {
+      import('../js/sheet.js');
+      import('../js/spells.js');
+      import('../js/dice.js');
+    }
+
+    document.addEventListener('modals:loaded', initModals);
+  </script>
+
+  <!-- Script do PlayerAreaManager -->
+  <script type="module">
+    import PlayerAreaManager from '../js/builder/builder.js';
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        window.playerManager = new PlayerAreaManager();
+      });
+    } else {
+      window.playerManager = new PlayerAreaManager();
+    }
+  </script>
+</body>
+</html>

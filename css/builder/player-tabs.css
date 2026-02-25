@@ -1,0 +1,108 @@
+/* =========================
+   Maeri RPG - Tabs CSS
+   Estilos para o sistema de abas da Área do Jogador
+========================= */
+
+/* Container das abas */
+.player-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  background: var(--surface);
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  border: 2px solid rgba(212, 175, 55, 0.2);
+  box-shadow: var(--shadow);
+}
+
+/* Botões das abas */
+.tab-button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 1rem 0.5rem;
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border-radius: calc(var(--radius) - 4px);
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tab-button::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: var(--gold);
+  transition: width 0.25s ease;
+}
+
+.tab-button:hover {
+  color: var(--text);
+  background: rgba(212, 175, 55, 0.05);
+}
+
+.tab-button:hover::before {
+  width: 30%;
+}
+
+.tab-button.active {
+  color: var(--gold);
+  background: rgba(212, 175, 55, 0.1);
+}
+
+.tab-button.active::before {
+  width: 80%;
+}
+
+/* Painéis de conteúdo */
+.tab-panel {
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.tab-panel.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animações */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Acessibilidade */
+.tab-button:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Responsivo */
+@media (min-width: 768px) {
+  .player-tabs {
+    gap: 1rem;
+  }
+  
+  .tab-button {
+    font-size: 1.2rem;
+    padding: 1.2rem;
+  }
+}

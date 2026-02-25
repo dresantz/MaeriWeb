@@ -63,22 +63,22 @@ function saveSheetData() {
     
     // Atributos
     attributes: {
-      f: modal.querySelector('#attr-f')?.value || '0',
-      v: modal.querySelector('#attr-v')?.value || '0',
-      d: modal.querySelector('#attr-d')?.value || '0',
-      s: modal.querySelector('#attr-s')?.value || '0',
-      i: modal.querySelector('#attr-i')?.value || '0',
-      a: modal.querySelector('#attr-a')?.value || '0'
+      f: modal.querySelector('#attr-f')?.value || '',
+      v: modal.querySelector('#attr-v')?.value || '',
+      d: modal.querySelector('#attr-d')?.value || '',
+      s: modal.querySelector('#attr-s')?.value || '',
+      i: modal.querySelector('#attr-i')?.value || '',
+      a: modal.querySelector('#attr-a')?.value || ''
     },
     
     // Status Vitais
     vit: {
-      current: modal.querySelector('#vit-current')?.value || '0',
-      total: modal.querySelector('#vit-total')?.value || '10'
+      current: modal.querySelector('#vit-current')?.value || '8',
+      total: modal.querySelector('#vit-total')?.value || '8'
     },
     con: {
-      current: modal.querySelector('#con-current')?.value || '0',
-      total: modal.querySelector('#con-total')?.value || '10'
+      current: modal.querySelector('#con-current')?.value || '8',
+      total: modal.querySelector('#con-total')?.value || '8'
     },
     
     // Notas
@@ -211,9 +211,9 @@ function clearSheet() {
   allInputs.forEach(input => {
     if (input.type === 'number') {
       if (input.id === 'vit-total' || input.id === 'con-total') {
-        input.value = '10';
+        input.value = '8';
       } else {
-        input.value = '0';
+        input.value = '2';
       }
     } else {
       input.value = '';
