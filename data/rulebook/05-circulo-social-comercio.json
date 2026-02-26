@@ -157,7 +157,6 @@
           "type": "paragraph",
           "text": "Os Contatos de Mercado representam personagens especializados na venda de bens específicos. Apenas por meio desses contatos é possível adquirir ou negociar itens de qualidade adequada, justa ou especializada."
         },
-
         {
           "type": "paragraph",
           "lojacomb_item": "ARMEIRO.",
@@ -181,7 +180,6 @@
             "Contusão Pesada Longa. Maça, martelo ou clava em haste longa. 1d6+3 (a), 1d6 (e), retira 1Res com resultados 5 e 6 e 2Res com resultados 6 e 6. 5Pes. 5Res. 5Fo."
           ]
         },
-
         {
           "type": "paragraph",
           "lojacomb_item": "BOWYER.",
@@ -200,7 +198,6 @@
             "Aljava. Munição passa a pesar 1Pes a cada 30 unidades. 3Dp."
           ]
         },
-
         {
           "type": "paragraph",
           "lojacomb_item": "ARMOREIRO.",
@@ -224,7 +221,6 @@
             "Escudo Grande (torre ou pipa). Ocupa uma mão. +2V contra F ou A, -1D geral, permite Empurrar com F. 2Pes. 3Res. 3Fo."
           ]
         },
-
         {
           "type": "paragraph",
           "lojacomb_item": "ALFAIATE.",
@@ -246,7 +242,6 @@
             "Sela de Montaria. +1A em testes de montaria equipada. 1Fo."
           ]
         },
-
         {
           "type": "paragraph",
           "lojarc_item": "ESCRIBA",
@@ -267,7 +262,6 @@
             "Óculos. +1S para adquirir ou substituir Conhecimento. 2Fo."
           ]
         },
-
         {
           "type": "paragraph",
           "lojarc_item": "APOTECÁRIO",
