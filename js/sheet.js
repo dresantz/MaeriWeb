@@ -274,7 +274,7 @@ function initSheet() {
     confirmBtn.addEventListener('click', clearSheet);
   }
 
-    // Botões Exportar/Importar
+  // Botões Exportar/Importar
   const exportBtn = document.getElementById('export-sheet');
   const importBtn = document.getElementById('import-sheet');
   const importFile = document.getElementById('import-file');

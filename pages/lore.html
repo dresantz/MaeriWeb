@@ -32,95 +32,201 @@
 <body>
   <header class="app-header">
     <h1>Crônicas de Maeri</h1>
-    <p>O Legado dos Deuses</p>
+    <p class="subtitle">O Sonho Perdido</p>
+    <div class="header-decoration"></div>
   </header>
 
   <main class="lore-page">
-    <!-- Abas de Navegação -->
+    <!-- Abas de Navegação - Corrigido e reduzido -->
     <nav class="tab-bar" aria-label="Seções de Lore">
       <button class="tab-button active" data-tab="autor">Autor</button>
-      <button class="tab-button" data-tab="redes">Redes</button>
-      <button class="tab-button" data-tab="faq">F.A.Q</button>
-      <button class="tab-button" data-tab="contato">Contato</button>
       <button class="tab-button" data-tab="lore">Lore</button>
+      <button class="tab-button" data-tab="faq">FAQ</button>
+      <button class="tab-button" data-tab="redes">Redes</button>
+      <button class="tab-button" data-tab="contato">Contato</button>
     </nav>
 
-    <!-- Conteúdo das Abas -->
+    <!-- Conteúdo das Abas - Reorganizado e enriquecido -->
     <section class="tab-content active" id="autor">
-      <h2>Sobre o Autor</h2>
-      <div class="card">
-        <p><strong>André "Mestre dos Ventos"</strong></p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <div class="card card--spotlight">
+        <div class="card-header">
+          <span class="card-icon">✧</span>
+          <h2>O Cronista</h2>
+        </div>
+        <div class="author-profile">
+          <div class="author-avatar">
+            <span class="avatar-initials">D.S.</span>
+          </div>
+          <div class="author-info">
+            <h3>Dré Santos</h3>
+            <p class="author-title">Escritor & Criador de Mundos</p>
+            <p class="author-bio">Escritor, graduado em Letras Escrita Criativa, editor e revisor, apaixonado por áreas de tecnologia, cinematografia, animação e games. Atuou como diretor de redação da revista Literomancia, possui publicações em diversas antologias e revistas, é autor do livro A Forja Cósmica.</p>
+          </div>
+        </div>
+        
+        <div class="author-works">
+          <h4>Publicações</h4>
+          <ul class="works-list">
+            <li>
+              <a href="https://operaeditorial.com.br/produto/a-forja-cosmica/" class="work-link" target="_blank">
+                <span class="work-title">A Forja Cósmica</span>
+                <span class="work-type">Livro</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="work-link">
+                <span class="work-title">Literomancia</span>
+                <span class="work-type">Revista</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="author-social">
+          <a href="https://www.instagram.com/dresantz/" class="social-link" target="_blank">
+            <span class="social-icon">📷</span>
+            <span>@dresantz</span>
+          </a>
+        </div>
       </div>
     </section>
 
-    <section class="tab-content" id="redes">
-      <h2>Redes Sociais</h2>
-      <div class="card">
-        <ul class="social-list">
-          <li><a href="#" class="social-link">📘 Facebook - Maeri RPG</a></li>
-          <li><a href="#" class="social-link">🐦 Twitter - @MaeriRPG</a></li>
-          <li><a href="#" class="social-link">📸 Instagram - @MaeriRPG</a></li>
-          <li><a href="#" class="social-link">💬 Discord - Comunidade Maeri</a></li>
-          <li><a href="#" class="social-link">📺 YouTube - Crônicas de Maeri</a></li>
-        </ul>
+    <section class="tab-content" id="lore">
+      <div class="card card--parchment">
+        <div class="card-header">
+          <span class="card-icon">📜</span>
+          <h2>A História de Maeri</h2>
+        </div>
+        
+        <div class="lore-timeline">
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3>A Era dos Sonhos</h3>
+              <p>No princípio, havia apenas o Sonho. Os deuses teceram a realidade com fios de imaginação e memória, criando Maeri como um reflexo perfeito do que poderia ser.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3>A Fragmentação</h3>
+              <p>Quando o Sonho foi quebrado, os pedaços caíram como estrelas, dando origem aos reinos mortais. Cada fragmento guarda uma memória do mundo original.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3>A Era Atual</h3>
+              <p>Os reinos buscam reunir os fragmentos do Sonho Perdido, enquanto forças antigas despertam de seu longo sono.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lore-quote">
+          <p>"E nos fragmentos do sonho, encontramos nossa própria realidade."</p>
+          <cite>- Dos Pergaminhos de Maeri</cite>
+        </div>
       </div>
     </section>
 
     <section class="tab-content" id="faq">
-      <h2>Perguntas Frequentes</h2>
       <div class="card">
-        <div class="faq-item">
-          <h3>📖 O que é Maeri?</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <div class="card-header">
+          <span class="card-icon">?</span>
+          <h2>Perguntas Frequentes</h2>
         </div>
-        <div class="faq-item">
-          <h3>🎲 Como criar um personagem?</h3>
-          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        
+        <div class="faq-grid">
+          <details class="faq-item" open>
+            <summary>O que é Maeri?</summary>
+            <p>Um sistema de RPG de mesa, um cenário de alta-fantasia, e um WebApp que reúne tudo isso em uma experiência única.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>O sistema é muito complicado?</summary>
+            <p>Não. Foi projetado para ser intuitivo e rápido, com regras que favorecem a narrativa sem perder profundidade.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Haverá novos conteúdos?</summary>
+            <p>Sempre. O mundo de Maeri está em constante expansão, com novos suplementos, aventuras e ferramentas sendo desenvolvidos.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Preciso comprar algo para jogar?</summary>
+            <p>O sistema básico é gratuito. Expansões e conteúdos especiais serão vendidos separadamente para apoiar o desenvolvimento.</p>
+          </details>
         </div>
-        <div class="faq-item">
-          <h3>⚔️ O sistema é compatível com D&D?</h3>
-          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+      </div>
+    </section>
+
+    <section class="tab-content" id="redes">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-icon">🌐</span>
+          <h2>Redes e Comunidade</h2>
         </div>
-        <div class="faq-item">
-          <h3>📅 Haverá novos conteúdos?</h3>
-          <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        
+        <div class="community-grid">
+          <a href="#" class="community-card">
+            <span class="community-icon">📸</span>
+            <span class="community-name">Instagram</span>
+            <span class="community-handle">@MaeriRPG</span>
+          </a>
+
+          <a href="#" class="community-card">
+            <span class="community-icon">💬</span>
+            <span class="community-name">Discord</span>
+            <span class="community-handle">Comunidade Maeri</span>
+          </a>
+
+          <a href="#" class="community-card">
+            <span class="community-icon">📺</span>
+            <span class="community-name">YouTube</span>
+            <span class="community-handle">Crônicas de Maeri</span>
+          </a>
+
+          <a href="#" class="community-card">
+            <span class="community-icon">🐦</span>
+            <span class="community-name">Twitter/X</span>
+            <span class="community-handle">@MaeriRPG</span>
+          </a>
         </div>
       </div>
     </section>
 
     <section class="tab-content" id="contato">
-      <h2>Contato</h2>
       <div class="card">
-        <p><strong>Email:</strong> contato@maerirpg.com</p>
-        <p><strong>Suporte:</strong> suporte@maerirpg.com</p>
-        <p><strong>Parcerias:</strong> parcerias@maerirpg.com</p>
-        <p><strong>Formulário de Contato:</strong> (em breve)</p>
+        <div class="card-header">
+          <span class="card-icon">✉️</span>
+          <h2>Contato</h2>
+        </div>
+        
+        <div class="contact-grid">
+          <div class="contact-item">
+            <span class="contact-label">Geral</span>
+            <a href="mailto:contato@maerirpg.com" class="contact-email">contato@maerirpg.com</a>
+          </div>
+          
+          <div class="contact-item">
+            <span class="contact-label">Suporte</span>
+            <a href="mailto:suporte@maerirpg.com" class="contact-email">suporte@maerirpg.com</a>
+          </div>
+          
+          <div class="contact-item">
+            <span class="contact-label">Parcerias</span>
+            <a href="mailto:parcerias@maerirpg.com" class="contact-email">parcerias@maerirpg.com</a>
+          </div>
+        </div>
+
+        <div class="contact-form-placeholder">
+          <p>Formulário de contato em breve</p>
+          <div class="placeholder-decoration">✧ ✧ ✧</div>
+        </div>
       </div>
     </section>
-
-    <section class="tab-content" id="lore">
-      <h2>A História de Maeri</h2>
-      <div class="card">
-        <h3>📜 A Criação</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        
-        <h3>⚡ A Era dos Deuses</h3>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        
-        <h3>🔥 O Grande Cataclisma</h3>
-        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-        
-        <h3>🏰 Reinos Atuais</h3>
-        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-      </div>
-    </section>
-
-    <!-- Botão Voltar -->
-    <div class="back-button-container">
-      <a href="../index.html" class="menu-button back-button">← Voltar ao Início</a>
-    </div>
   </main>
 
   <aside class="floating-actions" aria-label="Quick actions">
@@ -133,6 +239,9 @@
     <button id="dice-toggle" class="floating-button floating-button--pill" aria-label="Open Dice Roller" aria-expanded="false">
       <span class="floating-label">Dados</span>
     </button>
+    <a href="../index.html" class="floating-button" id="back-to-home">
+      <span class="floating-icon">⌂</span>
+    </a>
   </aside>
 
   <div id="modal-root"></div>
@@ -149,20 +258,45 @@
 
     document.addEventListener('modals:loaded', initModals);
 
-    // Lógica das abas
-    document.querySelectorAll('.tab-button').forEach(button => {
-      button.addEventListener('click', () => {
-        // Remove active de todos os botões e conteúdos
-        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+    // ===== SISTEMA DE ABAS MELHORADO =====
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabButtons = document.querySelectorAll('.tab-button');
+      const tabContents = document.querySelectorAll('.tab-content');
 
-        // Ativa o botão clicado
-        button.classList.add('active');
+      function activateTab(tabId) {
+        // Remove active de todos
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
 
-        // Ativa o conteúdo correspondente
-        const tabId = button.getAttribute('data-tab');
-        document.getElementById(tabId).classList.add('active');
+        // Ativa o botão correto (procura pelo data-tab)
+        const activeButton = document.querySelector(`.tab-button[data-tab="${tabId}"]`);
+        if (activeButton) {
+          activeButton.classList.add('active');
+        }
+
+        // Ativa o conteúdo
+        const activeContent = document.getElementById(tabId);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      }
+
+      // Adiciona evento a cada botão
+      tabButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          const tabId = button.getAttribute('data-tab');
+          activateTab(tabId);
+          
+          // Opcional: salva a última aba ativa
+          localStorage.setItem('lastLoreTab', tabId);
+        });
       });
+
+      // Restaura a última aba ativa (se existir)
+      const lastTab = localStorage.getItem('lastLoreTab');
+      if (lastTab && document.querySelector(`.tab-button[data-tab="${lastTab}"]`)) {
+        activateTab(lastTab);
+      }
     });
   </script>
   <script src="../js/notpad.js" defer></script>
