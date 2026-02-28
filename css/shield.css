@@ -52,11 +52,12 @@
 /* ===== BOTÃO GMNOTES - ESTILOS BASE ===== */
 .gmnotes-button {
   position: fixed;
-  top: 0.5rem;
+  bottom: 6rem;
   left: 0.5rem;
   width: 50px;
   height: 50px;
   border-radius: 50px;
+  min-width: 110px;
   font-size: 1.2rem;
   background: var(--gold);
   color: #1a1a1a;
@@ -70,6 +71,7 @@
   justify-content: center;
   box-shadow: 0 2px 5px rgba(0,0,0,0.3);
   transition: all 0.2s ease;
+  font-family: 'Crimson Text', serif;
 }
 
 .gmnotes-button:hover {
@@ -122,7 +124,7 @@
     width: 45px;
     height: 45px;
     font-size: 1.1rem;
-    top: 0.3rem;
+    bottom: 5.5rem;
     left: 0.3rem;
   }
 }
@@ -133,7 +135,7 @@
     width: 50px;
     height: 50px;
     font-size: 1rem;
-    top: 0.3rem;
+    bottom: 4.5rem;
     left: 0.3rem;
   }
   
@@ -148,7 +150,7 @@
     width: 60px;
     height: 60px;
     font-size: 1.4rem;
-    top: 1rem;
+    bottom: 7rem;
     left: 1rem;
   }
   

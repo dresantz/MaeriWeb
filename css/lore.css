@@ -14,45 +14,6 @@
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ===== HEADER REFINADO ===== */
-.app-header {
-  position: relative;
-  overflow: hidden;
-}
-
-.app-header::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, 
-    transparent, 
-    var(--gold), 
-    transparent
-  );
-}
-
-.subtitle {
-  font-family: 'Crimson Text', serif;
-  font-style: italic;
-  font-size: 0.95rem;
-  letter-spacing: 2px;
-  color: var(--lore-accent-light);
-  position: relative;
-  display: inline-block;
-}
-
-.subtitle::before,
-.subtitle::after {
-  content: '✧';
-  display: inline-block;
-  margin: 0 8px;
-  opacity: 0.6;
-  font-size: 0.8rem;
-}
-
 /* ===== TAB BAR REFINADA ===== */
 .tab-bar {
   display: flex;

@@ -429,6 +429,7 @@
 .limit-field {
   text-align: center;
   flex: 1;
+  color: var(--gold, #d4af37);
 }
 
 .limit-label {

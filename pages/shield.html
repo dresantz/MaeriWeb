@@ -22,7 +22,6 @@
   <link rel="stylesheet" href="../css/floatingButtons.css" />
   <link rel="stylesheet" href="../css/dice.css" />
   <link rel="stylesheet" href="../css/toc.css" />
-  <link rel="stylesheet" href="../css/notpat.css" />
   <link rel="stylesheet" href="../css/sheet.css" />
   <link rel="stylesheet" href="../css/spells.css" />
   <link rel="stylesheet" href="../css/shield.css" />
@@ -33,12 +32,12 @@
 
 <body>
   <button id="gmnotes-button" class="gmnotes-button" aria-label="GM Notes">
-    <span class="gmnotes-label">☰</span>
+    <span class="gmnotes-label">GM</span>
   </button>
 
   <header class="app-header">
     <h1>Escudo do Mestre</h1>
-    <p>Regras fundamentais ao alcance</p>
+    <p class="subtitle">Regras Básicas</p>
   </header>
 
   <main class="shield">
@@ -109,7 +108,6 @@
     document.addEventListener('modals:loaded', initModals);
   </script>
 
-  <script src="../js/notpad.js" defer></script>
   <script type="module" src="../js/shield/shield-modal.js"></script>
   <script type="module" src="../js/shield/gmnotes-modal.js"></script>
 

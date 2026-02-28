@@ -32,11 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(() => {
       if (showingNews) {
-        notpatToggle.textContent = "Patch Notes";
+        notpatToggle.textContent = "Patch Notes ⇄";
         notpatToggle.setAttribute("aria-pressed", "true");
         notpatContent.innerHTML = patchHTML;
       } else {
-        notpatToggle.textContent = "Notícias";
+        notpatToggle.textContent = "Notícias ⇄";
         notpatToggle.setAttribute("aria-pressed", "false");
         notpatContent.innerHTML = newsHTML;
       }

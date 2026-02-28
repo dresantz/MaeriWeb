@@ -73,12 +73,12 @@ function saveSheetData() {
     
     // Status Vitais
     vit: {
-      current: modal.querySelector('#vit-current')?.value || '8',
-      total: modal.querySelector('#vit-total')?.value || '8'
+      current: modal.querySelector('#vit-current')?.value || '0',
+      total: modal.querySelector('#vit-total')?.value || '0'
     },
     con: {
-      current: modal.querySelector('#con-current')?.value || '8',
-      total: modal.querySelector('#con-total')?.value || '8'
+      current: modal.querySelector('#con-current')?.value || '0',
+      total: modal.querySelector('#con-total')?.value || '0'
     },
     
     // Notas
@@ -210,10 +210,17 @@ function clearSheet() {
   const allInputs = modal.querySelectorAll('input, textarea');
   allInputs.forEach(input => {
     if (input.type === 'number') {
-      if (input.id === 'vit-total' || input.id === 'con-total') {
-        input.value = '8';
-      } else {
+      if (input.id.startsWith('attr-')) {
         input.value = '2';
+      }
+      else if (input.id === 'char-level') {
+        input.value = '1';
+      }
+      else if (input.id === 'vit-total' || input.id === 'con-total') {
+        input.value = '0';
+      }
+      else {
+        input.value = '0';
       }
     } else {
       input.value = '';
@@ -610,12 +617,12 @@ function initSheet() {
         a: modal.querySelector('#attr-a')?.value || ''
       },
       vit: {
-        current: modal.querySelector('#vit-current')?.value || '8',
-        total: modal.querySelector('#vit-total')?.value || '8'
+        current: modal.querySelector('#vit-current')?.value || '0',
+        total: modal.querySelector('#vit-total')?.value || '0'
       },
       con: {
-        current: modal.querySelector('#con-current')?.value || '8',
-        total: modal.querySelector('#con-total')?.value || '8'
+        current: modal.querySelector('#con-current')?.value || '0',
+        total: modal.querySelector('#con-total')?.value || '0'
       },
       notas: modal.querySelector('#notas')?.value || '',
       complemento: {

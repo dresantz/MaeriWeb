@@ -26,21 +26,77 @@ html, body {
 }
 
 /* HEADER */
+/* ===== HEADER PADRONIZADO ===== */
 .app-header {
-  text-align: center; padding: 1.8rem 1rem;
+  position: relative;
+  text-align: center;
+  padding: 1.8rem 1rem;
   background: var(--surface);
   border-bottom: 3px solid var(--gold);
   box-shadow: var(--shadow);
+  overflow: hidden;
 }
+
+.app-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--gold), 
+    transparent
+  );
+}
+
 .app-header h1 {
-  color: var(--gold); font-size: 2.2rem;
+  color: var(--gold);
+  font-size: 2.2rem;
   margin-bottom: 0.4rem;
   text-shadow: 0 2px 8px rgba(212,175,55,0.3);
 }
-.app-header p {
-  color: var(--text-muted);
+
+.app-header .subtitle {
   font-family: 'Crimson Text', serif;
-  font-size: 1rem; font-style: italic;
+  font-style: italic;
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  position: relative;
+  display: inline-block;
+}
+
+.app-header .subtitle::before,
+.app-header .subtitle::after {
+  content: '✧';
+  display: inline-block;
+  margin: 0 8px;
+  opacity: 0.6;
+  font-size: 0.8rem;
+  color: var(--gold);
+}
+
+/* Ajuste para mobile */
+@media (max-width: 480px) {
+  .app-header {
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .app-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .app-header .subtitle {
+    font-size: 0.85rem;
+  }
+  
+  .app-header .subtitle::before,
+  .app-header .subtitle::after {
+    margin: 0 4px;
+    font-size: 0.7rem;
+  }
 }
 
 /* MAIN - com padding para a barra flutuante */
@@ -87,6 +143,7 @@ main {
   padding: 1.5rem;
   margin-bottom: 2rem;
   box-shadow: var(--shadow);
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* BOTÕES FLUTUANTES */
