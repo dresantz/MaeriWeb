@@ -15,7 +15,7 @@
       ]
     },
     {
-      "id": "guerreiro",
+      "topic_id": "guerreiro",
       "title": "Guerreiro",
       "content": [
         {
@@ -67,7 +67,7 @@
       ]
     },
     {
-      "id": "paladino",
+      "topic_id": "paladino",
       "title": "Paladino",
       "content": [
         {
@@ -114,7 +114,7 @@
       ]
     },
     {
-      "id": "batedor",
+      "topic_id": "batedor",
       "title": "Batedor",
       "content": [
         {
@@ -156,7 +156,7 @@
       ]
     },
     {
-      "id": "ladino",
+      "topic_id": "ladino",
       "title": "Ladino",
       "content": [
         {
@@ -203,7 +203,7 @@
       ]
     },
     {
-      "id": "lutador",
+      "topic_id": "lutador",
       "title": "Lutador",
       "content": [
         {
@@ -270,7 +270,7 @@
       ]
     },
     {
-      "id": "mago",
+      "topic_id": "mago",
       "title": "Mago",
       "content": [
         {
@@ -317,7 +317,7 @@
       ]
     },
     {
-      "id": "druida",
+      "topic_id": "druida",
       "title": "Druida",
       "content": [
         {
@@ -364,7 +364,7 @@
       ]
     },
     {
-      "id": "bardo",
+      "topic_id": "bardo",
       "title": "Bardo",
       "content": [
         {

@@ -1,11 +1,11 @@
 {
-  "id": "circulo-social-comercio",
+  "id": "círculo social e comércio",
   "title": "Capítulo Cinco",
   "order": 5,
   "description": "Circulo de aliados e como acessar o comércio.",
   "sections": [
     {
-      "id": "construindo-um-circulo",
+      "topic_id": "construindo-um-circulo",
       "title": "Construindo Um Círculo",
       "content": [
         {
@@ -23,7 +23,7 @@
         ]
     },
     {
-      "id": "acampamento",
+      "topic_id": "acampamento",
       "title": "Acampamento",
       "content": [
         {
@@ -52,7 +52,7 @@
       ]
     },
     {
-      "id": "feiras-e-comercio",
+      "topic_id": "feiras-e-comercio",
       "title": "Feiras e Comércio",
       "content": [
         {
@@ -90,7 +90,7 @@
       ]
     },
     {
-      "id": "regras-de-armas-e-resistencia",
+      "topic_id": "regras-de-armas-e-resistencia",
       "title": "Regras de Armas e Resistência",
       "content": [
         {
@@ -150,7 +150,7 @@
       ]
     },
     {
-      "id": "contatos-de-mercado",
+      "topic_id": "contatos-de-mercado",
       "title": "Contatos de Mercado",
       "content": [
         {
@@ -294,7 +294,7 @@
       ]
     },
     {
-      "id": "contatos-de-acampamento",
+      "topic_id": "contatos-de-acampamento",
       "title": "Contatos de Acampamento",
       "content": [
         {
@@ -356,7 +356,7 @@
       ]
     },
     {
-      "id": "contatos-de-mercado-secreto",
+      "topic_id": "contatos-de-mercado-secreto",
       "title": "Contatos de Mercado Secreto",
       "content": [
         {
@@ -435,7 +435,7 @@
       ]
     },
     {
-      "id": "linguas",
+      "topic_id": "linguas",
       "title": "Línguas",
       "content": [
         {
@@ -458,7 +458,7 @@
       ]
     },
     {
-      "id": "tecnicas-marcais",
+      "topic_id": "tecnicas-marcais",
       "title": "Técnicas Marciais",
       "content": [
         {
@@ -501,7 +501,7 @@
       ]
     },
     {
-      "id": "montarias",
+      "topic_id": "montarias",
       "title": "Montarias",
       "content": [
         {

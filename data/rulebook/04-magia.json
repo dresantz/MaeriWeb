@@ -5,7 +5,7 @@
   "description": "Como funciona magia e lista de magias que podem ser aprendidas.",
   "sections": [
     {
-      "id": "magia",
+      "topic_id": "magia",
       "title": "Magia",
       "content": [
         {
@@ -46,7 +46,7 @@
       ]
     },
     {
-          "id": "invocacoes-e-criaturas",
+          "topic_id": "invocacoes-e-criaturas",
           "title": "Invocações e Criaturas",
           "content": [
             {
@@ -81,7 +81,7 @@
           ]
         },
         {
-      "id": "neofita",
+      "topic_id": "neofita",
       "title": "Neófita",
       "content": [
         {
@@ -307,7 +307,7 @@
       ]
     },
     {
-      "id": "bruxaria",
+      "topic_id": "bruxaria",
       "title": "Bruxaria",
       "content": [
         {
@@ -611,7 +611,7 @@
       ]
     },
     {
-      "id": "divinacao",
+      "topic_id": "divinacao",
       "title": "Divinação",
       "content": [
         {
@@ -906,7 +906,7 @@
       ]
     },
     {
-      "id": "feiticaria",
+      "topic_id": "feiticaria",
       "title": "Feitiçaria",
       "content": [
         {

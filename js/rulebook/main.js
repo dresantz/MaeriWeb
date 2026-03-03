@@ -13,11 +13,11 @@
 
 import { initTOCToggle, renderChapterSelect } from "./toc.js";
 import { loadRulebookChapter } from "./loader.js";
-import { RULEBOOK_CHAPTERS } from "./constants.js";
+import { RULEBOOK_CHAPTERS, LAST_CHAPTER_KEY } from "./constants.js";  // 👈 IMPORT LAST_CHAPTER_KEY
 import { 
   initChapterNavigation, 
   restoreLastTopic,
-  getCurrentChapter  // 👈 NOVO: importar o getter
+  getCurrentChapter
 } from "./navigation.js";
 import { buildIndex } from "../search/searchIndex.js";
 import { initSearchUI } from "../search/searchUI.js";
@@ -29,6 +29,9 @@ const REQUIRED_ELEMENTS = [
   'chapter-select',
   'rulebook-content'
 ];
+
+// ===== ESTADO LOCAL =====
+let rulebookInitialized = false;
 
 // ===== UTILITÁRIOS =====
 
@@ -102,6 +105,12 @@ async function preloadSearchIndex() {
  * Inicializa todos os componentes do rulebook
  */
 async function initRulebook() {
+  // Prevenção de duplicação
+  if (rulebookInitialized) {
+    console.log('Rulebook já inicializado, ignorando...');
+    return;
+  }
+
   // Verifica elementos necessários
   if (!checkRequiredElements()) {
     console.error('Rulebook: elementos essenciais não encontrados');
@@ -118,16 +127,24 @@ async function initRulebook() {
     initChapterNavigation();
     initSearchUI();
     
-    // Carrega o capítulo atual ou o primeiro
-    const currentChapter = getCurrentChapter();
-    const chapterToLoad = currentChapter || RULEBOOK_CHAPTERS[0]?.file;
+    // 👇 PRIORIDADE CORRETA: URL > localStorage > primeiro capítulo
+    const urlParams = new URLSearchParams(window.location.search);
+    const chapterFromURL = urlParams.get("chapter");
+    const chapterFromStorage = localStorage.getItem(LAST_CHAPTER_KEY);
+    
+    const chapterToLoad = chapterFromURL || chapterFromStorage || RULEBOOK_CHAPTERS[0]?.file;
     
     if (!chapterToLoad) {
       throw new Error('Nenhum capítulo disponível para carregar');
     }
     
+    console.log('📚 Capítulo a carregar:', chapterToLoad);
+    console.log('   (URL:', chapterFromURL, '| Storage:', chapterFromStorage, ')');
+    
+    // Carrega o capítulo
     await loadRulebookChapter(chapterToLoad);
-    restoreLastTopic();
+    
+    rulebookInitialized = true;
     
   } catch (error) {
     console.error('Erro ao inicializar rulebook:', error);

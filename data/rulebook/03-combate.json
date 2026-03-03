@@ -5,7 +5,7 @@
   "description": "Explica como funciona um turno de combate, embates entre personagens e resolução de ações.",
   "sections": [
     {
-      "id": "turno-de-combate",
+      "topic_id": "turno-de-combate",
       "title": "Turno de Combate",
       "content": [
         {
@@ -24,7 +24,7 @@
       ]
     },
     {
-      "id": "acoes-de-combate",
+      "topic_id": "acoes-de-combate",
       "title": "Ações de Combate",
       "content": [
         {
@@ -78,7 +78,7 @@
       ]
     },
     {
-      "id": "embate-bonus-e-embate-nulo",
+      "topic_id": "embate-bonus-e-embate-nulo",
       "title": "Embate Bônus e Embate Nulo",
       "content": [
         {
@@ -109,7 +109,7 @@
       ]
     },
     {
-      "id": "reacao-e-interrupcao",
+      "topic_id": "reacao-e-interrupcao",
       "title": "Reação e Interrupção",
       "content": [
         {
@@ -134,7 +134,7 @@
       ]
     },
     {
-      "id": "posicoes-de-combate",
+      "topic_id": "posicoes-de-combate",
       "title": "Posições de Combate",
       "content": [
         {
@@ -160,7 +160,7 @@
       ]
     },
     {
-    "id": "gesto-e-movimento",
+    "topic_id": "gesto-e-movimento",
     "title": "Gesto e Movimento",
     "content": [
       {
@@ -214,7 +214,7 @@
     ]
   },
   {
-      "id": "ordem-lideranca-e-estrategia",
+      "topic_id": "ordem-lideranca-e-estrategia",
       "title": "Ordem, Liderança e Estratégia",
       "content": [
         {
@@ -253,7 +253,7 @@
       ]
     },
     {
-      "id": "a-primeira-rodada",
+      "topic_id": "a-primeira-rodada",
       "title": "A Primeira Rodada",
       "content": [
         {
@@ -269,7 +269,7 @@
       ]
     },
     {
-      "id": "a-segunda-rodada",
+      "topic_id": "a-segunda-rodada",
       "title": "A Segunda Rodada",
       "content": [
         {
@@ -333,7 +333,7 @@
       ]
     },
     {
-      "id": "alvo-indefeso",
+      "topic_id": "alvo-indefeso",
       "title": "Alvo Indefeso",
       "content": [
         {
@@ -347,7 +347,7 @@
       ]
     },
     {
-      "id": "condicoes",
+      "topic_id": "condicoes",
       "title": "Condições",
       "content": [
         {
@@ -395,7 +395,7 @@
       ]
     },
     {
-      "id": "tecnicas",
+      "topic_id": "tecnicas",
       "title": "Técnicas",
       "content": [
         {
@@ -437,7 +437,7 @@
       ]
     },
     {
-      "id": "fuga-e-perseguicao",
+      "topic_id": "fuga-e-perseguicao",
       "title": "Fuga e Perseguição",
       "content": [
         {
@@ -451,7 +451,7 @@
       ]
     },
     {
-      "id": "tipos-de-danos",
+      "topic_id": "tipos-de-danos",
       "title": "Tipos de Danos",
       "content": [
         {
@@ -480,7 +480,7 @@
       ]
     },
     {
-      "id": "dano-hibrido-e-dano-bonus",
+      "topic_id": "dano-hibrido-e-dano-bonus",
       "title": "Dano Híbrido e Dano Bônus",
       "content": [
         {
@@ -498,7 +498,7 @@
       ]
     },
     {
-      "id": "grid-ou-teatro-da-mente",
+      "topic_id": "grid-ou-teatro-da-mente",
       "title": "Grid ou Teatro da Mente",
       "content": [
         {
@@ -529,7 +529,7 @@
       ]
     },
     {
-      "id": "dano-em-area",
+      "topic_id": "dano-em-area",
       "title": "Dano em Área",
       "content": [
         {
@@ -547,7 +547,7 @@
       ]
     },
     {
-      "id": "areas-de-efeito",
+      "topic_id": "areas-de-efeito",
       "title": "Áreas de Efeito",
       "content": [
         {

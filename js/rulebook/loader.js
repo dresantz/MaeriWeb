@@ -4,18 +4,23 @@
 
 import { renderRulebookChapter } from "./renderer.js";
 import { renderTOC, renderChapterSelect } from "./toc.js";
-import { LAST_CHAPTER_KEY } from "./constants.js";
+import { LAST_CHAPTER_KEY, getChapterIndex } from "./constants.js";
 import {
   setCurrentChapter,
   updateChapterNavButtons,
   restoreLastTopic,
   observeTopics,
-  updateURLTopic
+  updateURLTopic,
+  getTopicFromURL
 } from "./navigation.js";
 
 let loadToken = 0;
 
 export function loadRulebookChapter(fileName, topicOverride = null) {
+
+    console.log('📚 CARREGANDO CAPÍTULO:', fileName);
+  console.log('   Índice deste capítulo:', getChapterIndex(fileName));
+
   const currentToken = ++loadToken;
   const path = `../data/rulebook/${fileName}`;
 
@@ -24,12 +29,14 @@ export function loadRulebookChapter(fileName, topicOverride = null) {
   localStorage.setItem(LAST_CHAPTER_KEY, fileName);
 
   // Atualiza URL
-  const url = new URL(window.location);
-  if (url.searchParams.get("chapter") !== fileName) {
-    url.searchParams.set("chapter", fileName);
-    url.searchParams.delete("topic");
-    window.history.replaceState({}, "", url);
-  }
+const url = new URL(window.location);
+const currentChapter = url.searchParams.get("chapter");
+
+if (currentChapter !== fileName) {
+  url.searchParams.set("chapter", fileName);
+  url.searchParams.delete("topic");
+  window.history.replaceState({}, "", url);
+}
 
   fetch(path)
     .then(res => {
@@ -44,15 +51,19 @@ export function loadRulebookChapter(fileName, topicOverride = null) {
       renderChapterSelect();
       updateChapterNavButtons();
 
-      // 👇 ATIVA O SCROLL SPY DEPOIS DE RENDERIZAR
-      // Pequeno atraso para garantir que o DOM está pronto
+      // Ativa o scroll spy depois de renderizar
       setTimeout(() => {
         observeTopics();
       }, 100);
 
       requestAnimationFrame(() => {
+        // SEMPRE chama restoreLastTopic, ela que decide de onde pegar
         restoreLastTopic(topicOverride);
-        if (topicOverride) updateURLTopic(topicOverride);
+        
+        // Se tinha topicOverride, atualiza a URL
+        if (topicOverride) {
+          updateURLTopic(topicOverride);
+        }
       });
     })
     .catch(err => {

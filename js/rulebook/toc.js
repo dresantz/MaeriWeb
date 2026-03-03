@@ -129,15 +129,15 @@ export function renderTOC(chapterData) {
   }
 
   sections.forEach((section) => {
-    if (!section.id) return;
+    if (!section.topic_id) return;
 
     const li = document.createElement('li');
     li.className = 'toc-item';
     
     const a = document.createElement('a');
-    a.href = `#${section.id}`;
+    a.href = `#${section.topic_id}`;
     a.textContent = section.title || 'Sem título';
-    a.setAttribute('data-section-id', section.id);
+    a.setAttribute('data-section-id', section.topic_id);
     
     li.appendChild(a);
     tocList.appendChild(li);
@@ -168,22 +168,26 @@ export function renderChapterSelect() {
 
   // Remove listener antigo antes de adicionar novo
   select.onchange = null;
+  
+  // 👇 MUDA AQUI: passa null como topicOverride para não restaurar tópico
   select.addEventListener('change', () => {
-    loadRulebookChapter(select.value);
+    loadRulebookChapter(select.value, null);
   });
 }
 
 /**
  * Navega para um capítulo pelo índice
+ * Agora aceita um parâmetro topicOverride opcional
  */
-export function switchToChapterByIndex(index) {
+export function switchToChapterByIndex(index, topicOverride = null) {
   const chapter = RULEBOOK_CHAPTERS[index];
   if (!chapter) {
     console.warn(`Índice de capítulo inválido: ${index}`);
     return;
   }
 
-  loadRulebookChapter(chapter.file);
+  // 👇 PASSA topicOverride para o loader
+  loadRulebookChapter(chapter.file, topicOverride);
 
   const select = getElement(SELECTORS.CHAPTER_SELECT);
   if (select) select.value = chapter.file;

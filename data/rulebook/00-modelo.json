@@ -5,10 +5,15 @@
   "description": "modelo de json.",
   "sections": [
     {
-      "id": "primeiro-topico",
+      "topic_id": "primeiro-topico",
       "title": "Primeiro Tópico",
       "content": [
         {
+          "type": "paragraph",
+          "text": "Texto."
+        },
+        {
+          "id": "dog",
           "type": "paragraph",
           "text": "Texto."
         },

@@ -35,13 +35,13 @@ export function buildIndex(chaptersData) {
     const chapterFile = chapter.__file;
 
     (chapter.sections || []).forEach((section) => {
-      if (!section.id) return;
+      if (!section.topic_id) return;
 
       index.push({
         chapterFile,
         chapterTitle: chapter.title || "",
         _chapterTitleNorm: normalizeText(chapter.title || ""),
-        topicId: section.id,
+        topicId: section.topic_id,
         topicTitle: section.title || "",
         _topicTitleNorm: normalizeText(section.title || ""),
         text: extractText(section)

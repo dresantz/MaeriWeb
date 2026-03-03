@@ -5,7 +5,7 @@
   "description": "Como criar um personagem e interpretá-lo.",
   "sections": [
     {
-      "id": "peso-e-limite-de-carga",
+      "topic_id": "peso-e-limite-de-carga",
       "title": "Peso e Limite de Carga",
       "content": [
         {
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "id": "espaco-e-movimentacao",
+      "topic_id": "espaco-e-movimentacao",
       "title": "Espaço e Movimentação",
       "content": [
         {
@@ -72,7 +72,7 @@
       ]
     },
     {
-      "id": "vitalidade-e-fora-de-acao",
+      "topic_id": "vitalidade-e-fora-de-acao",
       "title": "Vitalidade e Fora de Ação",
       "content": [
         {
@@ -102,7 +102,7 @@
       ]
     },
     {
-      "id": "dano-e-ferimento",
+      "topic_id": "dano-e-ferimento",
       "title": "Dano e Ferimento",
       "content": [
         {
@@ -125,7 +125,7 @@
       ]
     },
     {
-      "id": "controle-e-intriga",
+      "topic_id": "controle-e-intriga",
       "title": "Controle e Intriga",
       "content": [
         {
@@ -163,7 +163,7 @@
       ]
     },
     {
-      "id": "repouso",
+      "topic_id": "repouso",
       "title": "Repouso",
       "content": [
         {
@@ -202,7 +202,7 @@
       ]
     },
     {
-      "id": "peculiaridades",
+      "topic_id": "peculiaridades",
       "title": "Peculiaridades",
       "content": [
         {
@@ -220,7 +220,7 @@
       ]
     },
     {
-      "id": "circulo",
+      "topic_id": "circulo",
       "title": "Círculo",
       "content": [
         {
@@ -238,7 +238,7 @@
       ]
     },
     {
-      "id": "moeda-inicial",
+      "topic_id": "moeda-inicial",
       "title": "Moeda Inicial",
       "content": [
         {
@@ -283,7 +283,7 @@
       ]
     },
     {
-      "id": "estudo-e-conhecimento",
+      "topic_id": "estudo-e-conhecimento",
       "title": "Estudo e Conhecimento",
       "content": [
         {
@@ -539,7 +539,7 @@
       ]
     },
     {
-      "id": "segredos",
+      "topic_id": "segredos",
       "title": "Segredos",
       "content": [
         {
@@ -581,7 +581,7 @@
       ]
     },
     {
-      "id": "arquetipo",
+      "topic_id": "arquetipo",
       "title": "Arquétipo",
       "content": [
         {
@@ -615,7 +615,7 @@
       ]
     },
     {
-      "id": "motivacao",
+      "topic_id": "motivacao",
       "title": "Motivação",
       "content": [
         {
@@ -639,7 +639,7 @@
       ]
     },
     {
-      "id": "disposicao",
+      "topic_id": "disposicao",
       "title": "Disposição",
       "content": [
         {

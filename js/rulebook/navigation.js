@@ -87,9 +87,12 @@ function navigateChapter(direction) {
 
   if (target < 0 || target >= RULEBOOK_CHAPTERS.length) return;
 
+  // 👇 LIMPA O TÓPICO PARA NÃO TENTAR RESTAURAR
   clearSavedTopic();
   updateURLTopic(null);
-  switchToChapterByIndex(target, false);
+  
+  // 👇 PASSA null como topicOverride para não restaurar nada
+  switchToChapterByIndex(target, null);
 }
 
 export function initChapterNavigation() {
@@ -132,31 +135,34 @@ export function initChapterNavigation() {
 // ===== RESTORE DE TÓPICO =====
 
 export function restoreLastTopic(override = null) {
-  if (!override && !isReload) return;
-
+  console.log('🔍 restoreLastTopic chamado');
+  console.log('   override:', override);
+  console.log('   URL topic:', getTopicFromURL());
+  console.log('   localStorage:', localStorage.getItem(LAST_TOPIC_KEY));
+  
   let saved = override || getTopicFromURL() || localStorage.getItem(LAST_TOPIC_KEY);
+  console.log('   saved:', saved);
+
   if (!saved) return;
 
   let topicId = saved;
-  let chapterIndex = null;
-
-  try {
-    const parsed = JSON.parse(saved);
-    topicId = parsed.topicId;
-    chapterIndex = parsed.chapterIndex;
-  } catch {
-    // Mantém saved como string simples
+  
+  // Se for JSON, extrai só o topicId
+  if (saved.startsWith('{')) {
+    try {
+      const parsed = JSON.parse(saved);
+      topicId = parsed.topicId;
+    } catch {}
   }
 
   if (!topicId) return;
 
-  if (chapterIndex !== null && chapterIndex !== getCurrentChapterIndex()) {
-    switchToChapterByIndex(chapterIndex, false);
+  const target = document.getElementById(topicId);
+  if (!target) {
+    console.log('🗑️ Tópico não encontrado, removendo');
+    localStorage.removeItem(LAST_TOPIC_KEY);
     return;
   }
-
-  const target = document.getElementById(topicId);
-  if (!target) return;
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
@@ -184,6 +190,13 @@ export function observeTopics() {
 
         lastActiveTopic = id;
         const chapterIndex = getCurrentChapterIndex();
+        
+        // 👇 LOG AQUI - DENTRO DO OBSERVER
+        console.log('💾 SALVANDO:', { 
+          topicId: id, 
+          chapterIndex, 
+          chapterFile: currentChapterFile 
+        });
 
         localStorage.setItem(
           LAST_TOPIC_KEY,
@@ -200,6 +213,44 @@ export function observeTopics() {
     topics.forEach(t => observer.observe(t));
   });
 }
+
+/* Salva o tópico atual antes de sair da página */
+function saveCurrentTopicBeforeUnload() {
+  if (!currentChapterFile) return;
+  
+  const activeTopics = document.querySelectorAll("[data-topic]");
+  let currentTopic = null;
+  
+  // Encontra o tópico mais próximo do topo da viewport
+  for (const topic of activeTopics) {
+    const rect = topic.getBoundingClientRect();
+    if (rect.top >= 0 && rect.top < window.innerHeight * 0.3) {
+      currentTopic = topic;
+      break;
+    }
+  }
+  
+  if (!currentTopic) return;
+  
+  const chapterIndex = getCurrentChapterIndex();
+  localStorage.setItem(
+    LAST_TOPIC_KEY,
+    JSON.stringify({ 
+      topicId: currentTopic.id, 
+      chapterIndex 
+    })
+  );
+}
+
+// Salva quando o usuário sai da página
+window.addEventListener('beforeunload', saveCurrentTopicBeforeUnload);
+
+// Também salva quando a página fica oculta (mudança de aba)
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden') {
+    saveCurrentTopicBeforeUnload();
+  }
+});
 
 // ===== BACK TO TOP =====
 

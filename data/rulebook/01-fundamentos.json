@@ -5,7 +5,7 @@
   "description": "O básico sobre o que é RPG e o que é Maeri.",
   "sections": [
     {
-      "id": "roleplaying-game",
+      "topic_id": "roleplaying-game",
       "title": "Roleplaying Game",
       "content": [
         {
@@ -42,7 +42,7 @@
       ]
     },
     {
-          "id": "mentalidade",
+          "topic_id": "mentalidade",
           "title": "Mentalidade",
           "content": [
             {
@@ -84,7 +84,7 @@
           ]
         },
         {
-          "id": "caracteristicas-basicas",
+          "topic_id": "caracteristicas-basicas",
           "title": "Características Básicas",
           "content": [
             {
@@ -186,7 +186,7 @@
           ]
         },
         {
-          "id": "divisoes-de-tempo",
+          "topic_id": "divisoes-de-tempo",
           "title": "Divisões de Tempo",
           "content": [
             {
@@ -209,7 +209,7 @@
           ]
         },
         {
-          "id": "testes",
+          "topic_id": "testes",
           "title": "Testes",
           "content": [
             {
@@ -284,7 +284,7 @@
           ]
         },
         {
-          "id": "penalidades-e-bonus",
+          "topic_id": "penalidades-e-bonus",
           "title": "Penalidades e Bônus",
           "content": [
             {
@@ -302,7 +302,7 @@
           ]
         },
         {
-          "id": "vantagem-e-desvantagem",
+          "topic_id": "vantagem-e-desvantagem",
           "title": "Vantagem e Desvantagem",
           "content": [
             {
@@ -325,7 +325,7 @@
           ]
         },
         {
-          "id": "embate",
+          "topic_id": "embate",
           "title": "Embate",
           "content": [
             {
@@ -356,7 +356,7 @@
           ]
         },
         {
-          "id": "nivel-e-experiencia",
+          "topic_id": "nivel-e-experiencia",
           "title": "Nível e Experiência",
           "content": [
             {

@@ -5,7 +5,7 @@
   "description": "Um pouco do cenário.",
   "sections": [
         {
-        "id": "o-mundo",
+        "topic_id": "o-mundo",
         "title": "O Mundo",
         "content": [
             {
@@ -23,7 +23,7 @@
         ]
         },
         {
-        "id": "historia-e-geografia",
+        "topic_id": "historia-e-geografia",
         "title": "História e Geografia",
         "content": [
             {
@@ -49,7 +49,7 @@
         ]
         },
         {
-        "id": "cidades-regioes-e-povos",
+        "topic_id": "cidades-regioes-e-povos",
         "title": "Cidades, Regiões e Povos",
         "content": [
             {
@@ -71,7 +71,7 @@
         ]
         },
         {
-        "id": "religioes",
+        "topic_id": "religioes",
         "title": "Religiões",
         "content": [
             {

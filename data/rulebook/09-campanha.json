@@ -5,7 +5,7 @@
   "description": "Dicas sobra como começar.",
   "sections": [
         {
-        "id": "etiqueta",
+        "topic_id": "etiqueta",
         "title": "Etiqueta",
         "content": [
             {
@@ -55,7 +55,7 @@
         ]
         },
         {
-        "id": "o-inicio-da-aventura",
+        "topic_id": "o-inicio-da-aventura",
         "title": "O Início da Aventura",
         "content": [
             {
@@ -85,7 +85,7 @@
         ]
         },
         {
-        "id": "uma-viagem",
+        "topic_id": "uma-viagem",
         "title": "Uma Viagem",
         "content": [
             {
@@ -107,7 +107,7 @@
         ]
         },
         {
-        "id": "um-combate",
+        "topic_id": "um-combate",
         "title": "Um Combate",
         "content": [
             {
@@ -141,7 +141,7 @@
         ]
         },
         {
-        "id": "uma-masmorra",
+        "topic_id": "uma-masmorra",
         "title": "Uma Masmorra",
         "content": [
             {
@@ -163,7 +163,7 @@
         ]
         },
         {
-    "id": "o-fim-da-aventura",
+    "topic_id": "o-fim-da-aventura",
     "title": "O Fim da Aventura",
         "content": [
                 {
@@ -189,7 +189,7 @@
             ]
         },
         {
-        "id": "o-que-e-rpg",
+        "topic_id": "o-que-e-rpg",
         "title": "O Que É RPG?",
         "content": [
             {

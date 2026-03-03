@@ -5,7 +5,7 @@
   "description": "Criaturas, raças, espécies, seres são ideias de tipos diferentes de povos que o jogador pode interpretar.",
   "sections": [
     {
-      "id": "o-que-sao-seres",
+      "topic_id": "o-que-sao-seres",
       "title": "O que são Seres",
       "content": [
         {
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "id": "humano",
+      "topic_id": "humano",
       "title": "Humano",
       "content": [
         {
@@ -45,7 +45,7 @@
       ]
     },
     {
-      "id": "oniro",
+      "topic_id": "oniro",
       "title": "Oniro",
       "content": [
         {
@@ -62,7 +62,7 @@
       ]
     },
     {
-      "id": "dredlim",
+      "topic_id": "dredlim",
       "title": "Dredlim",
       "content": [
         {
@@ -89,7 +89,7 @@
       ]
     },
     {
-      "id": "karnakin",
+      "topic_id": "karnakin",
       "title": "Karnakin",
       "content": [
         {
@@ -116,7 +116,7 @@
       ]
     },
     {
-      "id": "mogu",
+      "topic_id": "mogu",
       "title": "Mogu",
       "content": [
         {
@@ -137,7 +137,7 @@
       ]
     },
     {
-      "id": "caribo",
+      "topic_id": "caribo",
       "title": "Caribo",
       "content": [
         {
@@ -163,7 +163,7 @@
       ]
     },
     {
-      "id": "conchilu",
+      "topic_id": "conchilu",
       "title": "Conchilu",
       "content": [
         {
@@ -190,7 +190,7 @@
       ]
     },
     {
-      "id": "kerbero",
+      "topic_id": "kerbero",
       "title": "Kerbero",
       "content": [
         {

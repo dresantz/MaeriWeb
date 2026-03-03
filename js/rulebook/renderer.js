@@ -3,10 +3,10 @@
  * Converte dados JSON em elementos DOM
  * 
  * Dependências:
- * - ./navigation.js: Scroll spy e restauração de tópico
+ * - ./navigation.js: Scroll spy
  */
 
-import { observeTopics, restoreLastTopic } from "./navigation.js";
+import { observeTopics } from "./navigation.js";  // 👈 SÓ importa observeTopics
 
 // ===== CONSTANTES =====
 const MARK_PATTERN = /\[(.*?)\]/g;
@@ -56,10 +56,15 @@ function processBlock(block) {
 
 function renderParagraph(block) {
   const p = document.createElement('p');
-  if (block.id) {
-    p.id = block.id;
+  
+  if (block.topic_id) {
+    p.id = block.topic_id;
     p.dataset.topic = 'true';
+  } 
+  else if (block.id) {
+    p.id = block.id;
   }
+  
   applyMarkings(p, block.text);
   return p;
 }
@@ -78,6 +83,12 @@ function renderList(block) {
         const subUl = document.createElement('ul');
         item.subitems.forEach(sub => {
           const subLi = createElement('li', null, sub);
+          if (sub.topic_id) {
+            subLi.id = sub.topic_id;
+            subLi.dataset.topic = 'true';
+          } else if (sub.id) {
+            subLi.id = sub.id;
+          }
           subUl.appendChild(subLi);
         });
         li.appendChild(subUl);
@@ -103,7 +114,14 @@ function renderNestedList(block) {
     if (Array.isArray(item.items)) {
       const subUl = document.createElement('ul');
       item.items.forEach(sub => {
-        subUl.appendChild(createElement('li', null, sub));
+        const subLi = createElement('li', null, sub);
+        if (sub.topic_id) {
+          subLi.id = sub.topic_id;
+          subLi.dataset.topic = 'true';
+        } else if (sub.id) {
+          subLi.id = sub.id;
+        }
+        subUl.appendChild(subLi);
       });
       li.appendChild(subUl);
     }
@@ -124,7 +142,6 @@ function renderTable(block) {
   const wrapper = createElement('div', 'table-wrapper');
   const table = document.createElement('table');
 
-  // Cabeçalho
   if (block.columns?.length) {
     const thead = document.createElement('thead');
     const tr = document.createElement('tr');
@@ -135,13 +152,18 @@ function renderTable(block) {
     table.appendChild(thead);
   }
 
-  // Corpo
   const tbody = document.createElement('tbody');
   (block.rows || []).forEach(row => {
     const tr = document.createElement('tr');
     row.forEach(cell => {
       const td = createElement('td', null, cell);
       applyMarkings(td, cell);
+      if (cell.topic_id) {
+        td.id = cell.topic_id;
+        td.dataset.topic = 'true';
+      } else if (cell.id) {
+        td.id = cell.id;
+      }
       tr.appendChild(td);
     });
     tbody.appendChild(tr);
@@ -159,7 +181,14 @@ function renderSubsections(block) {
   
   (block.items || []).forEach(sub => {
     const wrap = createElement('div', 'subsection');
-    if (sub.id) wrap.id = sub.id;
+    
+    if (sub.topic_id) {
+      wrap.id = sub.topic_id;
+      wrap.dataset.topic = 'true';
+    }
+    else if (sub.id) {
+      wrap.id = sub.id;
+    }
     
     wrap.appendChild(createElement('h3', null, sub.title || 'Untitled'));
     
@@ -205,7 +234,14 @@ function renderSpellAsParagraph(block) {
   
   const p = document.createElement('p');
   p.className = 'spell-entry';
-  if (block.id) p.id = block.id;
+  
+  if (block.topic_id) {
+    p.id = block.topic_id;
+    p.dataset.topic = 'true';
+  }
+  else if (block.id) {
+    p.id = block.id;
+  }
   
   applyMarkings(p, parts.join(' '));
   
@@ -224,16 +260,11 @@ export function renderRulebookChapter(chapterData) {
     return;
   }
 
-  // Limpa o conteúdo anterior
   container.innerHTML = '';
-  
-  // Força reflow (necessário para animações/transições)
   container.offsetHeight;
 
-  // Usa DocumentFragment para melhor performance
   const fragment = document.createDocumentFragment();
 
-  // Cabeçalho do capítulo
   const header = document.createElement('header');
   header.className = 'chapter-header';
   header.appendChild(createElement('h1', null, chapterData.id || 'Rulebook'));
@@ -242,44 +273,37 @@ export function renderRulebookChapter(chapterData) {
     header.appendChild(createElement('p', 'chapter-description', chapterData.description));
   }
   
-    fragment.appendChild(header);
+  fragment.appendChild(header);
 
-    // Seções do capítulo
-    (chapterData.sections || []).forEach(section => {
-      const sectionEl = document.createElement('section');
-      sectionEl.className = 'chapter-section';
-      
-      if (section.id) {
-        sectionEl.id = section.id;
-        sectionEl.dataset.topic = 'true';
-        sectionEl.setAttribute('aria-labelledby', `${section.id}-title`);
-      }
+  (chapterData.sections || []).forEach(section => {
+    const sectionEl = document.createElement('section');
+    sectionEl.className = 'chapter-section';
+    
+    if (section.topic_id) {
+      sectionEl.id = section.topic_id;
+      sectionEl.dataset.topic = 'true';
+      sectionEl.setAttribute('aria-labelledby', `${section.topic_id}-title`);
+    }
 
-      const h2 = createElement('h2', 'section-title', section.title || 'Untitled Section');
-      if (section.id) h2.id = `${section.id}-title`;
-      sectionEl.appendChild(h2);
+    const h2 = createElement('h2', 'section-title', section.title || 'Untitled Section');
+    if (section.topic_id) h2.id = `${section.topic_id}-title`;
+    sectionEl.appendChild(h2);
 
-      (section.content || []).forEach(block => {
-        const element = processBlock(block);
-        if (element) sectionEl.appendChild(element);
-      });
-
-      fragment.appendChild(sectionEl);
+    (section.content || []).forEach(block => {
+      const element = processBlock(block);
+      if (element) sectionEl.appendChild(element);
     });
 
-    // Adiciona todo o conteúdo de uma vez
-    container.appendChild(fragment);
+    fragment.appendChild(sectionEl);
+  });
 
-    // Usa requestAnimationFrame para garantir que o DOM está pronto
-    requestAnimationFrame(() => {
-    // Ativa observadores de navegação
+  container.appendChild(fragment);
+
+  requestAnimationFrame(() => {
+    // 👇 SÓ ativa o scroll spy, NÃO restaura tópico
     observeTopics();
-    
-    // Restaura último tópico visitado
-    restoreLastTopic();
-
+    // A restauração é feita pelo loader quando necessário
   });
 }
 
-// ===== EXPORTAÇÕES ADICIONAIS (opcional) =====
-export { processBlock }; // Útil para testes ou uso em outros contextos
+export { processBlock };
