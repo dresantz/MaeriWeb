@@ -135,13 +135,7 @@ export function initChapterNavigation() {
 // ===== RESTORE DE TÓPICO =====
 
 export function restoreLastTopic(override = null) {
-  console.log('🔍 restoreLastTopic chamado');
-  console.log('   override:', override);
-  console.log('   URL topic:', getTopicFromURL());
-  console.log('   localStorage:', localStorage.getItem(LAST_TOPIC_KEY));
-  
   let saved = override || getTopicFromURL() || localStorage.getItem(LAST_TOPIC_KEY);
-  console.log('   saved:', saved);
 
   if (!saved) return;
 
@@ -159,7 +153,6 @@ export function restoreLastTopic(override = null) {
 
   const target = document.getElementById(topicId);
   if (!target) {
-    console.log('🗑️ Tópico não encontrado, removendo');
     localStorage.removeItem(LAST_TOPIC_KEY);
     return;
   }
@@ -190,13 +183,6 @@ export function observeTopics() {
 
         lastActiveTopic = id;
         const chapterIndex = getCurrentChapterIndex();
-        
-        // 👇 LOG AQUI - DENTRO DO OBSERVER
-        console.log('💾 SALVANDO:', { 
-          topicId: id, 
-          chapterIndex, 
-          chapterFile: currentChapterFile 
-        });
 
         localStorage.setItem(
           LAST_TOPIC_KEY,

@@ -18,9 +18,6 @@ let loadToken = 0;
 
 export function loadRulebookChapter(fileName, topicOverride = null) {
 
-    console.log('📚 CARREGANDO CAPÍTULO:', fileName);
-  console.log('   Índice deste capítulo:', getChapterIndex(fileName));
-
   const currentToken = ++loadToken;
   const path = `../data/rulebook/${fileName}`;
 

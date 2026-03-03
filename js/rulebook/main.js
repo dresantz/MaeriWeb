@@ -138,9 +138,6 @@ async function initRulebook() {
       throw new Error('Nenhum capítulo disponível para carregar');
     }
     
-    console.log('📚 Capítulo a carregar:', chapterToLoad);
-    console.log('   (URL:', chapterFromURL, '| Storage:', chapterFromStorage, ')');
-    
     // Carrega o capítulo
     await loadRulebookChapter(chapterToLoad);
     
