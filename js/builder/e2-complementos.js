@@ -14,6 +14,14 @@ class ComplementosManager {
     this.selectedEstudo = null;
     this.selectedTecnica = null;
     this.selectedMagia = null;
+    
+    // Caminhos dos dados (padronizados como relativos à raiz)
+    this.DATA_PATHS = {
+      SERES: '../data/rulebook/06-seres.json',
+      PERSONAGEM: '../data/rulebook/02-personagem.json',
+      SOCIAL: '../data/rulebook/05-circulo-social-comercio.json',
+      MAGIA: '../data/rulebook/04-magia.json'
+    };
   }
 
   render() {
@@ -25,7 +33,10 @@ class ComplementosManager {
         <p class="complementos-intro">Escolha o tipo de ser do personagem:</p>
         
         <div class="seres-buttons" id="seres-buttons-container">
-          <button class="ser-button loading" disabled>Carregando seres...</button>
+          <div class="loading-state">
+            <span class="spinner"></span>
+            <span>Carregando seres...</span>
+          </div>
         </div>
         
         <div class="ser-details" id="ser-details-container" style="display: none;">
@@ -40,7 +51,10 @@ class ComplementosManager {
           <p class="estudos-subtitle">Estudos</p>
           
           <div class="estudos-buttons" id="estudos-buttons-container">
-            <button class="estudo-button loading" disabled>Carregando estudos...</button>
+            <div class="loading-state">
+              <span class="spinner"></span>
+              <span>Carregando estudos...</span>
+            </div>
           </div>
           
           <div class="estudo-details" id="estudo-details-container" style="display: none;">
@@ -58,7 +72,10 @@ class ComplementosManager {
           <p class="tecnicas-subtitle">Técnicas Marciais</p>
           
           <div class="tecnicas-buttons" id="tecnicas-buttons-container">
-            <button class="tecnica-button loading" disabled>Carregando técnicas...</button>
+            <div class="loading-state">
+              <span class="spinner"></span>
+              <span>Carregando técnicas...</span>
+            </div>
           </div>
           
           <div class="tecnica-details" id="tecnica-details-container" style="display: none;">
@@ -72,7 +89,10 @@ class ComplementosManager {
           <p class="magias-subtitle">Estudos Mágicos</p>
           
           <div class="magias-buttons" id="magias-buttons-container">
-            <button class="magia-button loading" disabled>Carregando estudos mágicos...</button>
+            <div class="loading-state">
+              <span class="spinner"></span>
+              <span>Carregando estudos mágicos...</span>
+            </div>
           </div>
           
           <div class="magia-details" id="magia-details-container" style="display: none;">
@@ -87,6 +107,9 @@ class ComplementosManager {
       </div>
     `;
     
+    // Configura delegação de eventos
+    this.setupEventDelegation();
+    
     // Carrega todos os dados
     this.loadSeresData();
     this.loadEstudosData();
@@ -94,24 +117,104 @@ class ComplementosManager {
     this.loadMagiasData();
   }
 
+  // ===== UTILITÁRIOS =====
+  showSectionLoading(containerId, message) {
+    const container = document.getElementById(containerId);
+    if (container) {
+      container.innerHTML = `
+        <div class="loading-state">
+          <span class="spinner"></span>
+          <span>${message}</span>
+        </div>
+      `;
+    }
+  }
+
+  showSectionError(containerId, message) {
+    const container = document.getElementById(containerId);
+    if (container) {
+      container.innerHTML = `<button class="error-button" disabled>${message}</button>`;
+    }
+  }
+
+  closeWithAnimation(container, callback) {
+    if (!container) return;
+    
+    container.classList.add('closing');
+    
+    setTimeout(() => {
+      container.style.display = 'none';
+      container.classList.remove('closing');
+      if (callback) callback();
+    }, 300);
+  }
+
+  validateSelections() {
+    const selections = {
+      ser: this.selectedSer,
+      estudo: this.selectedEstudo,
+      tecnica: this.selectedTecnica,
+      magia: this.selectedMagia
+    };
+    
+    // Disparar evento com estado atual
+    const event = new CustomEvent('complementos:updated', {
+      detail: selections,
+      bubbles: true
+    });
+    
+    this.previewElement?.dispatchEvent(event);
+    
+    return selections;
+  }
+
+  setupEventDelegation() {
+    if (!this.previewElement) return;
+    
+    this.previewElement.addEventListener('click', (event) => {
+      const button = event.target.closest('.ser-button, .estudo-button, .tecnica-button, .magia-button');
+      if (!button) return;
+      
+      if (button.classList.contains('ser-button')) {
+        this.selectSer(button.dataset.serId);
+      } else if (button.classList.contains('estudo-button')) {
+        this.selectEstudo(button.dataset.estudoIndex);
+      } else if (button.classList.contains('tecnica-button')) {
+        this.selectTecnica(button.dataset.tecnicaIndex);
+      } else if (button.classList.contains('magia-button')) {
+        this.selectMagia(button.dataset.magiaIndex);
+      }
+    });
+  }
+
   // ===== SERES =====
   async loadSeresData() {
     try {
-      const response = await fetch('../../data/rulebook/06-seres.json');
+      const response = await fetch(this.DATA_PATHS.SERES);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
       const data = await response.json();
+      
+      if (!data.sections || !Array.isArray(data.sections)) {
+        throw new Error('Formato de dados inválido: sections não encontrada');
+      }
       
       this.seresData = data.sections.filter(section => 
         section.topic_id !== 'o-que-sao-seres' && 
         section.topic_id !== 'introducao'
       );
       
+      if (this.seresData.length === 0) {
+        throw new Error('Nenhum ser encontrado');
+      }
+      
       this.renderSeresButtons();
     } catch (error) {
       console.error('Erro ao carregar dados dos seres:', error);
-      const container = document.getElementById('seres-buttons-container');
-      if (container) {
-        container.innerHTML = '<button class="ser-button error" disabled>Erro ao carregar seres</button>';
-      }
+      this.showSectionError('seres-buttons-container', 'Erro ao carregar seres');
     }
   }
 
@@ -129,27 +232,19 @@ class ComplementosManager {
     });
     
     container.innerHTML = buttonsHtml;
-    
-    container.querySelectorAll('.ser-button').forEach(button => {
-      button.addEventListener('click', () => this.selectSer(button.dataset.serId));
-    });
   }
 
   selectSer(serId) {
     const detailsContainer = document.getElementById('ser-details-container');
     const selectedButton = document.querySelector(`[data-ser-id="${serId}"]`);
     
-    const isSameSer = this.selectedSer && this.selectedSer.id === serId;
+    const isSameSer = this.selectedSer && this.selectedSer.topic_id === serId;
     
     if (isSameSer) {
-      detailsContainer.classList.add('closing');
-      
-      setTimeout(() => {
-        detailsContainer.style.display = 'none';
-        detailsContainer.classList.remove('closing');
-      }, 300);
-      
-      this.selectedSer = null;
+      this.closeWithAnimation(detailsContainer, () => {
+        this.selectedSer = null;
+        this.validateSelections();
+      });
       
       document.querySelectorAll('.ser-button').forEach(btn => {
         btn.classList.remove('selected');
@@ -168,6 +263,7 @@ class ComplementosManager {
     
     this.selectedSer = this.seresData.find(ser => ser.topic_id === serId);
     this.renderSerDetails();
+    this.validateSelections();
   }
 
   renderSerDetails() {
@@ -218,20 +314,58 @@ class ComplementosManager {
   // ===== ESTUDOS =====
   async loadEstudosData() {
     try {
-      const response = await fetch('../../data/rulebook/02-personagem.json');
+      const response = await fetch(this.DATA_PATHS.PERSONAGEM);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
       const data = await response.json();
       
+      if (!data.sections || !Array.isArray(data.sections)) {
+        throw new Error('Formato de dados inválido: sections não encontrada');
+      }
+      
       const estudosSection = data.sections.find(s => s.topic_id === 'estudo-e-conhecimento');
+      
+      if (!estudosSection) {
+        throw new Error('Seção de estudos não encontrada');
+      }
+      
       this.processarEstudos(estudosSection.content);
+      
+      if (!this.estudosData || this.estudosData.length === 0) {
+        throw new Error('Nenhum estudo encontrado');
+      }
       
       this.renderEstudosButtons();
     } catch (error) {
       console.error('Erro ao carregar dados dos estudos:', error);
-      const container = document.getElementById('estudos-buttons-container');
-      if (container) {
-        container.innerHTML = '<button class="estudo-button error" disabled>Erro ao carregar estudos</button>';
-      }
+      this.showSectionError('estudos-buttons-container', 'Erro ao carregar estudos');
     }
+  }
+
+  isRegraGeral(texto) {
+    if (!texto) return false;
+    const textoLower = texto.toLowerCase();
+    const regrasGerais = ['custo', 'xpm', 'teste', 'fonte', 'repouso'];
+    return regrasGerais.some(regra => textoLower.includes(regra));
+  }
+
+  isNewEstudo(item) {
+    return item.estudos_item && !this.isRegraGeral(item.estudos_item);
+  }
+
+  isConhecimento(item) {
+    return item.id === 'estudos_item';
+  }
+
+  createEstudo(item) {
+    return {
+      nome: item.estudos_item,
+      descricao: item.text,
+      conhecimentos: []
+    };
   }
 
   processarEstudos(content) {
@@ -239,28 +373,12 @@ class ComplementosManager {
     let currentEstudo = null;
     
     content.forEach(item => {
-      if (item.estudos_item) {
-        // Filtra regras gerais
-        const isRegraGeral = 
-          item.estudos_item.includes('custo') ||
-          item.estudos_item.includes('xpm') ||
-          item.estudos_item.includes('teste') ||
-          item.estudos_item.includes('Fonte') ||
-          item.estudos_item.includes('repouso') ||
-          item.estudos_item.match(/^Ao custo/i);
-        
-        if (!isRegraGeral) {
-          if (currentEstudo) {
-            this.estudosData.push(currentEstudo);
-          }
-          
-          currentEstudo = {
-            nome: item.estudos_item,
-            descricao: item.text,
-            conhecimentos: []
-          };
+      if (this.isNewEstudo(item)) {
+        if (currentEstudo) {
+          this.estudosData.push(currentEstudo);
         }
-      } else if (item.id === 'estudos_item' && currentEstudo) {
+        currentEstudo = this.createEstudo(item);
+      } else if (this.isConhecimento(item) && currentEstudo) {
         currentEstudo.conhecimentos.push(item.text);
       }
     });
@@ -284,10 +402,6 @@ class ComplementosManager {
     });
     
     container.innerHTML = buttonsHtml;
-    
-    container.querySelectorAll('.estudo-button').forEach(button => {
-      button.addEventListener('click', () => this.selectEstudo(button.dataset.estudoIndex));
-    });
   }
 
   selectEstudo(index) {
@@ -297,14 +411,10 @@ class ComplementosManager {
     const isSameEstudo = this.selectedEstudo && this.selectedEstudo.index === index;
     
     if (isSameEstudo) {
-      detailsContainer.classList.add('closing');
-      
-      setTimeout(() => {
-        detailsContainer.style.display = 'none';
-        detailsContainer.classList.remove('closing');
-      }, 300);
-      
-      this.selectedEstudo = null;
+      this.closeWithAnimation(detailsContainer, () => {
+        this.selectedEstudo = null;
+        this.validateSelections();
+      });
       
       document.querySelectorAll('.estudo-button').forEach(btn => {
         btn.classList.remove('selected');
@@ -327,6 +437,7 @@ class ComplementosManager {
     };
     
     this.renderEstudoDetails();
+    this.validateSelections();
   }
 
   renderEstudoDetails() {
@@ -362,20 +473,40 @@ class ComplementosManager {
   // ===== TÉCNICAS MARCIAIS =====
   async loadTecnicasData() {
     try {
-      const response = await fetch('../../data/rulebook/05-circulo-social-comercio.json');
+      const response = await fetch(this.DATA_PATHS.SOCIAL);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
       const data = await response.json();
       
+      if (!data.sections || !Array.isArray(data.sections)) {
+        throw new Error('Formato de dados inválido: sections não encontrada');
+      }
+      
       const tecnicasSection = data.sections.find(s => s.topic_id === 'tecnicas-marcais');
+      
+      if (!tecnicasSection) {
+        throw new Error('Seção de técnicas marciais não encontrada');
+      }
+      
       const listaTecnicas = tecnicasSection.content.find(c => c.type === 'list' && c.id === 'tec_item');
       
+      if (!listaTecnicas || !listaTecnicas.items) {
+        throw new Error('Lista de técnicas não encontrada');
+      }
+      
       this.processarTecnicas(listaTecnicas.items);
+      
+      if (!this.tecnicasData || this.tecnicasData.length === 0) {
+        throw new Error('Nenhuma técnica encontrada');
+      }
+      
       this.renderTecnicasButtons();
     } catch (error) {
       console.error('Erro ao carregar dados das técnicas marciais:', error);
-      const container = document.getElementById('tecnicas-buttons-container');
-      if (container) {
-        container.innerHTML = '<button class="tecnica-button error" disabled>Erro ao carregar técnicas</button>';
-      }
+      this.showSectionError('tecnicas-buttons-container', 'Erro ao carregar técnicas');
     }
   }
 
@@ -406,10 +537,6 @@ class ComplementosManager {
     });
     
     container.innerHTML = buttonsHtml;
-    
-    container.querySelectorAll('.tecnica-button').forEach(button => {
-      button.addEventListener('click', () => this.selectTecnica(button.dataset.tecnicaIndex));
-    });
   }
 
   selectTecnica(index) {
@@ -419,14 +546,10 @@ class ComplementosManager {
     const isSameTecnica = this.selectedTecnica && this.selectedTecnica.index === index;
     
     if (isSameTecnica) {
-      detailsContainer.classList.add('closing');
-      
-      setTimeout(() => {
-        detailsContainer.style.display = 'none';
-        detailsContainer.classList.remove('closing');
-      }, 300);
-      
-      this.selectedTecnica = null;
+      this.closeWithAnimation(detailsContainer, () => {
+        this.selectedTecnica = null;
+        this.validateSelections();
+      });
       
       document.querySelectorAll('.tecnica-button').forEach(btn => {
         btn.classList.remove('selected');
@@ -449,6 +572,7 @@ class ComplementosManager {
     };
     
     this.renderTecnicaDetails();
+    this.validateSelections();
   }
 
   renderTecnicaDetails() {
@@ -469,8 +593,17 @@ class ComplementosManager {
   // ===== ESTUDOS MÁGICOS =====
   async loadMagiasData() {
     try {
-      const response = await fetch('../../data/rulebook/04-magia.json');
+      const response = await fetch(this.DATA_PATHS.MAGIA);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
       const data = await response.json();
+      
+      if (!data.sections || !Array.isArray(data.sections)) {
+        throw new Error('Formato de dados inválido: sections não encontrada');
+      }
       
       // Lista de IDs dos Estudos Mágicos válidos
       const estudosMagicosValidos = [
@@ -485,13 +618,14 @@ class ComplementosManager {
         estudosMagicosValidos.includes(section.topic_id)
       );
       
+      if (this.magiasData.length === 0) {
+        throw new Error('Nenhum estudo mágico encontrado');
+      }
+      
       this.renderMagiasButtons();
     } catch (error) {
       console.error('Erro ao carregar dados dos estudos mágicos:', error);
-      const container = document.getElementById('magias-buttons-container');
-      if (container) {
-        container.innerHTML = '<button class="magia-button error" disabled>Erro ao carregar estudos mágicos</button>';
-      }
+      this.showSectionError('magias-buttons-container', 'Erro ao carregar estudos mágicos');
     }
   }
 
@@ -509,10 +643,6 @@ class ComplementosManager {
     });
     
     container.innerHTML = buttonsHtml;
-    
-    container.querySelectorAll('.magia-button').forEach(button => {
-      button.addEventListener('click', () => this.selectMagia(button.dataset.magiaIndex));
-    });
   }
 
   selectMagia(index) {
@@ -522,14 +652,10 @@ class ComplementosManager {
     const isSameMagia = this.selectedMagia && this.selectedMagia.index === index;
     
     if (isSameMagia) {
-      detailsContainer.classList.add('closing');
-      
-      setTimeout(() => {
-        detailsContainer.style.display = 'none';
-        detailsContainer.classList.remove('closing');
-      }, 300);
-      
-      this.selectedMagia = null;
+      this.closeWithAnimation(detailsContainer, () => {
+        this.selectedMagia = null;
+        this.validateSelections();
+      });
       
       document.querySelectorAll('.magia-button').forEach(btn => {
         btn.classList.remove('selected');
@@ -552,6 +678,7 @@ class ComplementosManager {
     };
     
     this.renderMagiaDetails();
+    this.validateSelections();
   }
 
   renderMagiaDetails() {

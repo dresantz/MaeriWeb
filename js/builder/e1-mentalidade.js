@@ -7,6 +7,7 @@ class MentalidadeManager {
   constructor(previewElement) {
     this.previewElement = previewElement;
     this.tableBodyId = 'mentalidade-table-body';
+    this.cachedData = null;
   }
 
   render() {
@@ -55,15 +56,22 @@ class MentalidadeManager {
     this.loadData();
   }
 
-  async loadData() {
+  async loadData(forceRefresh = false) {
+
+    if (this.cachedData && !forceRefresh) {
+      this.renderTable(this.cachedData);
+      return;
+    }
+
     try {
-      const response = await fetch('../../data/rulebook/01-fundamentos.json');
+      const response = await fetch('/data/rulebook/01-fundamentos.json');
       const data = await response.json();
       
       // Encontra a seção de mentalidade
       const mentalidadeSection = data.sections.find(s => s.topic_id === 'mentalidade');
       const tableData = mentalidadeSection.content.find(c => c.type === 'table');
       
+      this.cachedData = tableData;
       this.renderTable(tableData);
     } catch (error) {
       console.error('Erro ao carregar dados de mentalidade:', error);
@@ -78,21 +86,35 @@ class MentalidadeManager {
     const tbody = document.getElementById(this.tableBodyId);
     if (!tbody) return;
     
-    let html = '';
+    // Usar DocumentFragment para melhor performance
+    const fragment = document.createDocumentFragment();
+    
     tableData.rows.forEach(row => {
-      html += `
-        <tr class="mentalidade-row">
-          <td><strong>${row[0]}</strong></td>
-          <td>${row[1]}</td>
-          <td>${row[2]}</td>
-          <td>${row[3]}</td>
-          <td>${row[4]}</td>
-          <td>${row[5]}</td>
-        </tr>
-      `;
+      const tr = document.createElement('tr');
+      tr.className = 'mentalidade-row';
+      tr.setAttribute('role', 'button');
+      tr.setAttribute('tabindex', '0');
+      tr.setAttribute('aria-label', `Selecionar mentalidade ${row[0]}`);
+      
+      // Adicionar cells
+      [0,1,2,3,4,5].forEach(index => {
+        const td = document.createElement('td');
+        if (index === 0) {
+          const strong = document.createElement('strong');
+          strong.textContent = row[index];
+          td.appendChild(strong);
+        } else {
+          td.textContent = row[index];
+        }
+        tr.appendChild(td);
+      });
+      
+      fragment.appendChild(tr);
     });
     
-    tbody.innerHTML = html;
+    // Limpar e adicionar novo conteúdo
+    tbody.innerHTML = '';
+    tbody.appendChild(fragment);
   }
 }
 

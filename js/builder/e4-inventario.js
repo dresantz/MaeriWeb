@@ -8,6 +8,11 @@ class InventarioManager {
     this.previewElement = previewElement;
     this.contatosData = null;
     this.selectedContato = null;
+    
+    // Caminhos dos dados padronizados
+    this.DATA_PATHS = {
+      SOCIAL: '../data/rulebook/05-circulo-social-comercio.json'
+    };
   }
 
   render() {
@@ -25,16 +30,19 @@ class InventarioManager {
               <span class="moeda-simbolo">Fo</span>
               <span class="moeda-nome">Florins de Ouro</span>
               <span class="moeda-calculo">I + 1d6</span>
+              <span class="moeda-valor" id="moeda-florins">—</span>
             </div>
             <div class="moeda-item">
               <span class="moeda-simbolo">Dp</span>
               <span class="moeda-nome">Denares de Prata</span>
               <span class="moeda-calculo">V + 1d6</span>
+              <span class="moeda-valor" id="moeda-denares">—</span>
             </div>
             <div class="moeda-item">
               <span class="moeda-simbolo">Tc</span>
               <span class="moeda-nome">Tostões de Cobre</span>
               <span class="moeda-calculo">S + 1d6</span>
+              <span class="moeda-valor" id="moeda-tostoes">—</span>
             </div>
           </div>
         </div>
@@ -48,10 +56,12 @@ class InventarioManager {
             <div class="peso-item">
               <span class="peso-tipo">Médio</span>
               <span class="peso-calculo">F x 2</span>
+              <span class="peso-valor" id="peso-medio">—</span>
             </div>
             <div class="peso-item">
               <span class="peso-tipo">Máximo</span>
               <span class="peso-calculo">F x 4</span>
+              <span class="peso-valor" id="peso-maximo">—</span>
             </div>
           </div>
         </div>
@@ -62,7 +72,10 @@ class InventarioManager {
           <p class="itens-intro">Os itens são adquiridos nas lojas de acordo com os Contatos escolhidos:</p>
           
           <div class="contatos-buttons" id="inventario-contatos-buttons-container">
-            <button class="contato-button loading" disabled>Carregando contatos...</button>
+            <div class="loading-state">
+              <span class="spinner"></span>
+              <span>Carregando contatos...</span>
+            </div>
           </div>
           
           <div class="contato-details" id="inventario-contato-details-container" style="display: none;">
@@ -77,15 +90,183 @@ class InventarioManager {
       </div>
     `;
     
-    // Carrega os dados dos contatos (reutilizando a mesma lógica da Etapa 3)
+    // Configura delegação de eventos
+    this.setupEventDelegation();
+    
+    // Carrega os dados dos contatos
     this.loadContatosData();
   }
 
+  // ===== UTILITÁRIOS =====
+  showSectionLoading(containerId, message) {
+    const container = document.getElementById(containerId);
+    if (container) {
+      container.innerHTML = `
+        <div class="loading-state">
+          <span class="spinner"></span>
+          <span>${message}</span>
+        </div>
+      `;
+    }
+  }
+
+  showSectionError(containerId, message) {
+    const container = document.getElementById(containerId);
+    if (container) {
+      container.innerHTML = `<button class="error-button" disabled>${message}</button>`;
+    }
+  }
+
+  closeWithAnimation(container, callback) {
+    if (!container) return;
+    
+    container.classList.add('closing');
+    
+    setTimeout(() => {
+      container.style.display = 'none';
+      container.classList.remove('closing');
+      if (callback) callback();
+    }, 300);
+  }
+
+  setupEventDelegation() {
+    if (!this.previewElement) return;
+    
+    this.previewElement.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-inventario-contato-index]');
+      if (!button) return;
+      
+      this.selectContato(button.dataset.inventarioContatoIndex);
+    });
+  }
+
+  // ===== CÁLCULOS =====
+  rollD6() {
+    return Math.floor(Math.random() * 6) + 1;
+  }
+
+  calcularMoedas(atributos) {
+    const { inteligencia = 0, vontade = 0, sagacidade = 0 } = atributos;
+    
+    return {
+      florins: inteligencia + this.rollD6(),
+      denares: vontade + this.rollD6(),
+      tostoes: sagacidade + this.rollD6()
+    };
+  }
+
+  calcularPeso(forca = 0) {
+    return {
+      medio: forca * 2,
+      maximo: forca * 4
+    };
+  }
+
+  atualizarValores(atributos) {
+    if (!this.previewElement) return;
+    
+    // Atualiza moedas
+    const moedas = this.calcularMoedas(atributos);
+    const florinsEl = document.getElementById('moeda-florins');
+    const denaresEl = document.getElementById('moeda-denares');
+    const tostoesEl = document.getElementById('moeda-tostoes');
+    
+    if (florinsEl) florinsEl.textContent = moedas.florins;
+    if (denaresEl) denaresEl.textContent = moedas.denares;
+    if (tostoesEl) tostoesEl.textContent = moedas.tostoes;
+    
+    // Atualiza peso
+    const peso = this.calcularPeso(atributos.forca);
+    const pesoMedioEl = document.getElementById('peso-medio');
+    const pesoMaximoEl = document.getElementById('peso-maximo');
+    
+    if (pesoMedioEl) pesoMedioEl.textContent = peso.medio;
+    if (pesoMaximoEl) pesoMaximoEl.textContent = peso.maximo;
+  }
+
+  // ===== INTEGRAÇÃO COM ETAPA 3 =====
+  setSelectedContatos(contatosSelecionados) {
+    if (!contatosSelecionados?.contato || !this.contatosData) return;
+    
+    const index = this.contatosData.findIndex(
+      c => c.nome === contatosSelecionados.contato.data.nome
+    );
+    
+    if (index !== -1) {
+      this.selectContato(index);
+    }
+  }
+
   // ===== CONTATOS =====
+  encontrarContato(item, tiposContato) {
+    for (const tipo of tiposContato) {
+      if (item[tipo.campo]) {
+        return { 
+          tipo, 
+          nome: item[tipo.campo].replace('.', '').trim() 
+        };
+      }
+    }
+    return null;
+  }
+
+  ehListaItens(item, currentContato) {
+    return item.type === 'list' && 
+           currentContato && 
+           item.id === currentContato.tipo.idLista;
+  }
+
+  criarContato(contatoInfo, item) {
+    return {
+      nome: contatoInfo.nome,
+      descricao: item.text,
+      tipo: contatoInfo.tipo
+    };
+  }
+
+  finalizarContato(currentContato, currentItems, section) {
+    if (currentContato && currentItems.length > 0) {
+      this.contatosData.push({
+        id: `${section?.id || 'contato'}-${currentContato.nome.toLowerCase().replace(/\s+/g, '-')}`,
+        nome: currentContato.nome,
+        descricao: currentContato.descricao,
+        itens: [...currentItems]
+      });
+    }
+  }
+
+  processarSectionContatos(section, tiposContato) {
+    let currentContato = null;
+    let currentItems = [];
+    
+    section.content.forEach(item => {
+      const contatoInfo = this.encontrarContato(item, tiposContato);
+      
+      if (contatoInfo) {
+        this.finalizarContato(currentContato, currentItems, section);
+        currentContato = this.criarContato(contatoInfo, item);
+        currentItems = [];
+      } else if (this.ehListaItens(item, currentContato)) {
+        currentItems = [...currentItems, ...item.items];
+      }
+    });
+    
+    this.finalizarContato(currentContato, currentItems, section);
+  }
+
   async loadContatosData() {
     try {
-      const response = await fetch('../../data/rulebook/05-circulo-social-comercio.json');
+      const response = await fetch(this.DATA_PATHS.SOCIAL);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
       const data = await response.json();
+      
+      if (!data.sections || !Array.isArray(data.sections)) {
+        throw new Error('Formato de dados inválido: sections não encontrada');
+      }
       
       this.contatosData = [];
       
@@ -96,73 +277,18 @@ class InventarioManager {
         { campo: 'montarias_item', idLista: 'montarias_item' }
       ];
       
-      data.sections.forEach(section => {
-        // Pula seções introdutórias
-        if (section.topic_id === 'introducao' || section.topic_id.includes('introducao')) return;
-        
-        let currentContato = null;
-        let currentItems = [];
-        
-        section.content.forEach(item => {
-          // Verifica se é um contato (tem algum dos campos específicos)
-          let encontrouContato = false;
-          let tipoEncontrado = null;
-          let nomeContato = null;
-          
-          for (const tipo of tiposContato) {
-            if (item[tipo.campo]) {
-              encontrouContato = true;
-              tipoEncontrado = tipo;
-              nomeContato = item[tipo.campo].replace('.', '').trim();
-              break;
-            }
-          }
-          
-          if (encontrouContato && item.type === 'paragraph') {
-            // Salva o contato anterior se existir
-            if (currentContato && currentItems.length > 0) {
-              this.contatosData.push({
-                id: `${section.id}-${currentContato.nome.toLowerCase().replace(/\s+/g, '-')}`,
-                nome: currentContato.nome,
-                descricao: currentContato.descricao,
-                itens: [...currentItems]
-              });
-            }
-            
-            // Inicia novo contato
-            currentContato = {
-              nome: nomeContato,
-              descricao: item.text,
-              tipo: tipoEncontrado
-            };
-            currentItems = [];
-          }
-          
-          // Verifica se é uma lista de itens do contato atual
-          if (item.type === 'list' && currentContato && item.id === currentContato.tipo.idLista) {
-            currentItems = [...currentItems, ...item.items];
-          }
-        });
-        
-        // Adiciona o último contato da seção
-        if (currentContato && currentItems.length > 0) {
-          this.contatosData.push({
-            id: `${section.id}-${currentContato.nome.toLowerCase().replace(/\s+/g, '-')}`,
-            nome: currentContato.nome,
-            descricao: currentContato.descricao,
-            itens: currentItems
-          });
-        }
-      });
-    
+      data.sections
+        .filter(section => !section.topic_id.includes('introducao'))
+        .forEach(section => this.processarSectionContatos(section, tiposContato));
+      
+      if (this.contatosData.length === 0) {
+        throw new Error('Nenhum contato encontrado');
+      }
       
       this.renderContatosButtons();
     } catch (error) {
       console.error('Erro ao carregar dados dos contatos:', error);
-      const container = document.getElementById('inventario-contatos-buttons-container');
-      if (container) {
-        container.innerHTML = '<button class="contato-button error" disabled>Erro ao carregar contatos</button>';
-      }
+      this.showSectionError('inventario-contatos-buttons-container', 'Erro ao carregar contatos');
     }
   }
 
@@ -180,10 +306,6 @@ class InventarioManager {
     });
     
     container.innerHTML = buttonsHtml;
-    
-    container.querySelectorAll('.contato-button').forEach(button => {
-      button.addEventListener('click', () => this.selectContato(button.dataset.inventarioContatoIndex));
-    });
   }
 
   selectContato(index) {
@@ -193,14 +315,9 @@ class InventarioManager {
     const isSameContato = this.selectedContato && this.selectedContato.index === index;
     
     if (isSameContato) {
-      detailsContainer.classList.add('closing');
-      
-      setTimeout(() => {
-        detailsContainer.style.display = 'none';
-        detailsContainer.classList.remove('closing');
-      }, 300);
-      
-      this.selectedContato = null;
+      this.closeWithAnimation(detailsContainer, () => {
+        this.selectedContato = null;
+      });
       
       document.querySelectorAll('[data-inventario-contato-index]').forEach(btn => {
         btn.classList.remove('selected');

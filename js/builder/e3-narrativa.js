@@ -13,6 +13,12 @@ class NarrativaManager {
     this.selectedArquetipo = null;
     this.selectedMotivacao = null;
     this.selectedContato = null;
+    
+    // Caminhos dos dados padronizados
+    this.DATA_PATHS = {
+      PERSONAGEM: '../data/rulebook/02-personagem.json',
+      SOCIAL: '../data/rulebook/05-circulo-social-comercio.json'
+    };
   }
 
   render() {
@@ -24,7 +30,10 @@ class NarrativaManager {
         <p class="narrativa-intro">Escolha o arquétipo do seu personagem:</p>
         
         <div class="arquetipos-buttons" id="arquetipos-buttons-container">
-          <button class="arquetipo-button loading" disabled>Carregando arquétipos...</button>
+          <div class="loading-state">
+            <span class="spinner"></span>
+            <span>Carregando arquétipos...</span>
+          </div>
         </div>
         
         <div class="arquetipo-details" id="arquetipo-details-container" style="display: none;">
@@ -37,7 +46,10 @@ class NarrativaManager {
           <p class="motivacoes-intro">Escolha a motivação do seu personagem:</p>
           
           <div class="motivacoes-buttons" id="motivacoes-buttons-container">
-            <button class="motivacao-button loading" disabled>Carregando motivações...</button>
+            <div class="loading-state">
+              <span class="spinner"></span>
+              <span>Carregando motivações...</span>
+            </div>
           </div>
           
           <div class="motivacao-details" id="motivacao-details-container" style="display: none;">
@@ -50,7 +62,10 @@ class NarrativaManager {
         <div class="disposicao-section">
           <p class="disposicao-intro">A Disposição é:</p>
           <div class="disposicao-text" id="disposicao-text-container">
-            <p class="disposicao-loading">Carregando...</p>
+            <div class="loading-state">
+              <span class="spinner"></span>
+              <span>Carregando...</span>
+            </div>
           </div>
         </div>
 
@@ -60,7 +75,10 @@ class NarrativaManager {
           <p class="contatos-descricao">O jogador pode escolher qualquer tipo de contato que quiser, não precisa estar na lista, porém, para adquirir itens em uma loja, é necessário ter o Contato específico.</p>
           
           <div class="contatos-buttons" id="contatos-buttons-container">
-            <button class="contato-button loading" disabled>Carregando contatos...</button>
+            <div class="loading-state">
+              <span class="spinner"></span>
+              <span>Carregando contatos...</span>
+            </div>
           </div>
           
           <div class="contato-details" id="contato-details-container" style="display: none;">
@@ -75,6 +93,9 @@ class NarrativaManager {
       </div>
     `;
     
+    // Configura delegação de eventos
+    this.setupEventDelegation();
+    
     // Carrega os dados
     this.loadArquetiposData();
     this.loadMotivacoesData();
@@ -82,23 +103,109 @@ class NarrativaManager {
     this.loadContatosData();
   }
 
+  // ===== UTILITÁRIOS =====
+  showSectionLoading(containerId, message) {
+    const container = document.getElementById(containerId);
+    if (container) {
+      container.innerHTML = `
+        <div class="loading-state">
+          <span class="spinner"></span>
+          <span>${message}</span>
+        </div>
+      `;
+    }
+  }
+
+  showSectionError(containerId, message) {
+    const container = document.getElementById(containerId);
+    if (container) {
+      container.innerHTML = `<button class="error-button" disabled>${message}</button>`;
+    }
+  }
+
+  closeWithAnimation(container, callback) {
+    if (!container) return;
+    
+    container.classList.add('closing');
+    
+    setTimeout(() => {
+      container.style.display = 'none';
+      container.classList.remove('closing');
+      if (callback) callback();
+    }, 300);
+  }
+
+  validateSelections() {
+    const selections = {
+      arquetipo: this.selectedArquetipo,
+      motivacao: this.selectedMotivacao,
+      contato: this.selectedContato
+    };
+    
+    const event = new CustomEvent('narrativa:updated', {
+      detail: selections,
+      bubbles: true
+    });
+    
+    this.previewElement?.dispatchEvent(event);
+    
+    return selections;
+  }
+
+  setupEventDelegation() {
+    if (!this.previewElement) return;
+    
+    this.previewElement.addEventListener('click', (event) => {
+      const button = event.target.closest('.arquetipo-button, .motivacao-button, .contato-button');
+      if (!button) return;
+      
+      if (button.classList.contains('arquetipo-button')) {
+        this.selectArquetipo(button.dataset.arquetipoIndex);
+      } else if (button.classList.contains('motivacao-button')) {
+        this.selectMotivacao(button.dataset.motivacaoIndex);
+      } else if (button.classList.contains('contato-button')) {
+        this.selectContato(button.dataset.contatoIndex);
+      }
+    });
+  }
+
   // ===== ARQUÉTIPOS =====
   async loadArquetiposData() {
     try {
-      const response = await fetch('../../data/rulebook/02-personagem.json');
+      const response = await fetch(this.DATA_PATHS.PERSONAGEM);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
       const data = await response.json();
       
+      if (!data.sections || !Array.isArray(data.sections)) {
+        throw new Error('Formato de dados inválido: sections não encontrada');
+      }
+      
       const arquetipoSection = data.sections.find(s => s.topic_id === 'arquetipo');
+      
+      if (!arquetipoSection) {
+        throw new Error('Seção de arquétipos não encontrada');
+      }
+      
       const listaArquetipos = arquetipoSection.content.find(c => c.type === 'list');
       
+      if (!listaArquetipos || !listaArquetipos.items) {
+        throw new Error('Lista de arquétipos não encontrada');
+      }
+      
       this.processarArquetipos(listaArquetipos.items);
+      
+      if (!this.arquetiposData || this.arquetiposData.length === 0) {
+        throw new Error('Nenhum arquétipo encontrado');
+      }
+      
       this.renderArquetiposButtons();
     } catch (error) {
       console.error('Erro ao carregar dados dos arquétipos:', error);
-      const container = document.getElementById('arquetipos-buttons-container');
-      if (container) {
-        container.innerHTML = '<button class="arquetipo-button error" disabled>Erro ao carregar arquétipos</button>';
-      }
+      this.showSectionError('arquetipos-buttons-container', 'Erro ao carregar arquétipos');
     }
   }
 
@@ -129,10 +236,6 @@ class NarrativaManager {
     });
     
     container.innerHTML = buttonsHtml;
-    
-    container.querySelectorAll('.arquetipo-button').forEach(button => {
-      button.addEventListener('click', () => this.selectArquetipo(button.dataset.arquetipoIndex));
-    });
   }
 
   selectArquetipo(index) {
@@ -142,14 +245,10 @@ class NarrativaManager {
     const isSameArquetipo = this.selectedArquetipo && this.selectedArquetipo.index === index;
     
     if (isSameArquetipo) {
-      detailsContainer.classList.add('closing');
-      
-      setTimeout(() => {
-        detailsContainer.style.display = 'none';
-        detailsContainer.classList.remove('closing');
-      }, 300);
-      
-      this.selectedArquetipo = null;
+      this.closeWithAnimation(detailsContainer, () => {
+        this.selectedArquetipo = null;
+        this.validateSelections();
+      });
       
       document.querySelectorAll('.arquetipo-button').forEach(btn => {
         btn.classList.remove('selected');
@@ -172,6 +271,7 @@ class NarrativaManager {
     };
     
     this.renderArquetipoDetails();
+    this.validateSelections();
   }
 
   renderArquetipoDetails() {
@@ -192,20 +292,40 @@ class NarrativaManager {
   // ===== MOTIVAÇÕES =====
   async loadMotivacoesData() {
     try {
-      const response = await fetch('../../data/rulebook/02-personagem.json');
+      const response = await fetch(this.DATA_PATHS.PERSONAGEM);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
       const data = await response.json();
       
+      if (!data.sections || !Array.isArray(data.sections)) {
+        throw new Error('Formato de dados inválido: sections não encontrada');
+      }
+      
       const motivacaoSection = data.sections.find(s => s.topic_id === 'motivacao');
+      
+      if (!motivacaoSection) {
+        throw new Error('Seção de motivações não encontrada');
+      }
+      
       const listaMotivacoes = motivacaoSection.content.find(c => c.type === 'list');
       
+      if (!listaMotivacoes || !listaMotivacoes.items) {
+        throw new Error('Lista de motivações não encontrada');
+      }
+      
       this.processarMotivacoes(listaMotivacoes.items);
+      
+      if (!this.motivacoesData || this.motivacoesData.length === 0) {
+        throw new Error('Nenhuma motivação encontrada');
+      }
+      
       this.renderMotivacoesButtons();
     } catch (error) {
       console.error('Erro ao carregar dados das motivações:', error);
-      const container = document.getElementById('motivacoes-buttons-container');
-      if (container) {
-        container.innerHTML = '<button class="motivacao-button error" disabled>Erro ao carregar motivações</button>';
-      }
+      this.showSectionError('motivacoes-buttons-container', 'Erro ao carregar motivações');
     }
   }
 
@@ -236,10 +356,6 @@ class NarrativaManager {
     });
     
     container.innerHTML = buttonsHtml;
-    
-    container.querySelectorAll('.motivacao-button').forEach(button => {
-      button.addEventListener('click', () => this.selectMotivacao(button.dataset.motivacaoIndex));
-    });
   }
 
   selectMotivacao(index) {
@@ -249,14 +365,10 @@ class NarrativaManager {
     const isSameMotivacao = this.selectedMotivacao && this.selectedMotivacao.index === index;
     
     if (isSameMotivacao) {
-      detailsContainer.classList.add('closing');
-      
-      setTimeout(() => {
-        detailsContainer.style.display = 'none';
-        detailsContainer.classList.remove('closing');
-      }, 300);
-      
-      this.selectedMotivacao = null;
+      this.closeWithAnimation(detailsContainer, () => {
+        this.selectedMotivacao = null;
+        this.validateSelections();
+      });
       
       document.querySelectorAll('.motivacao-button').forEach(btn => {
         btn.classList.remove('selected');
@@ -279,6 +391,7 @@ class NarrativaManager {
     };
     
     this.renderMotivacaoDetails();
+    this.validateSelections();
   }
 
   renderMotivacaoDetails() {
@@ -299,19 +412,34 @@ class NarrativaManager {
   // ===== DISPOSIÇÃO =====
   async loadDisposicaoData() {
     try {
-      const response = await fetch('../../data/rulebook/02-personagem.json');
+      const response = await fetch(this.DATA_PATHS.PERSONAGEM);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
       const data = await response.json();
       
+      if (!data.sections || !Array.isArray(data.sections)) {
+        throw new Error('Formato de dados inválido: sections não encontrada');
+      }
+      
       const disposicaoSection = data.sections.find(s => s.topic_id === 'disposicao');
+      
+      if (!disposicaoSection) {
+        throw new Error('Seção de disposição não encontrada');
+      }
+      
       const disposicaoText = disposicaoSection.content.find(c => c.type === 'paragraph');
+      
+      if (!disposicaoText || !disposicaoText.text) {
+        throw new Error('Texto da disposição não encontrado');
+      }
       
       this.renderDisposicaoText(disposicaoText.text);
     } catch (error) {
       console.error('Erro ao carregar dados da disposição:', error);
-      const container = document.getElementById('disposicao-text-container');
-      if (container) {
-        container.innerHTML = '<p class="disposicao-error">Erro ao carregar texto da disposição</p>';
-      }
+      this.showSectionError('disposicao-text-container', 'Erro ao carregar disposição');
     }
   }
 
@@ -323,89 +451,99 @@ class NarrativaManager {
   }
 
   // ===== CONTATOS =====
-  // ===== CONTATOS =====
-async loadContatosData() {
-  try {
-    const response = await fetch('../../data/rulebook/05-circulo-social-comercio.json');
-    const data = await response.json();
-    
-    this.contatosData = [];
-    
-    // Mapeamento de tipos de contato e seus respectivos campos
-    const tiposContato = [
-      { campo: 'lojacomb_item', idLista: 'lojacomb_item' },
-      { campo: 'lojarc_item', idLista: 'lojarc_item' },
-      { campo: 'montarias_item', idLista: 'montarias_item' }
-    ];
-    
-    data.sections.forEach(section => {
-      // Pula seções introdutórias
-      if (section.topic_id === 'introducao' || section.topic_id.includes('introducao')) return;
-      
-      let currentContato = null;
-      let currentItems = [];
-      
-      section.content.forEach(item => {
-        // Verifica se é um contato (tem algum dos campos específicos)
-        let encontrouContato = false;
-        let tipoEncontrado = null;
-        let nomeContato = null;
-        
-        for (const tipo of tiposContato) {
-          if (item[tipo.campo]) {
-            encontrouContato = true;
-            tipoEncontrado = tipo;
-            nomeContato = item[tipo.campo].replace('.', '').trim();
-            break;
-          }
-        }
-        
-        if (encontrouContato && item.type === 'paragraph') {
-          // Salva o contato anterior se existir
-          if (currentContato && currentItems.length > 0) {
-            this.contatosData.push({
-              id: `${section.id}-${currentContato.nome.toLowerCase().replace(/\s+/g, '-')}`,
-              nome: currentContato.nome,
-              descricao: currentContato.descricao,
-              itens: [...currentItems]
-            });
-          }
-          
-          // Inicia novo contato
-          currentContato = {
-            nome: nomeContato,
-            descricao: item.text,
-            tipo: tipoEncontrado
-          };
-          currentItems = [];
-        }
-        
-        // Verifica se é uma lista de itens do contato atual
-        if (item.type === 'list' && currentContato && item.id === currentContato.tipo.idLista) {
-          currentItems = [...currentItems, ...item.items];
-        }
+  encontrarContato(item, tiposContato) {
+    for (const tipo of tiposContato) {
+      if (item[tipo.campo]) {
+        return { 
+          tipo, 
+          nome: item[tipo.campo].replace('.', '').trim() 
+        };
+      }
+    }
+    return null;
+  }
+
+  ehListaItens(item, currentContato) {
+    return item.type === 'list' && 
+           currentContato && 
+           item.id === currentContato.tipo.idLista;
+  }
+
+  criarContato(contatoInfo, item) {
+    return {
+      nome: contatoInfo.nome,
+      descricao: item.text,
+      tipo: contatoInfo.tipo
+    };
+  }
+
+  finalizarContato(currentContato, currentItems, section) {
+    if (currentContato && currentItems.length > 0) {
+      this.contatosData.push({
+        id: `${section?.id || 'contato'}-${currentContato.nome.toLowerCase().replace(/\s+/g, '-')}`,
+        nome: currentContato.nome,
+        descricao: currentContato.descricao,
+        itens: [...currentItems]
       });
+    }
+  }
+
+  processarSectionContatos(section, tiposContato) {
+    let currentContato = null;
+    let currentItems = [];
+    
+    section.content.forEach(item => {
+      const contatoInfo = this.encontrarContato(item, tiposContato);
       
-      // Adiciona o último contato da seção
-      if (currentContato && currentItems.length > 0) {
-        this.contatosData.push({
-          id: `${section.id}-${currentContato.nome.toLowerCase().replace(/\s+/g, '-')}`,
-          nome: currentContato.nome,
-          descricao: currentContato.descricao,
-          itens: currentItems
-        });
+      if (contatoInfo) {
+        this.finalizarContato(currentContato, currentItems, section);
+        currentContato = this.criarContato(contatoInfo, item);
+        currentItems = [];
+      } else if (this.ehListaItens(item, currentContato)) {
+        currentItems = [...currentItems, ...item.items];
       }
     });
     
-    this.renderContatosButtons();
-  } catch (error) {
-    console.error('Erro ao carregar dados dos contatos:', error);
-    const container = document.getElementById('contatos-buttons-container');
-    if (container) {
-      container.innerHTML = '<button class="contato-button error" disabled>Erro ao carregar contatos</button>';
+    this.finalizarContato(currentContato, currentItems, section);
+  }
+
+  async loadContatosData() {
+    try {
+      const response = await fetch(this.DATA_PATHS.SOCIAL);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      
+      if (!data.sections || !Array.isArray(data.sections)) {
+        throw new Error('Formato de dados inválido: sections não encontrada');
+      }
+      
+      this.contatosData = [];
+      
+      // Mapeamento de tipos de contato e seus respectivos campos
+      const tiposContato = [
+        { campo: 'lojacomb_item', idLista: 'lojacomb_item' },
+        { campo: 'lojarc_item', idLista: 'lojarc_item' },
+        { campo: 'montarias_item', idLista: 'montarias_item' }
+      ];
+      
+      data.sections
+        .filter(section => !section.topic_id.includes('introducao'))
+        .forEach(section => this.processarSectionContatos(section, tiposContato));
+      
+      if (this.contatosData.length === 0) {
+        throw new Error('Nenhum contato encontrado');
+      }
+      
+      this.renderContatosButtons();
+    } catch (error) {
+      console.error('Erro ao carregar dados dos contatos:', error);
+      this.showSectionError('contatos-buttons-container', 'Erro ao carregar contatos');
     }
   }
-}
 
   renderContatosButtons() {
     const container = document.getElementById('contatos-buttons-container');
@@ -421,10 +559,6 @@ async loadContatosData() {
     });
     
     container.innerHTML = buttonsHtml;
-    
-    container.querySelectorAll('.contato-button').forEach(button => {
-      button.addEventListener('click', () => this.selectContato(button.dataset.contatoIndex));
-    });
   }
 
   selectContato(index) {
@@ -434,14 +568,10 @@ async loadContatosData() {
     const isSameContato = this.selectedContato && this.selectedContato.index === index;
     
     if (isSameContato) {
-      detailsContainer.classList.add('closing');
-      
-      setTimeout(() => {
-        detailsContainer.style.display = 'none';
-        detailsContainer.classList.remove('closing');
-      }, 300);
-      
-      this.selectedContato = null;
+      this.closeWithAnimation(detailsContainer, () => {
+        this.selectedContato = null;
+        this.validateSelections();
+      });
       
       document.querySelectorAll('.contato-button').forEach(btn => {
         btn.classList.remove('selected');
@@ -464,6 +594,7 @@ async loadContatosData() {
     };
     
     this.renderContatoDetails();
+    this.validateSelections();
   }
 
   renderContatoDetails() {
