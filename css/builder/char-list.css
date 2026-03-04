@@ -1,9 +1,7 @@
 /* =========================
    Maeri RPG - Character List
-   Estilos para a estrutura da lista de personagens
    ========================= */
 
-/* Container principal */
 .chars-container {
   display: flex;
   flex-direction: column;
@@ -11,7 +9,6 @@
   animation: slideIn 0.3s ease;
 }
 
-/* Títulos das seções */
 .chars-section-title {
   color: var(--gold);
   font-size: 1.3rem;
@@ -38,15 +35,23 @@
   border-radius: 20px;
 }
 
-/* Grid de personagens */
 .chars-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 1rem;
   margin-bottom: 1rem;
+  min-height: 200px;
 }
 
-/* Cards base (estrutura comum) */
+.ready-chars:empty::before {
+  content: 'Carregando personagens...';
+  display: block;
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
 .char-card {
   background: var(--surface);
   border: 2px solid rgba(212, 175, 55, 0.2);
@@ -68,7 +73,6 @@
   transform: translateY(-2px);
 }
 
-/* Cards vazios */
 .char-card--empty {
   background: linear-gradient(145deg, var(--surface) 0%, var(--surface-light) 100%);
   border-style: dashed;
@@ -99,7 +103,6 @@
   font-size: 0.9rem;
 }
 
-/* Cards de personagens prontos */
 .char-card--ready {
   background: var(--surface);
 }
@@ -115,7 +118,6 @@
   padding: 0.5rem;
 }
 
-/* Cores de fundo para cada classe */
 .warrior-bg { background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%); }
 .mage-bg { background: linear-gradient(135deg, #4b0082 0%, #663399 100%); }
 .cleric-bg { background: linear-gradient(135deg, #daa520 0%, #b8860b 100%); }
@@ -159,7 +161,6 @@
   overflow: hidden;
 }
 
-/* Animações */
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -171,7 +172,6 @@
   }
 }
 
-/* Responsivo */
 @media (min-width: 480px) {
   .chars-grid {
     grid-template-columns: repeat(2, 1fr);

@@ -1,13 +1,11 @@
 // js/builder/player-char.js
 // =========================
 // Maeri RPG - Player Character Manager
-// Gerencia exclusivamente a aba Personagens
 // =========================
 
 import templateList from './template-list.js';
 import templateManager from './template-manager.js';
 
-// Sistema de Diálogos
 class DialogSystem {
   constructor() {
     this.activeDialog = null;
@@ -15,7 +13,7 @@ class DialogSystem {
   }
   
   show({ title, message, buttons }) {
-    this.close(); // Fecha diálogo anterior se existir
+    this.close();
     
     const overlay = document.createElement('div');
     overlay.className = 'dialog-overlay';
@@ -24,22 +22,19 @@ class DialogSystem {
     dialog.className = 'dialog-box';
     
     const buttonsHtml = buttons.map(btn => 
-      `<button class="dialog-button ${btn.class || ''}" data-action="${btn.action || ''}">${btn.text}</button>`
+      `<button class="dialog-button ${btn.class || ''}">${btn.text}</button>`
     ).join('');
     
     dialog.innerHTML = `
       <h3 class="dialog-title">${title}</h3>
       <p class="dialog-message">${message}</p>
-      <div class="dialog-actions">
-        ${buttonsHtml}
-      </div>
+      <div class="dialog-actions">${buttonsHtml}</div>
     `;
     
     overlay.appendChild(dialog);
     document.body.appendChild(overlay);
     this.activeDialog = overlay;
     
-    // Adicionar event listeners
     const dialogButtons = dialog.querySelectorAll('.dialog-button');
     buttons.forEach((btn, index) => {
       dialogButtons[index].addEventListener('click', (e) => {
@@ -49,19 +44,13 @@ class DialogSystem {
       });
     });
     
-    // Fechar com ESC
     this.escHandler = (e) => {
-      if (e.key === 'Escape') {
-        this.close();
-      }
+      if (e.key === 'Escape') this.close();
     };
     document.addEventListener('keydown', this.escHandler);
     
-    // Fechar ao clicar no overlay (fora do diálogo)
     overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) {
-        this.close();
-      }
+      if (e.target === overlay) this.close();
     });
   }
   
@@ -77,7 +66,6 @@ class DialogSystem {
   }
 }
 
-// Sistema de Toasts
 class ToastSystem {
   constructor() {
     this.container = document.querySelector('.global-toast');
@@ -90,9 +78,7 @@ class ToastSystem {
   }
   
   show(message, type = 'success', duration = 3000) {
-    if (this.timeout) {
-      clearTimeout(this.timeout);
-    }
+    if (this.timeout) clearTimeout(this.timeout);
     
     this.container.textContent = message;
     this.container.className = `global-toast global-toast--${type}`;
@@ -103,53 +89,37 @@ class ToastSystem {
     }, duration);
   }
   
-  success(message) {
-    this.show(message, 'success');
-  }
-  
-  error(message) {
-    this.show(message, 'error', 4000);
-  }
-  
-  warning(message) {
-    this.show(message, 'warning', 4000);
-  }
+  success(message) { this.show(message, 'success'); }
+  error(message) { this.show(message, 'error', 4000); }
+  warning(message) { this.show(message, 'warning', 4000); }
 }
 
 class PlayerCharManager {
   constructor() {
-    // Constantes do localStorage
     this.STORAGE_KEYS = {
       CHARACTERS: 'maeri-characters',
       ACTIVE_CHARACTER: 'maeri-active-character',
       SHEET: 'maeri-sheet'
     };
     
-    // Elementos DOM específicos da aba Personagens
     this.charsCounter = document.querySelector('.chars-counter');
     this.savedCharsGrid = document.querySelector('.saved-chars');
     this.readyCharsGrid = document.querySelector('.ready-chars');
     
-    // Cache dos personagens
     this.characters = {};
     this.activeCharacterId = localStorage.getItem(this.STORAGE_KEYS.ACTIVE_CHARACTER);
     
-    // Sistemas auxiliares
     this.dialog = new DialogSystem();
     this.toast = new ToastSystem();
     
-    // Handlers com bind para remoção
     this.boundStorageHandler = this.handleStorageChange.bind(this);
     this.boundCharactersUpdatedHandler = this.handleCharactersUpdated.bind(this);
     this.boundReadyCharClickHandler = this.handleReadyCharClick.bind(this);
     
-    // Versão com debounce do loadCharacters
     this.loadCharactersDebounced = this.debounce(this.loadCharacters.bind(this), 100);
-
     this.init();
   }
 
-  // Utilitários
   debounce(func, wait) {
     let timeout;
     return (...args) => {
@@ -159,7 +129,7 @@ class PlayerCharManager {
   }
 
   generateCharacterId() {
-    return 'char_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+    return 'char_' + Date.now() + '_' + Math.random().toString(36).substring(2, 8);
   }
 
   escapeHtml(text) {
@@ -189,17 +159,10 @@ class PlayerCharManager {
 
   showLoading(show) {
     if (!this.savedCharsGrid) return;
-    
-    if (show) {
-      this.savedCharsGrid.style.opacity = '0.5';
-      this.savedCharsGrid.style.pointerEvents = 'none';
-    } else {
-      this.savedCharsGrid.style.opacity = '1';
-      this.savedCharsGrid.style.pointerEvents = 'auto';
-    }
+    this.savedCharsGrid.style.opacity = show ? '0.5' : '1';
+    this.savedCharsGrid.style.pointerEvents = show ? 'none' : 'auto';
   }
 
-  // Operações de localStorage
   saveCharacters() {
     try {
       localStorage.setItem(this.STORAGE_KEYS.CHARACTERS, JSON.stringify(this.characters));
@@ -237,22 +200,15 @@ class PlayerCharManager {
     }
   }
 
-  // Validação
   validateCharacter(character) {
-    if (!character || typeof character !== 'object') return false;
-    if (!character.id || typeof character.id !== 'string') return false;
-    if (!character.name) return false;
-    if (!character.lastModified) return false;
-    if (!character.data || typeof character.data !== 'object') return false;
-    
+    if (!character?.id || !character.name || !character.lastModified || !character.data) return false;
     return true;
   }
 
-  // Inicialização
   init() {
     this.loadCharacters();
     this.setupEventListeners();
-    this.renderReadyTemplates(); // Renderiza os templates
+    this.renderReadyTemplates();
   }
 
   setupEventListeners() {
@@ -260,17 +216,9 @@ class PlayerCharManager {
     window.addEventListener('storage', this.boundStorageHandler);
   }
 
-  // ===== TEMPLATES PRONTOS =====
   async renderReadyTemplates() {
-    if (!this.readyCharsGrid) {
-      console.warn('Grid de personagens prontos não encontrado');
-      return;
-    }
-
-    // Renderiza os cards usando a lista de templates
+    if (!this.readyCharsGrid) return;
     await templateList.renderCards(this.readyCharsGrid, templateManager);
-    
-    // Configura os eventos nos cards recém-criados
     this.setupReadyChars();
   }
 
@@ -278,54 +226,24 @@ class PlayerCharManager {
     if (!this.readyCharsGrid) return;
     
     const readyCards = this.readyCharsGrid.querySelectorAll('.char-card--ready');
-    console.log(`${readyCards.length} personagens prontos configurados`);
     
-    // Verificar cada card antes de adicionar eventos
-    readyCards.forEach((card, index) => {
-      console.log(`Configurando card ${index}:`, {
-        templateFile: card.dataset.templateFile,
-        char: card.dataset.char
-      });
-      
-      // Só adiciona evento se tiver os dados necessários
-      if (!card.dataset.templateFile || !card.dataset.char) {
-        console.warn(`Card ${index} sem dados completos, ignorando`);
-        return;
-      }
-      
-      // Remove listener antigo se existir
+    readyCards.forEach((card) => {
+      if (!card.dataset.templateFile || !card.dataset.char) return;
       card.removeEventListener('click', this.boundReadyCharClickHandler);
-      
-      // Adiciona novo listener - NÃO usar arrow function aqui para manter o 'this' correto
       card.addEventListener('click', this.boundReadyCharClickHandler);
     });
   }
 
-  // ===== PERSONAGENS PRONTOS =====
   async handleReadyCharClick(event) {
-    console.log('=== HANDLE READY CHAR CLICK ===');
-    console.log('Evento recebido:', event);
-    
-    // CORREÇÃO: Extrair o card do evento
-    const card = event.currentTarget; // ou event.target
-    console.log('Card extraído do evento:', card);
-    console.log('Classes do card:', card?.className);
-    console.log('Dataset completo:', card?.dataset);
-    
+    const card = event.currentTarget;
     const templateFile = card?.dataset?.templateFile;
     const baseId = card?.dataset?.char;
     
-    console.log('templateFile:', templateFile);
-    console.log('baseId:', baseId);
-    
     if (!templateFile || !baseId) {
-      console.error('Dados do template não encontrados no card:', card);
-      console.error('Dataset disponível:', card?.dataset);
       this.showError('Personagem não identificado');
       return;
     }
     
-    // Verificar limite de personagens
     if (!this.canCreateNewCharacter()) {
       this.showAreaCheiaDialog();
       return;
@@ -333,19 +251,11 @@ class PlayerCharManager {
     
     try {
       this.showLoading(true);
-      
-      console.log(`Carregando template: ${templateFile}`);
       const template = await templateManager.loadTemplate(templateFile);
       
-      if (!template) {
-        throw new Error('Template não encontrado');
-      }
-      
-      console.log('Template carregado com sucesso:', template);
+      if (!template) throw new Error('Template não encontrado');
       
       this.showLoading(false);
-      
-      // Mostra diálogo com preview usando os dados do template
       this.showTemplatePreview(template, templateFile, baseId);
       
     } catch (error) {
@@ -363,8 +273,7 @@ class PlayerCharManager {
           <p><strong>Classe:</strong> ${template.class || ''}</p>
           <p><strong>Nível:</strong> ${template.level || '?'}</p>
           <p><strong>Descrição:</strong> ${template.description || ''}</p>
-          <hr>
-          <p>Deseja copiar este personagem para um slot vazio?</p>
+          <hr><p>Deseja copiar este personagem para um slot vazio?</p>
         </div>
       `,
       buttons: [
@@ -381,12 +290,8 @@ class PlayerCharManager {
     });
   }
 
-  // No player-char.js, método copyReadyCharacter
   copyReadyCharacter(template, templateFile, baseId) {
-    // Cria o personagem a partir do template
     const characterId = this.generateCharacterId();
-    
-    // Converte o template para o formato da ficha
     const sheetData = templateManager.templateToSheetData(template);
     
     const newCharacter = {
@@ -394,10 +299,7 @@ class PlayerCharManager {
       name: template.name,
       lastModified: new Date().toISOString(),
       data: sheetData,
-      template: {
-        file: templateFile,
-        id: baseId
-      }
+      template: { file: templateFile, id: baseId }
     };
 
     this.characters[characterId] = newCharacter;
@@ -406,7 +308,6 @@ class PlayerCharManager {
       this.renderCharacterCards();
       this.updateCharsCounter();
       
-      // Pergunta se quer abrir
       this.dialog.show({
         title: 'Template Copiado',
         message: `"${template.name}" foi adicionado aos seus personagens. Deseja abri-lo agora?`,
@@ -415,16 +316,8 @@ class PlayerCharManager {
             text: 'Abrir Ficha', 
             class: 'dialog-button--save',
             handler: () => {
-              // Carrega o personagem na ficha
               this.loadCharacterToSheet(characterId);
-              
-              // USAR window.SheetManager (disponível globalmente)
-              if (window.SheetManager) {
-                window.SheetManager.open();
-              } else {
-                console.warn('SheetManager não disponível');
-                document.getElementById('sheet-button')?.click();
-              }
+              window.SheetManager ? window.SheetManager.open() : document.getElementById('sheet-button')?.click();
             }
           },
           { 
@@ -436,7 +329,6 @@ class PlayerCharManager {
     }
   }
 
-  // Handlers de eventos
   handleCharactersUpdated() {
     this.loadCharactersDebounced();
   }
@@ -453,13 +345,10 @@ class PlayerCharManager {
     
     if (this.readyCharsGrid) {
       const readyCards = this.readyCharsGrid.querySelectorAll('.char-card--ready');
-      readyCards.forEach(card => {
-        card.removeEventListener('click', this.boundReadyCharClickHandler);
-      });
+      readyCards.forEach(card => card.removeEventListener('click', this.boundReadyCharClickHandler));
     }
   }
 
-  // ===== CARREGAMENTO =====
   loadCharacters() {
     const saved = localStorage.getItem(this.STORAGE_KEYS.CHARACTERS);
     
@@ -468,13 +357,8 @@ class PlayerCharManager {
         const parsed = JSON.parse(saved);
         this.characters = {};
         
-        // Validar cada personagem
         Object.entries(parsed).forEach(([id, char]) => {
-          if (this.validateCharacter(char)) {
-            this.characters[id] = char;
-          } else {
-            console.warn('Personagem inválido ignorado:', id);
-          }
+          if (this.validateCharacter(char)) this.characters[id] = char;
         });
       } catch (e) {
         console.error('Erro ao carregar personagens:', e);
@@ -489,38 +373,26 @@ class PlayerCharManager {
     this.updateCharsCounter();
   }
 
-  // ===== RENDERIZAÇÃO =====
   renderCharacterCards() {
     if (!this.savedCharsGrid) return;
     
     const characterArray = Object.values(this.characters);
-    
-    // Limpar grid
     this.savedCharsGrid.innerHTML = '';
     
-    // Renderizar personagens salvos
     characterArray.forEach(char => {
-      const card = this.createCharacterCard(char);
-      this.savedCharsGrid.appendChild(card);
+      this.savedCharsGrid.appendChild(this.createCharacterCard(char));
     });
     
-    // Preencher slots vazios até 3
-    const slotsFaltando = 3 - characterArray.length;
-    for (let i = 0; i < slotsFaltando; i++) {
-      const emptyCard = this.createEmptyCard();
-      this.savedCharsGrid.appendChild(emptyCard);
+    for (let i = 0; i < 3 - characterArray.length; i++) {
+      this.savedCharsGrid.appendChild(this.createEmptyCard());
     }
   }
 
   createCharacterCard(character) {
     const card = document.createElement('div');
-    card.className = 'char-card char-card--saved';
-    if (character.id === this.activeCharacterId) {
-      card.classList.add('active');
-    }
+    card.className = `char-card char-card--saved ${character.id === this.activeCharacterId ? 'active' : ''}`;
     card.dataset.characterId = character.id;
     
-    // Extrair nome e nível dos dados
     const nome = character.data?.name || 'Personagem sem nome';
     const nivel = character.data?.level || '1';
     
@@ -537,7 +409,6 @@ class PlayerCharManager {
       </div>
     `;
     
-    // Event listeners
     card.addEventListener('click', (e) => {
       if (!e.target.closest('.char-card-delete')) {
         this.handleCharacterClick(character.id);
@@ -565,53 +436,31 @@ class PlayerCharManager {
       </div>
     `;
     
-    card.addEventListener('click', () => {
-      this.createNewCharacter();
-    });
-    
+    card.addEventListener('click', () => this.createNewCharacter());
     return card;
   }
 
-  // ===== AÇÕES COM PERSONAGENS =====
   async handleCharacterClick(characterId) {
     const character = this.characters[characterId];
     if (!character) return;
     
-    // Verificar se há modificações na ficha atual
     const hasChanges = await this.checkForUnsavedChanges();
-    
-    if (hasChanges) {
-      this.showUnsavedChangesDialog(characterId);
-    } else {
-      this.loadCharacterToSheet(characterId);
-    }
+    hasChanges ? this.showUnsavedChangesDialog(characterId) : this.loadCharacterToSheet(characterId);
   }
 
   checkForUnsavedChanges() {
     return new Promise((resolve) => {
-      // Se não há ficha ativa, não há mudanças
-      if (!this.activeCharacterId) {
-        resolve(false);
-        return;
-      }
+      if (!this.activeCharacterId) return resolve(false);
       
       const currentSheet = localStorage.getItem(this.STORAGE_KEYS.SHEET);
-      if (!currentSheet) {
-        resolve(false);
-        return;
-      }
-      
       const activeCharacter = this.characters[this.activeCharacterId];
-      if (!activeCharacter) {
-        resolve(false);
-        return;
-      }
+      
+      if (!currentSheet || !activeCharacter) return resolve(false);
       
       try {
         const currentData = JSON.parse(currentSheet);
         const savedData = activeCharacter.data;
-        const hasChanges = JSON.stringify(currentData) !== JSON.stringify(savedData);
-        resolve(hasChanges);
+        resolve(JSON.stringify(currentData) !== JSON.stringify(savedData));
       } catch (e) {
         console.error('Erro ao comparar dados:', e);
         resolve(false);
@@ -670,32 +519,79 @@ class PlayerCharManager {
     const character = this.characters[characterId];
     if (!character) return;
     
-    // Salva os dados da ficha
     if (this.saveSheet(character.data) && this.setActiveCharacter(characterId)) {
-      window.dispatchEvent(new CustomEvent('character-changed', { 
-        detail: { characterId } 
-      }));
-      
+      window.dispatchEvent(new CustomEvent('character-changed', { detail: { characterId } }));
       this.renderCharacterCards();
       this.toast.success(`Personagem "${character.name}" carregado`);
     }
   }
 
-  createNewCharacter() {
+  async createNewCharacter() {
     if (!this.canCreateNewCharacter()) {
       this.showAreaCheiaDialog();
       return;
     }
     
-    localStorage.removeItem(this.STORAGE_KEYS.SHEET);
-    this.setActiveCharacter(null);
+    // Reutiliza o método existente que verifica alterações
+    const hasChanges = await this.checkForUnsavedChanges();
     
-    window.dispatchEvent(new CustomEvent('character-changed', { 
-      detail: { characterId: null } 
-    }));
-    
-    document.getElementById('sheet-button')?.click();
-    this.toast.success('Nova ficha em branco');
+    if (hasChanges) {
+      this.showUnsavedChangesForNewCharacter();
+    } else {
+      this.proceedWithNewCharacter();
+    }
+  }
+
+  showUnsavedChangesForNewCharacter() {
+    this.dialog.show({
+      title: 'Alterações não salvas',
+      message: 'Deseja salvar as alterações atuais antes de criar um novo personagem?',
+      buttons: [
+        { 
+          text: 'Salvar e Novo', 
+          class: 'dialog-button--save',
+          handler: () => {
+            this.saveCurrentCharacter();
+            this.proceedWithNewCharacter();
+          }
+        },
+        { 
+          text: 'Descartar e Novo', 
+          class: 'dialog-button--discard',
+          handler: () => this.proceedWithNewCharacter()
+        },
+        { 
+          text: 'Cancelar', 
+          class: 'dialog-button--cancel' 
+        }
+      ]
+    });
+  }
+
+  clearSheetFields() {
+    // Tenta usar o SheetManager se disponível
+    if (window.SheetManager && typeof window.SheetManager.clear === 'function') {
+      window.SheetManager.clear();
+    } else {
+      // Fallback: limpa os campos manualmente
+      const modal = document.getElementById('sheet-modal');
+      if (!modal) return;
+      
+      const inputs = modal.querySelectorAll('input, textarea');
+      inputs.forEach(input => {
+        if (input.type === 'number') {
+          if (input.id.startsWith('attr-')) {
+            input.value = '2';
+          } else if (input.id === 'char-level') {
+            input.value = '1';
+          } else {
+            input.value = '0';
+          }
+        } else {
+          input.value = '';
+        }
+      });
+    }
   }
 
   confirmDeleteCharacter(characterId) {
@@ -726,9 +622,7 @@ class PlayerCharManager {
       if (this.activeCharacterId === characterId) {
         localStorage.removeItem(this.STORAGE_KEYS.SHEET);
         this.setActiveCharacter(null);
-        window.dispatchEvent(new CustomEvent('character-changed', { 
-          detail: { characterId: null } 
-        }));
+        window.dispatchEvent(new CustomEvent('character-changed', { detail: { characterId: null } }));
       }
       
       this.renderCharacterCards();
@@ -737,14 +631,11 @@ class PlayerCharManager {
     }
   }
 
-  // ===== UTILITÁRIOS DE DIÁLOGO =====
   showError(message) {
     this.dialog.show({
       title: 'Erro',
       message: message,
-      buttons: [
-        { text: 'OK', class: 'dialog-button--cancel' }
-      ]
+      buttons: [{ text: 'OK', class: 'dialog-button--cancel' }]
     });
   }
 
@@ -752,13 +643,10 @@ class PlayerCharManager {
     this.dialog.show({
       title: 'Área Cheia',
       message: 'Remova um personagem para poder criar ou copiar um novo.',
-      buttons: [
-        { text: 'OK', class: 'dialog-button--cancel' }
-      ]
+      buttons: [{ text: 'OK', class: 'dialog-button--cancel' }]
     });
   }
 
-  // ===== UTILITÁRIOS =====
   updateCharsCounter() {
     if (!this.charsCounter) return;
     const count = Object.keys(this.characters).length;
