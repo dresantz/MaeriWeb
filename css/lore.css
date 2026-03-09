@@ -216,7 +216,7 @@
 }
 
 .work-title {
-  font-weight: 600;
+  font-weight: 500;
   color: var(--lore-accent-light);
 }
 
@@ -608,11 +608,15 @@
 }
 
 /* ===== RESPONSIVIDADE REFINADA ===== */
-@media (max-width: 640px) {
+@media (max-width: 740px) {
   .author-profile {
     flex-direction: column;
     align-items: center;
     text-align: center;
+  }
+
+  .work-title {
+  width: 240px;
   }
   
   .community-grid {
@@ -644,7 +648,11 @@
     font-size: 0.7rem;
     padding: 0.5rem 0.8rem;
   }
-  
+
+  .work-title {
+  width: 140px;
+}
+
   .card {
     padding: 1.2rem;
   }

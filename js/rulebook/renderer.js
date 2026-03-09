@@ -6,7 +6,14 @@
  * - ./navigation.js: Scroll spy
  */
 
-import { observeTopics } from "./navigation.js";  // 👈 SÓ importa observeTopics
+/*
+ * [marcar]
+ * **negrito**
+ * *itálico*
+ * __sublinhado__
+ */
+
+import { observeTopics } from "./navigation.js";
 
 // ===== CONSTANTES =====
 const MARK_PATTERN = /\[(.*?)\]/g;
@@ -29,7 +36,22 @@ function createElement(tag, className, text) {
  */
 function applyMarkings(element, text) {
   if (!text) return;
-  element.innerHTML = text.replace(MARK_PATTERN, `<span class="${MARK_CLASS}">$1</span>`);
+
+  let html = text;
+
+  // marcação existente [texto]
+  html = html.replace(/\[(.*?)\]/g, `<span class="${MARK_CLASS}">$1</span>`);
+
+  // negrito **texto**
+  html = html.replace(/\*\*(.*?)\*\*/g, `<strong>$1</strong>`);
+
+  // itálico *texto*
+  html = html.replace(/\*(.*?)\*/g, `<em>$1</em>`);
+
+  // sublinhado __texto__
+  html = html.replace(/__(.*?)__/g, `<u>$1</u>`);
+
+  element.innerHTML = html;
 }
 
 /**
