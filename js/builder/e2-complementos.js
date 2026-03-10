@@ -326,7 +326,7 @@ class ComplementosManager {
         throw new Error('Formato de dados inválido: sections não encontrada');
       }
       
-      const estudosSection = data.sections.find(s => s.topic_id === 'estudo-e-conhecimento');
+      const estudosSection = data.sections.find(s => s.topic_id === 'lista-de-estudos');
       
       if (!estudosSection) {
         throw new Error('Seção de estudos não encontrada');

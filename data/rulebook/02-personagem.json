@@ -314,7 +314,13 @@
         {
           "type": "paragraph",
           "text": "Há uma diferença entre ter o Conhecimento e aplicar o Conhecimento. Ou seja, dependendo da situação, o mestre pode ou não exigir testes para aplicar um Conhecimento."
-        },
+        }
+    ]
+    },
+    {
+      "topic_id": "lista-de-estudos",
+      "title": "Lista de Estudos",
+      "content": [
         {
           "type": "paragraph",
           "estudos_item": "ARTESANATO",
