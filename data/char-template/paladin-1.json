@@ -1,36 +1,31 @@
 {
   "model": {
-    "id": "orvel",
-    "name": "Orvel, O Inexorável",
+    "id": "aykhan",
+    "name": "Aykhan",
     "level": "1",
     "class": "Paladino",
-    "description": "O cão do inferno",
+    "description": "O poderoso guardião da verdade",
     "attributes":
-    { "f": "4", "v": "3", "d": "2", "s": "2", "i": "1", "a": "2" },
-    "vit": { "current": "14", "total": "14" },
-    "con": { "current": "12", "total": "12" },
+    { "f": "4", "v": "5", "d": "2", "s": "2", "i": "3", "a": "2" },
+    "vit": { "current": "13", "total": "13" },
+    "con": { "current": "7", "total": "7" },
 
     "complemento": {
       "ser": {
-        "id": "humano",
-        "nome": "Humano",
-        "anato": "+1 em característica que não tenha recebido pontos."
+        "id": "dredlim",
+        "nome": "Dredlim",
+        "anato": "Imune a ferimento. Enxerga rastro da morte. Imune a doenças naturais."
       },
       "estudos": [
-        { "nome": "Comércio", "conhecimentos": "negociação, carta de comércio." },
-        { "nome": "Política", "conhecimentos": "educação básica, sinete." }
+        { "nome": "Religião", "conhecimentos": "30xpl. 1 xpm para ficar imune a medo. Pode usar pergaminhos. Estudo formal." }
       ],
       "tecnicas": [
-        { "nome": "Golpe Poderoso", "descricao": "Ataque que causa +2 de dano" },
-        { "nome": "Postura Defensiva", "descricao": "Aumenta defesa em +2 por rodada" }
       ],
       "estudos mágicos": [
-        {"nome": "Neófitas", "magias": "Punho Invisivel, Dregrau, Revelador."}
       ],
       "classes": [
-        {"nome": "Guerreiro", "característica":"golpe voador"}
       ],
-      "xp": { "m": "3", "l": "2", "p": "1" }
+      "xp": { "m": "0", "l": "30", "p": "0" }
     },
 
     "narrativa": {
@@ -38,23 +33,23 @@
         "nome": "Herói"
       },
       "motivacao": {
-        "nome": "Amor"
+        "nome": "Medo"
       },
       "disposicao": "-",
-      "historia": "Teste",
+      "historia": "Você decide...",
       "contatos": [
-        { "nome": "Amigo do Regimento", "tipo": "Armeiro" },
-        { "nome": "Menino Feio", "tipo": "Armadureiro" }
+        { "nome": "Amiga Leal", "tipo": "Armeiro" },
+        { "nome": "Irmão", "tipo": "Armadureiro" }
       ]
     },
 
     "inventario": {
-      "moedas": { "fo": "2", "dp": "2", "tc": "3" },
-      "peso": { "medio": "8", "maximo": "16", "atual": "12" },
+      "moedas": { "fo": "1", "dp": "2", "tc": "6" },
+      "peso": { "medio": "8", "maximo": "16", "atual": "6" },
       "itens": [
-        { "nome": "Espada longa", "peso": "3Pes", "quantidade": "1", "nota": "1d6+1 de dano"},
-        { "nome": "Armadura de couro", "peso": "8Pes", "quantidade": "1", "nota": "-1 de dano de corte"},
-        { "nome": "Escudo", "peso": "2", "quantidade": "1", "nota": "+1V em combate"}
+        { "nome": "Porrete", "peso": "1Pes", "quantidade": "1", "nota": "1d3+1 6Res"},
+        { "nome": "Armadura de Tecido/Couro Completa", "peso": "3Pes", "quantidade": "1", "nota": "sem tirar pra dormir, -1 de dano de corte, +2V resistir ferimento, protege frio, 5Res"},
+        { "nome": "Escudo Torre", "peso": "2Pes", "quantidade": "1", "nota": "+2V embate contra F ou A, -1D teste e embate, usar Empurrar com F, 3Res"}
       ]
     }
   }

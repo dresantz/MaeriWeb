@@ -1,60 +1,54 @@
 {
   "model": {
     "id": "orvel",
-    "name": "Orvel, O Inexorável",
+    "name": "Turu",
     "level": "1",
     "class": "Druida",
-    "description": "O cão do inferno",
+    "description": "O que escura o pulsar da terra",
     "attributes":
-    { "f": "4", "v": "3", "d": "2", "s": "2", "i": "1", "a": "2" },
-    "vit": { "current": "14", "total": "14" },
-    "con": { "current": "12", "total": "12" },
+    { "f": "3", "v": "2", "d": "2", "s": "5", "i": "2", "a": "3" },
+    "vit": { "current": "6", "total": "6" },
+    "con": { "current": "10", "total": "10" },
 
     "complemento": {
       "ser": {
-        "id": "humano",
-        "nome": "Humano",
-        "anato": "+1 em característica que não tenha recebido pontos."
+        "id": "oniro",
+        "nome": "Oniro",
+        "anato": "Voar com D por V turnos, carregando F-2."
       },
       "estudos": [
-        { "nome": "Comércio", "conhecimentos": "negociação, carta de comércio." },
-        { "nome": "Política", "conhecimentos": "educação básica, sinete." }
       ],
       "tecnicas": [
-        { "nome": "Golpe Poderoso", "descricao": "Ataque que causa +2 de dano" },
-        { "nome": "Postura Defensiva", "descricao": "Aumenta defesa em +2 por rodada" }
       ],
       "estudos mágicos": [
-        {"nome": "Neófitas", "magias": "Punho Invisivel, Dregrau, Revelador."}
+        {"nome": "Neófitas", "magias": "Flecha"},
+        {"nome": "Bruxaria", "magias": "Invocar Familiar, Aura Vampirica, Maldição da Presença Fantasma, Maldição da Marca Negra"}
       ],
       "classes": [
-        {"nome": "Guerreiro", "característica":"golpe voador"}
       ],
-      "xp": { "m": "3", "l": "2", "p": "1" }
+      "xp": { "m": "0", "l": "0", "p": "0" }
     },
 
     "narrativa": {
       "arquetipo": {
-        "nome": "Herói"
+        "nome": "Anti-Herói"
       },
       "motivacao": {
-        "nome": "Amor"
+        "nome": "Harmonia"
       },
-      "disposicao": "-",
-      "historia": "Teste",
+      "disposicao": "+",
+      "historia": "Você decide...",
       "contatos": [
-        { "nome": "Amigo do Regimento", "tipo": "Armeiro" },
-        { "nome": "Menino Feio", "tipo": "Armadureiro" }
+        { "nome": "Macaco Falante", "tipo": "Armeiro" },
+        { "nome": "Mestre de Caça", "tipo": "Estribeiro" }
       ]
     },
 
     "inventario": {
-      "moedas": { "fo": "2", "dp": "2", "tc": "3" },
-      "peso": { "medio": "8", "maximo": "16", "atual": "12" },
+      "moedas": { "fo": "0", "dp": "8", "tc": "6" },
+      "peso": { "medio": "6", "maximo": "12", "atual": "0" },
       "itens": [
-        { "nome": "Espada longa", "peso": "3Pes", "quantidade": "1", "nota": "1d6+1 de dano"},
-        { "nome": "Armadura de couro", "peso": "8Pes", "quantidade": "1", "nota": "-1 de dano de corte"},
-        { "nome": "Escudo", "peso": "2", "quantidade": "1", "nota": "+1V em combate"}
+        { "nome": "Lança", "peso": "5Pes", "quantidade": "1", "nota": "1d6+1 (a/e) 3Res"}
       ]
     }
   }

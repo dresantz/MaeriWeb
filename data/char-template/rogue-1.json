@@ -1,60 +1,54 @@
 {
   "model": {
-    "id": "orvel",
-    "name": "Orvel, O Inexorável",
+    "id": "Morise",
+    "name": "Morise, O Anfitrião",
     "level": "1",
     "class": "Ladino",
-    "description": "O cão do inferno",
+    "description": "Ele o receberá com toda a alegria",
     "attributes":
-    { "f": "4", "v": "3", "d": "2", "s": "2", "i": "1", "a": "2" },
-    "vit": { "current": "14", "total": "14" },
-    "con": { "current": "12", "total": "12" },
+    { "f": "2", "v": "3", "d": "4", "s": "2", "i": "4", "a": "3" },
+    "vit": { "current": "8", "total": "8" },
+    "con": { "current": "8", "total": "8" },
 
     "complemento": {
       "ser": {
-        "id": "humano",
-        "nome": "Humano",
-        "anato": "+1 em característica que não tenha recebido pontos."
+        "id": "caribo",
+        "nome": "Caribo",
+        "anato": "Gesto extra. -1 de dano de fogo."
       },
       "estudos": [
-        { "nome": "Comércio", "conhecimentos": "negociação, carta de comércio." },
-        { "nome": "Política", "conhecimentos": "educação básica, sinete." }
+        { "nome": "Crime", "conhecimentos": "8xpm + 1 xpm para falsificar ou destrancar" }
       ],
       "tecnicas": [
-        { "nome": "Golpe Poderoso", "descricao": "Ataque que causa +2 de dano" },
-        { "nome": "Postura Defensiva", "descricao": "Aumenta defesa em +2 por rodada" }
       ],
       "estudos mágicos": [
-        {"nome": "Neófitas", "magias": "Punho Invisivel, Dregrau, Revelador."}
       ],
       "classes": [
-        {"nome": "Guerreiro", "característica":"golpe voador"}
       ],
-      "xp": { "m": "3", "l": "2", "p": "1" }
+      "xp": { "m": "8", "l": "0", "p": "0" }
     },
 
     "narrativa": {
       "arquetipo": {
-        "nome": "Herói"
+        "nome": "Vilão"
       },
       "motivacao": {
-        "nome": "Amor"
+        "nome": "Ódio"
       },
       "disposicao": "-",
-      "historia": "Teste",
+      "historia": "Você decide...",
       "contatos": [
-        { "nome": "Amigo do Regimento", "tipo": "Armeiro" },
-        { "nome": "Menino Feio", "tipo": "Armadureiro" }
+        { "nome": "Mercador Estranho", "tipo": "Armeiro" },
+        { "nome": "Informante Estranho", "tipo": "Espião" }
       ]
     },
 
     "inventario": {
-      "moedas": { "fo": "2", "dp": "2", "tc": "3" },
-      "peso": { "medio": "8", "maximo": "16", "atual": "12" },
+      "moedas": { "fo": "5", "dp": "3", "tc": "3" },
+      "peso": { "medio": "4", "maximo": "8", "atual": "0" },
       "itens": [
-        { "nome": "Espada longa", "peso": "3Pes", "quantidade": "1", "nota": "1d6+1 de dano"},
-        { "nome": "Armadura de couro", "peso": "8Pes", "quantidade": "1", "nota": "-1 de dano de corte"},
-        { "nome": "Escudo", "peso": "2", "quantidade": "1", "nota": "+1V em combate"}
+        { "nome": "Adaga", "peso": "1Pes", "quantidade": "1", "nota": "1d3+1(x3) 4Res" },
+        { "nome": "Nota de Sangue", "peso": "0Pes", "quantidade": "2", "nota": "tontura em 4 temporadas, morte em 5 temporadas" }
       ]
     }
   }
