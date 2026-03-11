@@ -5,6 +5,11 @@
 
 const TEMPLATE_FILES = [
   'warrior-1',
+  'mage-1',
+  'cleric-1',
+  'rogue-1',
+  'druid-1',
+  'paladin-1'
 ];
 
 class TemplateList {

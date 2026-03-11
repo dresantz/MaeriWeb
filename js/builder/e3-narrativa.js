@@ -72,7 +72,7 @@ class NarrativaManager {
         <!-- Seção de Contatos -->
         <div class="contatos-section">
           <p class="contatos-intro">Escolha os Contatos</p>
-          <p class="contatos-descricao">O jogador pode escolher qualquer tipo de contato que quiser, não precisa estar na lista, porém, para adquirir itens em uma loja, é necessário ter o Contato específico.</p>
+          <p class="contatos-descricao">O jogador pode escolher sua I em contatos, ou deixar para depois, não precisa estar na lista, porém, para adquirir itens em uma loja, é necessário ter o Contato específico.</p>
           
           <div class="contatos-buttons" id="contatos-buttons-container">
             <div class="loading-state">

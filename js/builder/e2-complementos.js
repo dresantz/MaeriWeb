@@ -70,6 +70,7 @@ class ComplementosManager {
         <!-- Seção de Técnicas Marciais -->
         <div class="tecnicas-section" id="tecnicas-section">
           <p class="tecnicas-subtitle">Técnicas Marciais</p>
+              <p class="magias-subtitle">Exige que um dos seus Contatos seja um Mestre</p>
           
           <div class="tecnicas-buttons" id="tecnicas-buttons-container">
             <div class="loading-state">
@@ -87,6 +88,7 @@ class ComplementosManager {
         <!-- Seção de Estudos Mágicos -->
         <div class="magias-section" id="magias-section">
           <p class="magias-subtitle">Estudos Mágicos</p>
+              <p class="magias-subtitle">É preciso adquirir Neófita antes de poder adquirir as demais</p>
           
           <div class="magias-buttons" id="magias-buttons-container">
             <div class="loading-state">

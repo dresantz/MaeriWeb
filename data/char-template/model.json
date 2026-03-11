@@ -1,0 +1,61 @@
+{
+  "model": {
+    "id": "modelo",
+    "name": "Modelo",
+    "level": "1",
+    "class": "Template",
+    "description": "Modelo de Template",
+    "attributes":
+    { "f": "0", "v": "0", "d": "0", "s": "0", "i": "0", "a": "0" },
+    "vit": { "current": "00", "total": "00" },
+    "con": { "current": "00", "total": "00" },
+
+    "complemento": {
+      "ser": {
+        "id": "humano",
+        "nome": "Humano",
+        "anato": "+1 em característica que não tenha recebido pontos."
+      },
+      "estudos": [
+        { "nome": "Comércio", "conhecimentos": "negociação, carta de comércio." },
+        { "nome": "Política", "conhecimentos": "educação básica, sinete." }
+      ],
+      "tecnicas": [
+        { "nome": "Golpe Poderoso", "descricao": "Ataque que causa +2 de dano" },
+        { "nome": "Postura Defensiva", "descricao": "Aumenta defesa em +2 por rodada" }
+      ],
+      "estudos mágicos": [
+        {"nome": "Neófitas", "magias": "Punho Invisivel, Dregrau, Revelador."}
+      ],
+      "classes": [
+        {"nome": "Guerreiro", "característica":"golpe voador"}
+      ],
+      "xp": { "m": "0", "l": "0", "p": "0" }
+    },
+
+    "narrativa": {
+      "arquetipo": {
+        "nome": "Herói"
+      },
+      "motivacao": {
+        "nome": "Amor"
+      },
+      "disposicao": "-",
+      "historia": "Teste",
+      "contatos": [
+        { "nome": "Amigo do Regimento", "tipo": "Armeiro" },
+        { "nome": "Menino Feio", "tipo": "Armadureiro" }
+      ]
+    },
+
+    "inventario": {
+      "moedas": { "fo": "2", "dp": "2", "tc": "3" },
+      "peso": { "medio": "8", "maximo": "16", "atual": "12" },
+      "itens": [
+        { "nome": "Espada longa", "peso": "3Pes", "quantidade": "1", "nota": "1d6+1 de dano"},
+        { "nome": "Armadura de couro", "peso": "8Pes", "quantidade": "1", "nota": "-1 de dano de corte"},
+        { "nome": "Escudo", "peso": "2", "quantidade": "1", "nota": "+1V em combate"}
+      ]
+    }
+  }
+}
