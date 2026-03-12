@@ -352,6 +352,11 @@
   border: 1px solid var(--lore-border);
 }
 
+.timeline-content p {
+  font-family: 'Crimson Text', serif;
+  font-size: 1.1rem;
+}
+
 .timeline-content h3 {
   margin-top: 0;
   color: var(--lore-accent);
