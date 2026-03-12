@@ -266,6 +266,8 @@ const SpellsManager = (function() {
     overlay.classList.add('active');
     document.body.classList.add('no-scroll');
     
+    syncFilterUI();
+
     setTimeout(() => {
       document.getElementById('spells-search')?.focus();
     }, 100);
