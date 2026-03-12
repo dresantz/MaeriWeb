@@ -709,7 +709,7 @@
               "combat": true,
               "cost": "2 xpm e 2 Con/uso",
               "spellbrief_item": "+1 F, V e D em combate.",
-              "tags": ["suporte", "buff", "combate"],
+              "tags": ["suporte", "buff"],
               "description": "Sucesso em embate de S concede +1 em F, D e V para todos os aliados em combate. A magia precisa ser mantida verbalmente."
             },
             {
