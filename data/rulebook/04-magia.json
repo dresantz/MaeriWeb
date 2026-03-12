@@ -100,6 +100,7 @@
               "level": 1,
               "combat": true,
               "cost": "1 Con/uso",
+              "spellbrief_item": "Joga um alvo para cima.",
               "tags": ["movimento", "controle", "utilidade"],
               "description": "Joga um alvo para o alto em S em Esp. O alvo tem direito a um teste de D para cair em pé; se falhar, fica Caído. O conjurador pode usar de forma controlada em si ou em outros alvos para alcançar locais altos."
             },
@@ -111,6 +112,7 @@
               "level": 1,
               "combat": true,
               "cost": "1 Con/uso",
+              "spellbrief_item": "Dá um soco no alvo.",
               "tags": ["dano", "contusao"],
               "description": "Bate em um alvo com a força de um soco muito forte, causando 1d2+1 de dano de contusão."
             },
@@ -122,6 +124,7 @@
               "level": 1,
               "combat": false,
               "cost": "1 Con/degrau",
+              "spellbrief_item": "Cria plataformas no ar.",
               "tags": ["movimento", "utilidade"],
               "description": "Cria uma plataforma cristalina de quarenta centímetros de diâmetro, imóvel no ar, em qualquer ângulo, que aguenta S em Pes e possui 1 Res."
             },
@@ -133,6 +136,7 @@
               "level": 1,
               "combat": true,
               "cost": "2 Con/uso",
+              "spellbrief_item": "Revela coisas mágicas invisiveis.",
               "tags": ["detecção", "utilidade"],
               "description": "Um pulso que revela coisas invisíveis de origem mágica. Alerta para a possibilidade de alvos próximos ou aponta para algo que o conjurador queira, sendo que ele precisa conhecer o alvo. Tudo dentro de um raio de Sx2 em Esp."
             },
@@ -144,6 +148,7 @@
               "level": 1,
               "combat": true,
               "cost": "1 Con/uso",
+              "spellbrief_item": "Dispara uma flecha seguidora de 1 de dano.",
               "tags": ["dano", "rastreamento"],
               "description": "Dispara uma flecha de energia mística. Causa apenas 1 de dano perfurante; porém, ela rastreia o alvo, dando +2S para esse ataque. O alvo não precisa estar visível, porém o conjurador precisa saber que ele está por perto e já tê-lo visto."
             },
@@ -155,6 +160,7 @@
               "level": 1,
               "combat": true,
               "cost": "1 Con/uso",
+              "spellbrief_item": "Empurra objetos de até 4Pes.",
               "tags": ["controle", "movimento", "dano"],
               "description": "Empurra um alvo na direção que o conjurador escolher em a até Sx2 em Esp. Pode ser usado em objetos de até 4 Pes que não estejam presos ou sendo segurados, causando 1d3 de dano de um tipo que dependerá do objeto. Também pode apenas arremessar o objeto para a mão do conjurador ou de outro alvo dentro do alcance da S do conjurador, a partir do local do objeto."
             },
@@ -166,6 +172,7 @@
               "level": 1,
               "combat": true,
               "cost": "1 Con/uso",
+              "spellbrief_item": "Cega o alvo.",
               "tags": ["controle", "cegueira"],
               "description": "Cria um pulso de luz e fagulhas que cega o alvo até o final do próximo turno dele. O conjurador precisa estar dentro do raio de visão do alvo."
             },
@@ -177,6 +184,7 @@
               "level": 1,
               "combat": false,
               "cost": "1 Con/uso",
+              "spellbrief_item": "Amarra alvos.",
               "tags": ["controle", "utilidade"],
               "description": "Amarra um alvo ou mais em uma corda. O conjurador tem a opção de fazer a outra extremidade surgir em sua mão. Não pode ser usada em combate. O limite do tamanho da corda é a S do conjurador em metros."
             },
@@ -188,6 +196,7 @@
               "level": 1,
               "combat": true,
               "cost": "1 Con/uso",
+              "spellbrief_item": "-1 em todas caracteristicas do alvo.",
               "tags": ["controle", "debilitacao"],
               "description": "Faz o alvo rir descontroladamente. Usada em combate, causa -1 em todas as características do alvo até que ele tenha sucesso em um teste de V no fim do turno dele."
             },
@@ -199,6 +208,7 @@
               "level": 1,
               "combat": true,
               "cost": "1 Con/uso",
+              "spellbrief_item": "1d3 de dano explosivo.",
               "tags": ["dano", "explosao"],
               "description": "Dispara um feixe de energia contra um alvo, causando 1d3 de dano de explosão."
             },
@@ -210,6 +220,7 @@
               "level": 1,
               "combat": true,
               "cost": "1 Con/uso",
+              "spellbrief_item": "1d3 de dano de água.",
               "tags": ["dano", "agua"],
               "description": "Dispara bolhas de água contra um alvo. Ele fica molhado até o fim do combate ou cena e sofre 1d3 de dano de água."
             },
@@ -221,6 +232,7 @@
               "level": 1,
               "combat": false,
               "cost": "1 xpm/uso",
+              "spellbrief_item": "distrai um alvo fora de combate.",
               "tags": ["controle", "distracao"],
               "description": "Cria um pequeno inseto voador que chama a atenção do alvo, deixando-o distraído, distante e desatento. O alvo sofre -3A até o fim da cena. Não pode ser usado em combate."
             },
@@ -232,6 +244,7 @@
               "level": 1,
               "combat": true,
               "cost": "1 Con/uso",
+              "spellbrief_item": "1d3+1 de dano de fogo.",
               "tags": ["dano", "fogo"],
               "description": "Acerta o alvo com chamas multicoloridas muito brilhantes, causando 1d3+1 de dano de fogo."
             },
@@ -243,6 +256,7 @@
               "level": 1,
               "combat": false,
               "cost": "1 Con/alvo",
+              "spellbrief_item": "Cria camuflagem no alvo.",
               "tags": ["furtividade", "ilusao"],
               "description": "Faz o alvo assumir as mesmas cores do ambiente, recebendo +3D para ocultamento até o fim da cena."
             },
@@ -254,6 +268,7 @@
               "level": 1,
               "combat": false,
               "cost": "1 Con/alvo",
+              "spellbrief_item": "Evapora líguidos.",
               "tags": ["utilidade"],
               "description": "Evapora líquidos com ponto de ebulição menor ou igual ao da água sem usar calor. Pode ser usado até mesmo como guarda-chuva. Não funciona em alvos submersos."
             },
@@ -265,6 +280,7 @@
               "level": 1,
               "combat": false,
               "cost": "1 Con/alvo",
+              "spellbrief_item": "Alterar aparencia do alvo.",
               "tags": ["ilusao", "social"],
               "description": "Ilusão que permite mudar levemente detalhes da aparência do alvo, como maquiagem, linhas do rosto, cheiro, cor das unhas e penteado. Permite alinhar, secar, alisar e limpar roupas do corpo. Ações contra o alvo cancelam a magia. 1 Con/alvo."
             },
@@ -276,6 +292,7 @@
               "level": 1,
               "combat": false,
               "cost": "1 Con/uso",
+              "spellbrief_item": "Ampliar a visão para ver coisas pequenas ou distantes.",
               "tags": ["percepcao", "utilidade"],
               "description": "O conjurador une a ponta do indicador e do polegar para formar um círculo com os dedos. Ele pode enxergar melhor coisas pequenas ou distantes através dele, recebendo +3 para qualquer teste envolvendo visão até que separe os dedos."
             },
@@ -287,6 +304,7 @@
               "level": 1,
               "combat": false,
               "cost": "1 xpm e 1 Con/uso",
+              "spellbrief_item": "Conserta 1 Res em objetos.",
               "tags": ["utilidade", "objetos"],
               "description": "Permite restaurar 1 Res de objetos. A restauração é rudimentar, como se estivesse soldando ou colando o material; por isso não restaura armas ou objetos complexos, como um item mecânico. Pode juntar suas partes sem fazer com que funcionem ou sejam úteis."
             },
@@ -298,6 +316,7 @@
               "level": 1,
               "combat": true,
               "cost": "2 Con/uso",
+              "spellbrief_item": "+1 de dano mágico com F para o conjurador.",
               "tags": ["buff"],
               "description": "Usado em combate com sucesso em embate de S. Concede, apenas ao conjurador, +1 de dano mágico para ataques feitos com F até o fim da cena ou combate."
             }
@@ -349,6 +368,7 @@
               "level": 1,
               "combat": true,
               "cost": "1 Con/uso",
+              "spellbrief_item": " Roubar força vital.",
               "tags": ["dano", "necrótico", "cura"],
               "description": "Com sucesso em embate de S, essa magia rouba a força vital de um alvo, causando 1d3+1 de dano necrótico e recuperando o mesmo valor no conjurador ou em outro alvo."
             },
@@ -360,6 +380,7 @@
               "level": 1,
               "combat": false,
               "cost": "1 parte do alvo, 3 xpm/alvo, 2 Con/visão",
+              "spellbrief_item": "Permite espionar alvos.",
               "tags": ["maldição", "informação", "espionagem"],
               "description": "Com parte do corpo do alvo ou um pertence, como cabelo ou roupa, é possível vê-lo, saber o que está fazendo e ver até três objetos ao redor dele. O alvo poderá enxergar sombras fantasmagóricas da pessoa que o amaldiçoou observando-o com sucesso em A, mas não pode identificá-la. A magia dura apenas alguns instantes, mas, enquanto a maldição estiver ativa de forma manual, é possível ter uma nova visão do alvo por 2 Con, que só podem ser recuperados quando a maldição for desfeita."
             },
@@ -371,6 +392,7 @@
               "level": 1,
               "combat": true,
               "cost": "2 xpm e 2 Con/alvo",
+              "spellbrief_item": "O alvo sofrerá dano se fizer algo específico.",
               "tags": ["maldição", "condicional", "dano"],
               "description": "O alvo sofrerá 1d6+1 de dano de trovão sempre que uma condição, especificada pelo conjurador, for atendida. A condição não pode envolver algo físico, como respirar ou caminhar, ou algo que aconteça de forma incessante, como o movimento de roupas. É preciso ser algo que o alvo possa evitar, como tomar banho, comer um tipo específico de alimento ou tocar em algum objeto específico. Em combate, o conjurador pode escolher um alvo para que o amaldiçoado sofra o dano sempre que fizer uma ação contra ele. Não é possível usar essa magia mais de uma vez no mesmo personagem."
             },
@@ -382,6 +404,7 @@
               "level": 1,
               "combat": true,
               "cost": "3 Con/uso",
+              "spellbrief_item": "Causa 1d6 da dano e marca o alvo.",
               "tags": ["maldição", "fogo", "marca"],
               "description": "Um alvo é marcado, sofrendo 1d6 de dano de fogo, e todas as pessoas que conhecerem a marca escolhida e souberem seu significado poderão saber que o alvo possui aquela marca, pois, ao bater os olhos nele, a marca irá emergir à sua visão mesmo através de roupas e armaduras, em posição bem visível. Ninguém pode ter mais de cinco marcas. Em combate, é possível marcar e apenas repetir o dano em alvos que já foram marcados com embates de S."
             },
@@ -393,6 +416,7 @@
               "level": 1,
               "combat": true,
               "cost": "1 Con e 1 xpm/alvo",
+              "spellbrief_item": "Todo dano causará dano extra no alvo.",
               "tags": ["maldição", "sangramento", "sustentada"],
               "description": "Usada em combate como um ataque à distância com S. Qualquer dano no alvo causará +1d2 de dano de corte extra além de qualquer outro dano normal. A magia deve ser mantida manualmente."
             },
@@ -404,6 +428,7 @@
               "level": 1,
               "combat": false,
               "cost": "1 Con/animal",
+              "spellbrief_item": "Invoca um servo animal.",
               "tags": ["invocação", "utilidade", "sentidos"],
               "description": "F0 V1 D3 I0 A3 S3. Conjura um ou mais animais mágicos (limite da S do conjurador), terrestres, voadores ou aquáticos (mesma velocidade que em terra), de pequeno porte e incapazes de atacar. Tocando o familiar, o conjurador pode ver e experimentar em seus sentidos tudo o que o familiar experimentou desde que foi conjurado. Pessoas com estudo mágico podem fazer testes para identificá-los. O conjurador sofre 1 de dano que conta como Ferimento se um familiar é morto em vez de ser desconjurado. 1 Con/animal."
             },
@@ -415,6 +440,7 @@
               "level": 1,
               "combat": true,
               "cost": "3 xpm/uso",
+              "spellbrief_item": "O que voa irá cair e velas irão murchar.",
               "tags": ["controle", "exaustão", "ambiente"],
               "description": "Sucesso em embate de S deixa um alvo a até 2xS em Esp Exaurido, ou seja, ele recebe desvantagem em testes e embates de qualquer característica e -3 Esp para movimento. A magia precisa ser mantida verbalmente, e o alvo pode escapar dos efeitos com sucesso em teste de V no início do seu turno. Essa magia faz uma pessoa ou objeto se tornar imune aos efeitos do vento, recebendo pouco ar: ela ficará parada mesmo dentro de um tornado; velas irão murchar mesmo com vento em popa; chamas irão se apagar; criaturas e objetos que usam vento para voar irão cair."
             },
@@ -426,6 +452,7 @@
               "level": 1,
               "combat": true,
               "cost": "1 Con/alvo",
+              "spellbrief_item": "Desacelera alvos.",
               "tags": ["controle", "movimento", "tempo"],
               "description": "Sucesso em embate de S, e o conjurador manipula as fundações do tempo e do espaço para desacelerar alvos, fazendo com que se movam a -3 Esp por turno até que sejam bem-sucedidos em teste de V no final do próximo turno para se livrar do efeito. Fora de combate, essa magia desacelera pessoas e objetos de tamanho em Pes equivalente a S do conjurador, mesmo em voo ou em queda, anulando esse tipo de dano."
             }
@@ -448,6 +475,7 @@
               "level": 3,
               "combat": false,
               "cost": "4 xpm/altar",
+              "spellbrief_item": "Sombras amedrontam uma área.",
               "tags": ["maldição", "território", "medo", "visão"],
               "description": "O conjurador cria um altar em um local que não possa ser movimentado. Em um raio de 50 Esp ao redor desse altar, o conjurador pode criar sombras e ver através dos olhos delas. Testes de A permitem que alvos percebam essas sombras e, se não passarem em teste de V, ficarão Amedrontados por elas. Destruir o altar acaba com a maldição."
             },
@@ -459,6 +487,7 @@
               "level": 3,
               "combat": true,
               "cost": "2 Con/objeto",
+              "spellbrief_item": "Anima objetos de até 3 Res.",
               "tags": ["invocação", "objeto", "sustentada"],
               "description": "F3 V0 D3 A0 I0 S0. Usado em combate com um embate de S à distância, o personagem anima um objeto de até 3 Res (barril ou caixote vazio), que se torna capaz de flutuar a um metro do chão e atacar alvos. O mestre determina o dano e o tipo de dano do objeto baseado no tópico Contatos de Mercado (capítulo Círculo Social e Comércio). Uma pedra pequena pode causar o dano de uma arma de contusão leve, por exemplo. A maldição precisa ser mantida manualmente."
             },
@@ -470,6 +499,7 @@
               "level": 3,
               "combat": true,
               "cost": "3 xpm + 3 Con/amuleto",
+              "spellbrief_item": "Amuleto que anula magias.",
               "tags": ["anulação", "interrupção", "preparação"],
               "description": "O mago prepara um pequeno amuleto que pode ser consumido com uma interrupção caso um alvo seja bem-sucedido em um embate ao usar uma magia que use apenas Con. O sucesso do alvo é cancelado e a ação é perdida junto do custo da sua conjuração. Fora de combate, essa magia pode cancelar efeitos mágicos menores feitos com até 12 xpm e/ou 12 Con. 3 xpm + 3 Con/amuleto. A Con gasta para criar o amuleto não pode ser recuperada com repouso até que ele seja usado."
             },
@@ -481,6 +511,7 @@
               "level": 3,
               "combat": true,
               "cost": "1 Con/uso",
+              "spellbrief_item": "O conjurador se transforma em pequenos animais.",
               "tags": ["transformação", "mobilidade", "evasão"],
               "description": "O conjurador pode se transformar em uma revoada de pequenas criaturas de sua escolha. Ele recebe +3D para voar, fica imune a técnicas, e embates contra ele são bônus. É possível usar essa magia no início do seu turno, antes da sua ação, para um embate usando o bônus em D. Pode voltar à forma normal no início de um dos seus turnos sem custo."
             },
@@ -492,6 +523,7 @@
               "level": 3,
               "combat": true,
               "cost": "3 xpm/crânio",
+              "spellbrief_item": "Um crânio que permite disparar energia mágica.",
               "tags": ["dano", "ácido", "sustentada"],
               "description": "Sucesso em embate de S permite conjurar um crânio envolto em aura verde que o conjurador pode manter manualmente. O conjurador absorve a aura com a outra mão (livre) e dispara uma rajada de 1d6+1 de dano ácido. Enquanto mantiver o crânio, ele pode fazer outros disparos com embates de S sem custo. Ao causar dano, o alvo sofre -1F não cumulativo até o fim do combate ou da cena. As rajadas ácidas extras do crânio não possuem custo."
             },
@@ -503,6 +535,7 @@
               "level": 3,
               "combat": true,
               "cost": "2 Con/uso",
+              "spellbrief_item": "Absorve Vit de alvos mortos.",
               "tags": ["cura", "necrótico", "morte"],
               "description": "Sucesso em embate de S à distância permite que o conjurador cure em si ou em algum outro alvo 2 Vit para cada alvo morto em combate. Os mortos não podem ser repetidos caso haja outro uso dessa magia, mesmo que de outro conjurador."
             },
@@ -514,6 +547,7 @@
               "level": 3,
               "combat": true,
               "cost": "1 Con/uso",
+              "spellbrief_item": "Causa desvantagem em CF no alvo.",
               "tags": ["controle", "peso", "sustentada"],
               "description": "Com sucesso em embate de S, o conjurador causa no alvo o efeito negativo de quem sofre de excesso de carga (desvantagem em testes de CF). A magia precisa ser mantida manualmente. Fora de combate, essa magia faz com que objetos e pessoas fiquem mais pesados."
             },
@@ -525,6 +559,7 @@
               "level": 3,
               "combat": true,
               "cost": "2 Con/uso",
+              "spellbrief_item": "1d6 de dano perfurante e cegueira no alvo.",
               "tags": ["dano", "cegueira", "controle"],
               "description": "Sucesso em embate de S permite que o conjurador solte pela boca um enxame de insetos que atacam o alvo, fazendo com que ele fique Cego (desvantagem em qualquer embate e -3A em combate) até o fim do seu próximo turno e sofra 1d6 de dano perfurante."
             }
@@ -547,6 +582,7 @@
               "level": 5,
               "combat": false,
               "cost": "4 xpm/alvo",
+              "spellbrief_item": "Possuir corpo de um alvo.",
               "tags": ["maldição", "controle", "possessão"],
               "description": "O conjurador pode possuir o corpo de um alvo fora de ação (dormindo ou inconsciente). O corpo do conjurador ficará indefeso enquanto possui o corpo do alvo. As características F, V e D serão do possuído, e S, A e I do conjurador. Se o corpo possuído ou o conjurador forem alvos de qualquer ação, a maldição se desfaz."
             },
@@ -558,6 +594,7 @@
               "level": 5,
               "combat": true,
               "cost": "3 Con e 2 xpm/uso",
+              "spellbrief_item": "Transformar alvo em um animal.",
               "tags": ["maldição", "transformação", "controle"],
               "description": "Sucesso em embate de S permite transformar o alvo, junto com seus itens, em um animal qualquer de médio porte (porco, ovelha, bode, cachorro, anta, gambá). Ele permanecerá com sua S e sua Vit, mas todas as suas outras características diminuem para 1, inclusive a Con, e seu dano passa a ser 1d2 de contusão (batida) ou perfuração (mordida). O alvo permanecerá assim até ser alvo de alguma ação, beijado (ação de Ajuda) ou até que o conjurador cancele a magia com um gesto."
             },
@@ -569,6 +606,7 @@
               "level": 5,
               "combat": false,
               "cost": "3 xpm/pergunta",
+              "spellbrief_item": "Obriga o alvo a responder uma pergunta.",
               "tags": ["controle", "verdade", "mente"],
               "description": "Obriga um alvo a responder uma pergunta da forma mais sincera e completa possível com o que ele acredita ser verdade. O alvo pode tentar resistir com um teste de V e ficar em silêncio, porém jamais será capaz de mentir ou subverter o sentido da pergunta. O conjurador não pode repetir a mesma pergunta ou fazer uma pergunta diferente que exija a mesma resposta."
             },
@@ -580,6 +618,7 @@
               "level": 5,
               "combat": false,
               "cost": "-1 Vit e 30 xpm/filactéria",
+              "spellbrief_item": "O jogador revive ao lado da filactéria quando morto.",
               "tags": ["ritual", "imortalidade", "morte"],
               "description": "Permite que o conjurador perca 1 Vit e a use para criar um objeto pequeno qualquer com 1 Vit. Assim, quando sua Vit chegar a zero e ele morrer, permanecerá morto por 1d6 temporadas, quando então reviverá no local onde está sua filactéria, e ela será destruída. O custo de Vit não é recuperado após a destruição da filactéria, sendo perdido permanentemente."
             },
@@ -591,6 +630,7 @@
               "level": 5,
               "combat": true,
               "cost": "3 Con/uso",
+              "spellbrief_item": "Controla um turno de um alvo.",
               "tags": ["controle", "mente", "ação"],
               "description": "Sucesso em embate de S permite que o conjurador controle o próximo turno de um alvo, permitindo inclusive que ele faça uma ação contra outro alvo. Se usada fora de combate, um alvo pode tentar resistir com teste de S; se falhar, o conjurador pode controlá-lo por dez segundos."
             },
@@ -601,7 +641,8 @@
               "school": "bruxaria",
               "level": 5,
               "combat": true,
-              "cost": "1 cadáver humanoide, 2 Con e 6 xpm/zumbi",
+              "cost": "1 cadáver humanoide, 2 Con e 6 xpm/zumbi.",
+              "spellbrief_item": "Cria e controla um zumbi",
               "tags": ["invocação", "morto-vivo", "criatura"],
               "description": "F1 (contusão, 1d6-3), V1, D1, A0, I0, S0. Eles largam armas e ficam tão magros que suas armaduras caem. São imunes à fome, sono, falta de ar, envenenamento e cura mágica."
             }
@@ -655,6 +696,7 @@
               "level": 1,
               "combat": true,
               "cost": "2 Con/uso",
+              "spellbrief_item": "Interrompe usando S para embate nulo.",
               "tags": ["interrupção", "defesa", "suporte"],
               "description": "Ao custo de uma interrupção, permite usar S em embates nulos em vez de apenas D e V. Não possui nenhuma outra ação além de conceder a possibilidade de se defender com uma característica diferente."
             },
@@ -666,6 +708,7 @@
               "level": 1,
               "combat": true,
               "cost": "2 xpm e 2 Con/uso",
+              "spellbrief_item": "+1 F, V e D em combate.",
               "tags": ["suporte", "buff", "combate"],
               "description": "Sucesso em embate de S concede +1 em F, D e V para todos os aliados em combate. A magia precisa ser mantida verbalmente."
             },
@@ -677,6 +720,7 @@
               "level": 1,
               "combat": true,
               "cost": "2 Con/uso",
+              "spellbrief_item": "Causa 2 de dano mágico elemental em quem estiver engajado com o alvo.",
               "tags": ["dano", "elemental", "area"],
               "description": "Sucesso em embate de S à distância permite escolher um alvo e um tipo de dano elemental. Todos que iniciarem seus turnos engajados com o alvo da magia recebem 2 de dano mágico do tipo elemental escolhido. A magia precisa ser mantida manualmente."
             },
@@ -688,6 +732,7 @@
               "level": 1,
               "combat": true,
               "cost": "1 Con/uso",
+              "spellbrief_item": "Cura 1d6 Vit de um alvo.",
               "tags": ["cura", "suporte"],
               "description": "Sucesso em embate de S permite curar 1d6 Vit de um alvo em combate. Fora de combate, o conjurador pode escolher o valor da cura até o limite de 6 Vit."
             },
@@ -699,6 +744,7 @@
               "level": 1,
               "combat": false,
               "cost": "1 Con/alvo",
+              "spellbrief_item": "Cura e deixa imune a condições mentais.",
               "tags": ["cura", "mental", "proteção"],
               "description": "Sucesso em embate de S cura e deixa o alvo imune por uma temporada a qualquer condição mental, como Amedrontado, Aterrorizado, Traumatizado, Confuso e Encantado."
             },
@@ -710,6 +756,7 @@
               "level": 1,
               "combat": true,
               "cost": "1 Con/uso",
+              "spellbrief_item": "Teletransporta a S em Esp.",
               "tags": ["movimento", "teleporte"],
               "description": "Sucesso em embate de S permite que o conjurador se teletransporte até sua S em Esp, desde que seja um lugar para onde poderia ir a pé. Ele pode ir para dentro de uma casa se a porta ou janela estiver aberta, mas não pode ir para o telhado, por exemplo."
             },
@@ -721,6 +768,7 @@
               "level": 1,
               "combat": false,
               "cost": "1 Con/uso",
+              "spellbrief_item": "Bônus de +3D de deslocamento.",
               "tags": ["movimento", "buff", "utilidade"],
               "description": "Sucesso em embate de S à distância permite que o conjurador conceda um bônus de +3D em testes e deslocamento para si e para aliados durante uma cena. Eles poderão caminhar sobre a água e terrenos que causem Restrição sem sofrer penalidades. Sem limite de alvos por turno."
             },
@@ -732,6 +780,7 @@
               "level": 1,
               "combat": true,
               "cost": "1 Con/uso",
+              "spellbrief_item": "Concede +2 de dano radiante para um ataque do conjurador.",
               "tags": ["dano", "radiante", "buff"],
               "description": "Sucesso em embate de S concede à arma do conjurador +2 de dano radiante apenas para um ataque. Essa magia não exige palavras ou movimentos de mão, mas a arma é obrigatória."
             },
@@ -743,6 +792,7 @@
               "level": 1,
               "combat": true,
               "cost": "1 Con/alvo",
+              "spellbrief_item": "Correntes prendem alvo ao chão.",
               "tags": ["controle", "imobilização"],
               "description": "Sucesso em embate de S faz com que o conjurador invoque correntes, mãos ou algo do tipo, prendendo um alvo ao chão e tornando-o incapaz de se mover, embora ainda possa realizar ações. Pode trazer para o chão criaturas voadoras."
             }
@@ -765,6 +815,7 @@
               "level": 3,
               "combat": true,
               "cost": "6 xpm/altar",
+              "spellbrief_item": "Altar contra maldições.",
               "tags": ["proteção", "radiante", "area", "suporte"],
               "description": "Esse altar cria uma área de até 20 Esp de raio de proteção contra maldições. Uma maldição é cancelada contra o alvo que já estiver dentro e, se um personagem amaldiçoado entrar, a maldição continua ativa, mas seus efeitos cessam até que ele saia. Dentro da área do altar, o conjurador pode, ao custo de um gesto, conceder +1 de dano radiante para todos os alvos dentro dele."
             },
@@ -776,6 +827,7 @@
               "level": 3,
               "combat": true,
               "cost": "2 Con/uso",
+              "spellbrief_item": "Interrupção que cria escudo de 3 Vit, ou até Sx3 Vit fora de combate.",
               "tags": ["defesa", "proteção", "reação"],
               "description": "Pode ser conjurado como uma interrupção para criar um escudo de 3 Vit que ajuda a reduzir o dano sofrido por um alvo. Essa Vit desaparece logo após o término do cálculo de redução de dano caso não tenha sido reduzida a zero pelo ataque. Fora de combate, o jogador pode concentrar o poder por mais tempo para aumentar o tamanho (S em Esp) e a força do escudo (Sx3 Vit)."
             },
@@ -787,6 +839,7 @@
               "level": 3,
               "combat": true,
               "cost": "2 Con/uso",
+              "spellbrief_item": "Cancela magias.",
               "tags": ["anulação", "controle", "magia"],
               "description": "Sucesso em embate de S permite cancelar uma magia mantida manual ou verbalmente, uma invocação, algum efeito mágico afetando um alvo, uma maldição ou alguma condição. Pode ser usada fora de combate para cancelar efeitos mágicos conjurados com até 12 xpm e/ou 12 Con."
             },
@@ -798,6 +851,7 @@
               "level": 3,
               "combat": false,
               "cost": "2 xpm e 4 Con/uso",
+              "spellbrief_item": "Concede um conhecimento não mágico momentaneamente.",
               "tags": ["conhecimento", "suporte"],
               "description": "Concede a aquisição de um Conhecimento não mágico para apenas um teste que envolva somente S."
             },
@@ -809,6 +863,7 @@
               "level": 3,
               "combat": true,
               "cost": "1 Con/uso",
+              "spellbrief_item": "1d6 de dano de contusão +2 de dano de fogo.",
               "tags": ["dano", "contusão", "fogo"],
               "description": "Sucesso em embate de S dispara um cubo do tamanho de um tijolo contra um alvo, causando 1d6 de dano de contusão e +2 de dano de fogo."
             },
@@ -820,6 +875,7 @@
               "level": 3,
               "combat": true,
               "cost": "3 Con/uso",
+              "spellbrief_item": "Um gesto permite curar 1d6 de um alvo dentro da área de efeito.",
               "tags": ["cura", "area", "suporte"],
               "description": "Sucesso em embate de S faz com que o conjurador crie uma aura translúcida com sua S em Esp de raio. Ele pode gastar um gesto para curar 1d6 Vit de si próprio ou de qualquer aliado que esteja dentro do alcance enquanto mantiver verbalmente a aura ativa."
             },
@@ -831,6 +887,7 @@
               "level": 3,
               "combat": true,
               "cost": "2 Con/uso",
+              "spellbrief_item": "Aterroriza alvos.",
               "tags": ["controle", "medo", "mental"],
               "description": "Sucesso em embate de S faz com que o alvo tenha uma visão divina, algo que tema, talvez a própria morte vindo buscá-lo, deixando-o Aterrorizado (sem movimento, todos os embates nulos). O efeito acaba se o alvo for bem-sucedido em teste de V no final do seu próximo turno."
             }
@@ -852,7 +909,8 @@
               "school": "divinacao",
               "level": 5,
               "combat": true,
-              "cost": "Qualquer quantidade de xpm/selo fora de combate, 1 Con/uso em combate",
+              "cost": "Qualquer quantidade de xpm/selo fora de combate, 1 Con/uso em combate.",
+              "spellbrief_item": "Sela algo ou um local",
               "tags": ["controle", "proteção", "campo", "interrupção"],
               "description": "Permite selar algo ou um local com magia. Pode trancar uma sala, um baú ou mochila, ou criar um campo de força ao redor de uma região de até 20 Esp. O conjurador pode escolher quem pode entrar ou sair e também criar regras mágicas de acesso (recitar a palavra mágica, ter um objeto específico, apenas durante lua cheia, resolver enigma). Pode ser usado em combate como interrupção para anular o sucesso da ação de um personagem engajado ou flanqueando o conjurador. Um selo mágico pode ser quebrado se a mesma quantidade de xpm for investida em um contrafeitiço; o valor exato só pode ser descoberto com teste de S. Outra pessoa com algum Estudo mágico pode usar Con no lugar de xpm para desfazer o selo. Mesmo o próprio conjurador não pode desfazê-lo sem atender aos requisitos."
             },
@@ -864,6 +922,7 @@
               "level": 5,
               "combat": false,
               "cost": "3 xpm/dado",
+              "spellbrief_item": "Rola 1d6 e permite substituir o resultado em qualquer teste futuro.",
               "tags": ["destino", "previsao", "suporte"],
               "description": "O usuário rola 1d6 e então pode substituir o resultado desse dado após qualquer outra rolagem de dados feita no futuro, seja de um aliado ou de um inimigo. Ele pode inclusive dar o resultado para que outro jogador decida quando usá-lo. O conjurador também pode tentar usar essa magia para conseguir revelações, visões ou mensagens decididas pelo mestre, e não perde o xpm gasto caso falhe."
             },
@@ -875,6 +934,7 @@
               "level": 5,
               "combat": true,
               "cost": "2 Con/uso",
+              "spellbrief_item": "Permite voar com velocidade igual a D.",
               "tags": ["movimento", "aereo", "utilidade"],
               "description": "Sucesso em embate de S permite que o conjurador voe, deslocando-se a uma velocidade e altura equivalentes a D até o fim do combate ou da cena. Ele pode carregar o que sua F permitir e, se for atingido, cairá imediatamente."
             },
@@ -886,6 +946,7 @@
               "level": 5,
               "combat": true,
               "cost": "6 xpm e 3 Con/servo",
+              "spellbrief_item": "Invoca um servo que pode usar ferramentas.",
               "tags": ["invocacao", "controle", "utilidade"],
               "description": "F3 (contusão, 1d2) V2 D2 A3 I2 S3. Uma criatura de pouco mais de um metro, feita de escuridão pura, coberta por um manto branco e dourado e com um olho no centro do capuz. Consegue usar armas, mas não armaduras. Flutua na altura das pessoas, mas sofre dano de queda normalmente. Não é capaz de falar e desaparece ao ser alvo de qualquer ação."
             },
@@ -897,6 +958,7 @@
               "level": 5,
               "combat": true,
               "cost": "2 Con/alvo",
+              "spellbrief_item": "1d6 de dano em cada alvo e pode deixar Caído.",
               "tags": ["dano", "controle", "vento"],
               "description": "Sucesso em embate de S faz com que uma súbita pressão esmague os alvos, causando 1d6 de dano de vento em cada um. Se falharem em testes de D, ficam Caídos."
             }
@@ -946,6 +1008,7 @@
               "school": "feiticaria",
               "level": 1,
               "combat": true,
+              "spellbrief_item": "Empurra e causa 1d6+1 de dano de contusão.",
               "cost": "1 Con/uso",
               "tags": ["dano", "contusão", "empurrão", "controle"],
               "description": "Sucesso em embate de S libera um pulso de energia que empurra um alvo 3 Esp e causa 1d6+1 de dano de contusão mágica."
@@ -958,6 +1021,7 @@
               "level": 1,
               "combat": true,
               "cost": "2 Con/uso",
+              "spellbrief_item": "Causa 1d3+2 de dano de trovão e pode anular turno do alvo.",
               "tags": ["dano", "trovão", "controle", "condição"],
               "description": "Sucesso em embate de S permite que o conjurador dispare arcos elétricos contra um alvo, causando 1d3+2 de dano de trovão mágico. O alvo deve fazer um teste de V; se falhar, seu turno seguinte será nulo."
             },
@@ -969,6 +1033,7 @@
               "level": 1,
               "combat": false,
               "cost": "1 Con/alvo",
+              "spellbrief_item": "Pode transformar alvos dispostos em objetos.",
               "tags": ["transformação", "utilidade", "furtividade"],
               "description": "O conjurador pode transformar a si mesmo ou aliados dispostos em um objeto pequeno qualquer, junto de roupas e itens. Ele poderá se mover a 1 Esp por turno. Se sofrer dano, ou se ele ou o aliado assim decidir, o efeito acaba. Não pode realizar nenhum tipo de ação além de se mover."
             },
@@ -980,6 +1045,7 @@
               "level": 1,
               "combat": true,
               "cost": "1 Con/uso",
+              "spellbrief_item": "Pode rastrear uma área por vida e outras informações.",
               "tags": ["detecção", "divinação", "utilidade"],
               "description": "O conjurador pode pressentir vida em uma área de 4xS em Esp de raio. Ele pode saber se algo está vivo ou morto; pode ter uma direção média da forma de vida (norte, sul, leste, oeste); ter uma média de quantas formas de vida estão presentes na área (de um a cinco, de cinco a dez, de dez a quinze); saber se estão paradas ou se movendo e se estão se aproximando ou se afastando. Em combate, permite revelar até dois alvos invisíveis como uma interrupção."
             },
@@ -991,6 +1057,7 @@
               "level": 1,
               "combat": true,
               "cost": "3 Con/uso",
+              "spellbrief_item": "Deixa um alvo invisível.",
               "tags": ["furtividade", "ilusão", "controle"],
               "description": "O conjurador deixa um alvo (pessoa ou objeto de até 10 Pes), ou ele próprio, invisível (desvantagem em embates e -3A em combate contra ele), junto de roupas e demais itens associados ao objeto. A magia dura até que o personagem faça ou sofra uma ação, ou se mova mais rápido que sua D-1, com mínimo de 1 em Esp (não conta se ele estiver sendo movimentado por outra coisa). Ele ainda produzirá sons e não fica intangível. Pode ser usado em combate com sucesso em embate de S."
             },
@@ -1002,6 +1069,7 @@
               "level": 1,
               "combat": false,
               "cost": "2 xpm/ídolo",
+              "spellbrief_item": "Permite mudar a aparência.",
               "tags": ["ilusão", "disfarce", "utilidade"],
               "description": "O conjurador conjura um pequeno objeto qualquer que permite que ele ou outro alvo mude sua aparência para a de outro humanoide, de roupas e até o físico, desde que seja algo que não esteja distante de suas proporções originais, levando em conta seus pertences (uma mochila de viagem não pode simplesmente sumir das costas). A magia permanece até que o conjurador seja alvo de uma ação, opte por cancelá-la ou que o objeto seja destruído ou removido de suas posses."
             },
@@ -1013,6 +1081,7 @@
               "level": 1,
               "combat": true,
               "cost": "1 xpm/uso",
+              "spellbrief_item": "Troca de lugar com um alvo disposto.",
               "tags": ["teleporte", "movimento", "controle"],
               "description": "Sucesso em embate de S permite que o conjurador distorça o tempo e o espaço para trocar de lugar dois alvos, incluindo ele próprio. Os alvos precisam estar dispostos a trocar de lugar."
             },
@@ -1024,6 +1093,7 @@
               "level": 1,
               "combat": true,
               "cost": "1 xpm e 2 Con/uso",
+              "spellbrief_item": "Permite criar ilusões de algo que o conjurador já viu.",
               "tags": ["ilusão", "utilidade", "defesa"],
               "description": "Essa magia permite recriar imagens mentais com S em metros de diâmetro a partir do personagem. O conjurador precisa ter visto as imagens que está recriando, podendo moldar sons, cheiros e gostos. Não é possível recriar nada imaginado ou sonhado. A magia dura uma cena. Em combate, pode ser usada para usar S no lugar de D em Esquivas."
             },
@@ -1035,6 +1105,7 @@
               "level": 1,
               "combat": true,
               "cost": "1 Con/uso",
+              "spellbrief_item": "Permite projetar, copiar, gravar e até redigir texto usando a voz.",
               "tags": ["comunicação", "utilidade", "controle"],
               "description": "Uma magia com várias funções. O conjurador pode projetar sua voz a 2xS de distância, podendo inclusive sussurrar no ouvido de um alvo. Pode copiar a voz de outra pessoa, ditar algo para um pergaminho e as palavras aparecerão escritas (letra em estilo padrão). Pode deixar mensagens escritas ou de voz programadas para aparecerem ou serem reproduzidas quando alguma condição for atendida. Por fim, sucesso em embate de S permite gritar contra um alvo e deixá-lo Atordoado (desvantagem em qualquer embate e -3S em combate) até o início do próximo turno do alvo."
             }
@@ -1057,6 +1128,7 @@
               "level": 3,
               "combat": true,
               "cost": "3 Con/uso",
+              "spellbrief_item": "1d6+3 de dano de fogo +1 de dano em quem estiver perto.",
               "tags": ["dano", "fogo", "elemental"],
               "description": "Sucesso em embate de S permite que o mago dispare uma rajada de fogo que dispersa fagulhas no local de impacto. Causa 1d6+3 de dano elemental de fogo mágico no alvo. Qualquer pessoa engajada com o alvo, inclusive o conjurador, sofre 1 de dano de fogo mágico. Fora de combate, o conjurador pode usar essa magia para efeitos menores sem custo em Con, como acender uma fogueira, cachimbo, tocha ou vela, ou esquentar ou ferver alimento ou bebida."
             },
@@ -1068,6 +1140,7 @@
               "level": 3,
               "combat": true,
               "cost": "2 Con/uso",
+              "spellbrief_item": "1d3+2 de dano de terra e causa restrição total.",
               "tags": ["controle", "terra", "restricao"],
               "description": "Sucesso em embate de S causa 1d3+2 de dano de terra mágica e Restrição Total (-3 Esp por turno e penalidade de -2 em testes e embates de D e F; criaturas voadoras perdem a capacidade de voar) até que o alvo tenha sucesso em teste de V ou F no início do seu turno. Fora de combate, permite moldar a superfície de rochas com as mãos sem custo em Con, mas não permite escavá-las."
             },
@@ -1079,6 +1152,7 @@
               "level": 3,
               "combat": true,
               "cost": "3 Con/uso",
+              "spellbrief_item": "Causa 1d6 de dano de gelo em uma linha reta.",
               "tags": ["dano", "gelo", "area"],
               "description": "Sucesso em embate de S causa 1d6 de dano de gelo mágico em todos os alvos em uma linha reta posicionada pelo conjurador. O tamanho máximo da linha é a S do conjurador em Esp. A linha cria um véu semitranslúcido com cores boreais até o início do próximo turno do conjurador. Qualquer um que inicie seu turno na linha ou cruze por ela sofrerá 1d3 de dano de gelo."
             },
@@ -1090,6 +1164,7 @@
               "level": 3,
               "combat": true,
               "cost": "3 Con/corda",
+              "spellbrief_item": "Invoca uma corda feita de água.",
               "tags": ["controle", "invocacao", "imobilizacao"],
               "description": "F5 (contusão, 1d3+2) (Imobilizar) V0 D0 A0 I0 S0. Sucesso em embate de S a distância permite ao conjurador gastar um gesto para invocar uma corda feita de água. Seu tamanho pode chegar a 3xS do conjurador em Esp. É mantida verbalmente e possui 3 Res; ou seja, um ataque que cause 4 de dano ou mais pode destruí-la imediatamente. Dano menor não é cumulativo e não tem efeito."
             },
@@ -1101,6 +1176,7 @@
               "level": 3,
               "combat": true,
               "cost": "2 Con/uso",
+              "spellbrief_item": "Permite atravessar paredes e anular ataques.",
               "tags": ["mobilidade", "defesa", "intangibilidade"],
               "description": "Permite que o mago atravesse superfícies de no máximo um palmo de espessura. Ele não pode ficar parado dentro desse espaço. Pode ser usado em combate como uma interrupção para anular um sucesso de um inimigo em um embate contra o conjurador, fazendo com que seu golpe, ataque ou magia o atravesse. Ele pode usar essa magia com aliados ou objetos caso consiga tocá-los."
             },
@@ -1112,6 +1188,7 @@
               "level": 3,
               "combat": false,
               "cost": "1 xpm/mariposa",
+              "spellbrief_item": "Invoca uma mariposa muito veloza usada para comunicação.",
               "tags": ["invocacao", "comunicacao", "utilidade"],
               "description": "F0 V0 D10 A0 I0 S0. Uma pequena mariposa feita de material dos sonhos. Essa mariposa se desloca com grande velocidade e pode se teletransportar distâncias de 10 Esp para lugares que possa enxergar com sucesso em embate de D. O conjurador pode usá-la para reproduzir mensagens visuais (formadas por um pó que ela libera) e auditivas previamente gravadas, ou pode invocar mais de uma e usá-las como comunicadores colocando-as em algum lugar da cabeça. O alcance máximo, quando usadas como comunicadores, é de 1 km, aproximadamente a área de um bairro."
             },
@@ -1123,6 +1200,7 @@
               "level": 3,
               "combat": false,
               "cost": "2 Con/uso",
+              "spellbrief_item": "Permite entender intenções e sentimentos.",
               "tags": ["comunicacao", "utilidade", "mental"],
               "description": "Se o personagem for bem-sucedido em um teste de I, essa magia permite captar intenções e sentimentos superficiais e transformá-los em linguagem compreensível durante uma cena. O conjurador consegue se comunicar com sua S em alvos livremente, mesmo que não falem a mesma língua. Funciona com pessoas, animais e plantas, mas não funciona com monstros, seres confusos, controlados por terceiros ou que não possuam sentimentos."
             }
@@ -1145,6 +1223,7 @@
               "level": 5,
               "combat": true,
               "cost": "3 Con/uso",
+              "spellbrief_item": "Cria um buraco negro arrastando alvos e causando 1d6 de dano de vento em área.",
               "tags": ["area", "controle", "dano", "vento"],
               "description": "Sucesso em embate de S permite que o conjurador crie um pequeno buraco negro dentro do alcance da sua S. Ele ocupa 1 Esp e todos que iniciarem seu turno dentro de um raio de 1 Esp da esfera irão sofrer 1d6 de dano de vento mágico. Todos os alvos a até 2 Esp precisam fazer um teste de F ou V no início dos seus turnos para não serem arrastados 1 Esp para a sua direção."
             },
@@ -1156,6 +1235,7 @@
               "level": 5,
               "combat": true,
               "cost": "1 espaço de contato e 12 xpm/golem, +4 xpm/+1 em uma característica até o limite de +4 pontos, sendo que apenas +2 podem ser postos na mesma característica. A D é a única que não pode ser maior que 2",
+              "spellbrief_item": "Permite construir um golem.",
               "tags": ["invocacao", "criatura", "controle"],
               "description": "F2 (contusão, 1d6) V2 D2 A2 I2 S2. Uma criatura que parece uma armadura, oca e feita principalmente de argila. Recebe +1 em uma característica qualquer para cada 4 xpm extra. Não pode usar armaduras e armas."
             },
@@ -1167,6 +1247,7 @@
               "level": 5,
               "combat": false,
               "cost": "5 Con/magia",
+              "spellbrief_item": "Concede um uso de uma magia a um alvo.",
               "tags": ["suporte", "utilidade", "transferencia"],
               "description": "Concede a um alvo um uso de uma magia qualquer que o conjurador conheça. Se a magia possuir um custo em xpm, o conjurador deve dar a ele o xpm necessário para a realização da magia. Após ceder um ou mais usos de uma ou mais magias a um alvo, só é possível dar mais magias para o mesmo ou outros alvos após a primeira leva ter sido usada por completo."
             },
@@ -1178,6 +1259,7 @@
               "level": 5,
               "combat": false,
               "cost": "30 xpm e 10 Con/criação do espaço, 2 Con/abrir portal.",
+              "spellbrief_item": "Permite criar uma dimensão paralela.",
               "tags": ["dimensao", "utilidade", "controle"],
               "description": "O conjurador pode abrir um portal para o centro de uma dimensão paralela de 20 Esp, onde ele pode armazenar o que quiser levar para lá. Uma vez lá dentro, o conjurador pode fechar o portal, mas só poderá reabri-lo no mesmo lugar onde entrou. É possível prender pessoas lá dentro, mas conjuradores que conhecem essa magia podem forçar a saída, reabrindo o portal no último lugar onde ele foi fechado. Essa magia não pode ser cancelada de nenhuma forma após o espaço ser criado."
             },
@@ -1189,6 +1271,7 @@
               "level": 5,
               "combat": true,
               "cost": "3 Con/uso",
+              "spellbrief_item": "Permite mover, atacar e arremessar objetos e pessoas.",
               "tags": ["controle", "dano", "movimento"],
               "description": "Sucesso em embate de S a distância permite, por uma cena ou combate, que o conjurador mova, ataque (contusão, 1d6) e arremesse objetos e pessoas como se tivesse F6 e D6, podendo inclusive fazê-lo a distância."
             }

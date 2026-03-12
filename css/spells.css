@@ -214,8 +214,8 @@
 
 .spell-name {
   font-weight: bold;
-  color: var(--gold);
   font-size: 1.1rem;
+  color: var(--gold);
   margin-bottom: 0.5rem;
   font-family: 'Cinzel', serif;
 }
@@ -253,6 +253,22 @@
 .spell-item.empty-state:hover {
   transform: none;
   border-color: rgba(212,175,55,0.15);
+}
+
+.spell-brief {
+  margin: 0;
+  font-size: 0.9em;
+  color: white;
+  line-height: 1.4;
+  font-weight: normal;
+  font-size: 0.3 rem;
+  font-family: 'Crimson Text', serif;
+  /* Limita o texto a 3 linhas com ellipsis */
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .spells-loading {

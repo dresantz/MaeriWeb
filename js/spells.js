@@ -201,11 +201,16 @@ const SpellsManager = (function() {
     li.setAttribute('data-spell-id', spell.id || spell.name);
     
     li.innerHTML = `
-      <div class="spell-name">${escapeHtml(spell.name)}</div>
+      <div class="spell-name">
+        ${escapeHtml(spell.name)}
+              <p class="spell-brief">${escapeHtml(spell.spellbrief_item || 'Descrição não disponível')}</p>
+      </div>
+
       <div class="spell-meta">
         <span>${escapeHtml(spell.school)}</span>
         <span>Nível ${spell.level}</span>
       </div>
+
     `;
     
     li.addEventListener('click', (e) => {
