@@ -134,3 +134,10 @@ self.addEventListener('activate', event => {
     })
   );
 });
+
+// Escuta mensagens do frontend para pular a espera
+self.addEventListener('message', (event) => {
+  if (event.data === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});

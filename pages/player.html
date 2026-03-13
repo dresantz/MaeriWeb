@@ -210,17 +210,8 @@
     }
   </script>
 
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
-          console.log('ServiceWorker registrado com sucesso: ', registration.scope);
-        }, function(err) {
-          console.log('Falha no registro do ServiceWorker: ', err);
-        });
-      });
-    }
-  </script>
+  <!-- Registrar Service Worker para PWA -->
+  <script src="../js/pwa-update.js"></script>
 
 </body>
 </html>
