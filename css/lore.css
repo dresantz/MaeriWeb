@@ -168,6 +168,8 @@
   color: var(--bg-dark);
   border: 3px solid var(--lore-accent-light);
   box-shadow: var(--lore-glow);
+  aspect-ratio: 1 / 1;
+  flex-shrink: 0;
 }
 
 .author-info h3 {
