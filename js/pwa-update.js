@@ -154,7 +154,7 @@
   window.addEventListener('load', () => {
     console.log('📜 PWA Update: Página carregada, registrando...');
     
-    navigator.serviceWorker.register('/service-worker.js')
+    navigator.serviceWorker.register('./service-worker.js')
       .then(registration => {
         console.log('📜 Maeri RPG: ServiceWorker registrado', registration.scope);
 
