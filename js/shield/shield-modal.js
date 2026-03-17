@@ -1,6 +1,9 @@
 // js/shield/shield-modal.js
 import { RULEBOOK_CHAPTERS } from '../rulebook/constants.js';
 
+// Adiciona detecção do BASE_PATH
+const BASE_PATH = window.BASE_PATH || (window.location.hostname.includes('github.io') ? '/maeri/' : '/');
+
 const modal = document.getElementById('shield-modal');
 const modalTitle = document.getElementById('shield-modal-title');
 const modalBody = document.getElementById('shield-modal-body');
@@ -33,11 +36,18 @@ async function loadAllChapters() {
   
   const fetchPromises = RULEBOOK_CHAPTERS.map(async (chapter) => {
     try {
-      const response = await fetch(`../../data/rulebook/${chapter.file}`)
+      // CORRIGIDO: Adicionado BASE_PATH ao caminho do arquivo
+      const response = await fetch(`${BASE_PATH}data/rulebook/${chapter.file}`);
+      
+      // Adiciona verificação de erro na resposta
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status} - ${chapter.file}`);
+      }
+      
       const data = await response.json();
       allData.sections.push(...(data.sections || []));
     } catch (e) {
-      console.warn(`Erro ao carregar ${chapter.file}:`, e);
+      console.warn(`Erro ao carregar ${chapter.file}:`, e.message);
     }
   });
   
