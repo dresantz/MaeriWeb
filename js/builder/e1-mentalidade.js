@@ -20,7 +20,6 @@ class MentalidadeManager {
         <div class="mentalidade-table-container">
           <table class="mentalidade-table">
             <thead>
-              65e
                 <th>Mentalidade</th>
                 <th>CF</th>
                 <th>CM</th>
