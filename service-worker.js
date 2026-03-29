@@ -1,4 +1,4 @@
-const CACHE_NAME = 'maeri-rpg-v3';
+const CACHE_NAME = 'maeri-rpg-v4';
 
 // Detecta automaticamente se está no GitHub Pages
 const BASE_PATH = self.location.pathname.includes('/maeri/') 
