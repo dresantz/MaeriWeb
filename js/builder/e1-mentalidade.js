@@ -46,7 +46,7 @@ class MentalidadeManager {
             <p><strong>Con = S + I + Mentalidade</strong></p>
           </div>
           
-          <p>Aspectos são usados para adquirir um Estudo, uma Técnica Marcial ou um Estudo Mágico, que poderão ser escolhidos na Etapa 2.</p>
+          <p>Cada ponto de Aspecto permite adquirir ou um Estudo, ou uma Técnica Marcial, ou um Estudo Mágico, que poderão ser escolhidos na Etapa 2.</p>
         </div>
       </div>
     `;
