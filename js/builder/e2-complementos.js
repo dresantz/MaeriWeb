@@ -47,8 +47,9 @@ class ComplementosManager {
 
         <!-- Seção de Estudos -->
         <div class="estudos-section" id="estudos-section">
-          <p class="estudos-intro">Escolha onde gastar Aspectos</p>
+          <p class="estudos-intro">Escolha onde gastar Aspectos:</p>
           <p class="estudos-subtitle">Estudos</p>
+            <p class="estudos-subtitle">Um personagem pode ter sua S em Conhecimentos, que são cumulativos com magia, pois também contam como conhecimentos</p>
           
           <div class="estudos-buttons" id="estudos-buttons-container">
             <div class="loading-state">
@@ -70,7 +71,7 @@ class ComplementosManager {
         <!-- Seção de Técnicas Marciais -->
         <div class="tecnicas-section" id="tecnicas-section">
           <p class="tecnicas-subtitle">Técnicas Marciais</p>
-              <p class="magias-subtitle">Exige que um dos seus Contatos seja um Mestre</p>
+              <p class="magias-subtitle">Exige que um dos seus Contatos seja um Mestre.</p>
           
           <div class="tecnicas-buttons" id="tecnicas-buttons-container">
             <div class="loading-state">
@@ -88,7 +89,7 @@ class ComplementosManager {
         <!-- Seção de Estudos Mágicos -->
         <div class="magias-section" id="magias-section">
           <p class="magias-subtitle">Estudos Mágicos</p>
-              <p class="magias-subtitle">É preciso adquirir Neófita antes de poder adquirir as demais</p>
+              <p class="magias-subtitle">Antes de poder adquirir Bruxaria, Divinação ou Feitiçaria, é obrigatório adquirir Neófita antes. Um personagem pode conhecer sua S em magias.</p>
           
           <div class="magias-buttons" id="magias-buttons-container">
             <div class="loading-state">
