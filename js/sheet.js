@@ -144,6 +144,7 @@ const SheetManager = (function() {
         arquetipo: modal.querySelector('#arquetipo')?.value || '',
         motivacao: modal.querySelector('#motivacao')?.value || '',
         disposicao: modal.querySelector('#disposicao')?.value || '',
+        segredos: modal.querySelector('#segredo')?.value || '',
         historia: modal.querySelector('#historia')?.value || '',
         contatos: modal.querySelector('#contatos')?.value || ''
       },
@@ -216,6 +217,7 @@ const SheetManager = (function() {
       setFieldValue('#arquetipo', data.narrativa.arquetipo);
       setFieldValue('#motivacao', data.narrativa.motivacao);
       setFieldValue('#disposicao', data.narrativa.disposicao);
+      setFieldValue('#segredo', data.narrativa.segredos);
       setFieldValue('#historia', data.narrativa.historia);
       setFieldValue('#contatos', data.narrativa.contatos);
     }
