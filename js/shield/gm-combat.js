@@ -5,6 +5,13 @@ export class GMCombat {
     this.combatOrder = [];
     this.selectedItemId = null;
     this.confirmationActive = false;
+    this.tokenSize = 80;
+    this.gridMode = true;
+    // Cores fixas
+    this.npcColor = '#8B0000'; // Vermelho escuro para NPCs
+    this.playerColor = '#1a6b3c'; // Verde escuro para Jogadores
+    // Para o sistema de troca
+    this.swapSourceId = null;
   }
 
   init() {
@@ -14,15 +21,22 @@ export class GMCombat {
   }
 
   setupCombat() {
-    const startBtn = document.getElementById('combat-start');
-    const nextBtn = document.getElementById('combat-next');
     const removeSelectedBtn = document.getElementById('combat-remove-selected');
     const removeAllBtn = document.getElementById('combat-remove-all');
+    const toggleViewBtn = document.getElementById('combat-toggle-view');
 
-    startBtn?.addEventListener('click', () => this.startCombat());
-    nextBtn?.addEventListener('click', () => this.nextTurn());
     removeSelectedBtn?.addEventListener('click', () => this.showRemoveConfirmation('selected'));
     removeAllBtn?.addEventListener('click', () => this.showRemoveConfirmation('all'));
+    toggleViewBtn?.addEventListener('click', () => this.toggleView());
+  }
+
+  toggleView() {
+    this.gridMode = !this.gridMode;
+    this.renderCombatOrder();
+    const btn = document.getElementById('combat-toggle-view');
+    if (btn) {
+      btn.textContent = this.gridMode ? '📋 Ver Lista' : '🗺️ Ver Tokens';
+    }
   }
 
   showRemoveConfirmation(type) {
@@ -134,35 +148,117 @@ export class GMCombat {
   }
 
   setupSelectionHandler() {
-    const container = document.getElementById('combat-order');
-    if (!container) return;
+  const container = document.getElementById('combat-order');
+  if (!container) return;
 
-    container.addEventListener('click', (e) => {
-      if (this.confirmationActive) return;
+  container.addEventListener('click', (e) => {
+    if (this.confirmationActive) return;
 
-      const item = e.target.closest('.gmnotes-combat-item');
-      if (!item) return;
+    // Verifica se clicou em um token ou item da lista
+    const item = e.target.closest('.gmnotes-combat-token, .gmnotes-combat-item');
+    if (!item) return;
 
-      const clickedId = item.dataset.combatId;
-      
-      if (this.selectedItemId === clickedId) {
+    // Verifica se clicou em um botão de stat - não faz nada
+    if (e.target.closest('.gmnotes-token-stat-btn, .gmnotes-combat-stat-btn')) {
+      return;
+    }
+
+    // Verifica se clicou em um botão de navegação (setas)
+    if (e.target.closest('.gmnotes-token-nav-btn')) {
+      return; // Não faz nada, só exibe visualmente
+    }
+
+    const clickedId = item.dataset.combatId;
+    
+    // Sistema de troca de posição
+    if (this.swapSourceId) {
+      // Se já tem um token selecionado para troca
+      if (this.swapSourceId === clickedId) {
+        // Clicou no mesmo token - cancela a troca e a seleção
+        this.clearSwapMode();
         this.clearSelection();
-      } else {
-        this.selectItem(clickedId, item);
+        this.parent.updateStatus('Seleção cancelada');
+        this.renderCombatOrder();
+        return;
       }
       
-      e.stopPropagation();
+      // Troca os tokens de lugar
+      this.swapTokens(this.swapSourceId, clickedId);
+      this.clearSwapMode();
+      
+      // LIMPA A SELEÇÃO - nenhum token fica selecionado após a troca
+      this.clearSelection();
+      this.renderCombatOrder();
+      this.parent.updateStatus('Troca realizada');
+      return;
+    }
+    
+    // Seleção normal (primeiro clique)
+    if (this.selectedItemId === clickedId) {
+      this.clearSelection();
+      this.clearSwapMode();
+      this.parent.updateStatus('Seleção cancelada');
+      this.renderCombatOrder();
+    } else {
+      // Limpa seleção anterior
+      if (this.selectedItemId) {
+        const prev = document.querySelector(`.gmnotes-combat-token[data-combat-id="${this.selectedItemId}"], .gmnotes-combat-item[data-combat-id="${this.selectedItemId}"]`);
+        prev?.classList.remove('selected');
+        prev?.classList.remove('swap-source');
+      }
+      
+      this.selectedItemId = clickedId;
+      this.swapSourceId = clickedId;
+      item.classList.add('selected');
+      item.classList.add('swap-source');
+      
+      this.parent.updateStatus(`Clique em outro token para trocar com ${this.combatOrder.find(i => i.id === clickedId)?.name}`);
+      this.renderCombatOrder();
+    }
+    
+    e.stopPropagation();
+  });
+}
+
+  swapTokens(id1, id2) {
+    const index1 = this.combatOrder.findIndex(i => i.id === id1);
+    const index2 = this.combatOrder.findIndex(i => i.id === id2);
+    
+    if (index1 === -1 || index2 === -1) return;
+    
+    // Troca os elementos no array
+    [this.combatOrder[index1], this.combatOrder[index2]] = [this.combatOrder[index2], this.combatOrder[index1]];
+    
+    // Pega os nomes para a mensagem
+    const name1 = this.combatOrder[index1].name;
+    const name2 = this.combatOrder[index2].name;
+    
+    this.renderCombatOrder();
+    this.parent.saveToStorage();
+    this.parent.updateStatus(`${name1} ↔ ${name2} trocados`);
+  }
+
+  clearSwapMode() {
+    this.swapSourceId = null;
+    // Remove o destaque de swap de todos os tokens
+    document.querySelectorAll('.gmnotes-combat-token, .gmnotes-combat-item').forEach(el => {
+      el.classList.remove('swap-source');
     });
   }
 
   selectItem(id, element) {
+    // Remove seleção anterior
     if (this.selectedItemId) {
-      const prev = document.querySelector(`.gmnotes-combat-item[data-combat-id="${this.selectedItemId}"]`);
+      const prev = document.querySelector(`.gmnotes-combat-token[data-combat-id="${this.selectedItemId}"], .gmnotes-combat-item[data-combat-id="${this.selectedItemId}"]`);
       prev?.classList.remove('selected');
+      prev?.classList.remove('swap-source');
     }
     
     this.selectedItemId = id;
+    this.swapSourceId = id;
     element.classList.add('selected');
+    element.classList.add('swap-source');
+    this.parent.updateStatus(`Clique em outro token para trocar com ${this.combatOrder.find(i => i.id === id)?.name}`);
   }
 
   setupClickOutsideHandler() {
@@ -174,6 +270,9 @@ export class GMCombat {
       
       if (this.selectedItemId && combatList && !combatList.contains(e.target) && !confirmationBox) {
         this.clearSelection();
+        this.clearSwapMode();
+        this.parent.updateStatus('Seleção cancelada');
+        this.renderCombatOrder(); // <-- ADICIONADO: força a re-renderização para remover as setas
       }
     });
   }
@@ -181,9 +280,10 @@ export class GMCombat {
   clearSelection() {
     if (!this.selectedItemId) return;
     
-    const prev = document.querySelector(`.gmnotes-combat-item[data-combat-id="${this.selectedItemId}"]`);
+    const prev = document.querySelector(`.gmnotes-combat-token[data-combat-id="${this.selectedItemId}"], .gmnotes-combat-item[data-combat-id="${this.selectedItemId}"]`);
     prev?.classList.remove('selected');
     this.selectedItemId = null;
+    this.clearSwapMode();
   }
 
   updateCombatButtons() {
@@ -193,7 +293,10 @@ export class GMCombat {
 
   removeFromCombatById(id) {
     this.combatOrder = this.combatOrder.filter(item => item.id !== id);
-    if (this.selectedItemId === id) this.clearSelection();
+    if (this.selectedItemId === id) {
+      this.clearSelection();
+      this.clearSwapMode();
+    }
     this.renderCombatOrder();
     this.updateCombatButtons();
   }
@@ -209,12 +312,11 @@ export class GMCombat {
         id: npc.id,
         name: npc.name,
         type: 'npc',
-        initiative: 1,
         vit: npc.vitCurrent,
         vitMax: npc.vitMax,
         con: npc.conCurrent || 0,
         conMax: npc.conMax || 0,
-        condition: 'normal'
+        color: this.npcColor
       });
 
       this.renderCombatOrder();
@@ -235,8 +337,7 @@ export class GMCombat {
         id: player.id,
         name: player.name,
         type: 'player',
-        initiative: 1,
-        condition: 'normal'
+        color: this.playerColor
       });
 
       this.renderCombatOrder();
@@ -244,66 +345,6 @@ export class GMCombat {
       this.parent.saveToStorage();
       this.parent.updateStatus(`${player.name} adicionado`);
     }
-  }
-
-  getConditionOptions(currentCondition) {
-    const conditionGroups = [
-      {
-        label: 'Estado Básico',
-        options: [{ value: 'normal', label: 'Normal' }]
-      },
-      {
-        label: 'Condições Graves',
-        options: [
-          { value: 'inconsciente', label: 'Inconsciente' },
-          { value: 'paralisado', label: 'Paralisado' }
-        ]
-      },
-      {
-        label: 'Estado Físico',
-        options: [
-          { value: 'envenenado', label: 'Envenenado' },
-          { value: 'cansado', label: 'Cansado' },
-          { value: 'exausto', label: 'Exausto' }
-        ]
-      },
-      {
-        label: 'Sentidos',
-        options: [
-          { value: 'cego', label: 'Cego' },
-          { value: 'silenciado', label: 'Silenciado' }
-        ]
-      },
-      {
-        label: 'Movimento',
-        options: [
-          { value: 'caido', label: 'Caído' },
-          { value: 'restringido', label: 'Restringido' },
-          { value: 'escorregadio', label: 'Escorregadio' },
-          { value: 'submerso', label: 'Submerso' }
-        ]
-      },
-      {
-        label: 'Estado Mental',
-        options: [
-          { value: 'atordoado', label: 'Atordoado' },
-          { value: 'amedrontado', label: 'Amedrontado' },
-          { value: 'aterrorizado', label: 'Aterrorizado' },
-          { value: 'confuso', label: 'Confuso' },
-          { value: 'encantado', label: 'Encantado' }
-        ]
-      }
-    ];
-
-    return conditionGroups.map(group => `
-      <optgroup label="${group.label}" style="font-weight: bold; color: var(--gold); background: var(--surface-light);">
-        ${group.options.map(opt => `
-          <option value="${opt.value}" ${currentCondition === opt.value ? 'selected' : ''}>
-            ${opt.label}
-          </option>
-        `).join('')}
-      </optgroup>
-    `).join('');
   }
 
   renderCombatOrder() {
@@ -315,40 +356,91 @@ export class GMCombat {
       return;
     }
 
-    const sorted = [...this.combatOrder].sort((a, b) => a.initiative - b.initiative);
-
-    container.innerHTML = sorted.map(item => `
-      <div class="gmnotes-combat-item ${item.id === this.selectedItemId ? 'selected' : ''}" 
-           data-combat-id="${item.id}">
-        <div class="gmnotes-combat-name">${this.parent.escapeHtml(item.name)}</div>
-        
-        <div class="gmnotes-combat-controls-row">
-          ${this.renderInitiativeControl(item)}
-          ${this.renderConditionControl(item)}
-        </div>
-        
-        ${item.type === 'npc' ? this.renderNPCStats(item) : ''}
-      </div>
-    `).join('');
+    if (this.gridMode) {
+      container.className = 'gmnotes-combat-grid';
+      container.innerHTML = this.combatOrder.map(item => this.renderToken(item)).join('');
+    } else {
+      container.className = 'gmnotes-combat-list';
+      container.innerHTML = this.combatOrder.map(item => this.renderListItem(item)).join('');
+    }
   }
 
-  renderInitiativeControl(item) {
+  renderToken(item) {
+    const isSelected = item.id === this.selectedItemId;
+    const isSwapSource = item.id === this.swapSourceId;
+    const color = item.type === 'npc' ? this.npcColor : this.playerColor;
+
     return `
-      <div class="gmnotes-combat-initiative">
-        <input type="number" class="gmnotes-combat-initiative-input" 
-               value="${item.initiative}" min="1" max="99" 
-               onchange="gmNotes.updateCombatInitiative('${item.id}', this.value)">
+      <div class="gmnotes-combat-token ${isSelected ? 'selected' : ''} ${isSwapSource ? 'swap-source' : ''}"
+          data-combat-id="${item.id}"
+          style="border-color: ${color}">
+        
+        <div class="gmnotes-token-header" style="background: ${color}">
+          <div class="gmnotes-token-name">${this.parent.escapeHtml(item.name)}</div>
+          <div class="gmnotes-token-type">${item.type === 'npc' ? '⚔️' : '👤'}</div>
+        </div>
+
+        <div class="gmnotes-token-body">
+          ${item.type === 'npc' ? this.renderTokenStats(item) : ''}
+        </div>
+
+        <!-- Botões de navegação - aparecem apenas quando selecionado -->
+        ${isSelected ? `
+          <div class="gmnotes-token-nav">
+            <button class="gmnotes-token-nav-btn">◀</button>
+            <button class="gmnotes-token-nav-btn">▶</button>
+          </div>
+        ` : ''}
       </div>
     `;
   }
 
-  renderConditionControl(item) {
+  renderTokenStats(item) {
     return `
-      <div class="gmnotes-combat-status">
-        <select class="gmnotes-combat-condition" 
-                onchange="gmNotes.updateCombatCondition('${item.id}', this.value)">
-          ${this.getConditionOptions(item.condition)}
-        </select>
+      <div class="gmnotes-token-stats">
+        <div class="gmnotes-token-stat">
+          <span class="gmnotes-token-stat-label">Vit</span>
+          <div class="gmnotes-token-stat-control">
+            <button class="gmnotes-token-stat-btn" onclick="gmNotes.adjustCombatVit('${item.id}', -1)">-</button>
+            <span class="gmnotes-token-stat-value">
+              <span class="gmnotes-token-stat-current">${item.vit}</span>/
+              <span class="gmnotes-token-stat-max">${item.vitMax}</span>
+            </span>
+            <button class="gmnotes-token-stat-btn" onclick="gmNotes.adjustCombatVit('${item.id}', 1)">+</button>
+          </div>
+        </div>
+        <div class="gmnotes-token-stat">
+          <span class="gmnotes-token-stat-label">Con</span>
+          <div class="gmnotes-token-stat-control">
+            <button class="gmnotes-token-stat-btn" onclick="gmNotes.adjustCombatCon('${item.id}', -1)">-</button>
+            <span class="gmnotes-token-stat-value">
+              <span class="gmnotes-token-stat-current">${item.con || 0}</span>/
+              <span class="gmnotes-token-stat-max">${item.conMax || 0}</span>
+            </span>
+            <button class="gmnotes-token-stat-btn" onclick="gmNotes.adjustCombatCon('${item.id}', 1)">+</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  renderListItem(item) {
+    const isSelected = item.id === this.selectedItemId;
+    const isSwapSource = item.id === this.swapSourceId;
+
+    return `
+      <div class="gmnotes-combat-item ${isSelected ? 'selected' : ''} ${isSwapSource ? 'swap-source' : ''}" 
+           data-combat-id="${item.id}">
+        <div class="gmnotes-combat-name">${this.parent.escapeHtml(item.name)}</div>
+        <div class="gmnotes-combat-type">${item.type === 'npc' ? '⚔️ NPC' : '👤 Jogador'}</div>
+        ${item.type === 'npc' ? this.renderNPCStats(item) : ''}
+        <!-- Botões de navegação - aparecem apenas quando selecionado -->
+        ${isSelected ? `
+          <div class="gmnotes-token-nav">
+            <button class="gmnotes-token-nav-btn">◀</button>
+            <button class="gmnotes-token-nav-btn">▶</button>
+          </div>
+        ` : ''}
       </div>
     `;
   }
@@ -408,44 +500,6 @@ export class GMCombat {
     this.parent.saveToStorage();
   }
 
-  updateCombatInitiative(combatId, value) {
-    const item = this.combatOrder.find(i => i.id === combatId);
-    if (!item) return;
-
-    item.initiative = Math.min(99, parseInt(value) || 1);
-    this.renderCombatOrder();
-    this.parent.saveToStorage();
-  }
-
-  updateCombatCondition(combatId, condition) {
-    const item = this.combatOrder.find(i => i.id === combatId);
-    if (!item) return;
-
-    item.condition = condition;
-    this.parent.saveToStorage();
-  }
-
-  startCombat() {
-    if (this.combatOrder.length === 0) return;
-    
-    document.querySelectorAll('.gmnotes-combat-item').forEach((item, index) => {
-      item.classList.toggle('active-turn', index === 0);
-    });
-    this.parent.updateStatus('Combate iniciado!');
-  }
-
-  nextTurn() {
-    const items = document.querySelectorAll('.gmnotes-combat-item');
-    if (items.length === 0) return;
-    
-    const activeIndex = Array.from(items).findIndex(item => item.classList.contains('active-turn'));
-    
-    items.forEach(item => item.classList.remove('active-turn'));
-    
-    const nextIndex = activeIndex < items.length - 1 ? activeIndex + 1 : 0;
-    items[nextIndex].classList.add('active-turn');
-  }
-
   loadFromStorage(data) {
     this.combatOrder = (data.combatOrder || []).map(item => {
       if (item.type === 'npc') {
@@ -456,14 +510,19 @@ export class GMCombat {
             vit: npc.vitCurrent,
             vitMax: npc.vitMax,
             con: npc.conCurrent || 0,
-            conMax: npc.conMax || 0
+            conMax: npc.conMax || 0,
+            color: this.npcColor
           };
         }
       }
-      return item;
+      return {
+        ...item,
+        color: this.playerColor
+      };
     });
     
     this.clearSelection();
+    this.clearSwapMode();
     
     setTimeout(() => {
       this.renderCombatOrder();
