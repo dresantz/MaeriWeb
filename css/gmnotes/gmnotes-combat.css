@@ -604,3 +604,43 @@
   transform: none !important;
   box-shadow: none !important;
 }
+
+/* Checkbox de ação */
+.gmnotes-token-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #7B2FBE;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.gmnotes-token-checkbox:checked {
+  accent-color: #4CAF50;
+}
+
+/* Ajuste no header do token */
+.gmnotes-token-header {
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  gap: 8px;
+}
+
+.gmnotes-token-name {
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.gmnotes-token-type {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}

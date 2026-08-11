@@ -189,6 +189,15 @@ export class GMCombat {
       const item = e.target.closest('.gmnotes-combat-token, .gmnotes-combat-item');
       if (!item) return;
 
+      // Verifica se clicou em um checkbox
+      const checkbox = e.target.closest('.gmnotes-token-checkbox');
+      if (checkbox) {
+        const tokenId = checkbox.dataset.tokenId;
+        this.toggleTokenAction(tokenId);
+        e.stopPropagation(); // Impede a seleção do token
+        return;
+      }
+
       // Verifica se clicou em um botão de navegação (setas)
       const navBtn = e.target.closest('.gmnotes-token-nav-btn');
       if (navBtn) {
@@ -324,7 +333,8 @@ export class GMCombat {
         vitMax: npc.vitMax,
         con: npc.conCurrent || 0,
         conMax: npc.conMax || 0,
-        color: this.npcColor
+        color: this.npcColor,
+        hasActed: false // <-- ADICIONADO
       });
 
       this.renderCombatOrder();
@@ -345,7 +355,8 @@ export class GMCombat {
         id: player.id,
         name: player.name,
         type: 'player',
-        color: this.playerColor
+        color: this.playerColor,
+        hasActed: false // <-- ADICIONADO
       });
 
       this.renderCombatOrder();
@@ -389,7 +400,12 @@ export class GMCombat {
         
         <div class="gmnotes-token-header" style="background: ${color}">
           <div class="gmnotes-token-name">${this.parent.escapeHtml(item.name)}</div>
-          <div class="gmnotes-token-type">${item.type === 'npc' ? '⚔️' : '👤'}</div>
+          <div class="gmnotes-token-type">
+            <input type="checkbox" class="gmnotes-token-checkbox" 
+                  data-token-id="${item.id}"
+                  ${item.hasActed ? 'checked' : ''}
+                  title="Ação realizada">
+          </div>
         </div>
 
         <div class="gmnotes-token-body">
@@ -455,9 +471,14 @@ export class GMCombat {
 
     return `
       <div class="gmnotes-combat-item ${isSelected ? 'selected' : ''} ${isSwapSource ? 'swap-source' : ''}" 
-           data-combat-id="${item.id}">
+          data-combat-id="${item.id}">
         <div class="gmnotes-combat-name">${this.parent.escapeHtml(item.name)}</div>
-        <div class="gmnotes-combat-type">${item.type === 'npc' ? '⚔️ NPC' : '👤 Jogador'}</div>
+        <div class="gmnotes-combat-type">
+          <input type="checkbox" class="gmnotes-token-checkbox" 
+                data-token-id="${item.id}"
+                ${item.hasActed ? 'checked' : ''}
+                title="Ação realizada">
+        </div>
         ${item.type === 'npc' ? this.renderNPCStats(item) : ''}
         ${isSelected ? `
           <div class="gmnotes-token-nav">
@@ -504,6 +525,22 @@ export class GMCombat {
     `;
   }
 
+  toggleTokenAction(tokenId) {
+    const item = this.combatOrder.find(i => i.id === tokenId);
+    if (!item) return;
+
+    item.hasActed = !item.hasActed;
+    this.parent.saveToStorage();
+    
+    // Atualiza apenas o checkbox visualmente sem re-renderizar tudo
+    const checkbox = document.querySelector(`.gmnotes-token-checkbox[data-token-id="${tokenId}"]`);
+    if (checkbox) {
+      checkbox.checked = item.hasActed;
+    }
+    
+    this.parent.updateStatus(`${item.name} ${item.hasActed ? '✅ ação realizada' : '⏳ ação pendente'}`);
+  }
+
   adjustCombatVit(combatId, change) {
     const item = this.combatOrder.find(i => i.id === combatId);
     if (item?.type !== 'npc') return;
@@ -545,13 +582,15 @@ export class GMCombat {
             vitMax: npc.vitMax,
             con: npc.conCurrent || 0,
             conMax: npc.conMax || 0,
-            color: this.npcColor
+            color: this.npcColor,
+            hasActed: item.hasActed || false // <-- ActButton
           };
         }
       }
       return {
         ...item,
-        color: this.playerColor
+        color: this.playerColor,
+        hasActed: item.hasActed || false // <-- ActButton
       };
     });
     
