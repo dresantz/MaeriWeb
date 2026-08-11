@@ -147,78 +147,108 @@ export class GMCombat {
     });
   }
 
-  setupSelectionHandler() {
-  const container = document.getElementById('combat-order');
-  if (!container) return;
+  moveToken(id, direction) {
+    const currentIndex = this.combatOrder.findIndex(item => item.id === id);
+    if (currentIndex === -1) return;
 
-  container.addEventListener('click', (e) => {
-    if (this.confirmationActive) return;
+    let newIndex;
+    let directionName;
+    
+    if (direction === 'left') {
+      newIndex = currentIndex - 1;
+      directionName = 'esquerda';
+    } else {
+      newIndex = currentIndex + 1;
+      directionName = 'direita';
+    }
 
-    // Verifica se clicou em um token ou item da lista
-    const item = e.target.closest('.gmnotes-combat-token, .gmnotes-combat-item');
-    if (!item) return;
-
-    // Verifica se clicou em um botão de stat - não faz nada
-    if (e.target.closest('.gmnotes-token-stat-btn, .gmnotes-combat-stat-btn')) {
+    if (newIndex < 0 || newIndex >= this.combatOrder.length) {
+      this.parent.updateStatus(`Token já está no ${direction === 'left' ? 'início' : 'final'} da ordem`);
       return;
     }
 
-    // Verifica se clicou em um botão de navegação (setas)
-    if (e.target.closest('.gmnotes-token-nav-btn')) {
-      return; // Não faz nada, só exibe visualmente
-    }
+    const [item] = this.combatOrder.splice(currentIndex, 1);
+    this.combatOrder.splice(newIndex, 0, item);
 
-    const clickedId = item.dataset.combatId;
-    
-    // Sistema de troca de posição
-    if (this.swapSourceId) {
-      // Se já tem um token selecionado para troca
-      if (this.swapSourceId === clickedId) {
-        // Clicou no mesmo token - cancela a troca e a seleção
+    // Mantém a seleção no token movido
+    this.selectedItemId = id;
+    this.swapSourceId = id;
+
+    this.renderCombatOrder();
+    this.parent.saveToStorage();
+    this.parent.updateStatus(`${item.name} movido para ${directionName}`);
+  }
+
+  setupSelectionHandler() {
+    const container = document.getElementById('combat-order');
+    if (!container) return;
+
+    container.addEventListener('click', (e) => {
+      if (this.confirmationActive) return;
+
+      const item = e.target.closest('.gmnotes-combat-token, .gmnotes-combat-item');
+      if (!item) return;
+
+      // Verifica se clicou em um botão de navegação (setas)
+      const navBtn = e.target.closest('.gmnotes-token-nav-btn');
+      if (navBtn) {
+        const tokenId = item.dataset.combatId;
+        const direction = navBtn.dataset.direction;
+        this.moveToken(tokenId, direction);
+        e.stopPropagation();
+        e.preventDefault();
+        return;
+      }
+
+      if (e.target.closest('.gmnotes-token-stat-btn, .gmnotes-combat-stat-btn')) {
+        return;
+      }
+
+      const clickedId = item.dataset.combatId;
+      
+      if (this.swapSourceId) {
+        if (this.swapSourceId === clickedId) {
+          this.clearSwapMode();
+          this.clearSelection();
+          this.parent.updateStatus('Seleção cancelada');
+          this.renderCombatOrder();
+          e.stopPropagation();
+          return;
+        }
+        
+        this.swapTokens(this.swapSourceId, clickedId);
         this.clearSwapMode();
         this.clearSelection();
-        this.parent.updateStatus('Seleção cancelada');
         this.renderCombatOrder();
+        this.parent.updateStatus('Troca realizada');
+        e.stopPropagation();
         return;
       }
       
-      // Troca os tokens de lugar
-      this.swapTokens(this.swapSourceId, clickedId);
-      this.clearSwapMode();
-      
-      // LIMPA A SELEÇÃO - nenhum token fica selecionado após a troca
-      this.clearSelection();
-      this.renderCombatOrder();
-      this.parent.updateStatus('Troca realizada');
-      return;
-    }
-    
-    // Seleção normal (primeiro clique)
-    if (this.selectedItemId === clickedId) {
-      this.clearSelection();
-      this.clearSwapMode();
-      this.parent.updateStatus('Seleção cancelada');
-      this.renderCombatOrder();
-    } else {
-      // Limpa seleção anterior
-      if (this.selectedItemId) {
-        const prev = document.querySelector(`.gmnotes-combat-token[data-combat-id="${this.selectedItemId}"], .gmnotes-combat-item[data-combat-id="${this.selectedItemId}"]`);
-        prev?.classList.remove('selected');
-        prev?.classList.remove('swap-source');
+      if (this.selectedItemId === clickedId) {
+        this.clearSelection();
+        this.clearSwapMode();
+        this.parent.updateStatus('Seleção cancelada');
+        this.renderCombatOrder();
+      } else {
+        if (this.selectedItemId) {
+          const prev = document.querySelector(`.gmnotes-combat-token[data-combat-id="${this.selectedItemId}"], .gmnotes-combat-item[data-combat-id="${this.selectedItemId}"]`);
+          prev?.classList.remove('selected');
+          prev?.classList.remove('swap-source');
+        }
+        
+        this.selectedItemId = clickedId;
+        this.swapSourceId = clickedId;
+        item.classList.add('selected');
+        item.classList.add('swap-source');
+        
+        this.parent.updateStatus(`Clique em outro token para trocar com ${this.combatOrder.find(i => i.id === clickedId)?.name}`);
+        this.renderCombatOrder();
       }
       
-      this.selectedItemId = clickedId;
-      this.swapSourceId = clickedId;
-      item.classList.add('selected');
-      item.classList.add('swap-source');
-      
-      this.parent.updateStatus(`Clique em outro token para trocar com ${this.combatOrder.find(i => i.id === clickedId)?.name}`);
-      this.renderCombatOrder();
-    }
-    
-    e.stopPropagation();
-  });
-}
+      e.stopPropagation();
+    });
+  }
 
   swapTokens(id1, id2) {
     const index1 = this.combatOrder.findIndex(i => i.id === id1);
@@ -226,39 +256,17 @@ export class GMCombat {
     
     if (index1 === -1 || index2 === -1) return;
     
-    // Troca os elementos no array
     [this.combatOrder[index1], this.combatOrder[index2]] = [this.combatOrder[index2], this.combatOrder[index1]];
-    
-    // Pega os nomes para a mensagem
-    const name1 = this.combatOrder[index1].name;
-    const name2 = this.combatOrder[index2].name;
     
     this.renderCombatOrder();
     this.parent.saveToStorage();
-    this.parent.updateStatus(`${name1} ↔ ${name2} trocados`);
   }
 
   clearSwapMode() {
     this.swapSourceId = null;
-    // Remove o destaque de swap de todos os tokens
     document.querySelectorAll('.gmnotes-combat-token, .gmnotes-combat-item').forEach(el => {
       el.classList.remove('swap-source');
     });
-  }
-
-  selectItem(id, element) {
-    // Remove seleção anterior
-    if (this.selectedItemId) {
-      const prev = document.querySelector(`.gmnotes-combat-token[data-combat-id="${this.selectedItemId}"], .gmnotes-combat-item[data-combat-id="${this.selectedItemId}"]`);
-      prev?.classList.remove('selected');
-      prev?.classList.remove('swap-source');
-    }
-    
-    this.selectedItemId = id;
-    this.swapSourceId = id;
-    element.classList.add('selected');
-    element.classList.add('swap-source');
-    this.parent.updateStatus(`Clique em outro token para trocar com ${this.combatOrder.find(i => i.id === id)?.name}`);
   }
 
   setupClickOutsideHandler() {
@@ -272,7 +280,7 @@ export class GMCombat {
         this.clearSelection();
         this.clearSwapMode();
         this.parent.updateStatus('Seleção cancelada');
-        this.renderCombatOrder(); // <-- ADICIONADO: força a re-renderização para remover as setas
+        this.renderCombatOrder();
       }
     });
   }
@@ -369,6 +377,10 @@ export class GMCombat {
     const isSelected = item.id === this.selectedItemId;
     const isSwapSource = item.id === this.swapSourceId;
     const color = item.type === 'npc' ? this.npcColor : this.playerColor;
+    
+    const currentIndex = this.combatOrder.findIndex(i => i.id === item.id);
+    const isFirst = currentIndex === 0;
+    const isLast = currentIndex === this.combatOrder.length - 1;
 
     return `
       <div class="gmnotes-combat-token ${isSelected ? 'selected' : ''} ${isSwapSource ? 'swap-source' : ''}"
@@ -384,11 +396,20 @@ export class GMCombat {
           ${item.type === 'npc' ? this.renderTokenStats(item) : ''}
         </div>
 
-        <!-- Botões de navegação - aparecem apenas quando selecionado -->
         ${isSelected ? `
           <div class="gmnotes-token-nav">
-            <button class="gmnotes-token-nav-btn">◀</button>
-            <button class="gmnotes-token-nav-btn">▶</button>
+            <button class="gmnotes-token-nav-btn ${isFirst ? 'disabled' : ''}" 
+                    data-direction="left"
+                    ${isFirst ? 'disabled' : ''}
+                    title="Mover para esquerda">
+              ◀
+            </button>
+            <button class="gmnotes-token-nav-btn ${isLast ? 'disabled' : ''}" 
+                    data-direction="right"
+                    ${isLast ? 'disabled' : ''}
+                    title="Mover para direita">
+              ▶
+            </button>
           </div>
         ` : ''}
       </div>
@@ -427,6 +448,10 @@ export class GMCombat {
   renderListItem(item) {
     const isSelected = item.id === this.selectedItemId;
     const isSwapSource = item.id === this.swapSourceId;
+    
+    const currentIndex = this.combatOrder.findIndex(i => i.id === item.id);
+    const isFirst = currentIndex === 0;
+    const isLast = currentIndex === this.combatOrder.length - 1;
 
     return `
       <div class="gmnotes-combat-item ${isSelected ? 'selected' : ''} ${isSwapSource ? 'swap-source' : ''}" 
@@ -434,11 +459,20 @@ export class GMCombat {
         <div class="gmnotes-combat-name">${this.parent.escapeHtml(item.name)}</div>
         <div class="gmnotes-combat-type">${item.type === 'npc' ? '⚔️ NPC' : '👤 Jogador'}</div>
         ${item.type === 'npc' ? this.renderNPCStats(item) : ''}
-        <!-- Botões de navegação - aparecem apenas quando selecionado -->
         ${isSelected ? `
           <div class="gmnotes-token-nav">
-            <button class="gmnotes-token-nav-btn">◀</button>
-            <button class="gmnotes-token-nav-btn">▶</button>
+            <button class="gmnotes-token-nav-btn ${isFirst ? 'disabled' : ''}" 
+                    data-direction="left"
+                    ${isFirst ? 'disabled' : ''}
+                    title="Mover para esquerda">
+              ◀
+            </button>
+            <button class="gmnotes-token-nav-btn ${isLast ? 'disabled' : ''}" 
+                    data-direction="right"
+                    ${isLast ? 'disabled' : ''}
+                    title="Mover para direita">
+              ▶
+            </button>
           </div>
         ` : ''}
       </div>

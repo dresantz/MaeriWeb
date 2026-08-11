@@ -567,6 +567,7 @@
 /*NOVO*/
 
 
+/* Botões de navegação - aparecem apenas quando token está selecionado */
 .gmnotes-token-nav {
   display: flex;
   gap: 8px;
@@ -592,7 +593,14 @@
   box-shadow: 0 2px 8px rgba(123, 47, 190, 0.3);
 }
 
-.gmnotes-token-nav-btn:hover {
+.gmnotes-token-nav-btn:hover:not(:disabled) {
   background: #9C4DCC;
   transform: scale(1.1);
+}
+
+.gmnotes-token-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
 }
