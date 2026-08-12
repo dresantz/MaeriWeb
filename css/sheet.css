@@ -131,6 +131,9 @@
   color: var(--gold, #d4af37);
   margin-bottom: 0.2rem;
   font-family: 'Cinzel', serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sheet-input {
@@ -345,12 +348,20 @@
   margin-bottom: 0;
 }
 
+/* Linha com 4 campos */
+.panel-row--quad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.8rem;
+}
+
 .sheet-field--half {
   flex: 1;
 }
 
-.sheet-field--third {
-  flex: 1;
+.sheet-field--quarter {
+  min-width: 0;
+  width: 100%;
 }
 
 .sheet-field--full {
@@ -720,6 +731,12 @@
 /* =========================
    RESPONSIVIDADE
 ========================= */
+@media (max-width: 768px) {
+  .panel-row--quad {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 500px) {
   .sheet-header h2 {
     font-size: 1.1rem;
@@ -747,15 +764,6 @@
   .panel-row--xp, .panel-row--limits {
     flex-direction: row;
     flex-wrap: wrap;
-  }
-
-  .panel-row--triple {
-  flex-direction: row;
-  flex-wrap: nowrap;
-  }
-  
-  .panel-row--triple .sheet-field--third {
-  min-width: 0;
   }
   
   .clear-actions {
