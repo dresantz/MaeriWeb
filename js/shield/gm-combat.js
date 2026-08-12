@@ -8,8 +8,8 @@ export class GMCombat {
     this.tokenSize = 80;
     this.gridMode = true;
     // Cores fixas
-    this.npcColor = '#8B0000'; // Vermelho escuro para NPCs
-    this.playerColor = '#1a6b3c'; // Verde escuro para Jogadores
+    this.npcColor = '#3f2020'; // Vermelho escuro para NPCs
+    this.playerColor = '#1d412a'; // Verde escuro para Jogadores
     // Para o sistema de troca
     this.swapSourceId = null;
   }
@@ -24,10 +24,12 @@ export class GMCombat {
     const removeSelectedBtn = document.getElementById('combat-remove-selected');
     const removeAllBtn = document.getElementById('combat-remove-all');
     const toggleViewBtn = document.getElementById('combat-toggle-view');
+    const resetActionsBtn = document.getElementById('combat-reset-actions');
 
     removeSelectedBtn?.addEventListener('click', () => this.showRemoveConfirmation('selected'));
     removeAllBtn?.addEventListener('click', () => this.showRemoveConfirmation('all'));
     toggleViewBtn?.addEventListener('click', () => this.toggleView());
+    resetActionsBtn?.addEventListener('click', () => this.resetAllActions());
   }
 
   toggleView() {
@@ -130,6 +132,33 @@ export class GMCombat {
     this.updateCombatButtons();
     this.parent.saveToStorage();
     this.parent.updateStatus('Ordem limpa');
+  }
+
+  resetAllActions() {
+    if (this.combatOrder.length === 0) {
+      this.parent.updateStatus('Nenhum token na ordem de combate');
+      return;
+    }
+
+    // Verifica se há algum checkbox marcado
+    const hasActed = this.combatOrder.some(item => item.hasActed === true);
+    if (!hasActed) {
+      this.parent.updateStatus('Todos os tokens já estão com ações pendentes');
+      return;
+    }
+
+    // Desmarca todos os tokens
+    this.combatOrder.forEach(item => {
+      item.hasActed = false;
+    });
+
+    // Atualiza todos os checkboxes visualmente
+    document.querySelectorAll('.gmnotes-token-checkbox').forEach(checkbox => {
+      checkbox.checked = false;
+    });
+
+    this.parent.saveToStorage();
+    this.parent.updateStatus('✅ Todas as ações foram reiniciadas');
   }
 
   setButtonsDisabled(disabled) {
