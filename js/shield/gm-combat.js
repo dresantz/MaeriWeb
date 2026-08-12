@@ -7,10 +7,8 @@ export class GMCombat {
     this.confirmationActive = false;
     this.tokenSize = 80;
     this.gridMode = true;
-    // Cores fixas
-    this.npcColor = '#3f2020'; // Vermelho escuro para NPCs
-    this.playerColor = '#1d412a'; // Verde escuro para Jogadores
-    // Para o sistema de troca
+    this.npcColor = '#3f2020';
+    this.playerColor = '#1d412a';
     this.swapSourceId = null;
   }
 
@@ -140,19 +138,16 @@ export class GMCombat {
       return;
     }
 
-    // Verifica se há algum checkbox marcado
     const hasActed = this.combatOrder.some(item => item.hasActed === true);
     if (!hasActed) {
       this.parent.updateStatus('Todos os tokens já estão com ações pendentes');
       return;
     }
 
-    // Desmarca todos os tokens
     this.combatOrder.forEach(item => {
       item.hasActed = false;
     });
 
-    // Atualiza todos os checkboxes visualmente
     document.querySelectorAll('.gmnotes-token-checkbox').forEach(checkbox => {
       checkbox.checked = false;
     });
@@ -199,7 +194,6 @@ export class GMCombat {
     const [item] = this.combatOrder.splice(currentIndex, 1);
     this.combatOrder.splice(newIndex, 0, item);
 
-    // Mantém a seleção no token movido
     this.selectedItemId = id;
     this.swapSourceId = id;
 
@@ -218,16 +212,14 @@ export class GMCombat {
       const item = e.target.closest('.gmnotes-combat-token, .gmnotes-combat-item');
       if (!item) return;
 
-      // Verifica se clicou em um checkbox
       const checkbox = e.target.closest('.gmnotes-token-checkbox');
       if (checkbox) {
         const tokenId = checkbox.dataset.tokenId;
         this.toggleTokenAction(tokenId);
-        e.stopPropagation(); // Impede a seleção do token
+        e.stopPropagation();
         return;
       }
 
-      // Verifica se clicou em um botão de navegação (setas)
       const navBtn = e.target.closest('.gmnotes-token-nav-btn');
       if (navBtn) {
         const tokenId = item.dataset.combatId;
@@ -363,7 +355,7 @@ export class GMCombat {
         con: npc.conCurrent || 0,
         conMax: npc.conMax || 0,
         color: this.npcColor,
-        hasActed: false // <-- ADICIONADO
+        hasActed: false
       });
 
       this.renderCombatOrder();
@@ -385,7 +377,7 @@ export class GMCombat {
         name: player.name,
         type: 'player',
         color: this.playerColor,
-        hasActed: false // <-- ADICIONADO
+        hasActed: false
       });
 
       this.renderCombatOrder();
@@ -561,7 +553,6 @@ export class GMCombat {
     item.hasActed = !item.hasActed;
     this.parent.saveToStorage();
     
-    // Atualiza apenas o checkbox visualmente sem re-renderizar tudo
     const checkbox = document.querySelector(`.gmnotes-token-checkbox[data-token-id="${tokenId}"]`);
     if (checkbox) {
       checkbox.checked = item.hasActed;
@@ -612,14 +603,14 @@ export class GMCombat {
             con: npc.conCurrent || 0,
             conMax: npc.conMax || 0,
             color: this.npcColor,
-            hasActed: item.hasActed || false // <-- ActButton
+            hasActed: item.hasActed || false
           };
         }
       }
       return {
         ...item,
         color: this.playerColor,
-        hasActed: item.hasActed || false // <-- ActButton
+        hasActed: item.hasActed || false
       };
     });
     
