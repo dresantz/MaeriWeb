@@ -52,7 +52,7 @@ html, body {
 
 .app-header h1 {
   color: var(--gold);
-  font-size: 2.2rem;
+  font-size: 2.6rem;
   margin-bottom: 0.4rem;
   text-shadow: 0 2px 8px rgba(212,175,55,0.3);
 }
@@ -87,7 +87,7 @@ main {
 
 /* MENU */
 .main-menu {
-  display: grid; grid-template-columns: repeat(2,1fr);
+  display: grid; grid-template-columns: repeat(4,1fr);
   gap: 1rem; margin-bottom: 2rem;
 }
 .menu-button {
@@ -102,15 +102,35 @@ main {
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   will-change: transform, border-color;
   -webkit-tap-highlight-color: transparent;
+
+  background: linear-gradient(145deg, #1a1a2e, #161625);
+  position: relative;
+  overflow: hidden;
 }
+
+.menu-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  transition: left 0.3s;
+}
+
+.menu-button:hover::before {
+  left: 100%;
+}
+
 .menu-button:hover {
   transform: translateY(-4px);
   border-color: var(--gold);
   box-shadow: 0 8px 20px rgba(212,175,55,0.2);
 }
 .menu-button span {
-  font-family: 'Crimson Text', serif;
-  font-size: 1rem; color: var(--text-muted);
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem; color: var(--text-muted);
   margin-top: 0.5rem; font-weight: 400;
 }
 
@@ -129,23 +149,26 @@ main {
 .no-scroll { overflow: hidden; }
 
 /* RESPONSIVO */
-@media (min-width: 768px) {
-  .main-menu { grid-template-columns: repeat(4,1fr); }
-  .floating-actions { justify-content: center; gap: 2rem; }
-}
-
-@media (max-height: 600px) {
-  :root { --floating-bar-height: 60px; }
-  .floating-button { padding: 0.6rem 1rem; }
-}
-
-@media (max-width: 480px) {
-  .floating-button {
-    min-width: 80px; /* Garante área mínima de toque */
-    padding: 0.8rem 0.5rem; /* Ajuste horizontal */
+@media (max-width: 768px) {
+  :root { 
+    --floating-bar-height: 60px; 
   }
-
-    .app-header {
+  
+  .main-menu { 
+    grid-template-columns: repeat(2,1fr); 
+  }
+  
+  .floating-actions { 
+    justify-content: center; 
+    gap: 1rem; 
+  }
+  
+  .floating-button {
+    min-width: 80px;
+    padding: 0.6rem 0.5rem;
+  }
+  
+  .app-header {
     padding: 1.5rem 0.5rem;
   }
   
