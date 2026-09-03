@@ -17,6 +17,7 @@ const urlsToCache = [
   `${BASE_PATH}/pages/gmnotes-modal.html`,
   `${BASE_PATH}/pages/sheet-modal.html`,
   `${BASE_PATH}/pages/spells-modal.html`,
+  `${BASE_PATH}/pages/settings-modal.html`,
 
   `${BASE_PATH}/css/3d-dice.css`,
   `${BASE_PATH}/css/base.css`,
@@ -29,6 +30,7 @@ const urlsToCache = [
   `${BASE_PATH}/css/shield.css`,
   `${BASE_PATH}/css/spells.css`,
   `${BASE_PATH}/css/toc.css`,
+  `${BASE_PATH}/css/settings-modal.css`,
 
   `${BASE_PATH}/css/builder/builder-base.css`,
   `${BASE_PATH}/css/builder/char-cards.css`,
@@ -69,6 +71,7 @@ const urlsToCache = [
   `${BASE_PATH}/js/sheet.js`,
   `${BASE_PATH}/js/spell-detail.js`,
   `${BASE_PATH}/js/spells.js`,
+  `${BASE_PATH}/js/settings.js`,
 
   `${BASE_PATH}/js/builder/builder.js`,
   `${BASE_PATH}/js/builder/e1-mentalidade.js`,

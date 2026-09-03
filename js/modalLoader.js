@@ -7,6 +7,7 @@ const MODAL_PATHS = [
   'pages/sheet-modal.html',
   'pages/spells-modal.html',
   'pages/dice-modal.html',
+  'pages/settings-modal.html',
 ];
 
 const MODAL_SCRIPTS = [
@@ -14,7 +15,8 @@ const MODAL_SCRIPTS = [
   'js/spells.js',
   'js/dice.js',
   'js/spell-detail.js',
-  'js/dice-pool.js'
+  'js/dice-pool.js',
+  'js/settings.js'
 ];
 
 // Cache de scripts carregados

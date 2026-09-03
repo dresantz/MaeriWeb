@@ -1,0 +1,76 @@
+<!-- Modal de Configurações -->
+<div id="settings-modal" class="modal" role="dialog" aria-labelledby="settings-title">
+  <div class="modal-overlay" data-close-modal></div>
+  <div class="modal-content settings-modal-content">
+    <div class="modal-header">
+      <h2 id="settings-title">Configurações</h2>
+      <button class="modal-close" data-close-modal aria-label="Fechar">
+        ✕
+      </button>
+    </div>
+    
+    <div class="modal-body">
+      <!-- TEMA -->
+      <div class="settings-section">
+        <h3 class="settings-section-title">Tema</h3>
+        <div class="settings-options" data-setting="theme">
+          <button class="setting-option active" data-value="classic">
+            <span class="option-icon">🌙</span>
+            <span class="option-label">Clássico</span>
+          </button>
+          <button class="setting-option" data-value="sepia">
+            <span class="option-icon">📜</span>
+            <span class="option-label">Sépia</span>
+          </button>
+          <button class="setting-option" data-value="dark">
+            <span class="option-icon">🌑</span>
+            <span class="option-label">Escuro</span>
+          </button>
+          <button class="setting-option" data-value="contrast">
+            <span class="option-icon">🔆</span>
+            <span class="option-label">Contraste</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- FONTE -->
+      <div class="settings-section">
+        <h3 class="settings-section-title">Fonte</h3>
+        <div class="settings-options" data-setting="font">
+          <button class="setting-option active" data-value="original">
+            <span class="option-label">Original</span>
+            <small class="option-preview" style="font-family: 'Cinzel', serif;">Maeri RPG</small>
+          </button>
+          <button class="setting-option" data-value="comfort">
+            <span class="option-label">Conforto</span>
+            <small class="option-preview" style="font-family: 'Comfortaa', sans-serif;">Maeri RPG</small>
+          </button>
+          <button class="setting-option" data-value="reading">
+            <span class="option-label">Leitura</span>
+            <small class="option-preview" style="font-family: 'Merriweather', serif;">Maeri RPG</small>
+          </button>
+        </div>
+      </div>
+      
+      <!-- TAMANHO DE FONTE -->
+      <div class="settings-section">
+        <h3 class="settings-section-title">Tamanho</h3>
+        <div class="settings-options settings-options--inline" data-setting="font-size">
+          <button class="setting-option active" data-value="normal">
+            <span class="option-label">Normal</span>
+          </button>
+          <button class="setting-option" data-value="large">
+            <span class="option-label">Grande</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- RESTAURAR -->
+      <div class="settings-section settings-section--footer">
+        <button class="settings-reset" data-reset-settings>
+          ↺ Restaurar Padrão
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
