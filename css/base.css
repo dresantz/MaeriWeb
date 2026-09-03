@@ -142,7 +142,7 @@ main {
   min-height: 120px;
   background: linear-gradient(145deg, #2a1a3a, #1a0a2a);
   border-color: var(--gold);
-  border-width: 3px;
+  border-width: 1px;
   box-shadow: 0 2px 8px rgba(212,175,55,0.3);
 }
 

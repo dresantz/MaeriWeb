@@ -1,46 +1,127 @@
 /* =========================
-   NotPat – News / Patch Notes
-   Home Toggle Controller
+   NotPat – Word Carousel
+   Roleta Horizontal de Palavras
 ========================= */
 
 document.addEventListener("DOMContentLoaded", () => {
   const notpatToggle = document.getElementById("notpat-toggle");
+  const wordContainer = document.querySelector('.word-carousel-container');
   const notpatContent = document.getElementById("notpat-content");
   
-  if (!notpatToggle || !notpatContent) return;
+  if (!notpatToggle || !wordContainer || !notpatContent) return;
   
+  const wordItems = wordContainer.querySelectorAll('.word-item');
   const newsList = notpatContent.querySelector('.news-list');
   const patchList = notpatContent.querySelector('.patch-list');
+  const aboutList = notpatContent.querySelector('.about-list');
   
-  // Se não encontrar as listas, não prossegue
-  if (!newsList || !patchList) return;
+  if (!newsList || !patchList || !aboutList || wordItems.length < 3) return;
   
-  let showingNews = true; // true = news, false = patches
+  // Mapeamento das seções e palavras
+  const sections = [
+    { id: 'news', list: newsList, word: 'Notícias' },
+    { id: 'patch', list: patchList, word: 'Patch Notes' },
+    { id: 'about', list: aboutList, word: 'Sobre' }
+  ];
   
-  function switchContent() {
-    notpatContent.classList.add("is-switching");
-    notpatToggle.disabled = true; // Previne cliques durante transição
+  let currentIndex = 0;
+  let isAnimating = false;
+  
+  function updateCarousel(animate = true) {
+    if (isAnimating && animate) return;
     
-    requestAnimationFrame(() => {
+    if (animate) {
+      isAnimating = true;
+      
+      // FASE 1: Slide out para a esquerda
+      wordContainer.style.opacity = '0';
+      wordContainer.style.transform = 'translateX(-40px)';
+      
+      // FASE 2: Troca os textos
       setTimeout(() => {
-        if (showingNews) {
-          notpatToggle.textContent = "Patch Notes ⇄";
-          notpatToggle.setAttribute("aria-pressed", "true");
-          newsList.style.display = 'none';
-          patchList.style.display = 'block';
-        } else {
-          notpatToggle.textContent = "Notícias ⇄";
-          notpatToggle.setAttribute("aria-pressed", "false");
-          newsList.style.display = 'block';
-          patchList.style.display = 'none';
-        }
+        const leftIndex = (currentIndex - 1 + sections.length) % sections.length;
+        const centerIndex = currentIndex;
+        const rightIndex = (currentIndex + 1) % sections.length;
         
-        showingNews = !showingNews;
-        notpatContent.classList.remove("is-switching");
-        notpatToggle.disabled = false;
-      }, 150);
-    });
+        wordItems.forEach(item => {
+          const position = item.getAttribute('data-position');
+          
+          if (position === 'left') {
+            item.textContent = sections[leftIndex].word;
+          } else if (position === 'center') {
+            item.textContent = sections[centerIndex].word;
+          } else if (position === 'right') {
+            item.textContent = sections[rightIndex].word;
+          }
+        });
+        
+        // Atualiza estado do botão
+        notpatToggle.setAttribute("aria-pressed", currentIndex !== 0);
+        
+        // Esconde todas as seções
+        sections.forEach(section => {
+          section.list.style.display = 'none';
+        });
+        
+        // Mostra a seção atual
+        sections[currentIndex].list.style.display = 'block';
+        
+        // Prepara para entrada vindo da direita
+        wordContainer.style.transition = 'none';
+        wordContainer.style.transform = 'translateX(40px)';
+        
+        // FASE 3: Slide in da direita
+        setTimeout(() => {
+          wordContainer.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+          wordContainer.style.opacity = '1';
+          wordContainer.style.transform = 'translateX(0)';
+          
+          setTimeout(() => {
+            isAnimating = false;
+          }, 300);
+          
+        }, 50);
+        
+      }, 300);
+      
+    } else {
+      // Inicialização sem animação
+      const leftIndex = (currentIndex - 1 + sections.length) % sections.length;
+      const centerIndex = currentIndex;
+      const rightIndex = (currentIndex + 1) % sections.length;
+      
+      wordItems.forEach(item => {
+        const position = item.getAttribute('data-position');
+        
+        if (position === 'left') {
+          item.textContent = sections[leftIndex].word;
+        } else if (position === 'center') {
+          item.textContent = sections[centerIndex].word;
+        } else if (position === 'right') {
+          item.textContent = sections[rightIndex].word;
+        }
+      });
+      
+      sections.forEach(section => {
+        section.list.style.display = 'none';
+      });
+      sections[currentIndex].list.style.display = 'block';
+      
+      // Garante que o container está visível
+      wordContainer.style.opacity = '1';
+      wordContainer.style.transform = 'translateX(0)';
+    }
   }
   
-  notpatToggle.addEventListener("click", switchContent);
+  function nextWord() {
+    if (isAnimating) return;
+    currentIndex = (currentIndex + 1) % sections.length;
+    updateCarousel();
+  }
+  
+  // Evento de clique
+  notpatToggle.addEventListener("click", nextWord);
+  
+  // Inicializa
+  updateCarousel(false);
 });

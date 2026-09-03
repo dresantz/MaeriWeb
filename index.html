@@ -74,19 +74,59 @@
     </nav>
 
     <section class="notpat-section">
-      <button id="notpat-toggle" class="notpat-button" aria-pressed="false">Notícias ⇄</button>
-        <div id="notpat-content" class="notpat-content" aria-live="polite">
-          <ul class="news-list">
-            <li><strong>16/03/26</strong> — Bem-vindo ao Maeri RPG WebApp.</li>
-            <li><strong>16/03/26</strong> — Primeiro Deploy.</li>
-            <li><strong>31/01/26</strong> — Primeiro Commit.</li>
-          </ul>
-          <ul class="patch-list" style="display: none;">
-            <li><strong>v0.1</strong> — Lançado.</li>
-
-          </ul>
+      <div class="word-carousel">
+        <button id="notpat-toggle" class="notpat-button word-carousel-button" aria-pressed="false">
+          <span class="word-carousel-container">
+            <span class="word-item" data-position="left">Sobre</span>
+            <span class="word-item word-item--center" data-position="center">Notícias</span>
+            <span class="word-item" data-position="right">Patch Notes</span>
+          </span>
+        </button>
+      </div>
+      
+      <div id="notpat-content" class="notpat-content" aria-live="polite">
+        <!-- ABA 1: NOTÍCIAS -->
+        <ul class="news-list">
+          <li><strong>16/03/26</strong> — Bem-vindo ao Maeri RPG WebApp.</li>
+          <li><strong>16/03/26</strong> — Primeiro Deploy.</li>
+          <li><strong>31/01/26</strong> — Primeiro Commit.</li>
+        </ul>
+        
+        <!-- ABA 2: PATCH NOTES -->
+        <ul class="patch-list" style="display: none;">
+          <li><strong>v0.1</strong> — Lançado.</li>
+        </ul>
+        
+        <!-- ABA 3: SOBRE -->
+        <div class="about-list" style="display: none;">
+          <div class="about-author">
+            <p class="about-role">Dré Santos é Graduado em Letras - Escrita Criativa com bolsa de iniciação científica em tecnologia e worldbuilding. Foi diretor de redação da revista Literomancia, tem publicações em diversas antologias e revistas, e é autor dos livros 'A Forja Cósmica', 'Silêncio e Pessoas Quebradas' e do RPG 'Maeri - Livro I'.</p>
+          </div>
+          
+          <div class="about-publications">
+            <a href="https://operaeditorial.com.br/produto/a-forja-cosmica/" target="_blank" class="about-link-item">
+              ✦  A Forja Cósmica
+            </a>
+            <a href="https://www.amazon.com.br/Silêncio-Pessoas-Quebradas-Dré-Santos-ebook/dp/B0B3V4R852" target="_blank" class="about-link-item">
+              ✦  Silêncio e Pessoas Quebradas
+            </a>
+            <a href="data/Maeri - Livro I.pdf" download class="about-link-item">
+              ✦  Maeri - Livro I (PDF)
+            </a>
+          </div>
+          
+          <div class="about-social-links">
+            <a href="https://www.instagram.com/dresantz/" target="_blank" class="about-social-link">
+              📷 @dresantz
+            </a>
+            <a href="mailto:dre.santoz@gmail.com" class="about-social-link">
+              ✉️ dre.santoz@gmail.com
+            </a>
+          </div>
         </div>
+      </div>
     </section>
+
   </main>
 
   <aside class="floating-actions" aria-label="Quick actions">
