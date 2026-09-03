@@ -104,7 +104,6 @@ main {
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   will-change: transform, border-color;
   -webkit-tap-highlight-color: transparent;
-
   background: linear-gradient(145deg, #1a1a2e, #161625);
   position: relative;
   overflow: hidden;
@@ -137,6 +136,14 @@ main {
 }
 
 /* BOTÃO PRIMÁRIO (DESTAQUE) */
+.book-icon {
+  width: 210px;
+  height: 210px;
+  margin-bottom: 0.8rem;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+}
+
 .menu-button--primary {
   grid-column: 1 / -1; /* Ocupa toda a largura */
   min-height: 120px;
@@ -189,6 +196,12 @@ main {
   margin-bottom: 2rem;
   box-shadow: var(--shadow);
   -webkit-tap-highlight-color: transparent;
+  
+  /* Novo: Altura fixa */
+  height: 620px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 /* UTILITÁRIOS */
@@ -200,6 +213,10 @@ main {
     --floating-bar-height: 60px; 
   }
   
+  .notpat-section {
+    height: 700px;
+  }
+
   .main-menu { 
     grid-template-columns: repeat(2, 1fr); 
     gap: 1.5rem;

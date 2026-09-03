@@ -10,7 +10,6 @@ const urlsToCache = [
   `${BASE_PATH}/index.html`,
   `${BASE_PATH}/manifest.json`,
 
-  `${BASE_PATH}/pages/lore.html`,
   `${BASE_PATH}/pages/player.html`,
   `${BASE_PATH}/pages/rulebook.html`,
   `${BASE_PATH}/pages/shield.html`,
@@ -23,7 +22,6 @@ const urlsToCache = [
   `${BASE_PATH}/css/base.css`,
   `${BASE_PATH}/css/dice.css`,
   `${BASE_PATH}/css/floatingButtons.css`,
-  `${BASE_PATH}/css/lore.css`,
   `${BASE_PATH}/css/notpat.css`,
   `${BASE_PATH}/css/rulebook.css`,
   `${BASE_PATH}/css/sheet.css`,
@@ -49,6 +47,19 @@ const urlsToCache = [
   `${BASE_PATH}/css/gmnotes/gmnotes-notes.css`,
   `${BASE_PATH}/css/gmnotes/gmnotes-npcs.css`,
   `${BASE_PATH}/css/gmnotes/gmnotes-players.css`,
+
+  `${BASE_PATH}/icons/icon-72.png`,
+  `${BASE_PATH}/icons/icon-96.png`,
+  `${BASE_PATH}/icons/icon-144.png`,
+  `${BASE_PATH}/icons/icon-152.png`,
+  `${BASE_PATH}/icons/icon-192.png`,
+  `${BASE_PATH}/icons/icon-192-maskable.png`,
+  `${BASE_PATH}/icons/icon-512.png`,
+  `${BASE_PATH}/icons/icon-512-maskable.png`,
+  `${BASE_PATH}/icons/apple-touch-icon.png`,
+  `${BASE_PATH}/icons/MaeriC.png`,
+
+  `${BASE_PATH}/favicon.ico`,
 
   `${BASE_PATH}/js/characterSheetStore.js`,
   `${BASE_PATH}/js/dice-pool.js`,

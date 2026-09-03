@@ -128,6 +128,33 @@
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.3s ease, transform 0.3s ease;
+  
+  /* Novo: Scroll interno */
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+  
+  /* Scrollbar estilizada */
+  scrollbar-width: thin;
+  scrollbar-color: var(--bronze) transparent;
+}
+
+/* Scrollbar para WebKit (Chrome, Safari, Edge) */
+.notpat-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.notpat-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.notpat-content::-webkit-scrollbar-thumb {
+  background: var(--bronze);
+  border-radius: 3px;
+}
+
+.notpat-content::-webkit-scrollbar-thumb:hover {
+  background: #9b8261;
 }
 
 .notpat-content.is-switching {
