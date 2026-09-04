@@ -187,16 +187,54 @@
 }
 
 /* Responsivo */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .settings-options {
     grid-template-columns: 1fr;
   }
   
-  .modal-content {
-    padding: 1.5rem;
-  }
-  
   .modal {
     padding: 0.5rem;
+    align-items: flex-start; /* Alinha no topo */
+  }
+  
+  .modal-content {
+    padding: 1.25rem;
+    max-height: 85vh; /* Altura menor para dar espaço */
+    border-radius: 8px; /* Bordas menores */
+    
+    /* Scrollbar mais fina para mobile */
+    scrollbar-width: thin;
+  }
+  
+  /* Scrollbar WebKit no mobile */
+  .modal-content::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .modal-content::-webkit-scrollbar-track {
+    margin: 4px 0;
+  }
+  
+  .modal-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+  }
+  
+  .modal-header h2 {
+    font-size: 1.2rem;
+  }
+  
+  .settings-section {
+    margin-bottom: 1.5rem;
+  }
+  
+  .settings-section-title {
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 0.8rem;
+  }
+  
+  .setting-option {
+    padding: 0.8rem;
   }
 }

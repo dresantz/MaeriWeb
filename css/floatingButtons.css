@@ -7,9 +7,9 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(26, 26, 46, 0.9);
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
-  padding: 0.8rem 1rem;
+  background: var(--surface);
+  border-top: 1px solid var(--gold-border);
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -17,27 +17,28 @@
 }
 
 .floating-button {
-  background: var(--surface);
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  border-radius: 25px;
-  padding: 0.8rem 1.2rem;
+  background: var(--surface-light);
+  border: 1px solid var(--gold-border);
+  border-radius: 12px;
+  padding: 0.8rem 1.5rem;
   color: var(--gold);
   font-family: 'Cinzel', serif;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
-  min-width: 70px;
-  height: 45px;
+  min-width: 250px;
+  height: 60px;
   -webkit-tap-highlight-color: transparent;
   outline: none;
 }
 
 .floating-button:hover {
   border-color: var(--gold);
+  background: var(--surface-hover);
   transform: translateY(-1px);
 }
 
@@ -54,21 +55,23 @@
   background: var(--bronze);
   color: white;
   border: 1px solid var(--gold);
-  border-radius: 50px;
-  min-width: 50px;
-  width: 50px;
+  border-radius: 12px;
+  min-width: 80px;
+  width: 80px;
+  height: 60px;
   padding: 0;
 }
 
 #back-to-home:hover,
 #back-to-top:hover {
-  background: #9b8261;
+  background: var(--bronze);
   border-color: var(--gold);
+  box-shadow: 0 2px 6px var(--gold-glow);
 }
 
 #back-to-home .floating-icon,
 #back-to-top .floating-icon {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   line-height: 1;
 }
 
@@ -77,59 +80,33 @@
   display: none;
 }
 
-@media (min-width: 768px) {
+/* =========================
+   Responsivo - Mobile
+========================= */
+
+@media (max-width: 768px) {
+  .floating-actions {
+    padding: 0.6rem 0.8rem;
+  }
+  
+  .floating-button {
+    min-width: 60px;
+    height: 40px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+    border-radius: 25px;
+  }
+  
   #back-to-home,
   #back-to-top {
-    min-width: 55px;
-    width: 55px;
+    min-width: 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
   }
   
   #back-to-home .floating-icon,
   #back-to-top .floating-icon {
-    font-size: 1.6rem;
-  }
-}
-
-/* =========================
-   Floating Buttons - Adaptação para Desktop
-   Adicione ao final do seu floatingButtons.css
-========================= */
-
-@media (min-width: 1024px) {
-  .floating-button {
-    /* Botões maiores e mais quadrados */
-    min-width: 250px;
-    height: 60px;
-    padding: 0.8rem 1.5rem;
-    border-radius: 12px; /* Menos arredondado, mais quadrado */
-    font-size: 1rem;
-  }
-
-  /* Botões especiais (Início e Topo) acompanham */
-  #back-to-home,
-  #back-to-top {
-    min-width: 80px;
-    width: 80px;
-    height: 60px;
-    border-radius: 12px;
-  }
-
-  #back-to-home .floating-icon,
-  #back-to-top .floating-icon {
-    font-size: 1.8rem;
-  }
-
-  /* Ajuste no espaçamento da barra para comportar botões maiores */
-  .floating-actions {
-    padding: 1rem 2rem;
-  }
-}
-
-/* Ajuste intermediário para tablets */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .floating-button {
-    min-width: 90px;
-    height: 52px;
-    border-radius: 10px;
+    font-size: 1.2rem;
   }
 }
