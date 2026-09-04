@@ -1,183 +1,32 @@
-<!-- gmnotes-modal.html -->
-<!-- Painel do Mestre - Gerenciamento de NPCs e Combate -->
+<!-- shield-rules-modal.html -->
+<!-- Modal de Regras Rápidas - Consulta rápida de regras -->
 
-<div id="gmnotes-modal" class="gmnotes-modal" aria-hidden="true" role="dialog" aria-labelledby="gmnotes-modal-title">
-  <div class="gmnotes-modal-content">
+<div id="shield-modal" class="shield-modal" aria-hidden="true" role="dialog" aria-labelledby="shield-modal-title">
+  <div class="shield-modal-content">
     
     <!-- HEADER -->
-    <div class="gmnotes-modal-header">
-      <h2 id="gmnotes-modal-title">Painel do Mestre</h2>
-      <div class="gmnotes-header-tabs">
-        <button class="gmnotes-tab-btn active" data-tab="npcs">NPCs</button>
-        <button class="gmnotes-tab-btn" data-tab="players">Jogadores</button>
-        <button class="gmnotes-tab-btn" data-tab="combat">Combate</button>
-        <button class="gmnotes-tab-btn" data-tab="notes">Notas</button>
-      </div>
-      <button class="gmnotes-modal-close" id="gmnotes-modal-close" aria-label="Fechar">&times;</button>
+    <div class="shield-modal-header">
+      <h2 id="shield-modal-title">Regras Rápidas</h2>
+      <button class="shield-modal-close" id="shield-modal-close" aria-label="Fechar">&times;</button>
     </div>
 
     <!-- BODY -->
-    <div class="gmnotes-modal-body">
-      
-      <!-- TAB NPCs -->
-      <div class="gmnotes-tab-pane active" id="tab-npcs">
-        
-        <!-- Formulário de criação de NPC -->
-        <div class="gmnotes-section">
-          <h3 class="gmnotes-section-title">Criar Novo NPC</h3>
-          <div class="gmnotes-npc-form">
-            <div class="gmnotes-form-row">
-              <div class="gmnotes-form-group gmnotes-form-group-full">
-                <label for="npc-name">Nome</label>
-                <input type="text" id="npc-name" class="gmnotes-input" placeholder="Nome do NPC">
-              </div>
-            </div>
-
-            <div class="gmnotes-stats-row">
-              <div class="gmnotes-stat-field">
-                <label for="npc-vit">Vit</label>
-                <input type="number" id="npc-vit" class="gmnotes-input gmnotes-input-number" value="8" min="1" max="999">
-              </div>
-              <div class="gmnotes-stat-field">
-                <label for="npc-con">Con</label>
-                <input type="number" id="npc-con" class="gmnotes-input gmnotes-input-number" value="8" min="1" max="999">
-              </div>
-            </div>
-
-            <div class="gmnotes-attributes-grid">
-              <div class="gmnotes-attr-cell">
-                <label for="npc-f">Físico</label>
-                <input type="number" id="npc-f" class="gmnotes-input gmnotes-input-attr" value="2" min="1" max="99">
-              </div>
-              <div class="gmnotes-attr-cell">
-                <label for="npc-v">Vigor</label>
-                <input type="number" id="npc-v" class="gmnotes-input gmnotes-input-attr" value="2" min="1" max="99">
-              </div>
-              <div class="gmnotes-attr-cell">
-                <label for="npc-d">Destreza</label>
-                <input type="number" id="npc-d" class="gmnotes-input gmnotes-input-attr" value="2" min="1" max="99">
-              </div>
-              <div class="gmnotes-attr-cell">
-                <label for="npc-a">Assimilação</label>
-                <input type="number" id="npc-a" class="gmnotes-input gmnotes-input-attr" value="2" min="1" max="99">
-              </div>
-              <div class="gmnotes-attr-cell">
-                <label for="npc-i">Influência</label>
-                <input type="number" id="npc-i" class="gmnotes-input gmnotes-input-attr" value="2" min="1" max="99">
-              </div>
-              <div class="gmnotes-attr-cell">
-                <label for="npc-s">Sabedoria</label>
-                <input type="number" id="npc-s" class="gmnotes-input gmnotes-input-attr" value="2" min="1" max="99">
-              </div>
-            </div>
-
-            <div class="gmnotes-form-row">
-              <div class="gmnotes-form-group gmnotes-form-group-full">
-                <label for="npc-extra">Extra</label>
-                <input type="text" id="npc-extra" class="gmnotes-input" placeholder="Habilidades, história...">
-              </div>
-            </div>
-
-            <div class="gmnotes-form-actions">
-              <button class="gmnotes-btn gmnotes-btn-primary" id="npc-add">Adicionar NPC</button>
-              <button class="gmnotes-btn gmnotes-btn-secondary" id="npc-clear">Limpar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Lista de NPCs -->
-        <div class="gmnotes-section">
-          <h3 class="gmnotes-section-title">NPCs Ativos</h3>
-          <div class="gmnotes-search-bar">
-            <input type="text" class="gmnotes-search-input" placeholder="Buscar NPC...">
-            <button class="gmnotes-search-btn" aria-label="Buscar">🔍</button>
-          </div>
-          
-          <div class="gmnotes-npc-list" id="npc-list"></div>
-        </div>
-      </div>
-
-      <!-- TAB JOGADORES -->
-      <div class="gmnotes-tab-pane" id="tab-players">
-        <div class="gmnotes-section">
-          <h3 class="gmnotes-section-title">Adicionar Jogador</h3>
-          <div class="gmnotes-player-form">
-            <div class="gmnotes-form-row">
-              <div class="gmnotes-form-group gmnotes-form-group-full">
-                <label for="player-name">Nome</label>
-                <input type="text" id="player-name" class="gmnotes-input" placeholder="Ex: João (Aric)">
-              </div>
-            </div>
-
-            <div class="gmnotes-form-row">
-              <div class="gmnotes-form-group gmnotes-form-group-full">
-                <label for="player-info">Info</label>
-                <input type="text" id="player-info" class="gmnotes-input" placeholder="Classe, nível, raça...">
-              </div>
-            </div>
-
-            <div class="gmnotes-form-actions">
-              <button class="gmnotes-btn gmnotes-btn-primary" id="player-add">Adicionar Jogador</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="gmnotes-section">
-          <h3 class="gmnotes-section-title">Jogadores na Campanha</h3>
-          <div class="gmnotes-players-list" id="players-list"></div>
-        </div>
-      </div>
-
-      <!-- TAB COMBATE -->
-      <div class="gmnotes-tab-pane" id="tab-combat">
-        <div class="gmnotes-section">
-          <h3 class="gmnotes-section-title">Ordem de Combate</h3>
-          <div class="gmnotes-coment">Marque com ✔️ quem já realizou ação.</div>
-
-          <div class="gmnotes-combat-list" id="combat-order"></div>
-
-          <div class="gmnotes-combat-controls">
-            <button class="gmnotes-combat-btn-reset" id="combat-reset-actions">🔄 Reiniciar Ações</button>
-            <button class="gmnotes-combat-remove-selected" id="combat-remove-selected">🗑️ Remover</button>
-            <button class="gmnotes-combat-remove-all" id="combat-remove-all">🗑️ Limpar Ordem</button>
-          </div>
-
-          <div class="gmnotes-confirmation-container" id="combat-confirmation"></div>
-        </div>
-      </div>
-
-      <!-- TAB NOTAS -->
-      <div class="gmnotes-tab-pane" id="tab-notes">
-        <div class="gmnotes-section">
-          <h3 class="gmnotes-section-title">Notas da Sessão</h3>
-          <div class="gmnotes-editor">
-            <textarea id="gmnotes-textarea" class="gmnotes-textarea" placeholder="Escreva suas notas aqui..."></textarea>
-          </div>
-          <div class="gmnotes-toolbar">
-            <button class="gmnotes-toolbar-btn" id="gmnotes-save" title="Salvar">💾</button>
-            <button class="gmnotes-toolbar-btn" id="gmnotes-clear" title="Limpar">🗑️</button>
-          </div>
-        </div>
-
-        <div class="gmnotes-section">
-          <h3 class="gmnotes-section-title">Sessões</h3>
-          <div class="gmnotes-sessions-list" id="sessions-list">
-            <button class="gmnotes-session-item gmnotes-session-new">+ Nova Sessão</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- FOOTER -->
-    <div class="gmnotes-modal-footer">
-      <div class="gmnotes-footer-status">
-        <span class="gmnotes-status" id="gmnotes-status">Pronto</span>
-        <span class="gmnotes-save-indicator">💾 Salvo</span>
-      </div>
-      <div class="gmnotes-footer-actions">
-        <button class="gmnotes-footer-btn" id="gmnotes-export">📤 Exportar</button>
-        <button class="gmnotes-footer-btn" id="gmnotes-import">📥 Importar</button>
-        <button class="gmnotes-footer-btn gmnotes-footer-btn-primary" id="gmnotes-done">Concluído</button>
+    <div class="shield-modal-body">
+      <div class="shield-grid">
+        <button class="shield-button">Combate</button>
+        <button class="shield-button">Testes</button>
+        <button class="shield-button">Iniciativa</button>
+        <button class="shield-button">Aventura</button>
+        <button class="shield-button">Magia</button>
+        <button class="shield-button">Condições</button>
+        <button class="shield-button">Seres</button>
+        <button class="shield-button">Classes</button>
+        <button class="shield-button">Técnicas</button>
+        <button class="shield-button">Estudos</button>
+        <button class="shield-button">Armas</button>
+        <button class="shield-button">Montarias</button>
+        <button class="shield-button">Loja Combate</button>
+        <button class="shield-button">Loja Arcana</button>
       </div>
     </div>
   </div>

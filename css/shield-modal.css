@@ -1,3 +1,8 @@
+/* =========================
+   Maeri RPG - Modal de Regras Rápidas
+   (Escudo do Mestre)
+========================= */
+
 .shield-modal {
   display: none;
   position: fixed;
@@ -23,8 +28,8 @@
   border: 2px solid var(--gold);
   border-radius: 24px;
   width: 100%;
-  max-width: 700px; /* Reduzido de 800px */
-  margin: 2rem auto; /* Margem maior para ver o fundo */
+  max-width: 700px;
+  margin: 2rem auto;
   position: relative;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   display: flex;
@@ -66,11 +71,57 @@
   font-family: 'Crimson Text', serif;
   font-size: 1.2rem;
   line-height: 1.6;
-  padding: 0.5rem 1.5rem 1.5rem 1.5rem;
+  padding: 1rem 1.5rem 1.5rem 1.5rem;
   flex: 1;
 }
 
-/* Conteúdo do modal */
+/* =========================
+   Grade de botões (Regras Rápidas)
+========================= */
+
+.shield-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.8rem;
+  width: 100%;
+}
+
+.shield-button {
+  background: var(--surface-light);
+  border: 1px solid rgba(212,175,55,0.3);
+  border-radius: 12px;
+  padding: 1rem 0.5rem;
+  color: var(--text);
+  font-family: 'Crimson Text', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+.shield-button:hover {
+  background: var(--gold);
+  color: var(--bg-dark);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.shield-button:active {
+  transform: translateY(0);
+}
+
+/* =========================
+   Conteúdo do modal (texto)
+========================= */
+
 .shield-modal-body p {
   margin-bottom: 1rem;
 }
@@ -93,7 +144,10 @@
   border-radius: 2px;
 }
 
-/* Scroll customizado */
+/* =========================
+   Scroll customizado
+========================= */
+
 .shield-modal::-webkit-scrollbar {
   width: 8px;
 }
@@ -108,10 +162,13 @@
   border-radius: 10px;
 }
 
-/* Ajustes responsivos */
+/* =========================
+   Responsivo
+========================= */
+
 @media (max-width: 600px) {
   .shield-modal-content {
-    max-width: 90%; /* Relativo em vez de fixo */
+    max-width: 90%;
     margin: 1.5rem auto;
     border-radius: 20px;
   }
@@ -125,8 +182,21 @@
   }
   
   .shield-modal-body {
-    padding: 0.25rem 1.25rem 1.25rem 1.25rem;
-    font-size: 1.2rem;
+    padding: 0.5rem 1.25rem 1.25rem 1.25rem;
+    font-size: 1.15rem;
+  }
+
+  .shield-grid {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.6rem;
+  }
+
+  .shield-button {
+    padding: 0.8rem 0.3rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    white-space: normal; /* permite quebra de linha em telas pequenas */
+    line-height: 1.2;
   }
 }
 
@@ -149,5 +219,16 @@
   .shield-modal-body ul, 
   .shield-modal-body ol {
     padding-left: 1.25rem;
+  }
+
+  .shield-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.4rem;
+  }
+
+  .shield-button {
+    padding: 0.7rem 0.2rem;
+    font-size: 0.95rem;
+    border-radius: 6px;
   }
 }

@@ -1,151 +1,72 @@
 /* =========================
    Maeri RPG - Escudo do Mestre
+   Página principal (painel do mestre)
 ========================= */
 
+/* Container principal */
 .shield {
-  padding: 1rem;
-  padding-bottom: 6rem;
-}
-
-.shield-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 0.8rem;
-  padding: 1rem 0;
+  max-width: 900px;
   margin: 0 auto;
-  max-width: 1200px;
+  padding: 0rem 1rem;
+  padding-bottom: 4rem; /* espaço para barra flutuante */
 }
 
-.shield-button {
-  background: var(--surface-light);
-  border: 1px solid rgba(212,175,55,0.3);
-  border-radius: 16px;
-  padding: 1.5rem 0.3rem;
+.shield-back-button {
+  background: transparent;
+  border: 1px solid var(--gold-border);
+  border-radius: 20px;
+  padding: 0.4rem 1rem;
   color: var(--text);
-  font-family: 'Crimson Text', serif;
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
   cursor: pointer;
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
   transition: all 0.2s ease;
-  width: 100%;
-  min-width: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-tap-highlight-color: transparent;
-  outline: none;
 }
 
-.shield-button:hover {
+.shield-back-button:hover {
+  background: var(--surface-hover);
+  border-color: var(--gold);
+}
+
+/* Botão Regras Rápidas */
+.rules-button {
+  display: block;
+  width: fit-content;
+  margin: 1rem auto;
+  padding: 0.7rem 1rem;
   background: var(--gold);
   color: var(--bg-dark);
-  border-color: var(--gold);
-  transform: translateY(-2px);
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  border: 2px solid var(--gold);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.shield-button:active {
+.rules-button:hover {
+  background: transparent;
+  color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(212,175,55,0.3);
+}
+
+.rules-button:active {
   transform: translateY(0);
 }
 
-.gmnotes-button {
-  position: fixed;
-  bottom: 6rem;
-  left: 0.5rem;
-  width: 110px;
-  height: 50px;
-  border-radius: 30px;
-  font-size: 1.2rem;
-  background: var(--gold);
-  color: #1a1a1a;
-  border: 2px solid var(--gold);
-  cursor: pointer;
-  z-index: 1001;
-  -webkit-tap-highlight-color: transparent;
-  outline: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-  transition: all 0.2s ease;
-  font-family: 'Crimson Text', serif;
-}
-
-.gmnotes-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-}
-
-.gmnotes-button:active {
-  transform: scale(0.95);
-}
-
+/* Responsivo */
 @media (max-width: 600px) {
   .shield {
-    padding-bottom: 5rem;
+    padding: 1rem 0.5rem;
+    padding-bottom: 3rem;
   }
   
-  .shield-grid {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 0.4rem;
-  }
-  
-  .shield-button {
-    padding: 0.9rem 0.2rem;
+  .rules-button {
     font-size: 1rem;
-    border-radius: 10px;
-    white-space: normal;
-    line-height: 1.2;
-  }
-}
-
-@media (max-width: 400px) {
-  .shield-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.4rem;
-  }
-  
-  .shield-button {
-    padding: 0.8rem 0.2rem;
-    font-size: 0.95rem;
-    border-radius: 8px;
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  .gmnotes-button {
-    width: 100px;
-    height: 45px;
-    font-size: 1.1rem;
-    bottom: 5.5rem;
-    left: 0.3rem;
-  }
-}
-
-@media (orientation: landscape) and (max-height: 600px) {
-  .gmnotes-button {
-    width: 100px;
-    height: 45px;
-    font-size: 1rem;
-    bottom: 4.5rem;
-    left: 0.3rem;
-  }
-  
-  .shield {
-    padding-bottom: 4rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .gmnotes-button {
-    width: 120px;
-    height: 60px;
-    font-size: 1.4rem;
-    bottom: 7rem;
-    left: 1rem;
-  }
-  
-  .shield {
-    padding: 2rem;
-    padding-bottom: 7rem;
+    padding: 0.7rem 1.2rem;
   }
 }

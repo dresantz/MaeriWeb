@@ -44,8 +44,6 @@ const urlsToCache = [
 
   `${BASE_PATH}/css/gmnotes/gmnotes-base.css`,
   `${BASE_PATH}/css/gmnotes/gmnotes-combat.css`,
-  `${BASE_PATH}/css/gmnotes/gmnotes-forms.css`,
-  `${BASE_PATH}/css/gmnotes/gmnotes-modal.css`,
   `${BASE_PATH}/css/gmnotes/gmnotes-notes.css`,
   `${BASE_PATH}/css/gmnotes/gmnotes-npcs.css`,
   `${BASE_PATH}/css/gmnotes/gmnotes-players.css`,
@@ -98,8 +96,7 @@ const urlsToCache = [
   `${BASE_PATH}/js/shield/gm-npcs.js`,
   `${BASE_PATH}/js/shield/gm-players.js`,
   `${BASE_PATH}/js/shield/gm-sectionNotes.js`,
-  `${BASE_PATH}/js/shield/gmnotes-loader.js`,
-  `${BASE_PATH}/js/shield/gmnotes-modal.js`,
+  `${BASE_PATH}/js/shield/gmnotes.js`,
   `${BASE_PATH}/js/shield/shield-modal.js`,
 
   `${BASE_PATH}/data/rulebook/00-modelo.json`,

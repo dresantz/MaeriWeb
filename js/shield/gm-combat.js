@@ -5,8 +5,6 @@ export class GMCombat {
     this.combatOrder = [];
     this.selectedItemId = null;
     this.confirmationActive = false;
-    this.tokenSize = 80;
-    this.gridMode = true;
     this.npcColor = '#3f2020';
     this.playerColor = '#1d412a';
     this.swapSourceId = null;
@@ -21,22 +19,11 @@ export class GMCombat {
   setupCombat() {
     const removeSelectedBtn = document.getElementById('combat-remove-selected');
     const removeAllBtn = document.getElementById('combat-remove-all');
-    const toggleViewBtn = document.getElementById('combat-toggle-view');
     const resetActionsBtn = document.getElementById('combat-reset-actions');
 
     removeSelectedBtn?.addEventListener('click', () => this.showRemoveConfirmation('selected'));
     removeAllBtn?.addEventListener('click', () => this.showRemoveConfirmation('all'));
-    toggleViewBtn?.addEventListener('click', () => this.toggleView());
     resetActionsBtn?.addEventListener('click', () => this.resetAllActions());
-  }
-
-  toggleView() {
-    this.gridMode = !this.gridMode;
-    this.renderCombatOrder();
-    const btn = document.getElementById('combat-toggle-view');
-    if (btn) {
-      btn.textContent = this.gridMode ? '📋 Ver Lista' : '🗺️ Ver Tokens';
-    }
   }
 
   showRemoveConfirmation(type) {
@@ -209,7 +196,7 @@ export class GMCombat {
     container.addEventListener('click', (e) => {
       if (this.confirmationActive) return;
 
-      const item = e.target.closest('.gmnotes-combat-token, .gmnotes-combat-item');
+      const item = e.target.closest('.gmnotes-combat-token');
       if (!item) return;
 
       const checkbox = e.target.closest('.gmnotes-token-checkbox');
@@ -230,7 +217,7 @@ export class GMCombat {
         return;
       }
 
-      if (e.target.closest('.gmnotes-token-stat-btn, .gmnotes-combat-stat-btn')) {
+      if (e.target.closest('.gmnotes-token-stat-btn')) {
         return;
       }
 
@@ -262,7 +249,7 @@ export class GMCombat {
         this.renderCombatOrder();
       } else {
         if (this.selectedItemId) {
-          const prev = document.querySelector(`.gmnotes-combat-token[data-combat-id="${this.selectedItemId}"], .gmnotes-combat-item[data-combat-id="${this.selectedItemId}"]`);
+          const prev = document.querySelector(`.gmnotes-combat-token[data-combat-id="${this.selectedItemId}"]`);
           prev?.classList.remove('selected');
           prev?.classList.remove('swap-source');
         }
@@ -294,7 +281,7 @@ export class GMCombat {
 
   clearSwapMode() {
     this.swapSourceId = null;
-    document.querySelectorAll('.gmnotes-combat-token, .gmnotes-combat-item').forEach(el => {
+    document.querySelectorAll('.gmnotes-combat-token').forEach(el => {
       el.classList.remove('swap-source');
     });
   }
@@ -318,7 +305,7 @@ export class GMCombat {
   clearSelection() {
     if (!this.selectedItemId) return;
     
-    const prev = document.querySelector(`.gmnotes-combat-token[data-combat-id="${this.selectedItemId}"], .gmnotes-combat-item[data-combat-id="${this.selectedItemId}"]`);
+    const prev = document.querySelector(`.gmnotes-combat-token[data-combat-id="${this.selectedItemId}"]`);
     prev?.classList.remove('selected');
     this.selectedItemId = null;
     this.clearSwapMode();
@@ -396,13 +383,8 @@ export class GMCombat {
       return;
     }
 
-    if (this.gridMode) {
-      container.className = 'gmnotes-combat-grid';
-      container.innerHTML = this.combatOrder.map(item => this.renderToken(item)).join('');
-    } else {
-      container.className = 'gmnotes-combat-list';
-      container.innerHTML = this.combatOrder.map(item => this.renderListItem(item)).join('');
-    }
+    container.className = 'gmnotes-combat-grid';
+    container.innerHTML = this.combatOrder.map(item => this.renderToken(item)).join('');
   }
 
   renderToken(item) {
@@ -477,70 +459,6 @@ export class GMCombat {
             </span>
             <button class="gmnotes-token-stat-btn" onclick="gmNotes.adjustCombatCon('${item.id}', 1)">+</button>
           </div>
-        </div>
-      </div>
-    `;
-  }
-
-  renderListItem(item) {
-    const isSelected = item.id === this.selectedItemId;
-    const isSwapSource = item.id === this.swapSourceId;
-    
-    const currentIndex = this.combatOrder.findIndex(i => i.id === item.id);
-    const isFirst = currentIndex === 0;
-    const isLast = currentIndex === this.combatOrder.length - 1;
-
-    return `
-      <div class="gmnotes-combat-item ${isSelected ? 'selected' : ''} ${isSwapSource ? 'swap-source' : ''}" 
-          data-combat-id="${item.id}">
-        <div class="gmnotes-combat-name">${this.parent.escapeHtml(item.name)}</div>
-        <div class="gmnotes-combat-type">
-          <input type="checkbox" class="gmnotes-token-checkbox" 
-                data-token-id="${item.id}"
-                ${item.hasActed ? 'checked' : ''}
-                title="Ação realizada">
-        </div>
-        ${item.type === 'npc' ? this.renderNPCStats(item) : ''}
-        ${isSelected ? `
-          <div class="gmnotes-token-nav">
-            <button class="gmnotes-token-nav-btn ${isFirst ? 'disabled' : ''}" 
-                    data-direction="left"
-                    ${isFirst ? 'disabled' : ''}
-                    title="Mover para esquerda">
-              ◀
-            </button>
-            <button class="gmnotes-token-nav-btn ${isLast ? 'disabled' : ''}" 
-                    data-direction="right"
-                    ${isLast ? 'disabled' : ''}
-                    title="Mover para direita">
-              ▶
-            </button>
-          </div>
-        ` : ''}
-      </div>
-    `;
-  }
-
-  renderNPCStats(item) {
-    return `
-      <div class="gmnotes-combat-stats-row">
-        ${this.renderStatControl('Vit', item.vit, item.vitMax, item.id, 'adjustCombatVit')}
-        ${this.renderStatControl('Con', item.con || 0, item.conMax || 0, item.id, 'adjustCombatCon')}
-      </div>
-    `;
-  }
-
-  renderStatControl(label, current, max, id, method) {
-    return `
-      <div class="gmnotes-combat-stat">
-        <span class="gmnotes-combat-stat-label">${label}:</span>
-        <div class="gmnotes-combat-stat-control">
-          <button class="gmnotes-combat-stat-btn" onclick="gmNotes.${method}('${id}', -1)">-</button>
-          <span class="gmnotes-combat-stat-value">
-            <span class="gmnotes-combat-stat-current">${current}</span>/
-            <span class="gmnotes-combat-stat-max">${max}</span>
-          </span>
-          <button class="gmnotes-combat-stat-btn" onclick="gmNotes.${method}('${id}', 1)">+</button>
         </div>
       </div>
     `;

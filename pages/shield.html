@@ -5,28 +5,14 @@
   <meta name="theme-color" content="#0a0a12">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-
-    <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GZK5KHBGQZ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-GZK5KHBGQZ');
-  </script>
-
-  
   <title>Maeri RPG - Escudo do Mestre</title>
 
   <!-- Manifest do PWA -->
   <link rel="manifest" href="../manifest.json">
-
-  <!-- Ícones -->
   <link rel="icon" href="../favicon.ico" sizes="32x32">
   <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
 
-  <!-- Meta tags para iOS (tela cheia) -->
+  <!-- Meta tags para iOS -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Maeri RPG">
@@ -45,39 +31,193 @@
   <link rel="stylesheet" href="../css/spells.css" />
   <link rel="stylesheet" href="../css/shield.css" />
   <link rel="stylesheet" href="../css/shield-modal.css" />
-  <link rel="stylesheet" href="../css/gmnotes/gmnotes-modal.css" />
+  <link rel="stylesheet" href="../css/settings-modal.css" />
+  <link rel="stylesheet" href="../css/gmnotes/gmnotes-base.css" />
+  <link rel="stylesheet" href="../css/gmnotes/gmnotes-npcs.css" />
+  <link rel="stylesheet" href="../css/gmnotes/gmnotes-players.css" />
+  <link rel="stylesheet" href="../css/gmnotes/gmnotes-combat.css" />
+  <link rel="stylesheet" href="../css/gmnotes/gmnotes-notes.css" />
   <link rel="stylesheet" href="../css/3d-dice.css" />
 </head>
 
 <body>
-  <button id="gmnotes-button" class="gmnotes-button" aria-label="GM Notes">
-    <span class="gmnotes-label">GM</span>
-  </button>
-
+  <!-- HEADER -->
   <header class="app-header">
+    <button id="settings-button" class="settings-button" aria-label="Configurações">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+      </svg>
+    </button>
     <h1>Escudo do Mestre</h1>
-    <p class="subtitle">Regras Básicas</p>
+    <p class="subtitle">Painel de Controle</p>
   </header>
 
+  <!-- BOTÃO REGRAS RÁPIDAS -->
+  <button id="rules-button" class="rules-button">
+  Regras Rápidas
+  </button>
+
+  <!-- PAINEL DO MESTRE (conteúdo principal) -->
   <main class="shield">
-    <div class="shield-grid">
-      <button class="shield-button">Combate</button>
-      <button class="shield-button">Testes</button>
-      <button class="shield-button">Iniciativa</button>
-      <button class="shield-button">Aventura</button>
-      <button class="shield-button">Magia</button>
-      <button class="shield-button">Condições</button>
-      <button class="shield-button">Seres</button>
-      <button class="shield-button">Classes</button>
-      <button class="shield-button">Técnicas</button>
-      <button class="shield-button">Estudos</button>
-      <button class="shield-button">Armas</button>
-      <button class="shield-button">Montarias</button>
-      <button class="shield-button">Loja Combate</button>
-      <button class="shield-button">Loja Arcana</button>
+    <div class="gmnotes-tabs">
+      <button class="gmnotes-tab-btn active" data-tab="npcs">NPCs</button>
+      <button class="gmnotes-tab-btn" data-tab="players">Jogadores</button>
+      <button class="gmnotes-tab-btn" data-tab="combat">Combate</button>
+      <button class="gmnotes-tab-btn" data-tab="notes">Notas</button>
+    </div>
+
+    <!-- TAB NPCs -->
+    <div class="gmnotes-tab-pane active" id="tab-npcs">
+      <div class="gmnotes-section">
+        <h3 class="gmnotes-section-title">Criar Novo NPC</h3>
+        <div class="gmnotes-npc-form">
+          <div class="gmnotes-form-row">
+            <div class="gmnotes-form-group gmnotes-form-group-full">
+              <label for="npc-name">Nome</label>
+              <input type="text" id="npc-name" class="gmnotes-input" placeholder="Nome do NPC">
+            </div>
+          </div>
+
+          <div class="gmnotes-stats-row">
+            <div class="gmnotes-stat-field">
+              <label for="npc-vit">Vit</label>
+              <input type="number" id="npc-vit" class="gmnotes-input gmnotes-input-number" value="8" min="1" max="999">
+            </div>
+            <div class="gmnotes-stat-field">
+              <label for="npc-con">Con</label>
+              <input type="number" id="npc-con" class="gmnotes-input gmnotes-input-number" value="8" min="1" max="999">
+            </div>
+          </div>
+
+          <div class="gmnotes-attributes-grid">
+            <div class="gmnotes-attr-cell">
+              <label for="npc-f">Físico</label>
+              <input type="number" id="npc-f" class="gmnotes-input gmnotes-input-attr" value="2" min="1" max="99">
+            </div>
+            <div class="gmnotes-attr-cell">
+              <label for="npc-v">Vigor</label>
+              <input type="number" id="npc-v" class="gmnotes-input gmnotes-input-attr" value="2" min="1" max="99">
+            </div>
+            <div class="gmnotes-attr-cell">
+              <label for="npc-d">Destreza</label>
+              <input type="number" id="npc-d" class="gmnotes-input gmnotes-input-attr" value="2" min="1" max="99">
+            </div>
+            <div class="gmnotes-attr-cell">
+              <label for="npc-a">Assimilação</label>
+              <input type="number" id="npc-a" class="gmnotes-input gmnotes-input-attr" value="2" min="1" max="99">
+            </div>
+            <div class="gmnotes-attr-cell">
+              <label for="npc-i">Influência</label>
+              <input type="number" id="npc-i" class="gmnotes-input gmnotes-input-attr" value="2" min="1" max="99">
+            </div>
+            <div class="gmnotes-attr-cell">
+              <label for="npc-s">Sabedoria</label>
+              <input type="number" id="npc-s" class="gmnotes-input gmnotes-input-attr" value="2" min="1" max="99">
+            </div>
+          </div>
+
+          <div class="gmnotes-form-row">
+            <div class="gmnotes-form-group gmnotes-form-group-full">
+              <label for="npc-extra">Extra</label>
+              <input type="text" id="npc-extra" class="gmnotes-input" placeholder="Habilidades, história...">
+            </div>
+          </div>
+
+          <div class="gmnotes-form-actions">
+            <button class="gmnotes-btn gmnotes-btn-primary" id="npc-add">Adicionar NPC</button>
+            <button class="gmnotes-btn gmnotes-btn-secondary" id="npc-clear">Limpar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="gmnotes-section">
+        <h3 class="gmnotes-section-title">NPCs Ativos</h3>
+        <div class="gmnotes-search-bar">
+          <input type="text" class="gmnotes-search-input" placeholder="Buscar NPC...">
+          <button class="gmnotes-search-btn" aria-label="Buscar">🔍</button>
+        </div>
+        <div class="gmnotes-npc-list" id="npc-list"></div>
+      </div>
+    </div>
+
+    <!-- TAB JOGADORES -->
+    <div class="gmnotes-tab-pane" id="tab-players">
+      <div class="gmnotes-section">
+        <h3 class="gmnotes-section-title">Adicionar Jogador</h3>
+        <div class="gmnotes-player-form">
+          <div class="gmnotes-form-row">
+            <div class="gmnotes-form-group gmnotes-form-group-full">
+              <label for="player-name">Nome</label>
+              <input type="text" id="player-name" class="gmnotes-input" placeholder="Ex: João (Aric)">
+            </div>
+          </div>
+          <div class="gmnotes-form-row">
+            <div class="gmnotes-form-group gmnotes-form-group-full">
+              <label for="player-info">Info</label>
+              <input type="text" id="player-info" class="gmnotes-input" placeholder="Classe, nível, raça...">
+            </div>
+          </div>
+          <div class="gmnotes-form-actions">
+            <button class="gmnotes-btn gmnotes-btn-primary" id="player-add">Adicionar Jogador</button>
+          </div>
+        </div>
+      </div>
+      <div class="gmnotes-section">
+        <h3 class="gmnotes-section-title">Jogadores na Campanha</h3>
+        <div class="gmnotes-players-list" id="players-list"></div>
+      </div>
+    </div>
+
+    <!-- TAB COMBATE -->
+    <div class="gmnotes-tab-pane" id="tab-combat">
+      <div class="gmnotes-section">
+        <h3 class="gmnotes-section-title">Ordem de Combate</h3>
+        <div class="gmnotes-coment">Marque com ✔️ quem já realizou ação.</div>
+        <div class="gmnotes-combat-grid" id="combat-order"></div>
+        <div class="gmnotes-combat-controls">
+          <button class="gmnotes-combat-btn-reset" id="combat-reset-actions">🔄 Reiniciar Ações</button>
+          <button class="gmnotes-combat-remove-selected" id="combat-remove-selected">🗑️ Remover</button>
+          <button class="gmnotes-combat-remove-all" id="combat-remove-all">🗑️ Limpar Ordem</button>
+        </div>
+        <div class="gmnotes-confirmation-container" id="combat-confirmation"></div>
+      </div>
+    </div>
+
+    <!-- TAB NOTAS -->
+    <div class="gmnotes-tab-pane" id="tab-notes">
+      <div class="gmnotes-section">
+        <h3 class="gmnotes-section-title">Notas da Sessão</h3>
+        <div class="gmnotes-editor">
+          <textarea id="gmnotes-textarea" class="gmnotes-textarea" placeholder="Escreva suas notas aqui..."></textarea>
+        </div>
+        <div class="gmnotes-toolbar">
+          <button class="gmnotes-toolbar-btn" id="gmnotes-save" title="Salvar">💾</button>
+          <button class="gmnotes-toolbar-btn" id="gmnotes-clear" title="Limpar">🗑️</button>
+        </div>
+      </div>
+      <div class="gmnotes-section">
+        <h3 class="gmnotes-section-title">Sessões</h3>
+        <div class="gmnotes-sessions-list" id="sessions-list">
+          <button class="gmnotes-session-item gmnotes-session-new">+ Nova Sessão</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATUS E AÇÕES DO PAINEL (dentro do main, sem footer) -->
+    <div class="gmnotes-panel-actions">
+      <div class="gmnotes-panel-status">
+        <span class="gmnotes-status" id="gmnotes-status">Pronto</span>
+        <span class="gmnotes-save-indicator">💾 Salvo</span>
+      </div>
+      <div class="gmnotes-panel-buttons">
+        <button class="gmnotes-panel-btn" id="gmnotes-export">📤 Exportar</button>
+        <button class="gmnotes-panel-btn" id="gmnotes-import">📥 Importar</button>
+      </div>
     </div>
   </main>
 
+  <!-- BOTÕES FLUTUANTES -->
   <aside class="floating-actions" aria-label="Quick actions">
     <button id="sheet-button" class="floating-button floating-button--pill floating-button--primary" aria-label="Open Character Sheet">
       <span class="floating-label">Ficha</span>
@@ -93,29 +233,46 @@
     </a>
   </aside>
 
+  <!-- MODAL ROOT (modais globais) -->
   <div id="modal-root"></div>
 
-  <div id="shield-modal" class="shield-modal">
+  <!-- MODAL DE REGRAS RÁPIDAS (inline) -->
+  <div id="shield-modal" class="shield-modal" aria-hidden="true" role="dialog" aria-labelledby="shield-modal-title">
     <div class="shield-modal-content">
       <div class="shield-modal-header">
-        <h2 id="shield-modal-title">Testes</h2>
+        <h2 id="shield-modal-title">Regras Rápidas</h2>
+        <button id="shield-back-button" class="shield-back-button" style="display: none;">← Voltar</button>
         <button class="shield-modal-close" id="shield-modal-close">&times;</button>
       </div>
-      <div id="shield-modal-body" class="shield-modal-body"></div>
+      <div class="shield-modal-body">
+        <div class="shield-grid">
+          <button class="shield-button">Combate</button>
+          <button class="shield-button">Testes</button>
+          <button class="shield-button">Iniciativa</button>
+          <button class="shield-button">Aventura</button>
+          <button class="shield-button">Magia</button>
+          <button class="shield-button">Condições</button>
+          <button class="shield-button">Seres</button>
+          <button class="shield-button">Classes</button>
+          <button class="shield-button">Técnicas</button>
+          <button class="shield-button">Estudos</button>
+          <button class="shield-button">Armas</button>
+          <button class="shield-button">Montarias</button>
+          <button class="shield-button">Loja Combate</button>
+          <button class="shield-button">Loja Arcana</button>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Scripts -->
-
   <script type="module">
     import { loadGlobalModals } from '../js/modalLoader.js';
     loadGlobalModals();
   </script>
 
-  <!-- Registrar Service Worker para PWA -->
   <script src="../js/pwa-update.js"></script>
-
   <script type="module" src="../js/shield/shield-modal.js"></script>
-  <script type="module" src="../js/shield/gmnotes-modal.js"></script>
+  <script type="module" src="../js/shield/gmnotes.js"></script>
 </body>
 </html>
