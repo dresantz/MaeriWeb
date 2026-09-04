@@ -89,8 +89,6 @@ const urlsToCache = [
   `${BASE_PATH}/js/rulebook/navigation.js`,
   `${BASE_PATH}/js/rulebook/renderer.js`,
   `${BASE_PATH}/js/rulebook/toc.js`,
-  `${BASE_PATH}/js/rulebook/tocKeyboard.js`,
-  `${BASE_PATH}/js/rulebook/uiReset.js`,
 
   `${BASE_PATH}/js/search/searchIndex.js`,
   `${BASE_PATH}/js/search/searchRouter.js`,

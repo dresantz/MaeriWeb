@@ -1,47 +1,52 @@
 /**
  * main.js - Livro de Regras
  * Ponto de entrada principal para o módulo rulebook
- * 
- * Dependências:
- * - ./toc.js: Controle do índice
- * - ./loader.js: Carregamento de capítulos
- * - ./constants.js: Constantes do rulebook
- * - ./navigation.js: Navegação e estado global
- * - ../search/searchIndex.js: Índice de busca
- * - ../search/searchUI.js: Interface de busca
  */
 
 import { initTOCToggle, renderChapterSelect } from "./toc.js";
 import { loadRulebookChapter } from "./loader.js";
-import { RULEBOOK_CHAPTERS, LAST_CHAPTER_KEY } from "./constants.js";  // 👈 IMPORT LAST_CHAPTER_KEY
-import { 
-  initChapterNavigation, 
-  restoreLastTopic,
-  getCurrentChapter
-} from "./navigation.js";
+import { RULEBOOK_CHAPTERS, LAST_CHAPTER_KEY } from "./constants.js";
+import { initChapterNavigation } from "./navigation.js";
 import { buildIndex } from "../search/searchIndex.js";
 import { initSearchUI } from "../search/searchUI.js";
 
 // ===== CONSTANTES =====
 const DATA_PATH = '../data/rulebook/';
-const REQUIRED_ELEMENTS = [
-  'toc-panel',
-  'chapter-select',
-  'rulebook-content'
-];
+const REQUIRED_ELEMENTS = ['toc-panel', 'chapter-select', 'rulebook-content'];
+const PRESERVED_ELEMENTS = ['dice-panel', 'dice-overlay'];
+const MODAL_SELECTORS = '.modal.active, .drawer.active, .overlay.active';
 
-// ===== ESTADO LOCAL =====
+// ===== ESTADO =====
 let rulebookInitialized = false;
+
+// ===== UI RESET =====
+
+function closeGenericModals() {
+  document.querySelectorAll(MODAL_SELECTORS).forEach(el => {
+    if (!PRESERVED_ELEMENTS.includes(el.id)) {
+      el.classList.remove('open', 'active');
+    }
+  });
+}
+
+function unlockBodyScroll() {
+  document.body.classList.remove('no-scroll');
+  
+  ['overflow', 'paddingRight', 'marginRight', 'width', 'position', 'top', 'left']
+    .forEach(prop => document.body.style[prop] = '');
+}
+
+function resetUI() {
+  unlockBodyScroll();
+  closeGenericModals();
+}
 
 // ===== UTILITÁRIOS =====
 
-/**
- * Verifica se todos os elementos necessários existem no DOM
- */
 function checkRequiredElements() {
   const missing = REQUIRED_ELEMENTS.filter(id => !document.getElementById(id));
   
-  if (missing.length > 0) {
+  if (missing.length) {
     console.warn(`Elementos não encontrados: ${missing.join(', ')}`);
     return false;
   }
@@ -49,50 +54,27 @@ function checkRequiredElements() {
   return true;
 }
 
-/**
- * Retorna o caminho completo para um arquivo de capítulo
- */
-function getChapterPath(filename) {
-  return `${DATA_PATH}${filename}`;
-}
-
 // ===== ÍNDICE DE BUSCA =====
 
-/**
- * Carrega todos os capítulos em paralelo para construir o índice de busca
- */
 async function preloadSearchIndex() {
-  
-  // Carrega todos os capítulos em paralelo
-  const fetchPromises = RULEBOOK_CHAPTERS.map(async (chapter) => {
-    try {
-      const path = getChapterPath(chapter.file);
-      const response = await fetch(path);
-      
-      if (!response.ok) {
-        console.warn(`Falha ao carregar ${chapter.file}: ${response.status}`);
+  const results = await Promise.all(
+    RULEBOOK_CHAPTERS.map(async (chapter) => {
+      try {
+        const response = await fetch(`${DATA_PATH}${chapter.file}`);
+        if (!response.ok) return null;
+        
+        const data = await response.json();
+        return { ...data, __file: chapter.file, __title: chapter.title };
+      } catch (error) {
+        console.warn(`Erro ao carregar ${chapter.file}:`, error.message);
         return null;
       }
-      
-      const data = await response.json();
-      data.__file = chapter.file;
-      data.__title = chapter.title;
-      return data;
-      
-    } catch (error) {
-      console.error(`Erro ao buscar ${chapter.file}:`, error.message);
-      return null;
-    }
-  });
-
-  // Aguarda todos os fetches terminarem
-  const results = await Promise.all(fetchPromises);
+    })
+  );
   
-  // Filtra resultados bem-sucedidos
-  const chaptersData = results.filter(data => data !== null);
-    
-  // Constrói o índice apenas se houver dados
-  if (chaptersData.length > 0) {
+  const chaptersData = results.filter(Boolean);
+  
+  if (chaptersData.length) {
     buildIndex(chaptersData);
   } else {
     console.error('Nenhum capítulo carregado para o índice de busca');
@@ -101,52 +83,35 @@ async function preloadSearchIndex() {
 
 // ===== INICIALIZAÇÃO =====
 
-/**
- * Inicializa todos os componentes do rulebook
- */
 async function initRulebook() {
-  // Prevenção de duplicação
-  if (rulebookInitialized) {
-    console.log('Rulebook já inicializado, ignorando...');
-    return;
-  }
-
-  // Verifica elementos necessários
-  if (!checkRequiredElements()) {
-    console.error('Rulebook: elementos essenciais não encontrados');
-    return;
-  }
-
+  if (rulebookInitialized) return;
+  
+  if (!checkRequiredElements()) return;
+  
   try {
-    // Pré-carrega índice de busca
     await preloadSearchIndex();
     
-    // Inicializa componentes da UI
     initTOCToggle();
     renderChapterSelect();
     initChapterNavigation();
     initSearchUI();
     
-    // 👇 PRIORIDADE CORRETA: URL > localStorage > primeiro capítulo
+    // Prioridade: URL > localStorage > primeiro capítulo
     const urlParams = new URLSearchParams(window.location.search);
-    const chapterFromURL = urlParams.get("chapter");
-    const chapterFromStorage = localStorage.getItem(LAST_CHAPTER_KEY);
-    
-    const chapterToLoad = chapterFromURL || chapterFromStorage || RULEBOOK_CHAPTERS[0]?.file;
+    const chapterToLoad = urlParams.get("chapter") || 
+                          localStorage.getItem(LAST_CHAPTER_KEY) || 
+                          RULEBOOK_CHAPTERS[0]?.file;
     
     if (!chapterToLoad) {
-      throw new Error('Nenhum capítulo disponível para carregar');
+      throw new Error('Nenhum capítulo disponível');
     }
     
-    // Carrega o capítulo
     await loadRulebookChapter(chapterToLoad);
-    
     rulebookInitialized = true;
     
   } catch (error) {
     console.error('Erro ao inicializar rulebook:', error);
     
-    // Mostra mensagem amigável para o usuário
     const content = document.getElementById('rulebook-content');
     if (content) {
       content.innerHTML = `
@@ -162,16 +127,13 @@ async function initRulebook() {
 
 // ===== INICIALIZAÇÃO AUTOMÁTICA =====
 
-// Aguarda o carregamento dos modais antes de inicializar
-document.addEventListener('modals:loaded', () => {
+if (document.getElementById('modal-root')?.dataset.loaded === 'true') {
   initRulebook();
-});
-
-// Fallback para quando os modais já estiverem carregados
-if (document.readyState === 'complete' || 
-    (document.readyState === 'interactive' && document.getElementById('modal-root')?.dataset.loaded === 'true')) {
-  initRulebook();
+} else {
+  document.addEventListener('modals:loaded', initRulebook, { once: true });
 }
 
-// Exporta para uso em outros módulos (opcional)
-export { initRulebook };
+// Reset da UI quando modais são carregados
+document.addEventListener('modals:loaded', resetUI);
+
+export { initRulebook, resetUI };
