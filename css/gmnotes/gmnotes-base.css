@@ -44,7 +44,6 @@
   color: var(--bg-dark);
 }
 
-/* Conteúdo das abas */
 .gmnotes-tab-pane {
   display: none;
 }
@@ -78,7 +77,41 @@
   border-bottom: 1px solid var(--gold-border);
 }
 
-/* Texto de apoio (ex.: instruções) */
+/* Cabeçalho de seção recolhível */
+.gmnotes-collapsible-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.gmnotes-collapsible-header .gmnotes-section-title {
+  margin-bottom: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.gmnotes-collapsible-toggle {
+  background: transparent;
+  border: 1px solid var(--gold-border);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gmnotes-collapsible-toggle:hover {
+  background: var(--surface-hover);
+  border-color: var(--gold);
+}
+
 .gmnotes-coment {
   color: var(--text-muted);
   font-family: 'Crimson Text', serif;
@@ -126,10 +159,7 @@
   flex-wrap: wrap;
 }
 
-/* Campos de entrada */
-.gmnotes-input,
-.gmnotes-select,
-.gmnotes-textarea {
+.gmnotes-input {
   width: 100%;
   background: var(--surface-light);
   border: 1px solid var(--gold-border);
@@ -141,19 +171,12 @@
   transition: all 0.2s ease;
 }
 
-.gmnotes-input:focus,
-.gmnotes-select:focus,
-.gmnotes-textarea:focus {
+.gmnotes-input:focus {
   outline: none;
   border-color: var(--gold);
   box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
 }
 
-.gmnotes-select {
-  cursor: pointer;
-}
-
-/* Variações de input */
 .gmnotes-input-number {
   max-width: 100px;
 }
@@ -164,7 +187,6 @@
   text-align: center;
 }
 
-/* Linha para Vit/Con */
 .gmnotes-stats-row {
   display: flex;
   gap: 1rem;
@@ -176,7 +198,6 @@
   min-width: 0;
 }
 
-/* Grid de atributos */
 .gmnotes-attributes-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -296,41 +317,7 @@
 }
 
 /* =========================
-   Combate
-========================= */
-
-.gmnotes-combat-toolbar {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-}
-
-.gmnotes-combat-btn {
-  background: var(--surface-light);
-  border: 1px solid var(--gold-border);
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
-  color: var(--text);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-family: 'Crimson Text', serif;
-}
-
-.gmnotes-combat-btn:hover {
-  border-color: var(--gold);
-  background: var(--surface-hover);
-}
-
-.gmnotes-combat-controls {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  flex-wrap: wrap;
-}
-
-/* =========================
-   Ações do painel (substitui footer)
+   Ações do painel
 ========================= */
 
 .gmnotes-panel-actions {
@@ -475,16 +462,16 @@
 
   .gmnotes-attributes-grid {
     gap: 0.5rem;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .gmnotes-attr-cell label {
     font-size: 0.8rem;
   }
 
+  .gmnotes-input-number,
   .gmnotes-input-attr {
     max-width: 100%;
-    padding: 0.4rem;
   }
 
   .gmnotes-stats-row {

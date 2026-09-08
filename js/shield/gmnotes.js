@@ -25,6 +25,7 @@ class GMNotes {
   init() {
     this.cacheElements();
     this.setupTabs();
+    this.setupCollapsibleSections();
     this.setupEventListeners();
     this.initializeModules();
     this.loadFromStorage();
@@ -72,6 +73,32 @@ class GMNotes {
     this.currentTab = tabId;
   }
 
+  // Controla seções recolhíveis
+  setupCollapsibleSections() {
+    const toggles = document.querySelectorAll('.gmnotes-collapsible-toggle');
+    
+    toggles.forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const header = toggle.closest('.gmnotes-collapsible-header');
+        const content = header?.nextElementSibling;
+        
+        if (!content) return;
+        
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        
+        if (isExpanded) {
+          content.style.display = 'none';
+          toggle.textContent = '+';
+          toggle.setAttribute('aria-expanded', 'false');
+        } else {
+          content.style.display = 'block';
+          toggle.textContent = '−';
+          toggle.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  }
+
   setupEventListeners() {
     // Exportação/Importação
     if (this.exportBtn) {
@@ -100,8 +127,6 @@ class GMNotes {
   // Combat
   adjustCombatVit(combatId, change) { this.combat.adjustCombatVit(combatId, change); }
   adjustCombatCon(combatId, change) { this.combat.adjustCombatCon(combatId, change); }
-  updateCombatInitiative(combatId, value) { this.combat.updateCombatInitiative(combatId, value); }
-  updateCombatCondition(combatId, condition) { this.combat.updateCombatCondition(combatId, condition); }
 
   // ========== EXPORTAÇÃO/IMPORTAÇÃO ==========
   exportData() {
@@ -119,7 +144,9 @@ class GMNotes {
     a.href = url;
     a.download = `gmnotes-backup-${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
-    URL.revokeObjectURL(url);
+    
+    // Aguarda o início do download para revogar a URL
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
     
     this.updateStatus('Dados exportados!');
   }
@@ -202,10 +229,10 @@ class GMNotes {
   updateSaveIndicator() {
     if (!this.saveIndicator) return;
     
-    this.saveIndicator.textContent = '💾 Salvo';
+    this.saveIndicator.textContent = '💾 Salvando...';
     setTimeout(() => {
       this.saveIndicator.textContent = '💾 Salvo';
-    }, 2000);
+    }, 500);
   }
 
   // ========== UTILITÁRIOS ==========

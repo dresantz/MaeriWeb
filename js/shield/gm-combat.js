@@ -1,4 +1,20 @@
 // js/shield/gm-combat.js
+
+const CONDITION_OPTIONS = [
+  '💀',
+  '🩸',
+  '🐍',
+  '🔥',
+  '❄️',
+  '⚡',
+  '🛡️',
+  '✨',
+  '😵',
+  '🕸️',
+  '👁️',
+  '💤'
+];
+
 export class GMCombat {
   constructor(parent) {
     this.parent = parent;
@@ -14,6 +30,7 @@ export class GMCombat {
     this.setupCombat();
     this.setupSelectionHandler();
     this.setupClickOutsideHandler();
+    this.setupConditionMenu();
   }
 
   setupCombat() {
@@ -199,6 +216,16 @@ export class GMCombat {
       const item = e.target.closest('.gmnotes-combat-token');
       if (!item) return;
 
+      // Ignora cliques em elementos do painel de condições
+      if (
+        e.target.closest('.gmnotes-token-conditions') ||
+        e.target.closest('.gmnotes-condition-menu') ||
+        e.target.closest('.gmnotes-conditions-add') ||
+        e.target.closest('.gmnotes-condition')
+      ) {
+        return;
+      }
+
       const checkbox = e.target.closest('.gmnotes-token-checkbox');
       if (checkbox) {
         const tokenId = checkbox.dataset.tokenId;
@@ -342,7 +369,8 @@ export class GMCombat {
         con: npc.conCurrent || 0,
         conMax: npc.conMax || 0,
         color: this.npcColor,
-        hasActed: false
+        hasActed: false,
+        conditions: []
       });
 
       this.renderCombatOrder();
@@ -364,7 +392,8 @@ export class GMCombat {
         name: player.name,
         type: 'player',
         color: this.playerColor,
-        hasActed: false
+        hasActed: false,
+        conditions: []
       });
 
       this.renderCombatOrder();
@@ -413,6 +442,7 @@ export class GMCombat {
 
         <div class="gmnotes-token-body">
           ${item.type === 'npc' ? this.renderTokenStats(item) : ''}
+          ${this.renderConditions(item)}
         </div>
 
         ${isSelected ? `
@@ -464,6 +494,25 @@ export class GMCombat {
     `;
   }
 
+  renderConditions(item) {
+    const conditions = item.conditions || [];
+    
+    if (conditions.length === 0) {
+      return `
+        <button class="gmnotes-conditions-add" data-combat-id="${item.id}">+ Condição</button>
+      `;
+    }
+    
+    return `
+      <div class="gmnotes-token-conditions" data-combat-id="${item.id}">
+        ${conditions.map(emoji => 
+          `<span class="gmnotes-condition" data-combat-id="${item.id}" data-condition="${emoji}">${emoji}</span>`
+        ).join('')}
+        <button class="gmnotes-conditions-add" data-combat-id="${item.id}">+</button>
+      </div>
+    `;
+  }
+
   toggleTokenAction(tokenId) {
     const item = this.combatOrder.find(i => i.id === tokenId);
     if (!item) return;
@@ -509,6 +558,87 @@ export class GMCombat {
     this.parent.saveToStorage();
   }
 
+  // ===== SISTEMA DE CONDIÇÕES =====
+
+  setupConditionMenu() {
+    document.addEventListener('click', (e) => {
+      const addBtn = e.target.closest('.gmnotes-conditions-add');
+      if (addBtn) {
+        e.stopPropagation();
+        const combatId = addBtn.dataset.combatId;
+        this.openConditionMenu(combatId, addBtn);
+        return;
+      }
+
+      // Clique em um emoji de condição existente remove a condição
+      const condition = e.target.closest('.gmnotes-condition');
+      if (condition) {
+        e.stopPropagation();
+        const combatId = condition.dataset.combatId;
+        const emoji = condition.dataset.condition;
+        this.toggleCondition(combatId, emoji);
+        return;
+      }
+    });
+  }
+
+  openConditionMenu(combatId, anchor) {
+    // Fecha menu anterior
+    document.querySelector('.gmnotes-condition-menu')?.remove();
+
+    const menu = document.createElement('div');
+    menu.className = 'gmnotes-condition-menu';
+    menu.innerHTML = CONDITION_OPTIONS.map(emoji => `
+      <button class="gmnotes-condition-option" data-condition="${emoji}">
+        ${emoji}
+      </button>
+    `).join('');
+
+    // Posiciona próximo ao botão
+    anchor.parentNode.appendChild(menu);
+
+    menu.addEventListener('click', (e) => {
+      const btn = e.target.closest('.gmnotes-condition-option');
+      if (!btn) return;
+      
+      e.stopPropagation();
+      const emoji = btn.dataset.condition;
+      this.toggleCondition(combatId, emoji);
+      menu.remove();
+    });
+
+    // Fecha ao clicar fora do token e fora do menu
+    setTimeout(() => {
+      const token = anchor.closest('.gmnotes-combat-token');
+      document.addEventListener('click', function handler(e) {
+        if (!menu.contains(e.target) && !token?.contains(e.target)) {
+          menu.remove();
+          document.removeEventListener('click', handler);
+        }
+      });
+    }, 10);
+  }
+
+  toggleCondition(combatId, emoji) {
+    const item = this.combatOrder.find(i => i.id === combatId);
+    if (!item) return;
+
+    if (!item.conditions) item.conditions = [];
+
+    const existingIndex = item.conditions.findIndex(c => c === emoji);
+    if (existingIndex >= 0) {
+      item.conditions.splice(existingIndex, 1);
+    } else {
+      item.conditions.push(emoji);
+    }
+
+    this.renderCombatOrder();
+    this.parent.saveToStorage();
+    this.parent.updateStatus('Condições atualizadas');
+  }
+
+  // ===== ARMAZENAMENTO =====
+
   loadFromStorage(data) {
     this.combatOrder = (data.combatOrder || []).map(item => {
       if (item.type === 'npc') {
@@ -521,14 +651,16 @@ export class GMCombat {
             con: npc.conCurrent || 0,
             conMax: npc.conMax || 0,
             color: this.npcColor,
-            hasActed: item.hasActed || false
+            hasActed: item.hasActed || false,
+            conditions: item.conditions || []
           };
         }
       }
       return {
         ...item,
         color: this.playerColor,
-        hasActed: item.hasActed || false
+        hasActed: item.hasActed || false,
+        conditions: item.conditions || []
       };
     });
     

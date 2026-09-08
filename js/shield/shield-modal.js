@@ -19,7 +19,7 @@ const BUTTON_CONFIG = {
   'Técnicas':      { id: 'tec_item',       prop: 'tec_item',       title: 'Técnicas' },
   'Estudos':       { id: 'estudos_item',   prop: 'estudos_item',   title: 'Estudos' },
   'Segredos':      { id: 'segredos_item',  prop: 'segredos_item',  title: 'Segredos' },
-  'Aventura':      { id: 'aventura_item',  prop: 'aventura_item',  title: 'Aventura' },
+  'GERAL':         { id: 'aventura_item',  prop: 'aventura_item',  title: 'Geral' },
   'Armas':         { id: 'armas_item',     prop: 'armas_item',     title: 'Armas' },
   'Montarias':     { id: 'montarias_item', prop: 'montarias_item', title: 'Montarias' },
   'Loja Combate':  { id: 'lojacomb_item',  prop: 'lojacomb_item',  title: 'Loja Combate' },
@@ -134,10 +134,10 @@ function renderRulesGrid() {
   
   elements.body.innerHTML = `
     <div class="shield-grid">
+      <button class="shield-button">GERAL</button>
       <button class="shield-button">Combate</button>
       <button class="shield-button">Testes</button>
       <button class="shield-button">Iniciativa</button>
-      <button class="shield-button">Aventura</button>
       <button class="shield-button">Magia</button>
       <button class="shield-button">Condições</button>
       <button class="shield-button">Seres</button>
